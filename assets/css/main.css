@@ -4051,3 +4051,54 @@ body.is-mobile.landing .wrapper.style4 {
 .features li p {
     color: #333; /* Darker grey for easier reading */
 }
+
+/* --- LANDING MOBILE OVERRIDES --- */
+body.is-mobile.landing #banner,
+body.is-mobile.landing .wrapper.style4 {
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
+    background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* --- MY CUSTOM EARTHY THEME --- */
+
+/* Feature Icon Circles */
+.features li:nth-child(1) .icon { background-color: #6b705c !important; }
+.features li:nth-child(2) .icon { background-color: #a98467 !important; }
+.features li:nth-child(3) .icon { background-color: #dda15e !important; }
+.features li:nth-child(4) .icon { background-color: #457b9d !important; }
+.features li:nth-child(5) .icon { background-color: #bc6c25 !important; }
+.features li:nth-child(6) .icon { background-color: #283618 !important; }
+
+/* Global Footer Color */
+#footer {
+    background-color: #2D332A !important;
+}
+
+/* --- Niche "Field Note" Card Styling --- */
+.features li {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2em;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.features li .icon {
+    order: 2;
+    margin-left: 2em;
+    margin-right: 0 !important;
+    flex-shrink: 0;
+}
+
+.features li div {
+    order: 1;
+}
