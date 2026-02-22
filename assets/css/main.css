@@ -4094,17 +4094,20 @@ body.is-mobile.landing .wrapper.style4 {
     color: #2D423F;
 }
 
-/* --- Text Background Plate --- */
+/* --- Simplistic Card Style --- */
 .features li {
-    background-color: rgba(255, 255, 255, 255); /* Nearly solid white background */
+    background-color: #ffffff; /* 100% Solid White */
     padding: 2em;
-    border-radius: 8px; /* Smooth corners */
-    color: #000; /* Dark text for high contrast */
-    margin-bottom: 2em; /* Good spacing between sections */
+    border-radius: 8px;
+    margin-bottom: 2em;
+    border: 1px solid #e0e0e0; /* Subtle border to define the card edge */
+    color: #000000; /* Pure black text */
 }
 
+/* Ensure the heading stands out nicely */
 .features li h3 {
-    color: #000; /* Your earthy green for the heading */
+    color: #283618; /* Your earthy green heading */
+    margin-bottom: 0.5em;
 }
 
 
