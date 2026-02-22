@@ -4094,20 +4094,27 @@ body.is-mobile.landing .wrapper.style4 {
     color: #2D423F;
 }
 
-/* --- Simplistic Card Style --- */
+/* --- Black "Field Note" Plates --- */
 .features li {
-    background-color: #ffffff; /* 100% Solid White */
+    background-color: #000000;    /* Solid black background */
+    color: #ffffff;               /* White text for readability */
     padding: 2em;
-    border-radius: 8px;
-    margin-bottom: 2em;
-    border: 1px solid #e0e0e0; /* Subtle border to define the card edge */
-    color: #000000; /* Pure black text */
+    border-radius: 16px;          /* Rounded edges */
+    margin-bottom: 2em;           /* Space between the plates */
+    border: 2px solid #283618;    /* Adds a subtle earthy green border for style */
 }
 
-/* Ensure the heading stands out nicely */
+/* Ensure the headings look good on black */
 .features li h3 {
-    color: #283618; /* Your earthy green heading */
+    color: #dda15e;               /* A nice sandy-gold color for the headers */
     margin-bottom: 0.5em;
 }
+
+/* Ensure the paragraph text is clearly readable */
+.features li p {
+    color: #ffffff;
+    margin: 0;
+}
+
 
 
