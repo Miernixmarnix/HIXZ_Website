@@ -3999,74 +3999,9 @@ input, select, textarea {
 		background-color: #1d242a;
 	}
 
+/* --- CUSTOM EARTHY THEME - CLEANED --- */
 
-/* --- LANDING MOBILE OVERRIDES --- */
-
-body.is-mobile.landing #banner,
-body.is-mobile.landing .wrapper.style4 {
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-/* --- MY CUSTOM EARTHY THEME --- */
-
-/* Feature Icon Circles */
-.features li:nth-child(1) .icon { background-color: #6b705c !important; } /* Sage */
-.features li:nth-child(2) .icon { background-color: #a98467 !important; } /* Sand */
-.features li:nth-child(3) .icon { background-color: #dda15e !important; } /* Earth */
-.features li:nth-child(4) .icon { background-color: #457b9d !important; } /* Sea */
-.features li:nth-child(5) .icon { background-color: #bc6c25 !important; } /* Clay */
-.features li:nth-child(6) .icon { background-color: #283618 !important; } /* Forest */
-
-/* Global Footer Color */
-#footer {
-    background-color: #2D332A !important;
-}
-
-/* --- Earthy "Card" Style for Hiking Tips --- */
-.features li {
-    background-color: rgba(255, 255, 255, 0.85); /* Off-white with 85% transparency */
-    border-radius: 8px; /* Softens the corners to look less like a robot, more like a journal */
-    padding: 2em;      /* Gives the text room to breathe */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Very subtle border */
-    transition: transform 0.3s ease;
-}
-
-/* Optional: Subtle hover effect for that "niche" feel */
-.features li:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.95);
-}
-
-.features li h3 {
-    color: #283618; /* Deep Forest Green for contrast */
-    margin-bottom: 0.5em;
-}
-
-.features li p {
-    color: #333; /* Darker grey for easier reading */
-}
-
-/* --- LANDING MOBILE OVERRIDES --- */
-body.is-mobile.landing #banner,
-body.is-mobile.landing .wrapper.style4 {
-    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-/* --- MY CUSTOM EARTHY THEME --- */
-
-/* Feature Icon Circles */
+/* 1. Feature Icon Circles */
 .features li:nth-child(1) .icon { background-color: #6b705c !important; }
 .features li:nth-child(2) .icon { background-color: #a98467 !important; }
 .features li:nth-child(3) .icon { background-color: #dda15e !important; }
@@ -4074,47 +4009,31 @@ body.is-mobile.landing .wrapper.style4 {
 .features li:nth-child(5) .icon { background-color: #bc6c25 !important; }
 .features li:nth-child(6) .icon { background-color: #283618 !important; }
 
-/* Global Footer Color */
+/* 2. Global Footer Color */
 #footer {
     background-color: #2D332A !important;
 }
 
-/* --- Simplistic Card Style --- */
+/* 3. The "Field Note" Plates (Solid Black Cards) */
 .features li {
-    background-color: rgba(255, 255, 255, 0.9); /* Clear, visible white background */
-    padding: 2em;
-    border-radius: 8px;
-    margin-bottom: 2em;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: #000000 !important; /* Solid Black */
+    color: #ffffff !important;           /* White text */
+    padding: 2em !important;
+    border-radius: 16px !important;      /* Rounded edges */
+    margin-bottom: 2em !important;       /* Space between cards */
+    border: 2px solid #283618 !important;/* Earthy border */
+    list-style: none !important;         /* Removes dots */
 }
 
-/* Ensure the text stays legible */
+/* 4. Headings and Paragraphs inside the plates */
 .features li h3 {
-    margin-bottom: 0.5em;
-    color: #2D423F;
+    color: #dda15e !important;            /* Sandy-gold headings */
+    margin-bottom: 0.5em !important;
 }
 
-/* --- Black "Field Note" Plates --- */
-.features li {
-    background-color: #000000;    /* Solid black background */
-    color: #ffffff;               /* White text for readability */
-    padding: 2em;
-    border-radius: 16px;          /* Rounded edges */
-    margin-bottom: 2em;           /* Space between the plates */
-    border: 2px solid #283618;    /* Adds a subtle earthy green border for style */
-}
-
-/* Ensure the headings look good on black */
-.features li h3 {
-    color: #dda15e;               /* A nice sandy-gold color for the headers */
-    margin-bottom: 0.5em;
-}
-
-/* Ensure the paragraph text is clearly readable */
 .features li p {
-    color: #ffffff;
-    margin: 0;
+    color: #ffffff !important;           /* White text */
+    margin: 0 !important;
 }
-
 
 
