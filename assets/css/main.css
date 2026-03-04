@@ -4000,22 +4000,25 @@ input, select, textarea {
 	}
 
 /* --- Expanded Video Grid (400px optimized) --- */
+/* --- Optimized Video Grid (340px for Sharpness) --- */
 .video-grid {
     display: grid;
-    /* Changed min-width to 400px */
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-    gap: 30px; 
+    /* Dropped to 340px to restore video crispness */
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+    gap: 25px; 
     padding: 20px 0;
     width: 100%;
+    max-width: 1200px; /* Prevents the grid from getting too wide on desktop */
+    margin: 0 auto;    /* Centers the grid if it hits the max-width */
 }
 
 .video-item {
     background: #000;
-    border-radius: 8px; 
+    border-radius: 6px; 
     overflow: hidden;
     position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
-    opacity: 0; /* Handled by Anime.js */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+    opacity: 0; 
     transition: transform 0.4s ease;
 }
 
@@ -4025,7 +4028,6 @@ input, select, textarea {
     object-fit: cover; 
     display: block;
 }
-
 /* Make it interactive! */
 .video-item:hover {
     transform: translateY(-5px); /* Card lifts up slightly */
@@ -4069,5 +4071,6 @@ input, select, textarea {
         grid-template-columns: 1fr; /* Force 1 column on phones */
     }
 }
+
 
 
