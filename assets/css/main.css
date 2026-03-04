@@ -4072,5 +4072,36 @@ input, select, textarea {
     }
 }
 
+/* --- Video Social Overlays --- */
+.video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+}
+
+.video-item:hover .video-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.video-overlay a {
+    color: #f4f1de !important; /* Your "Sand" color */
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.video-overlay a:hover {
+    color: #3b716f !important; /* Your "Olive" color on hover */
+}
 
 
