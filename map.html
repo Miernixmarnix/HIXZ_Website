@@ -72,9 +72,21 @@
     }).addTo(map);
 
     // 4. Function for GPS
+   // 4. Function for GPS
     function getLocation() {
         map.locate({setView: true, maxZoom: 16});
-    }
+    } // <--- The function ends here
+
+    // 5. Add Photo Points (Markers) - This stays outside so it's always visible
+    var conchiMarker = L.marker([12.5244, -69.9126]).addTo(map);
+
+    conchiMarker.bindPopup(`
+        <div style="text-align:center;">
+            <h3 style="color:black; margin:0;">Natural Pool (Conchi)</h3>
+            <p style="color:black; margin:10px 0;">The best spot for a DJI Action 5 swim video!</p>
+            <img src="images/arikok.jpeg" alt="Conchi" style="width:100px; border-radius:5px;">
+        </div>
+    `);
 
     map.on('locationfound', function(e) {
         L.circle(e.latlng, {radius: 10, color: 'blue'}).addTo(map)
