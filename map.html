@@ -14,11 +14,20 @@
             height: 70vh; 
             width: 100%; 
             border-bottom: 2px solid #fff;
+            background: #2e3436;
         }
         .map-container { padding: 2em; text-align: center; }
-        /* Fix for popup text colors in Spectral theme */
+
+        /* Prevents theme from stretching map markers */
+        .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container {
+            max-width: none !important;
+            max-height: none !important;
+            width: auto;
+        }
+
         .leaflet-popup-content-wrapper { color: #000 !important; }
-        .leaflet-control-zoom { margin-top: 80px !important; }
+        /* Moves zoom and layer controls down to avoid header overlap */
+        .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
     </style>
 </head>
 <body class="is-preload">
@@ -50,70 +59,80 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 <script>
-    // 1. Initialize Map
-    // Coordinates centered slightly inland from Conchi
-    var map = L.map('map').setView([12.5247, -69.9135], 15);
-    
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // 1. Define Map Layers
+    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
+    });
 
-    // 2. Fix the "Floating" Marker with a proper Anchor
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri'
+    });
+
+    var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data: &copy; OpenStreetMap, SRTM | Style: &copy; OpenTopoMap'
+    });
+
+    // 2. Initialize Map (Start with Satellite)
+    var map = L.map('map', {
+        center: [12.5247, -69.9135],
+        zoom: 15,
+        layers: [satellite] 
+    });
+
+    // 3. Add Layer Toggle Control
+    var baseMaps = {
+        "Satellite": satellite,
+        "Terrain": terrain,
+        "Streets": streets
+    };
+    L.control.layers(baseMaps).addTo(map);
+
+    // 4. Custom Icon Logic
     var customIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
         iconSize: [25, 41],
-        iconAnchor: [12, 41], // This keeps the tip of the pin on the land
+        iconAnchor: [12, 41], 
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
 
-    // 3. Load GPX
+    // 5. Load GPX Trail
     var gpx = 'Conchi_Natuurbad_Wandelroute.gpx';
     new L.GPX(gpx, {
         async: true,
         polyline_options: {
-            color: '#ff8c00', // Brighter orange
+            color: '#00ccff', 
             weight: 6,
-            opacity: 0.8
+            opacity: 0.9
         }
     }).on('loaded', function(e) {
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 4. FIXED GPS: This draws the blue dot
-    var userLocationMarker;
-    var userLocationCircle;
-
-    function getLocation() {
-        map.locate({setView: true, maxZoom: 16});
-    }
+    // 6. GPS Logic
+    var userLocationMarker, userLocationCircle;
+    function getLocation() { map.locate({setView: true, maxZoom: 16}); }
 
     map.on('locationfound', function(e) {
-        // Remove old markers if they exist
         if (userLocationMarker) { map.removeLayer(userLocationMarker); }
         if (userLocationCircle) { map.removeLayer(userLocationCircle); }
-
-        // Create the blue dot (User Location)
-        userLocationCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.5 }).addTo(map);
-        userLocationMarker = L.circleMarker(e.latlng, { radius: 6, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 2 }).addTo(map);
-        
+        userLocationCircle = L.circle(e.latlng, { radius: 20, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
+        userLocationMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
         userLocationMarker.bindPopup("You are here!").openPopup();
     });
 
-    map.on('locationerror', function() {
-        alert("Could not find your location. Please check your GPS settings.");
-    });
-
-    // 5. The Conchi Pin
+    // 7. Conchi Pin
     var conchiMarker = L.marker([12.5247, -69.9135], {icon: customIcon}).addTo(map);
     conchiMarker.bindPopup(`
-        <div style="text-align:center; width:150px; color: black;">
+        <div style="text-align:center; width:150px; color:black;">
             <h3 style="margin:0;">Natural Pool</h3>
             <p style="font-size:12px;">Perfect for swim videos!</p>
             <img src="images/NB.jpeg" style="width:100%; border-radius:5px; margin-top:5px;">
         </div>
     `);
+
     setTimeout(function(){ map.invalidateSize()}, 500);
 </script>
-</body> </html>
+</body>
+</html>
