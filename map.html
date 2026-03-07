@@ -18,6 +18,7 @@
         .map-container { padding: 2em; text-align: center; }
         /* Fix for popup text colors in Spectral theme */
         .leaflet-popup-content-wrapper { color: #000 !important; }
+        .leaflet-control-zoom { margin-top: 80px !important; }
     </style>
 </head>
 <body class="is-preload">
@@ -50,66 +51,69 @@
 
 <script>
     // 1. Initialize Map
-    var map = L.map('map').setView([12.5244, -69.9126], 15);
+    // Coordinates centered slightly inland from Conchi
+    var map = L.map('map').setView([12.5247, -69.9135], 15);
+    
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    // 2. Define Custom Icon (Using CDN links for stability)
+    // 2. Fix the "Floating" Marker with a proper Anchor
     var customIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41], // This keeps the tip of the pin on the land
+        popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
 
-    // 3. LOAD YOUR GPX FILE
+    // 3. Load GPX
     var gpx = 'Conchi_Natuurbad_Wandelroute.gpx';
     new L.GPX(gpx, {
         async: true,
         polyline_options: {
-            color: 'orange',
-            weight: 5,
-            opacity: 0.75,
-            lineCap: 'round'
+            color: '#ff8c00', // Brighter orange
+            weight: 6,
+            opacity: 0.8
         }
     }).on('loaded', function(e) {
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 4. GPS Function
+    // 4. FIXED GPS: This draws the blue dot
+    var userLocationMarker;
+    var userLocationCircle;
+
     function getLocation() {
         map.locate({setView: true, maxZoom: 16});
     }
 
-    // 5. The Conchi Marker
-    var conchiMarker = L.marker([12.5244, -69.9130], {icon: customIcon}).addTo(map);
+    map.on('locationfound', function(e) {
+        // Remove old markers if they exist
+        if (userLocationMarker) { map.removeLayer(userLocationMarker); }
+        if (userLocationCircle) { map.removeLayer(userLocationCircle); }
 
+        // Create the blue dot (User Location)
+        userLocationCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.5 }).addTo(map);
+        userLocationMarker = L.circleMarker(e.latlng, { radius: 6, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 2 }).addTo(map);
+        
+        userLocationMarker.bindPopup("You are here!").openPopup();
+    });
+
+    map.on('locationerror', function() {
+        alert("Could not find your location. Please check your GPS settings.");
+    });
+
+    // 5. The Conchi Pin
+    var conchiMarker = L.marker([12.5247, -69.9135], {icon: customIcon}).addTo(map);
     conchiMarker.bindPopup(`
-        <div style="text-align:center; width:150px;">
-            <h3 style="margin:0; font-size:16px;">Natural Pool (Conchi)</h3>
-            <p style="margin:8px 0; font-size:12px;">The best spot for a DJI Action 5 swim video!</p>
-            <img src="images/NB.jpeg" alt="Natural Bridge" style="width:100%; border-radius:5px;">
+        <div style="text-align:center; width:150px; color: black;">
+            <h3 style="margin:0;">Natural Pool</h3>
+            <p style="font-size:12px;">Perfect for swim videos!</p>
+            <img src="images/NB.jpeg" style="width:100%; border-radius:5px; margin-top:5px;">
         </div>
     `);
-
-    // 6. Handle User Location
-    map.on('locationfound', function(e) {
-        L.circle(e.latlng, {radius: 10, color: 'blue'}).addTo(map)
-            .bindPopup("You are here!").openPopup();
-    });
-
-    map.on('locationerror', function(e) {
-        alert("Location access denied or not found.");
-    });
+    setTimeout(function(){ map.invalidateSize()}, 500);
 </script>
-
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
 </body> </html>
