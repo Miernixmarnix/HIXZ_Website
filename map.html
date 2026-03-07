@@ -18,25 +18,26 @@
         }
         .map-container { padding: 2em; text-align: center; }
 
-        /* --- THE ULTIMATE MARKER FIX --- */
-        /* This prevents the theme from stretching or moving map images */
+        /* THE FIX: Clears any theme styling that breaks map layers */
         .leaflet-pane img, 
-        .leaflet-marker-icon, 
-        .leaflet-marker-shadow, 
         .leaflet-tile-container img {
             max-width: none !important;
             max-height: none !important;
             width: auto !important;
-            height: auto !important;
             padding: 0 !important;
-            margin: 0 !important;
-            border: none !important;
-            background: none !important;
-            box-shadow: none !important;
         }
 
-        .leaflet-popup-content-wrapper { color: #000 !important; }
+        .leaflet-popup-content-wrapper { color: #000 !important; border-radius: 8px; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
+        
+        /* Ensures the photo inside the popup looks good */
+        .popup-img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 8px;
+            display: block;
+        }
     </style>
 </head>
 <body class="is-preload">
@@ -68,77 +69,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 <script>
-    // 1. Map Layer Definitions
-    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-    });
+    // 1. Layers
+    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' });
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri' });
+    var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: 'Map data: &copy; OpenStreetMap' });
 
-    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri'
-    });
-
-    var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data: &copy; OpenStreetMap, SRTM | Style: &copy; OpenTopoMap'
-    });
-
-    // 2. Initialize (Satellite as default)
+    // 2. Initialize
     var map = L.map('map', {
         center: [12.5247, -69.9135],
         zoom: 15,
         layers: [satellite]
     });
 
-    var baseMaps = {
-        "Satellite": satellite,
-        "Terrain": terrain,
-        "Streets": streets
-    };
-    L.control.layers(baseMaps).addTo(map);
+    L.control.layers({"Satellite": satellite, "Terrain": terrain, "Streets": streets}).addTo(map);
 
-    // 3. Icon with proper Anchor (tip of the pin is at 12, 41)
-    var customIcon = L.icon({
-        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41], 
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-
-    // 4. Load GPX Trail
+    // 3. Load GPX Trail
     var gpxFile = 'Conchi_Natuurbad_Wandelroute.gpx';
     new L.GPX(gpxFile, {
         async: true,
-        polyline_options: {
-            color: '#00ccff', 
-            weight: 6,
-            opacity: 0.9
-        }
+        polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
     }).on('loaded', function(e) {
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 5. GPS Locator Logic
-    var userLocationMarker, userLocationCircle;
+    // 4. THE BLUE MARKER FIX: Using a CircleMarker instead of a Pin image
+    // This will NEVER float in the ocean because it's a vector, not an image.
+    var conchiDestination = L.circleMarker([12.5247, -69.9135], {
+        radius: 10,
+        fillColor: "#ff4500", // Bright Orange-Red
+        color: "#fff",
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.8
+    }).addTo(map);
+
+    conchiDestination.bindPopup(`
+        <div style="text-align:center; width:160px; color:black;">
+            <h3 style="margin:0;">Natural Pool</h3>
+            <p style="font-size:12px; margin: 5px 0;">The end of the trail! Perfect for swim videos.</p>
+            <img src="images/NB.jpeg" class="popup-img" alt="Natural Pool View">
+        </div>
+    `);
+
+    // 5. GPS Logic
+    var userMarker, userCircle;
     function getLocation() { map.locate({setView: true, maxZoom: 16}); }
 
     map.on('locationfound', function(e) {
-        if (userLocationMarker) { map.removeLayer(userLocationMarker); }
-        if (userLocationCircle) { map.removeLayer(userLocationCircle); }
-        userLocationCircle = L.circle(e.latlng, { radius: 20, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
-        userLocationMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
-        userLocationMarker.bindPopup("You are here!").openPopup();
+        if (userMarker) { map.removeLayer(userMarker); }
+        if (userCircle) { map.removeLayer(userCircle); }
+        userCircle = L.circle(e.latlng, { radius: 20, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
+        userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
+        userMarker.bindPopup("You are here!").openPopup();
     });
-
-    // 6. Natural Pool Marker
-    var conchiMarker = L.marker([12.5247, -69.9135], {icon: customIcon}).addTo(map);
-    conchiMarker.bindPopup(`
-        <div style="text-align:center; width:150px; color:black;">
-            <h3 style="margin:0;">Natural Pool</h3>
-            <p style="font-size:12px;">Perfect for swim videos!</p>
-            <img src="images/NB.jpeg" style="width:100%; border-radius:5px; margin-top:5px;">
-        </div>
-    `);
 
     setTimeout(function(){ map.invalidateSize()}, 500);
 </script>
