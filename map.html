@@ -18,15 +18,24 @@
         }
         .map-container { padding: 2em; text-align: center; }
 
-        /* Prevents theme from stretching map markers */
-        .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container {
+        /* --- THE ULTIMATE MARKER FIX --- */
+        /* This prevents the theme from stretching or moving map images */
+        .leaflet-pane img, 
+        .leaflet-marker-icon, 
+        .leaflet-marker-shadow, 
+        .leaflet-tile-container img {
             max-width: none !important;
             max-height: none !important;
-            width: auto;
+            width: auto !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            background: none !important;
+            box-shadow: none !important;
         }
 
         .leaflet-popup-content-wrapper { color: #000 !important; }
-        /* Moves zoom and layer controls down to avoid header overlap */
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
     </style>
 </head>
@@ -59,7 +68,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 <script>
-    // 1. Define Map Layers
+    // 1. Map Layer Definitions
     var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
     });
@@ -72,14 +81,13 @@
         attribution: 'Map data: &copy; OpenStreetMap, SRTM | Style: &copy; OpenTopoMap'
     });
 
-    // 2. Initialize Map (Start with Satellite)
+    // 2. Initialize (Satellite as default)
     var map = L.map('map', {
         center: [12.5247, -69.9135],
         zoom: 15,
-        layers: [satellite] 
+        layers: [satellite]
     });
 
-    // 3. Add Layer Toggle Control
     var baseMaps = {
         "Satellite": satellite,
         "Terrain": terrain,
@@ -87,7 +95,7 @@
     };
     L.control.layers(baseMaps).addTo(map);
 
-    // 4. Custom Icon Logic
+    // 3. Icon with proper Anchor (tip of the pin is at 12, 41)
     var customIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -97,9 +105,9 @@
         shadowSize: [41, 41]
     });
 
-    // 5. Load GPX Trail
-    var gpx = 'Conchi_Natuurbad_Wandelroute.gpx';
-    new L.GPX(gpx, {
+    // 4. Load GPX Trail
+    var gpxFile = 'Conchi_Natuurbad_Wandelroute.gpx';
+    new L.GPX(gpxFile, {
         async: true,
         polyline_options: {
             color: '#00ccff', 
@@ -110,7 +118,7 @@
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 6. GPS Logic
+    // 5. GPS Locator Logic
     var userLocationMarker, userLocationCircle;
     function getLocation() { map.locate({setView: true, maxZoom: 16}); }
 
@@ -122,7 +130,7 @@
         userLocationMarker.bindPopup("You are here!").openPopup();
     });
 
-    // 7. Conchi Pin
+    // 6. Natural Pool Marker
     var conchiMarker = L.marker([12.5247, -69.9135], {icon: customIcon}).addTo(map);
     conchiMarker.bindPopup(`
         <div style="text-align:center; width:150px; color:black;">
