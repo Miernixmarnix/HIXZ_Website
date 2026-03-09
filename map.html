@@ -10,17 +10,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        #map { 
-            height: 70vh; 
-            width: 100%; 
-            border-bottom: 2px solid #fff;
-            background: #2e3436;
-        }
+        #map { height: 70vh; width: 100%; border-bottom: 2px solid #fff; background: #2e3436; }
         .map-container { padding: 2em; text-align: center; }
 
-        /* THE FIX: Clears any theme styling that breaks map layers */
-        .leaflet-pane img, 
-        .leaflet-tile-container img {
+        /* THE FIX: Clears theme styling that breaks map layers */
+        .leaflet-pane img, .leaflet-tile-container img {
             max-width: none !important;
             max-height: none !important;
             width: auto !important;
@@ -30,7 +24,6 @@
         .leaflet-popup-content-wrapper { color: #000 !important; border-radius: 8px; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
         
-        /* Ensures the photo inside the popup looks good */
         .popup-img {
             width: 100%;
             height: auto;
@@ -76,8 +69,8 @@
 
     // 2. Initialize
     var map = L.map('map', {
-        center: [12.5247, -69.9135],
-        zoom: 15,
+        center: [12.5312, -69.9230], // Centered near the start of the trail
+        zoom: 14,
         layers: [satellite]
     });
 
@@ -92,22 +85,25 @@
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 4. THE BLUE MARKER FIX: Using a CircleMarker instead of a Pin image
-    // This will NEVER float in the ocean because it's a vector, not an image.
-    var conchiDestination = L.circleMarker([12.5247, -69.9135], {
-        radius: 10,
-        fillColor: "#ff4500", // Bright Orange-Red
-        color: "#fff",
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.8
+    // 4. MARKERS (Using CircleMarkers to avoid CSS bugs)
+    
+    // START OF TRAIL (Green)
+    var startPoint = L.circleMarker([12.5362, -69.9318], {
+        radius: 8, fillColor: "#2ecc71", color: "#fff", weight: 2, opacity: 1, fillOpacity: 1
+    }).addTo(map);
+    startPoint.bindPopup("<b style='color:black;'>Trailhead</b><br><span style='color:black;'>Park here to start the hike.</span>");
+
+    // END OF TRAIL (Natural Pool - Orange/Red)
+    // Adjusted coordinates to put it on the coastline at the end of your trail
+    var conchiDestination = L.circleMarker([12.5255, -69.9142], {
+        radius: 10, fillColor: "#ff4500", color: "#fff", weight: 2, opacity: 1, fillOpacity: 0.8
     }).addTo(map);
 
     conchiDestination.bindPopup(`
         <div style="text-align:center; width:160px; color:black;">
             <h3 style="margin:0;">Natural Pool</h3>
-            <p style="font-size:12px; margin: 5px 0;">The end of the trail! Perfect for swim videos.</p>
-            <img src="images/NB.jpeg" class="popup-img" alt="Natural Pool View">
+            <p style="font-size:12px; margin: 5px 0;">Arrival point! Perfect for swim videos.</p>
+            <img src="images/NB.jpeg" class="popup-img" alt="Natural Pool" onerror="this.style.display='none';">
         </div>
     `);
 
