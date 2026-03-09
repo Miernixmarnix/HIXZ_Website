@@ -5,112 +5,75 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <style>
         #map { height: 70vh; width: 100%; border-bottom: 2px solid #fff; background: #2e3436; }
         .map-container { padding: 2em; text-align: center; }
-
-        /* THE FIX: Clears theme styling that breaks map layers */
-        .leaflet-pane img, .leaflet-tile-container img {
-            max-width: none !important;
-            max-height: none !important;
-            width: auto !important;
-            padding: 0 !important;
-        }
-
+        .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; max-height: none !important; width: auto !important; padding: 0 !important; }
         .leaflet-popup-content-wrapper { color: #000 !important; border-radius: 8px; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
-        
-        .popup-img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-top: 8px;
-            display: block;
-        }
+        .popup-img { width: 100%; height: auto; border-radius: 5px; margin-top: 8px; display: block; }
     </style>
 </head>
 <body class="is-preload">
-
     <header id="header">
         <h1><a href="index.html">HIXZ</a></h1>
-        <nav id="nav">
-            <ul>
-                <li><a href="index.html">Back to Home</a></li>
-            </ul>
-        </nav>
+        <nav id="nav"><ul><li><a href="index.html">Back to Home</a></li></ul></nav>
     </header>
-
     <article id="main">
-        <header>
-            <h2>Aruba Hike Map</h2>
-            <p>Live GPS Tracking & Trail Routes</p>
-        </header>
+        <header><h2>Aruba Hike Map</h2><p>Live GPS Tracking & Trail Routes</p></header>
         <section class="wrapper style5">
             <div class="inner">
                 <div id="map"></div>
-                <div class="map-container">
-                    <button class="button primary" onclick="getLocation()">Find My Location</button>
-                </div>
+                <div class="map-container"><button class="button primary" onclick="getLocation()">Find My Location</button></div>
             </div>
         </section>
     </article>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-
 <script>
-    // 1. Layers
-    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' });
-    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri' });
-    var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: 'Map data: &copy; OpenStreetMap' });
+    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+    var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenTopoMap' });
 
-    // 2. Initialize
-    var map = L.map('map', {
-        center: [12.5312, -69.9230], // Centered near the start of the trail
-        zoom: 14,
-        layers: [satellite]
-    });
-
+    var map = L.map('map', { center: [12.5312, -69.9230], zoom: 14, layers: [satellite] });
     L.control.layers({"Satellite": satellite, "Terrain": terrain, "Streets": streets}).addTo(map);
 
-    // 3. Load GPX Trail
+   // 3. Load GPX Trail and remove default image markers
     var gpxFile = 'Conchi_Natuurbad_Wandelroute.gpx';
     new L.GPX(gpxFile, {
         async: true,
+        // This line is the fix: it tells Leaflet NOT to look for missing icon images
+        marker_options: { 
+            startIconUrl: null, 
+            endIconUrl: null, 
+            shadowUrl: null,
+            pointMatchers: [] 
+        },
         polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
     }).on('loaded', function(e) {
-        map.fitBounds(e.target.getBounds());
+        var gpx = e.target;
+        map.fitBounds(gpx.getBounds());
+
+        // Now we use our custom CircleMarkers which don't rely on image files
+        var startCoords = gpx.get_start_point();
+        var endCoords = gpx.get_end_point();
+
+        L.circleMarker(startCoords, { radius: 8, fillColor: "#2ecc71", color: "#fff", weight: 2, fillOpacity: 1 })
+            .addTo(map).bindPopup("<b style='color:black;'>Trailhead</b>");
+
+        L.circleMarker(endCoords, { radius: 10, fillColor: "#ff4500", color: "#fff", weight: 2, fillOpacity: 0.8 })
+            .addTo(map).bindPopup(`
+                <div style="text-align:center; width:160px; color:black;">
+                    <h3 style="margin:0;">Natural Pool</h3>
+                    <img src="images/NB.jpeg" class="popup-img" onerror="this.style.display='none';">
+                </div>
+            `);
     }).addTo(map);
 
-    // 4. MARKERS (Using CircleMarkers to avoid CSS bugs)
-    
-    // START OF TRAIL (Green)
-    var startPoint = L.circleMarker([12.5362, -69.9318], {
-        radius: 8, fillColor: "#2ecc71", color: "#fff", weight: 2, opacity: 1, fillOpacity: 1
-    }).addTo(map);
-    startPoint.bindPopup("<b style='color:black;'>Trailhead</b><br><span style='color:black;'>Park here to start the hike.</span>");
-
-    // END OF TRAIL (Natural Pool - Orange/Red)
-    // Adjusted coordinates to put it on the coastline at the end of your trail
-    var conchiDestination = L.circleMarker([12.5255, -69.9142], {
-        radius: 10, fillColor: "#ff4500", color: "#fff", weight: 2, opacity: 1, fillOpacity: 0.8
-    }).addTo(map);
-
-    conchiDestination.bindPopup(`
-        <div style="text-align:center; width:160px; color:black;">
-            <h3 style="margin:0;">Natural Pool</h3>
-            <p style="font-size:12px; margin: 5px 0;">Arrival point! Perfect for swim videos.</p>
-            <img src="images/NB.jpeg" class="popup-img" alt="Natural Pool" onerror="this.style.display='none';">
-        </div>
-    `);
-
-    // 5. GPS Logic
     var userMarker, userCircle;
     function getLocation() { map.locate({setView: true, maxZoom: 16}); }
-
     map.on('locationfound', function(e) {
         if (userMarker) { map.removeLayer(userMarker); }
         if (userCircle) { map.removeLayer(userCircle); }
@@ -118,7 +81,6 @@
         userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
         userMarker.bindPopup("You are here!").openPopup();
     });
-
     setTimeout(function(){ map.invalidateSize()}, 500);
 </script>
 </body>
