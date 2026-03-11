@@ -9,33 +9,58 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-    .google-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #0d1a11; 
-        color: #ffffff !important;
-        padding: 14px 36px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-family: 'Archivo Black', sans-serif;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: background-color 0.3s ease;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        opacity: 0;
-        /* These lines ensure no outlines or shadows appear */
-        box-shadow: none;
-        text-shadow: none; 
-    }
+			/* Dark Forest Green Button - No Border, Pure White Text */
+			.google-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				background-color: #050a06; /* Deepest Forest Green */
+				color: #ffffff !important;
+				padding: 14px 36px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 14px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				transition: background-color 0.3s ease;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				opacity: 0; /* Starts hidden for animation */
+				box-shadow: none;
+				text-shadow: none;
+			}
 
-    .google-btn:hover {
-        background-color: #1b3022;
-    }
-</style>
+			.google-btn:hover {
+				background-color: #1b3022;
+			}
+
+			/* Video Grid Styling */
+			.video-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 20px;
+			}
+
+			.video-item {
+				opacity: 0; /* For scroll animation */
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+			}
+
+			.video-item video {
+				width: 100%;
+				display: block;
+			}
+
+			@media screen and (max-width: 736px) {
+				.video-grid {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+		</style>
 	</head>
 	<body class="landing is-preload">
 
@@ -70,12 +95,12 @@
 					<p>Welcome to the best hike and swim adventures in Aruba<br />
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
-    <li>
-        <button class="google-btn" onclick="handleGoogleSignIn()">
-            Sign up!
-        </button>
-    </li>
-</ul>
+						<li>
+							<button class="google-btn" onclick="handleGoogleSignIn()">
+								Sign Up!
+							</button>
+						</li>
+					</ul>
 				</div>
 			</section>
 
@@ -95,41 +120,6 @@
 				</div>
 			</section>
 
-			<section id="two" class="wrapper alt style2">
-				<section class="spotlight">
-					<div class="image"><img src="images/NB.jpeg" alt="Natural Bridge Aruba" /></div>
-					<div class="content">
-						<h2>Natural Bridge & Blackstone Beach</h2>
-						<p>Explore the rugged north coast where the ocean has carved spectacular formations out of coral rock. The trail to Blackstone Beach is a hidden gem for those looking to see Aruba's wilder side.</p>
-						<ul class="actions">
-							<li><a href="map.html" class="button">See Natural Bridge Route</a></li>
-						</ul>
-					</div>
-				</section>
-
-				<section class="spotlight">
-					<div class="image"><img src="images/arikok.jpeg" alt="Arikok National Park" /></div>
-					<div class="content">
-						<h2>Arikok National Park</h2>
-						<p>Nearly 20% of the island is a protected sanctuary. From the Spooky Trail's mysterious atmosphere to the peak of Jamanota, Arikok offers the most diverse hiking trails on the island.</p>
-						<ul class="actions">
-							<li><a href="map.html" class="button">See Arikok Route</a></li>
-						</ul>
-					</div>
-				</section>
-
-				<section class="spotlight">
-					<div class="image"><img src="images/Ayo.jpeg" alt="Ayo Rock Formations" /></div>
-					<div class="content">
-						<h2>Ayo & Casibari Rock Formations</h2>
-						<p>Wander through massive monolithic boulders and ancient Arawak petroglyphs. These sites offer paved paths that make for an easy but mystical walk through Aruba's inland history.</p>
-						<ul class="actions">
-							<li><a href="map.html" class="button">See Ayo Route</a></li>
-						</ul>
-					</div>
-				</section>
-			</section>
-
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
 					<header class="major" style="margin-bottom: 4rem;">
@@ -139,21 +129,18 @@
 					</header>
 
 					<div class="video-grid">
-						<div class="video-item">
-							<video src="images/clip1.mp4" autoplay loop muted playsinline></video>
-							<div class="video-overlay">
-								<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-								<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-								<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-							</div>
-						</div>
-						</div>
+						<div class="video-item"><video src="images/clip1.mp4" autoplay loop muted playsinline></video></div>
+						<div class="video-item"><video src="images/clip2.mp4" autoplay loop muted playsinline></video></div>
+						<div class="video-item"><video src="images/clip3.mp4" autoplay loop muted playsinline></video></div>
+						<div class="video-item"><video src="images/clip4.mp4" autoplay loop muted playsinline></video></div>
+						<div class="video-item"><video src="images/clip5.mp4" autoplay loop muted playsinline></video></div>
+						<div class="video-item"><video src="images/clip6.mp4" autoplay loop muted playsinline></video></div>
+					</div>
 				</div>
 			</section>
 
 			<footer id="footer">
 				<ul class="icons">
-					<li><a href="https://linkedin.com/in/yourprofile" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 					<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
@@ -173,26 +160,24 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
 		<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 		<script>
-			// Google Sign-In Logic
+			// Google Login
 			function handleGoogleSignIn() {
 				google.accounts.id.initialize({
 					client_id: "105805193817-k44af5896s4cd43i8hc31m0h9sd3b6g2.apps.googleusercontent.com",
 					callback: function(response) {
-						console.log("Encoded JWT ID token: " + response.credential);
+						console.log("JWT Token: " + response.credential);
 						alert("Welcome to the community of 500+ hikers!");
 					}
 				});
 				google.accounts.id.prompt(); 
 			}
 
-			// Preloader and Showcase animations
+			// Main Animations
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
-				
 				tl.add({
 					targets: '.loader-logo',
 					opacity: [0, 1],
@@ -206,7 +191,6 @@
 					duration: 1000,
 					delay: 500
 				})
-				/* This part fades in your new button right after the curtain lifts */
 				.add({
 					targets: '.google-btn',
 					opacity: [0, 1],
@@ -216,8 +200,8 @@
 				});
 			});
 
-			const observerOptions = { root: null, threshold: 0.2 };
-			const observer = new IntersectionObserver((entries, observer) => {
+			// Video Grid Scroll Animation
+			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
 						anime({
@@ -226,18 +210,16 @@
 							filter: ['blur(15px)', 'blur(0px)'],
 							opacity: [0, 1],
 							delay: anime.stagger(200),
-							duration: 2000,
+							duration: 1500,
 							easing: 'easeOutExpo'
 						});
 						observer.unobserve(entry.target);
 					}
 				});
-			}, observerOptions);
+			}, { threshold: 0.2 });
 
-			const target = document.querySelector('#showcase');
-			if (target) { observer.observe(target); }
+			const showcase = document.querySelector('#showcase');
+			if (showcase) { observer.observe(showcase); }
 		</script>
 	</body>
 </html>
-
-
