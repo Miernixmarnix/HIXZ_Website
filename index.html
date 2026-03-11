@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>HIXZ.mx</title>
+		<title>HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -9,29 +9,30 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* Forest Green Google Button Styles */
-			.google-btn {
-				display: inline-flex;
-				align-items: center;
-				background-color: #1b3022;
-				color: #ffffff;
-				padding: 12px 30px;
-				border-radius: 50px;
-				text-decoration: none;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 14px;
-				transition: background-color 0.3s ease;
-				border: none;
-				cursor: pointer;
-			}
-			.google-btn:hover {
-				background-color: #2d4f38;
-			}
-			.google-btn img {
-				width: 18px;
-				margin-right: 12px;
-			}
-		</style>
+    .google-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #0d1a11; 
+        color: #ffffff !important;
+        padding: 14px 36px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        opacity: 0; /* Starts hidden for the animation */
+    }
+
+    .google-btn:hover {
+        background-color: #1b3022;
+    }
+</style>
 	</head>
 	<body class="landing is-preload">
 
@@ -66,13 +67,12 @@
 					<p>Welcome to the best hike and swim adventures in Aruba<br />
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
-						<li>
-							<button class="google-btn" onclick="handleGoogleSignIn()">
-								<img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" alt="Google">
-								Sign up with Google
-							</button>
-						</li>
-					</ul>
+    <li>
+        <button class="google-btn" onclick="handleGoogleSignIn()">
+            Sign up with Google
+        </button>
+    </li>
+</ul>
 				</div>
 			</section>
 
@@ -189,6 +189,7 @@
 			// Preloader and Showcase animations
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
+				
 				tl.add({
 					targets: '.loader-logo',
 					opacity: [0, 1],
@@ -201,6 +202,14 @@
 					translateY: '-100%', 
 					duration: 1000,
 					delay: 500
+				})
+				/* This part fades in your new button right after the curtain lifts */
+				.add({
+					targets: '.google-btn',
+					opacity: [0, 1],
+					translateY: [20, 0],
+					duration: 800,
+					offset: '-=400' 
 				});
 			});
 
@@ -227,3 +236,4 @@
 		</script>
 	</body>
 </html>
+
