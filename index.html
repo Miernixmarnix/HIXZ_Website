@@ -14,7 +14,7 @@
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				background-color: #050a06; /* Deepest Forest Green */
+				background-color: #050a06; 
 				color: #ffffff !important;
 				padding: 14px 36px;
 				border-radius: 50px;
@@ -27,7 +27,7 @@
 				border: none;
 				outline: none;
 				cursor: pointer;
-				opacity: 0; /* Starts hidden for animation */
+				opacity: 0; 
 				box-shadow: none;
 				text-shadow: none;
 			}
@@ -36,15 +36,9 @@
 				background-color: #1b3022;
 			}
 
-			/* Video Grid Styling */
-			.video-grid {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 20px;
-			}
-
+			/* Restoring Video Grid & Social Hover Styles */
 			.video-item {
-				opacity: 0; /* For scroll animation */
+				opacity: 0;
 				position: relative;
 				overflow: hidden;
 				border-radius: 8px;
@@ -55,10 +49,34 @@
 				display: block;
 			}
 
-			@media screen and (max-width: 736px) {
-				.video-grid {
-					grid-template-columns: 1fr 1fr;
-				}
+			.video-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.video-item:hover .video-overlay {
+				opacity: 1;
+			}
+
+			.video-overlay a {
+				color: #fff;
+				font-size: 1.5rem;
+				text-decoration: none;
+				transition: transform 0.2s ease;
+			}
+
+			.video-overlay a:hover {
+				transform: scale(1.2);
 			}
 		</style>
 	</head>
@@ -120,6 +138,39 @@
 				</div>
 			</section>
 
+			<section id="two" class="wrapper alt style2">
+				<section class="spotlight">
+					<div class="image"><img src="images/NB.jpeg" alt="Natural Bridge" /></div>
+					<div class="content">
+						<h2>Natural Bridge & Blackstone Beach</h2>
+						<p>Explore the rugged north coast where the ocean has carved spectacular formations out of coral rock.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Natural Bridge Route</a></li>
+						</ul>
+					</div>
+				</section>
+				<section class="spotlight">
+					<div class="image"><img src="images/arikok.jpeg" alt="Arikok" /></div>
+					<div class="content">
+						<h2>Arikok National Park</h2>
+						<p>Nearly 20% of the island is a protected sanctuary with diverse hiking trails.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Arikok Route</a></li>
+						</ul>
+					</div>
+				</section>
+				<section class="spotlight">
+					<div class="image"><img src="images/Ayo.jpeg" alt="Ayo" /></div>
+					<div class="content">
+						<h2>Ayo & Casibari Rock Formations</h2>
+						<p>Wander through massive monolithic boulders and ancient Arawak petroglyphs.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Ayo Route</a></li>
+						</ul>
+					</div>
+				</section>
+			</section>
+
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
 					<header class="major" style="margin-bottom: 4rem;">
@@ -129,12 +180,21 @@
 					</header>
 
 					<div class="video-grid">
-						<div class="video-item"><video src="images/clip1.mp4" autoplay loop muted playsinline></video></div>
-						<div class="video-item"><video src="images/clip2.mp4" autoplay loop muted playsinline></video></div>
-						<div class="video-item"><video src="images/clip3.mp4" autoplay loop muted playsinline></video></div>
-						<div class="video-item"><video src="images/clip4.mp4" autoplay loop muted playsinline></video></div>
-						<div class="video-item"><video src="images/clip5.mp4" autoplay loop muted playsinline></video></div>
-						<div class="video-item"><video src="images/clip6.mp4" autoplay loop muted playsinline></video></div>
+						<script>
+							const clips = [1, 2, 3, 4, 5, 6];
+							clips.forEach(i => {
+								document.write(`
+									<div class="video-item">
+										<video src="images/clip${i}.mp4" autoplay loop muted playsinline></video>
+										<div class="video-overlay">
+											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+											<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
+											<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
+										</div>
+									</div>
+								`);
+							});
+						</script>
 					</div>
 				</div>
 			</section>
@@ -163,7 +223,6 @@
 		<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 		<script>
-			// Google Login
 			function handleGoogleSignIn() {
 				google.accounts.id.initialize({
 					client_id: "105805193817-k44af5896s4cd43i8hc31m0h9sd3b6g2.apps.googleusercontent.com",
@@ -175,7 +234,6 @@
 				google.accounts.id.prompt(); 
 			}
 
-			// Main Animations
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
 				tl.add({
@@ -200,7 +258,6 @@
 				});
 			});
 
-			// Video Grid Scroll Animation
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
@@ -216,7 +273,7 @@
 						observer.unobserve(entry.target);
 					}
 				});
-			}, { threshold: 0.2 });
+			}, { threshold: 0.1 });
 
 			const showcase = document.querySelector('#showcase');
 			if (showcase) { observer.observe(showcase); }
