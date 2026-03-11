@@ -19,14 +19,17 @@
         border-radius: 50px;
         text-decoration: none;
         font-family: 'Archivo Black', sans-serif;
-        font-size: 13px;
+        font-size: 14px;
         letter-spacing: 1px;
         text-transform: uppercase;
         transition: background-color 0.3s ease;
         border: none;
         outline: none;
         cursor: pointer;
-        opacity: 0; /* Starts hidden for the animation */
+        opacity: 0;
+        /* These lines ensure no outlines or shadows appear */
+        box-shadow: none;
+        text-shadow: none; 
     }
 
     .google-btn:hover {
@@ -69,7 +72,7 @@
 					<ul class="actions special">
     <li>
         <button class="google-btn" onclick="handleGoogleSignIn()">
-            Sign up with Google
+            Sign up!
         </button>
     </li>
 </ul>
@@ -236,4 +239,5 @@
 		</script>
 	</body>
 </html>
+
 
