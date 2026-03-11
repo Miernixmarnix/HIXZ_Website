@@ -10,7 +10,6 @@
     <style>
         #map { height: 75vh; width: 100%; border-bottom: 2px solid #fff; background: #2e3436; }
         .map-container { padding: 2em; text-align: center; }
-        /* Fixes for theme conflicts */
         .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
     </style>
@@ -37,14 +36,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 <script>
-    // 1. Setup Map Layers
     var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
     var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
 
     var map = L.map('map', { center: [12.4933, -69.9455], zoom: 15, layers: [satellite] });
     L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
 
-    // 2. Load Trail Line Only
+    // Load Trail Line ONLY (Blue/Cyan)
     var gpxFile = 'Cunucu_Arikok_Loop.gpx'; 
     new L.GPX(gpxFile, {
         async: true,
@@ -54,7 +52,7 @@
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // 3. GPS Function
+    // Find My Location function
     var userMarker, userCircle;
     function getLocation() { map.locate({setView: true, maxZoom: 17}); }
     map.on('locationfound', function(e) {
