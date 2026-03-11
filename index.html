@@ -4,11 +4,34 @@
 		<title>HIXZ.mx</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-		
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+			/* Forest Green Google Button Styles */
+			.google-btn {
+				display: inline-flex;
+				align-items: center;
+				background-color: #1b3022;
+				color: #ffffff;
+				padding: 12px 30px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 14px;
+				transition: background-color 0.3s ease;
+				border: none;
+				cursor: pointer;
+			}
+			.google-btn:hover {
+				background-color: #2d4f38;
+			}
+			.google-btn img {
+				width: 18px;
+				margin-right: 12px;
+			}
+		</style>
 	</head>
 	<body class="landing is-preload">
 
@@ -18,229 +41,189 @@
 
 		<div id="page-wrapper">
 
-				<header id="header" class="alt">
-						<h1><a href="index.html">HIXZ</a></h1>
-						<nav id="nav">
-							<ul>
-								<li class="special">
-									<a href="#menu" class="menuToggle"><span>Menu</span></a>
-									<div id="menu">
-										<ul>
-											<li><a href="index.html">Home</a></li>
-											<li><a href="map.html">Hike Map</a></li> 
-											<li><a href="generic.html">About Me</a></li>
-											<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</nav>
+			<header id="header" class="alt">
+				<h1><a href="index.html">HIXZ</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="map.html">Hike Map</a></li> 
+									<li><a href="generic.html">About Me</a></li>
+									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<section id="banner">
+				<div class="inner">
+					<h2>HIXZ</h2>
+					<p>Welcome to the best hike and swim adventures in Aruba<br />
+					Explore the secrets this small island has to offer</p>
+					<ul class="actions special">
+						<li>
+							<button class="google-btn" onclick="handleGoogleSignIn()">
+								<img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" alt="Google">
+								Sign up with Google
+							</button>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="one" class="wrapper style1 special">
+				<div class="inner">
+					<header class="major">
+						<h2>Explore what Aruba's nature has to offer<br />
+						Step by step.</h2>
+						<p>I specialize in making the experience fun, and injoyable for everyone.<br />
+						Those are the principles I bring to every project.</p>
+					</header>
+					<ul class="icons major">
+						<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
+						<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
+						<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="two" class="wrapper alt style2">
+				<section class="spotlight">
+					<div class="image"><img src="images/NB.jpeg" alt="Natural Bridge Aruba" /></div>
+					<div class="content">
+						<h2>Natural Bridge & Blackstone Beach</h2>
+						<p>Explore the rugged north coast where the ocean has carved spectacular formations out of coral rock. The trail to Blackstone Beach is a hidden gem for those looking to see Aruba's wilder side.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Natural Bridge Route</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="spotlight">
+					<div class="image"><img src="images/arikok.jpeg" alt="Arikok National Park" /></div>
+					<div class="content">
+						<h2>Arikok National Park</h2>
+						<p>Nearly 20% of the island is a protected sanctuary. From the Spooky Trail's mysterious atmosphere to the peak of Jamanota, Arikok offers the most diverse hiking trails on the island.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Arikok Route</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="spotlight">
+					<div class="image"><img src="images/Ayo.jpeg" alt="Ayo Rock Formations" /></div>
+					<div class="content">
+						<h2>Ayo & Casibari Rock Formations</h2>
+						<p>Wander through massive monolithic boulders and ancient Arawak petroglyphs. These sites offer paved paths that make for an easy but mystical walk through Aruba's inland history.</p>
+						<ul class="actions">
+							<li><a href="map.html" class="button">See Ayo Route</a></li>
+						</ul>
+					</div>
+				</section>
+			</section>
+
+			<section id="showcase" class="wrapper style2">
+				<div class="inner">
+					<header class="major" style="margin-bottom: 4rem;">
+						<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
+							Go on hikes with me everywhere
+						</h2>
 					</header>
 
-				<section id="banner">
-						<div class="inner">
-							<h2>HIXZ</h2>
-							<p>Welcome to the best hike and swim adventures in Aruba<br />
-							Explore the secrets this small island has to offer</p>
-							<ul class="actions special">
-								<li><a href="#" class="button primary">Sign Up</a></li>
-							</ul>
-						</div>
-					</section>
-
-				<section id="one" class="wrapper style1 special">
-						<div class="inner">
-							<header class="major">
-								<h2>Explore what Aruba's nature has to offer<br />
-								Step by step.</h2>
-								<p>I specialize in making the experience fun, and injoyable for everyone.<br />
-								Those are the principles I bring to every project.</p>
-							</header>
-							<ul class="icons major">
-								<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
-								<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
-								<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
-							</ul>
-						</div>
-					</section>
-
-				<section id="two" class="wrapper alt style2">
-						<section class="spotlight">
-							<div class="image"><img src="images/NB.jpeg" alt="Natural Bridge Aruba" /></div>
-							<div class="content">
-								<h2>Natural Bridge & Blackstone Beach</h2>
-								<p>Explore the rugged north coast where the ocean has carved spectacular formations out of coral rock. The trail to Blackstone Beach is a hidden gem for those looking to see Aruba's wilder side.</p>
-								<ul class="actions">
-									<li><a href="map.html" class="button">See Natural Bridge Route</a></li>
-								</ul>
-							</div>
-						</section>
-
-						<section class="spotlight">
-							<div class="image"><img src="images/arikok.jpeg" alt="Arikok National Park" /></div>
-							<div class="content">
-								<h2>Arikok National Park</h2>
-								<p>Nearly 20% of the island is a protected sanctuary. From the Spooky Trail's mysterious atmosphere to the peak of Jamanota, Arikok offers the most diverse hiking trails on the island.</p>
-								<ul class="actions">
-									<li><a href="map.html" class="button">See Arikok Route</a></li>
-								</ul>
-							</div>
-						</section>
-
-						<section class="spotlight">
-							<div class="image"><img src="images/Ayo.jpeg" alt="Ayo Rock Formations" /></div>
-							<div class="content">
-								<h2>Ayo & Casibari Rock Formations</h2>
-								<p>Wander through massive monolithic boulders and ancient Arawak petroglyphs. These sites offer paved paths that make for an easy but mystical walk through Aruba's inland history.</p>
-								<ul class="actions">
-									<li><a href="map.html" class="button">See Ayo Route</a></li>
-								</ul>
-							</div>
-						</section>
-					</section>
-
-				<section id="showcase" class="wrapper style2">
-						<div class="inner">
-							<header class="major" style="margin-bottom: 4rem;">
-								<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
-									Go on hikes with me everywhere
-								</h2>
-							</header>
-
-							<div class="video-grid">
-								<div class="video-item">
-									<video src="images/clip1.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
-
-								<div class="video-item">
-									<video src="images/clip2.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
-
-								<div class="video-item">
-									<video src="images/clip3.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
-
-								<div class="video-item">
-									<video src="images/clip4.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
-
-								<div class="video-item">
-									<video src="images/clip5.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
-
-								<div class="video-item">
-									<video src="images/clip6.mp4" autoplay loop muted playsinline></video>
-									<div class="video-overlay">
-										<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-										<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-										<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-									</div>
-								</div>
+					<div class="video-grid">
+						<div class="video-item">
+							<video src="images/clip1.mp4" autoplay loop muted playsinline></video>
+							<div class="video-overlay">
+								<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+								<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
+								<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
 							</div>
 						</div>
-					</section>
-
-				<section id="cta" class="wrapper style4">
-						<div class="inner">
-							<header>
-								<h2>Ready for your next adventure?</h2>
-								<p>If you have questions about trails in Aruba or want to collaborate on a hiking project, I'd love to hear from you.</p>
-							</header>
-							<ul class="actions stacked">
-								<li><a href="mailto:marnixvanpelt11@gmail.com" class="button fit primary">Email Me</a></li>
-								<li><a href="generic.html" class="button fit">Learn More About Me</a></li>
-							</ul>
 						</div>
-					</section>
+				</div>
+			</section>
 
-				<footer id="footer">
-						<ul class="icons">
-							<li><a href="https://linkedin.com/in/yourprofile" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-							<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-						<ul class="copyright">
-							<li>&copy; HIXZ </li>
-							<li>Built by Marnix van Pelt with <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://linkedin.com/in/yourprofile" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+					<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; HIXZ </li>
+					<li>Built by Marnix van Pelt with <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
 
 		</div>
 
 		<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+		<script src="https://accounts.google.com/gsi/client" async defer></script>
 
-			<script>
-				window.addEventListener('load', () => {
-					const tl = anime.timeline({ easing: 'easeInOutQuart' });
-					tl.add({
-						targets: '.loader-logo',
-						opacity: [0, 1],
-						scale: [0.8, 1],
-						duration: 800,
-						delay: 200
-					})
-					.add({
-						targets: '#loader-curtain',
-						translateY: '-100%', 
-						duration: 1000,
-						delay: 500
-					});
+		<script>
+			// Google Sign-In Logic
+			function handleGoogleSignIn() {
+				google.accounts.id.initialize({
+					client_id: "105805193817-k44af5896s4cd43i8hc31m0h9sd3b6g2.apps.googleusercontent.com",
+					callback: function(response) {
+						console.log("Encoded JWT ID token: " + response.credential);
+						alert("Welcome to the community of 500+ hikers!");
+					}
 				});
+				google.accounts.id.prompt(); 
+			}
 
-				const observerOptions = { root: null, threshold: 0.2 };
-				const observer = new IntersectionObserver((entries, observer) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							anime({
-								targets: '.video-item',
-								translateY: [60, 0],
-								filter: ['blur(15px)', 'blur(0px)'],
-								opacity: [0, 1],
-								delay: anime.stagger(200),
-								duration: 2000,
-								easing: 'easeOutExpo'
-							});
-							observer.unobserve(entry.target);
-						}
-					});
-				}, observerOptions);
+			// Preloader and Showcase animations
+			window.addEventListener('load', () => {
+				const tl = anime.timeline({ easing: 'easeInOutQuart' });
+				tl.add({
+					targets: '.loader-logo',
+					opacity: [0, 1],
+					scale: [0.8, 1],
+					duration: 800,
+					delay: 200
+				})
+				.add({
+					targets: '#loader-curtain',
+					translateY: '-100%', 
+					duration: 1000,
+					delay: 500
+				});
+			});
 
-				const target = document.querySelector('#showcase');
-				if (target) { observer.observe(target); }
-			</script>
+			const observerOptions = { root: null, threshold: 0.2 };
+			const observer = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						anime({
+							targets: '.video-item',
+							translateY: [60, 0],
+							filter: ['blur(15px)', 'blur(0px)'],
+							opacity: [0, 1],
+							delay: anime.stagger(200),
+							duration: 2000,
+							easing: 'easeOutExpo'
+						});
+						observer.unobserve(entry.target);
+					}
+				});
+			}, observerOptions);
 
+			const target = document.querySelector('#showcase');
+			if (target) { observer.observe(target); }
+		</script>
 	</body>
 </html>
