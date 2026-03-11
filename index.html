@@ -36,7 +36,13 @@
 				background-color: #1b3022;
 			}
 
-			/* Restoring Video Grid & Social Hover Styles */
+			/* Video Grid & Social Hover Styles */
+			.video-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 20px;
+			}
+
 			.video-item {
 				opacity: 0;
 				position: relative;
@@ -77,6 +83,12 @@
 
 			.video-overlay a:hover {
 				transform: scale(1.2);
+			}
+
+			@media screen and (max-width: 736px) {
+				.video-grid {
+					grid-template-columns: 1fr 1fr;
+				}
 			}
 		</style>
 	</head>
@@ -127,7 +139,7 @@
 					<header class="major">
 						<h2>Explore what Aruba's nature has to offer<br />
 						Step by step.</h2>
-						<p>I specialize in making the experience fun, and injoyable for everyone.<br />
+						<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
 						Those are the principles I bring to every project.</p>
 					</header>
 					<ul class="icons major">
@@ -227,11 +239,25 @@
 				google.accounts.id.initialize({
 					client_id: "105805193817-k44af5896s4cd43i8hc31m0h9sd3b6g2.apps.googleusercontent.com",
 					callback: function(response) {
-						console.log("JWT Token: " + response.credential);
-						alert("Welcome to the community of 500+ hikers!");
+						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
+							method: "POST",
+							mode: "no-cors",
+							body: JSON.stringify({
+								token: response.credential
+							}),
+							headers: {
+								"Content-Type": "application/json"
+							}
+						})
+						.then(() => {
+							alert("Success! You're on the list.");
+						})
+						.catch(() => {
+							alert("Something went wrong, please try again.");
+						});
 					}
 				});
-				google.accounts.id.prompt(); 
+				google.accounts.id.prompt();
 			}
 
 			window.addEventListener('load', () => {
