@@ -23,7 +23,7 @@
 				font-size: 14px;
 				letter-spacing: 1px;
 				text-transform: uppercase;
-				transition: background-color 0.3s ease;
+				transition: all 0.3s ease;
 				border: none;
 				outline: none;
 				cursor: pointer;
@@ -35,6 +35,13 @@
 			.google-btn:hover {
 				background-color: #1b3022;
 			}
+
+            /* Loading state for the button */
+            .google-btn.loading {
+                background-color: #333;
+                cursor: not-allowed;
+                opacity: 0.7;
+            }
 
 			/* Video Grid & Social Hover Styles */
 			.video-grid {
@@ -126,7 +133,7 @@
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
 						<li>
-							<button class="google-btn" onclick="handleGoogleSignIn()">
+							<button id="signup-btn" class="google-btn" onclick="handleGoogleSignIn()">
 								Sign Up!
 							</button>
 						</li>
@@ -236,24 +243,31 @@
 
 		<script>
 			function handleGoogleSignIn() {
+                const btn = document.getElementById('signup-btn');
+                
 				google.accounts.id.initialize({
 					client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
 					callback: function(response) {
+                        // UI Update: Loading
+                        btn.innerHTML = "Processing...";
+                        btn.classList.add('loading');
+
 						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
 							method: "POST",
-							mode: "no-cors",
 							body: JSON.stringify({
 								token: response.credential
-							}),
-							headers: {
-								"Content-Type": "application/json"
-							}
+							})
 						})
 						.then(() => {
 							alert("Success! You're on the list.");
+                            btn.innerHTML = "Sign Up!";
+                            btn.classList.remove('loading');
 						})
-						.catch(() => {
+						.catch((err) => {
+							console.error("Error sending to Zapier:", err);
 							alert("Something went wrong, please try again.");
+                            btn.innerHTML = "Sign Up!";
+                            btn.classList.remove('loading');
 						});
 					}
 				});
@@ -306,4 +320,3 @@
 		</script>
 	</body>
 </html>
-
