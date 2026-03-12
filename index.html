@@ -243,36 +243,47 @@
 
 		<script>
 			function handleGoogleSignIn() {
-                const btn = document.getElementById('signup-btn');
-                
-				google.accounts.id.initialize({
-					client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
-					callback: function(response) {
-                        // UI Update: Loading
-                        btn.innerHTML = "Processing...";
-                        btn.classList.add('loading');
+    const btn = document.getElementById('signup-btn');
+    
+    google.accounts.id.initialize({
+        client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
+        callback: function(response) {
+            // UI Update: Loading
+            btn.innerHTML = "Processing...";
+            btn.classList.add('loading');
 
-						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
-							method: "POST",
-							body: JSON.stringify({
-								token: response.credential
-							})
-						})
-						.then(() => {
-							alert("Success! You're on the list.");
-                            btn.innerHTML = "Sign Up!";
-                            btn.classList.remove('loading');
-						})
-						.catch((err) => {
-							console.error("Error sending to Zapier:", err);
-							alert("Something went wrong, please try again.");
-                            btn.innerHTML = "Sign Up!";
-                            btn.classList.remove('loading');
-						});
-					}
-				});
-				google.accounts.id.prompt();
-			}
+            // Decode the JWT token to get user info
+            const token = response.credential;
+            const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
+
+            // Extract name and email from token
+            const userEmail = payload.email;
+            const userName = payload.name;
+
+            // Send to Zapier
+            fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: userName,
+                    email: userEmail
+                })
+            })
+            .then(() => {
+                alert("Success! You're on the list.");
+                btn.innerHTML = "Sign Up!";
+                btn.classList.remove('loading');
+            })
+            .catch((err) => {
+                console.error("Error sending to Zapier:", err);
+                alert("Something went wrong, please try again.");
+                btn.innerHTML = "Sign Up!";
+                btn.classList.remove('loading');
+            });
+        }
+    });
+    google.accounts.id.prompt();
+}
 
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
