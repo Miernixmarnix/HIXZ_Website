@@ -243,76 +243,37 @@
 
 		<script>
 			function handleGoogleSignIn() {
-    const btn = document.getElementById('signup-btn');
-    
-    console.log("1. Button clicked, initializing Google Sign-In...");
-    
-    google.accounts.id.initialize({
-        client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
-        callback: function(response) {
-            console.log("2. Google callback triggered");
-            console.log("3. Response credential:", response.credential ? "✓ exists" : "✗ missing");
-            
-            try {
-                // UI Update: Loading
-                btn.innerHTML = "Processing...";
-                btn.classList.add('loading');
+				const btn = document.getElementById('signup-btn');
+				
+				google.accounts.id.initialize({
+					client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
+					callback: function(response) {
+						// Set Loading State
+						btn.innerHTML = "Processing...";
+						btn.classList.add('loading');
 
-                // Decode the JWT token to get user info
-                const token = response.credential;
-                console.log("4. Token received:", token ? "✓ yes" : "✗ no");
-                
-                const parts = token.split('.');
-                console.log("5. Token parts:", parts.length, "parts");
-                
-                const payload = JSON.parse(atob(parts[1]));
-                console.log("6. JWT decoded ✓");
-                console.log("7. Payload:", payload);
-
-                // Extract name and email from token
-                const userEmail = payload.email;
-                const userName = payload.name;
-                
-                console.log("8. Name:", userName);
-                console.log("9. Email:", userEmail);
-
-                // Send to Zapier
-                console.log("10. Sending to webhook...");
-                fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: userName,
-                        email: userEmail
-                    })
-                })
-                .then(response => {
-                    console.log("11. Webhook response status:", response.status);
-                    return response.json().catch(() => ({}));
-                })
-                .then(data => {
-                    console.log("12. Webhook response data:", data);
-                    alert("Success! You're on the list.");
-                    btn.innerHTML = "Sign Up!";
-                    btn.classList.remove('loading');
-                })
-                .catch((err) => {
-                    console.error("13. ✗ Error sending to Zapier:", err);
-                    alert("Something went wrong, please try again.");
-                    btn.innerHTML = "Sign Up!";
-                    btn.classList.remove('loading');
-                });
-            } catch (error) {
-                console.error("ERROR during processing:", error);
-                alert("Processing error: " + error.message);
-                btn.innerHTML = "Sign Up!";
-                btn.classList.remove('loading');
-            }
-        }
-    });
-    console.log("14. Prompting Google Sign-In...");
-    google.accounts.id.prompt();
-}
+						// Send raw token to Zapier
+						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
+							method: "POST",
+							body: JSON.stringify({
+								token: response.credential
+							})
+						})
+						.then(() => {
+							alert("Success! You're on the list.");
+							btn.innerHTML = "Sign Up!";
+							btn.classList.remove('loading');
+						})
+						.catch((err) => {
+							console.error("Error sending to Zapier:", err);
+							alert("Something went wrong, please try again.");
+							btn.innerHTML = "Sign Up!";
+							btn.classList.remove('loading');
+						});
+					}
+				});
+				google.accounts.id.prompt();
+			}
 
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
@@ -360,5 +321,3 @@
 		</script>
 	</body>
 </html>
-
-
