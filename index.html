@@ -97,6 +97,13 @@
 					grid-template-columns: 1fr 1fr;
 				}
 			}
+
+			/* Style for Kit Form Container */
+			.kit-form-container {
+				padding: 4rem 2rem;
+				text-align: center;
+				background-color: #ffffff;
+			}
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -218,6 +225,12 @@
 				</div>
 			</section>
 
+			<section id="newsletter" class="kit-form-container">
+				<div class="inner">
+					<script async data-uid="280d5e66a3" src="https://hixz.kit.com/280d5e66a3/index.js"></script>
+				</div>
+			</section>
+
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
@@ -248,11 +261,9 @@
 				google.accounts.id.initialize({
 					client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
 					callback: function(response) {
-						// Set Loading State
 						btn.innerHTML = "Processing...";
 						btn.classList.add('loading');
 
-						// Send raw token to Zapier
 						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
 							method: "POST",
 							body: JSON.stringify({
