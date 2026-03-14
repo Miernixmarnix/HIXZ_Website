@@ -36,13 +36,6 @@
 				background-color: #1b3022;
 			}
 
-            /* Loading state for the button */
-            .google-btn.loading {
-                background-color: #333;
-                cursor: not-allowed;
-                opacity: 0.7;
-            }
-
 			/* Video Grid & Social Hover Styles */
 			.video-grid {
 				display: grid;
@@ -97,13 +90,6 @@
 					grid-template-columns: 1fr 1fr;
 				}
 			}
-
-			/* Style for Kit Form Container */
-			.kit-form-container {
-				padding: 4rem 2rem;
-				text-align: center;
-				background-color: #ffffff;
-			}
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -140,9 +126,9 @@
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
 						<li>
-							<button id="signup-btn" class="google-btn" onclick="handleGoogleSignIn()">
+							<a href="https://hixz.kit.com/280d5e66a3" data-formkit-toggle="280d5e66a3" class="google-btn" id="signup-btn">
 								Sign Up!
-							</button>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -225,12 +211,6 @@
 				</div>
 			</section>
 
-			<section id="newsletter" class="kit-form-container">
-				<div class="inner">
-					<script async data-uid="280d5e66a3" src="https://hixz.kit.com/280d5e66a3/index.js"></script>
-				</div>
-			</section>
-
 			<footer id="footer">
 				<ul class="icons">
 					<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
@@ -252,40 +232,10 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-		<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+		<script async data-uid="280d5e66a3" src="https://hixz.kit.com/280d5e66a3/index.js"></script>
 
 		<script>
-			function handleGoogleSignIn() {
-				const btn = document.getElementById('signup-btn');
-				
-				google.accounts.id.initialize({
-					client_id: "105805193817-o0jn7vlpca7qs8hf1i54kck9tv4c2430.apps.googleusercontent.com",
-					callback: function(response) {
-						btn.innerHTML = "Processing...";
-						btn.classList.add('loading');
-
-						fetch("https://hooks.zapier.com/hooks/catch/26773890/uxz9zuf/", {
-							method: "POST",
-							body: JSON.stringify({
-								token: response.credential
-							})
-						})
-						.then(() => {
-							alert("Success! You're on the list.");
-							btn.innerHTML = "Sign Up!";
-							btn.classList.remove('loading');
-						})
-						.catch((err) => {
-							console.error("Error sending to Zapier:", err);
-							alert("Something went wrong, please try again.");
-							btn.innerHTML = "Sign Up!";
-							btn.classList.remove('loading');
-						});
-					}
-				});
-				google.accounts.id.prompt();
-			}
-
 			window.addEventListener('load', () => {
 				const tl = anime.timeline({ easing: 'easeInOutQuart' });
 				tl.add({
