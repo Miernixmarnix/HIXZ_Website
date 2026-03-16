@@ -36,6 +36,18 @@
 				background-color: #1b3022;
 			}
 
+			/* --- START NEW CSS: See More Section --- */
+			/* Keeps the extended trail list hidden initially */
+			#all-trail-options {
+				display: none;
+			}
+			/* Container styling for the see-more button */
+			.see-more-container {
+				text-align: center;
+				padding: 4rem 0;
+			}
+			/* --- END NEW CSS: See More Section --- */
+
 			/* Video Grid & Social Hover Styles */
 			.video-grid {
 				display: grid;
@@ -181,7 +193,16 @@
 						</ul>
 					</div>
 				</section>
-			</section>
+
+				<div class="see-more-container style2">
+					<button class="google-btn" id="see-more-btn">
+						LOOK AT ALL TRAIL OPTIONS
+					</button>
+				</div>
+
+				<div id="all-trail-options" class="style2">
+					</div>
+				</section>
 
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
@@ -193,20 +214,20 @@
 
 					<div class="video-grid">
 						<script>
-	const clips = [1, 2, 3, 4, 5, 6];
-	clips.forEach(i => {
-		document.write(`
-			<div class="video-item">
-				<video data-src="images/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
-				<div class="video-overlay">
-					<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-					<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-					<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-				</div>
-			</div>
-		`);
-	});
-</script>
+							const clips = [1, 2, 3, 4, 5, 6];
+							clips.forEach(i => {
+								document.write(`
+									<div class="video-item">
+										<video data-src="images/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+										<div class="video-overlay">
+											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+											<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
+											<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
+										</div>
+									</div>
+								`);
+							});
+						</script>
 					</div>
 				</div>
 			</section>
@@ -279,27 +300,46 @@
 
 			const showcase = document.querySelector('#showcase');
 			if (showcase) { observer.observe(showcase); }
-			// Lazy Load & Play Videos only when visible
-const videoObserver = new IntersectionObserver((entries) => {
-	entries.forEach(entry => {
-		const video = entry.target;
-		if (entry.isIntersecting) {
-			if (!video.src) {
-				video.src = video.getAttribute('data-src');
-			}
-			video.play();
-		} else {
-			video.pause();
-		}
-	});
-}, { threshold: 0.1 });
 
-// Give the DOM a second to write the videos, then observe them
-setTimeout(() => {
-	document.querySelectorAll('.lazy-video').forEach(video => {
-		videoObserver.observe(video);
-	});
-}, 100);
+			/* --- START NEW JS: Lazy Load & Play Videos only when visible --- */
+			const videoObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					const video = entry.target;
+					if (entry.isIntersecting) {
+						if (!video.src) {
+							video.src = video.getAttribute('data-src');
+						}
+						video.play();
+					} else {
+						video.pause();
+					}
+				});
+			}, { threshold: 0.1 });
+
+			// Give the DOM a second to write the videos, then observe them
+			setTimeout(() => {
+				document.querySelectorAll('.lazy-video').forEach(video => {
+					videoObserver.observe(video);
+				});
+			}, 100);
+			/* --- END NEW JS: Lazy Load & Play Videos --- */
+
+			/* --- START NEW JS: Toggle See More Trails --- */
+			const seeMoreBtn = document.getElementById('see-more-btn');
+			const hiddenDiv = document.getElementById('all-trail-options');
+
+			seeMoreBtn.addEventListener('click', function() {
+				// Toggle the display property between none and block
+				if (hiddenDiv.style.display === "block") {
+					hiddenDiv.style.display = "none";
+					this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
+				t} else {
+					hiddenDiv.style.display = "block";
+					this.innerHTML = "SHOW FEWER OPTIONS";
+				}
+			});
+			/* --- END NEW JS: Toggle See More Trails --- */
+
 		</script>
 	</body>
 </html>
