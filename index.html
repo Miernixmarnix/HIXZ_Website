@@ -193,20 +193,20 @@
 
 					<div class="video-grid">
 						<script>
-							const clips = [1, 2, 3, 4, 5, 6];
-							clips.forEach(i => {
-								document.write(`
-									<div class="video-item">
-										<video src="images/clip${i}.mp4" autoplay loop muted playsinline></video>
-										<div class="video-overlay">
-											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-											<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
-											<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
-										</div>
-									</div>
-								`);
-							});
-						</script>
+	const clips = [1, 2, 3, 4, 5, 6];
+	clips.forEach(i => {
+		document.write(`
+			<div class="video-item">
+				<video data-src="images/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+				<div class="video-overlay">
+					<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+					<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
+					<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
+				</div>
+			</div>
+		`);
+	});
+</script>
 					</div>
 				</div>
 			</section>
@@ -279,6 +279,27 @@
 
 			const showcase = document.querySelector('#showcase');
 			if (showcase) { observer.observe(showcase); }
+			// Lazy Load & Play Videos only when visible
+const videoObserver = new IntersectionObserver((entries) => {
+	entries.forEach(entry => {
+		const video = entry.target;
+		if (entry.isIntersecting) {
+			if (!video.src) {
+				video.src = video.getAttribute('data-src');
+			}
+			video.play();
+		} else {
+			video.pause();
+		}
+	});
+}, { threshold: 0.1 });
+
+// Give the DOM a second to write the videos, then observe them
+setTimeout(() => {
+	document.querySelectorAll('.lazy-video').forEach(video => {
+		videoObserver.observe(video);
+	});
+}, 100);
 		</script>
 	</body>
 </html>
