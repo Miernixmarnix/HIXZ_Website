@@ -42,15 +42,21 @@
     var map = L.map('map', { center: [12.4933, -69.9455], zoom: 15, layers: [satellite] });
     L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
 
-    // Load Trail Line ONLY (Blue/Cyan)
-    var gpxFile = 'Cunucu_Arikok_Loop.gpx'; 
-    new L.GPX(gpxFile, {
-        async: true,
-        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, pointMatchers: [] },
-        polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-    }).on('loaded', function(e) {
-        map.fitBounds(e.target.getBounds());
-    }).addTo(map);
+   // Load Trail Line and End Marker
+	var gpxFile = 'Cunucu_Arikok_Loop.gpx'; 
+	new L.GPX(gpxFile, {
+		async: true,
+		marker_options: { 
+			startIconUrl: '', // Keeps the start hidden
+			endIconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png', // Adds the blue pin at the end
+			shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+			iconSize: [25, 41],
+			iconAnchor: [12, 41]
+		},
+		polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+	}).on('loaded', function(e) {
+		map.fitBounds(e.target.getBounds());
+	}).addTo(map);
 
     // Find My Location function
     var userMarker, userCircle;
