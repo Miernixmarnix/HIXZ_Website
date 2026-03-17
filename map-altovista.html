@@ -1,1 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Hike Map - HIXZ</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 75vh; width: 100%; border-bottom: 2px solid #fff; background: #2e3436; }
+        .map-container { padding: 2em; text-align: center; }
+        .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
+        .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
+    </style>
+</head>
+<body class="is-preload">
 
+    <header id="header">
+        <h1><a href="index.html">HIXZ</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">Back to Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <article id="main">
+        <section class="wrapper style5">
+            <div id="map"></div>
+            <div class="map-container">
+                <button class="button primary" onclick="getLocation()">Find My Location</button>
+            </div>
+        </section>
+    </article>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+<script>
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+    var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
+
+    var map = L.map('map', { center: [12.4933, -69.9455], zoom: 15, layers: [satellite] });
+    L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
+
+   // Load Trail Line and End Marker
+	var gpxFile = 'GPX/Alto_Vista_Chapel.gpx';
+	new L.GPX(gpxFile, {
+		async: true,
+		marker_options: { 
+			startIconUrl: '',
+			endIconUrl: 'images/route.gif',
+			iconSize: [50, 82], 
+			iconAnchor: [24, 82]
+		},
+		polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+	}).on('loaded', function(e) {
+		map.fitBounds(e.target.getBounds());
+	}).addTo(map);
+
+    // Find My Location function
+    var userMarker, userCircle;
+    function getLocation() { map.locate({setView: true, maxZoom: 17}); }
+    map.on('locationfound', function(e) {
+        if (userMarker) { map.removeLayer(userMarker); }
+        if (userCircle) { map.removeLayer(userCircle); }
+        userCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
+        userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
+        userMarker.bindPopup("You are here!").openPopup();
+    });
+</script>
+</body>
+</html>
