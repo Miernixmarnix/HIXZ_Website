@@ -425,34 +425,56 @@
 			/* --- START NEW JS: Toggle See More Trails --- */
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
-			// Grab all the individual trail sections inside the hidden div
 			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
 
-			// Make sure they start invisible so they can fade in smoothly
 			anime.set(trailItems, { opacity: 0, translateY: 40 });
 
 			seeMoreBtn.addEventListener('click', function() {
-				if (hiddenDiv.style.display === "block") {
-					// Hide the container
-					hiddenDiv.style.display = "none";
-					this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
-					// Reset them back to invisible for the next time you click
-					anime.set(trailItems, { opacity: 0, translateY: 40 });
-				} else {
-					// Show the container
-					hiddenDiv.style.display = "block";
-					this.innerHTML = "SHOW FEWER OPTIONS";
-					
-					// The smooth staggered animation
-					anime({
-						targets: trailItems,
-						opacity: [0, 1],
-						translateY: [40, 0], // Slides them up slightly into place
-						delay: anime.stagger(120), // Triggers them one by one, 120ms apart
-						duration: 800,
-						easing: 'easeOutQuart'
-					});
-				}
+				// Prevent double-clicking while the animation is playing
+				if (this.style.pointerEvents === 'none') return;
+				this.style.pointerEvents = 'none';
+				
+				const isShowing = hiddenDiv.style.display === "block";
+
+				// 1. Fade the button out quickly
+				anime({
+					targets: this,
+					opacity: 0,
+					duration: 200,
+					easing: 'easeOutQuad',
+					complete: () => {
+						// 2. Change the text and layout while it is invisible
+						if (isShowing) {
+							hiddenDiv.style.display = "none";
+							this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
+							anime.set(trailItems, { opacity: 0, translateY: 40 });
+						} else {
+							hiddenDiv.style.display = "block";
+							this.innerHTML = "SHOW FEWER OPTIONS";
+							
+							// Trigger the smooth staggered drop-down
+							anime({
+								targets: trailItems,
+								opacity: [0, 1],
+								translateY: [40, 0],
+								delay: anime.stagger(120),
+								duration: 800,
+								easing: 'easeOutQuart'
+							});
+						}
+						
+						// 3. Fade the button back in with the new text
+						anime({
+							targets: this,
+							opacity: 1,
+							duration: 200,
+							easing: 'easeInQuad',
+							complete: () => {
+								this.style.pointerEvents = 'auto'; // allow clicking again
+							}
+						});
+					}
+				});
 			});
 			/* --- END NEW JS: Toggle See More Trails --- */
 
