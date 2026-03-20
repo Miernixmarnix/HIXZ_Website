@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Hike Map - HIXZ</title>
+    <title>Hike Map - Jamanota - HIXZ</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -12,6 +13,11 @@
         .map-container { padding: 2em; text-align: center; }
         .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
+        
+        /* New styling for the trail image and title */
+        .trail-header { text-align: center; padding: 3em 1em 1em 1em; max-width: 900px; margin: 0 auto; }
+        .trail-header h2 { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; margin-bottom: 1em; }
+        .trail-header img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 2em; }
     </style>
 </head>
 <body class="is-preload">
@@ -27,10 +33,18 @@
 
     <article id="main">
         <section class="wrapper style5">
+            
+            <div class="trail-header">
+                <h2>Jamanota Trail</h2>
+                <img src="images/mountjamanota.jpg" alt="Mount Jamanota Trail" />
+            </div>
+
             <div id="map"></div>
+            
             <div class="map-container">
                 <button class="button primary" onclick="getLocation()">Find My Location</button>
             </div>
+            
         </section>
     </article>
 
@@ -43,19 +57,19 @@
     L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
 
    // Load Trail Line and End Marker
-	var gpxFile = 'GPX/Jamanota_Trail.gpx';
-	new L.GPX(gpxFile, {
-		async: true,
-		marker_options: { 
-			startIconUrl: '',
-			endIconUrl: 'images/route.gif',
-			iconSize: [50, 82], 
-			iconAnchor: [24, 82]
-		},
-		polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-	}).on('loaded', function(e) {
-		map.fitBounds(e.target.getBounds());
-	}).addTo(map);
+    var gpxFile = 'GPX/Jamanota_Trail.gpx';
+    new L.GPX(gpxFile, {
+        async: true,
+        marker_options: { 
+            startIconUrl: '',
+            endIconUrl: 'images/route.gif',
+            iconSize: [50, 82], 
+            iconAnchor: [24, 82]
+        },
+        polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+    }).on('loaded', function(e) {
+        map.fitBounds(e.target.getBounds());
+    }).addTo(map);
 
     // Find My Location function
     var userMarker, userCircle;
