@@ -1,11 +1,11 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Hike Map - HIXZ</title>
+    <title>Hike Map - Calbas to Bushiribana - HIXZ</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
@@ -13,60 +13,80 @@
         .map-container { padding: 2em; text-align: center; }
         .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
         .leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
+        
+        .trail-header { text-align: center; padding: 3em 1em 1em 1em; max-width: 900px; margin: 0 auto; }
+        .trail-header h2 { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; margin-bottom: 1em; }
+        .trail-header img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 2em; }
+
+        .map-container .button.primary {
+            background-color: #050a06 !important; color: #ffffff !important; box-shadow: none !important;
+            border-radius: 50px !important; font-family: 'Archivo Black', sans-serif !important;
+            text-transform: uppercase !important; letter-spacing: 1px !important; border: none !important;
+            transition: all 0.3s ease !important;
+        }
+        .map-container .button.primary:hover { background-color: #1b3022 !important; }
+
+        .map-wrapper { position: relative; }
+        #locating-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
+            align-items: center; justify-content: center; z-index: 9999;
+            font-family: 'Archivo Black', sans-serif; font-size: 2.5rem; letter-spacing: 2px;
+            text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        #locating-overlay.active { opacity: 1; pointer-events: all; }
     </style>
 </head>
 <body class="is-preload">
-
     <header id="header">
-        <h1><a href="index.html">HIXZ</a></h1>
-        <nav id="nav">
-            <ul>
-                <li><a href="index.html">Back to Home</a></li>
-            </ul>
-        </nav>
+        <h1><a href="../index.html">HIXZ</a></h1>
+        <nav id="nav"><ul><li><a href="../index.html">Back to Home</a></li></ul></nav>
     </header>
-
     <article id="main">
         <section class="wrapper style5">
-            <div id="map"></div>
+            <div class="trail-header">
+                <h2>Bushiribana Loop (from Calbas)</h2>
+                <img src="../images/naturalbridgeruins.jpg" alt="Bushiribana from Calbas" />
+            </div>
+            <div class="map-wrapper">
+                <div id="locating-overlay">Locating...</div>
+                <div id="map"></div>
+            </div>
             <div class="map-container">
                 <button class="button primary" onclick="getLocation()">Find My Location</button>
             </div>
         </section>
     </article>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 <script>
     var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
     var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
-
-    var map = L.map('map', { center: [12.4933, -69.9455], zoom: 15, layers: [satellite] });
+    var map = L.map('map', { center: [12.5400, -69.9600], zoom: 15, layers: [satellite] });
     L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
 
-   // Load Trail Line and End Marker
-	var gpxFile = 'GPX/Bushiribana_vanaf_Calbas.gpx';
-	new L.GPX(gpxFile, {
-		async: true,
-		marker_options: { 
-			startIconUrl: '',
-			endIconUrl: 'images/route.gif',
-			iconSize: [50, 82], 
-			iconAnchor: [24, 82]
-		},
-		polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-	}).on('loaded', function(e) {
-		map.fitBounds(e.target.getBounds());
-	}).addTo(map);
+    var gpxFile = '../GPX/Bushiribana_vanaf_Calbas.gpx';
+    new L.GPX(gpxFile, {
+        async: true,
+        marker_options: { startIconUrl: '', endIconUrl: '../images/route.gif', iconSize: [50, 82], iconAnchor: [24, 82] },
+        polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+    }).on('loaded', function(e) { map.fitBounds(e.target.getBounds()); }).addTo(map);
 
-    // Find My Location function
     var userMarker, userCircle;
-    function getLocation() { map.locate({setView: true, maxZoom: 17}); }
+    function getLocation() { 
+        document.getElementById('locating-overlay').classList.add('active');
+        map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
+    }
     map.on('locationfound', function(e) {
+        document.getElementById('locating-overlay').classList.remove('active');
         if (userMarker) { map.removeLayer(userMarker); }
         if (userCircle) { map.removeLayer(userCircle); }
         userCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
         userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
         userMarker.bindPopup("You are here!").openPopup();
+    });
+    map.on('locationerror', function(e) {
+        document.getElementById('locating-overlay').classList.remove('active');
+        alert("Could not find your location. Please check your device permissions.");
     });
 </script>
 </body>
