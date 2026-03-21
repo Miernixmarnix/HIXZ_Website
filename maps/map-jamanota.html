@@ -72,15 +72,33 @@
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // Find My Location function
+    // Find My Location function with UX Improvements
     var userMarker, userCircle;
-    function getLocation() { map.locate({setView: true, maxZoom: 17}); }
+    
+    function getLocation() { 
+        var btn = document.querySelector('.map-container .button');
+        btn.innerText = "Locating..."; // Instantly show the user it is working
+        
+        // maximumAge: 10000 allows it to use a cached location up to 10 seconds old
+        map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
+    }
+    
     map.on('locationfound', function(e) {
+        var btn = document.querySelector('.map-container .button');
+        btn.innerText = "Find My Location"; // Reset button text
+        
         if (userMarker) { map.removeLayer(userMarker); }
         if (userCircle) { map.removeLayer(userCircle); }
         userCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
         userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
         userMarker.bindPopup("You are here!").openPopup();
+    });
+
+    // Handle if the user denies location access
+    map.on('locationerror', function(e) {
+        var btn = document.querySelector('.map-container .button');
+        btn.innerText = "Find My Location"; // Reset button text
+        alert("Could not find your location. Please check your device permissions.");
     });
 </script>
 </body>
