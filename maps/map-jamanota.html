@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
+        /* Map and basic layout styles */
         #map { height: 75vh; width: 100%; border-bottom: 2px solid #fff; background: #2e3436; }
         .map-container { padding: 2em; text-align: center; }
         .leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
@@ -18,6 +19,36 @@
         .trail-header { text-align: center; padding: 3em 1em 1em 1em; max-width: 900px; margin: 0 auto; }
         .trail-header h2 { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; margin-bottom: 1em; }
         .trail-header img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 2em; }
+
+        /* --- NEW: Locating Overlay Styles --- */
+        .map-wrapper {
+            position: relative; /* Keeps the overlay perfectly locked to the map area */
+        }
+        #locating-overlay {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(5, 10, 6, 0.9); /* Very dark, very little transparency */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Forces it above all map layers and buttons */
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem; /* Huge text */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            pointer-events: none; /* Lets you click the map when hidden */
+            transition: opacity 0.3s ease;
+        }
+        #locating-overlay.active {
+            opacity: 1;
+            pointer-events: all; /* Blocks clicks while loading */
+        }
+        /* --- END NEW --- */
     </style>
 </head>
 <body class="is-preload">
@@ -39,7 +70,10 @@
                 <img src="../images/mountjamanota.jpg" alt="Mount Jamanota Trail" />
             </div>
 
-            <div id="map"></div>
+            <div class="map-wrapper">
+                <div id="locating-overlay">Locating...</div>
+                <div id="map"></div>
+            </div>
             
             <div class="map-container">
                 <button class="button primary" onclick="getLocation()">Find My Location</button>
@@ -56,8 +90,6 @@
     var map = L.map('map', { center: [12.4933, -69.9455], zoom: 15, layers: [satellite] });
     L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
 
-   // Load Trail Line and End Marker
-   // Added ../ to correctly target the GPX and images folders
     var gpxFile = '../GPX/Jamanota_Trail.gpx';
     new L.GPX(gpxFile, {
         async: true,
@@ -72,20 +104,18 @@
         map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
-    // Find My Location function with UX Improvements
     var userMarker, userCircle;
     
     function getLocation() { 
-        var btn = document.querySelector('.map-container .button');
-        btn.innerText = "Locating..."; // Instantly show the user it is working
+        // 1. Turn on the big dark overlay
+        document.getElementById('locating-overlay').classList.add('active');
         
-        // maximumAge: 10000 allows it to use a cached location up to 10 seconds old
         map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
     }
     
     map.on('locationfound', function(e) {
-        var btn = document.querySelector('.map-container .button');
-        btn.innerText = "Find My Location"; // Reset button text
+        // 2. Turn off the overlay when found
+        document.getElementById('locating-overlay').classList.remove('active');
         
         if (userMarker) { map.removeLayer(userMarker); }
         if (userCircle) { map.removeLayer(userCircle); }
@@ -94,10 +124,9 @@
         userMarker.bindPopup("You are here!").openPopup();
     });
 
-    // Handle if the user denies location access
     map.on('locationerror', function(e) {
-        var btn = document.querySelector('.map-container .button');
-        btn.innerText = "Find My Location"; // Reset button text
+        // 3. Turn off the overlay if there is an error
+        document.getElementById('locating-overlay').classList.remove('active');
         alert("Could not find your location. Please check your device permissions.");
     });
 </script>
