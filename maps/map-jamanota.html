@@ -20,6 +20,22 @@
         .trail-header h2 { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; margin-bottom: 1em; }
         .trail-header img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); margin-bottom: 2em; }
 
+        /* --- NEW: Dark Green Theme Button Styles --- */
+        .map-container .button.primary {
+            background-color: #050a06 !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+            border-radius: 50px !important;
+            font-family: 'Archivo Black', sans-serif !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            border: none !important;
+            transition: all 0.3s ease !important;
+        }
+        .map-container .button.primary:hover {
+            background-color: #1b3022 !important;
+        }
+
         /* --- NEW: Locating Overlay Styles --- */
         .map-wrapper {
             position: relative; /* Keeps the overlay perfectly locked to the map area */
@@ -48,7 +64,6 @@
             opacity: 1;
             pointer-events: all; /* Blocks clicks while loading */
         }
-        /* --- END NEW --- */
     </style>
 </head>
 <body class="is-preload">
@@ -107,14 +122,11 @@
     var userMarker, userCircle;
     
     function getLocation() { 
-        // 1. Turn on the big dark overlay
         document.getElementById('locating-overlay').classList.add('active');
-        
         map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
     }
     
     map.on('locationfound', function(e) {
-        // 2. Turn off the overlay when found
         document.getElementById('locating-overlay').classList.remove('active');
         
         if (userMarker) { map.removeLayer(userMarker); }
@@ -125,7 +137,6 @@
     });
 
     map.on('locationerror', function(e) {
-        // 3. Turn off the overlay if there is an error
         document.getElementById('locating-overlay').classList.remove('active');
         alert("Could not find your location. Please check your device permissions.");
     });
