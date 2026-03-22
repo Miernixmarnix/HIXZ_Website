@@ -1,0 +1,507 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Unlocked Trails - HIXZ</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+			/* Dark Forest Green Button - No Border, Pure White Text */
+			.google-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				background-color: #050a06; 
+				color: #ffffff !important;
+				padding: 14px 36px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 14px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				transition: all 0.3s ease;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				opacity: 0; 
+				box-shadow: none;
+				text-shadow: none;
+			}
+
+			.google-btn:hover {
+				background-color: #1b3022;
+			}
+
+			/* --- START NEW CSS: See More Section --- */
+			#all-trail-options {
+				display: none;
+			}
+			.see-more-container {
+				text-align: center;
+				padding: 4rem 0;
+			}
+			/* --- END NEW CSS: See More Section --- */
+
+			/* Video Grid & Social Hover Styles */
+			.video-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 20px;
+			}
+
+			.video-item {
+				opacity: 0;
+				position: relative;
+				overflow: hidden;
+				border-radius: 8px;
+			}
+
+			.video-item video {
+				width: 100%;
+				display: block;
+			}
+
+			/* --- NEW: Video Loading Overlay --- */
+			.video-loading-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(5, 10, 6, 0.9);
+				color: #ffffff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				z-index: 5;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.2rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				transition: opacity 0.4s ease;
+				pointer-events: none;
+			}
+			.video-loading-overlay.hidden {
+				opacity: 0;
+			}
+			/* --- END NEW --- */
+
+			.video-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+				opacity: 0;
+				z-index: 10;
+				transition: opacity 0.3s ease;
+			}
+
+			.video-item:hover .video-overlay {
+				opacity: 1;
+			}
+
+			.video-overlay a {
+				color: #fff;
+				font-size: 1.5rem;
+				text-decoration: none;
+				transition: transform 0.2s ease;
+			}
+
+			.video-overlay a:hover {
+				transform: scale(1.2);
+			}
+
+			@media screen and (max-width: 736px) {
+				.video-grid {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="landing is-preload">
+
+		<div id="loader-curtain">
+			<div class="loader-logo">HIXZ</div>
+		</div>
+
+		<div id="page-wrapper">
+
+			<header id="header" class="alt">
+				<h1><a href="index.html">HIXZ</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="maps/map.html">Hike Map</a></li> 
+									<li><a href="generic.html">About Me</a></li>
+									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<div class="inner">
+					<h2>HIXZ VIP</h2>
+					<p>Welcome to the best hike and swim adventures in Aruba<br />
+					Explore the secrets this small island has to offer</p>
+					<ul class="actions special">
+						<li>
+							<a href="#two" class="google-btn scrolly">
+								View Secret Trails
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="one" class="wrapper style1 special">
+				<div class="inner">
+					<header class="major">
+						<h2>Explore what Aruba's nature has to offer<br />
+						Step by step.</h2>
+						<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
+						Those are the principles I bring to every project.</p>
+					</header>
+					<ul class="icons major">
+						<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
+						<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
+						<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
+					</ul>
+				</div>
+			</section>
+
+			<section id="two" class="wrapper alt style2">
+				<section class="spotlight">
+					<div class="image"><img src="images/naturalbridge.jpg" alt="Natural Bridge" /></div>
+					<div class="content">
+						<h2>Natural Bridge & Blackstone Beach</h2>
+						<p>Explore the rugged north coast where the ocean has carved spectacular formations out of coral rock.</p>
+						<ul class="actions">
+							<li><a href="maps/map.html" class="button">See Natural Bridge Route</a></li>
+						</ul>
+					</div>
+				</section>
+				<section class="spotlight">
+					<div class="image"><img src="images/mangroves.jpg" alt="Arikok" /></div>
+					<div class="content">
+						<h2>Arikok National Park</h2>
+						<p>Nearly 20% of the island is a protected sanctuary with diverse hiking trails.</p>
+						<ul class="actions">
+							<li><a href="maps/map.html" class="button">See Arikok Route</a></li>
+						</ul>
+					</div>
+				</section>
+				<section class="spotlight">
+					<div class="image"><img src="images/watertank.jpg" alt="Ayo" /></div>
+					<div class="content">
+						<h2>Ayo & Casibari Rock Formations</h2>
+						<p>Wander through massive monolithic boulders and ancient Arawak petroglyphs.</p>
+						<ul class="actions">
+							<li><a href="maps/map.html" class="button">See Ayo Route</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<div class="see-more-container style2">
+					<button class="google-btn" id="see-more-btn">
+						LOOK AT ALL TRAIL OPTIONS
+					</button>
+				</div>
+
+				<div id="all-trail-options" class="style2">
+					<section class="spotlight">
+						<div class="image"><img src="images/mountjamanota.jpg" alt="Jamanota Trail" /></div>
+						<div class="content">
+							<h2>Jamanota Trail</h2>
+							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
+							<ul class="actions">
+								<li><a href="maps/map-jamanota.html" class="button">See Jamanota Route</a></li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="spotlight">
+						<div class="image"><img src="images/hooiberg.jpg" alt="Hooiberg Hiking Trail" /></div>
+						<div class="content">
+							<h2>Hooiberg Hiking Trail</h2>
+							<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
+							<ul class="actions">
+								<li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="spotlight">
+						<div class="image"><img src="images/anywhere1.jpg" alt="Sasariwichi Dunes" /></div>
+						<div class="content">
+							<h2>North Aruba - Sasariwichi Dunes</h2>
+							<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
+							<ul class="actions">
+								<li><a href="maps/map-sasarawichi.html" class="button">See Dunes Route</a></li>
+							</ul>
+						</div>
+					</section>
+					
+					<section class="spotlight">
+					    <div class="image"><img src="images/tower.jpg" alt="Alto Vista Chapel Trail" /></div>
+					    <div class="content">
+					        <h2>Alto Vista Chapel Route</h2>
+					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-altovista.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/spaanlagoen.jpg" alt="Balashi Gold Mine Trail" /></div>
+					    <div class="content">
+					        <h2>Balashi Gold Mine & Spanish Lagoon</h2>
+					        <p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-balashi.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/naturalbridgeruins.jpg" alt="Bushiribana from Calbas" /></div>
+					    <div class="content">
+					        <h2>Bushiribana Loop (from Calbas)</h2>
+					        <p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-calbas.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/anywhere2.jpg" alt="Conchi Natural Pool" /></div>
+					    <div class="content">
+					        <h2>Conchi Natural Pool</h2>
+					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-conchi.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/anywhere3.jpg" alt="Dos Playa Trail" /></div>
+					    <div class="content">
+					        <h2>Dos Playa Route</h2>
+					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-dosplaya.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/sunset.jpg" alt="Bushiribana to Malmok" /></div>
+					    <div class="content">
+					        <h2>Bushiribana to Malmok Beach</h2>
+					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-malmok.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+				</div>
+			</section>
+
+			<section id="showcase" class="wrapper style2">
+				<div class="inner">
+					<header class="major" style="margin-bottom: 4rem;">
+						<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
+							Go on hikes with me everywhere
+						</h2>
+					</header>
+
+					<div class="video-grid">
+						<script>
+							const clips = [1, 2, 3, 4, 5, 6];
+							clips.forEach(i => {
+								document.write(`
+									<div class="video-item">
+										<div class="video-loading-overlay">Loading...</div>
+										<video data-src="videos/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+										<div class="video-overlay">
+											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+											<a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"></a>
+											<a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"></a>
+										</div>
+									</div>
+								`);
+							});
+						</script>
+					</div>
+				</div>
+			</section>
+
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://instagram.com/marnix_van_pelt/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; HIXZ </li>
+					<li>Built by Marnix van Pelt</li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+		<script>
+			window.addEventListener('load', () => {
+				const tl = anime.timeline({ easing: 'easeInOutQuart' });
+				tl.add({
+					targets: '.loader-logo',
+					opacity: [0, 1],
+					scale: [0.8, 1],
+					duration: 800,
+					delay: 200
+				})
+				.add({
+					targets: '#loader-curtain',
+					translateY: '-100%', 
+					duration: 1000,
+					delay: 500
+				})
+				.add({
+					targets: '.google-btn',
+					opacity: [0, 1],
+					translateY: [20, 0],
+					duration: 800,
+					offset: '-=400' 
+				});
+			});
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						anime({
+							targets: '.video-item',
+							translateY: [60, 0],
+							filter: ['blur(15px)', 'blur(0px)'],
+							opacity: [0, 1],
+							delay: anime.stagger(200),
+							duration: 1500,
+							easing: 'easeOutExpo'
+						});
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.1 });
+
+			const showcase = document.querySelector('#showcase');
+			if (showcase) { observer.observe(showcase); }
+
+			/* --- START NEW JS: Lazy Load & Play Videos only when visible --- */
+			const videoObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					const video = entry.target;
+					if (entry.isIntersecting) {
+						if (!video.src) {
+							video.src = video.getAttribute('data-src');
+						}
+						video.play();
+					} else {
+						video.pause();
+					}
+				});
+			}, { threshold: 0.1 });
+
+			setTimeout(() => {
+				document.querySelectorAll('.lazy-video').forEach(video => {
+					videoObserver.observe(video);
+					
+					video.addEventListener('loadeddata', function() {
+						const overlay = this.parentElement.querySelector('.video-loading-overlay');
+						if (overlay) {
+							overlay.classList.add('hidden');
+						}
+					});
+				});
+			}, 100);
+			/* --- END NEW JS: Lazy Load & Play Videos --- */
+
+			/* --- START NEW JS: Toggle See More Trails --- */
+			const seeMoreBtn = document.getElementById('see-more-btn');
+			const hiddenDiv = document.getElementById('all-trail-options');
+			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
+
+			anime.set(trailItems, { opacity: 0, translateY: 40 });
+
+			seeMoreBtn.addEventListener('click', function() {
+				if (this.style.pointerEvents === 'none') return;
+				this.style.pointerEvents = 'none';
+				
+				const isShowing = hiddenDiv.style.display === "block";
+
+				anime({
+					targets: this,
+					opacity: 0,
+					duration: 200,
+					easing: 'easeOutQuad',
+					complete: () => {
+						if (isShowing) {
+							hiddenDiv.style.display = "none";
+							this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
+							anime.set(trailItems, { opacity: 0, translateY: 40 });
+						} else {
+							hiddenDiv.style.display = "block";
+							this.innerHTML = "SHOW FEWER OPTIONS";
+							
+							anime({
+								targets: trailItems,
+								opacity: [0, 1],
+								translateY: [40, 0],
+								delay: anime.stagger(120),
+								duration: 800,
+								easing: 'easeOutQuart'
+							});
+						}
+						
+						anime({
+							targets: this,
+							opacity: 1,
+							duration: 200,
+							easing: 'easeInQuad',
+							complete: () => {
+								this.style.pointerEvents = 'auto'; 
+							}
+						});
+					}
+				});
+			});
+			/* --- END NEW JS: Toggle See More Trails --- */
+
+		</script>
+	</body>
+</html>
