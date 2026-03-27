@@ -6,36 +6,52 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="../assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+		
 		<style>
-			body, html {
-				margin: 0; padding: 0; height: 100%;
-				background-color: #050a06; /* Keep the dark theme seamless */
-			}
-			#map-container {
-				width: 100%; height: 80vh; /* Map takes up 80% of screen */
-				position: relative;
-			}
+			body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #050a06; }
+			
+			/* Full screen map locked behind the interface */
+			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
+			
+			/* Floating transparent header */
+			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); }
+			
+			/* Floating button locked to the bottom */
 			.button-container {
-				display: flex; justify-content: center; align-items: center;
-				height: 20vh; /* Button takes up bottom 20% */
-				background-color: #050a06;
+				position: absolute; bottom: 40px; left: 0; width: 100%;
+				display: flex; justify-content: center; z-index: 1000; pointer-events: none;
 			}
-			/* Your signature dark green button */
+			
 			.google-btn {
+				pointer-events: auto;
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #1b3022; color: #ffffff !important; padding: 14px 36px;
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: 1px solid #ffffff; cursor: pointer;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 			}
 			.google-btn:hover { background-color: #ffffff; color: #050a06 !important; }
+
+			/* Full screen loading screen */
+			#locating-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(5, 10, 6, 0.9); color: #ffffff;
+				display: flex; align-items: center; justify-content: center;
+				z-index: 9999; font-family: 'Archivo Black', sans-serif;
+				font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase;
+				opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+			}
+			#locating-overlay.active { opacity: 1; pointer-events: all; }
+			
+			/* Push Leaflet controls below the floating header */
+			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
 		</style>
 	</head>
 	<body class="is-preload">
 
-		<header id="header" class="alt" style="position: absolute; top: 0; width: 100%; z-index: 9999; background: rgba(5, 10, 6, 0.8);">
+		<header id="header" class="alt">
 			<h1><a href="../index.html">HIXZ</a></h1>
 			<nav id="nav">
 				<ul>
@@ -52,14 +68,11 @@
 			</nav>
 		</header>
 
-		<div id="map-container">
-			<div style="width: 100%; height: 100%; background-color: #2a2a2a; display: flex; align-items: center; justify-content: center; color: white;">
-				[Map loads here]
-			</div>
-		</div>
+		<div id="locating-overlay">Locating...</div>
+		<div id="map"></div>
 
 		<div class="button-container">
-			<button class="google-btn" onclick="findLocation()">Find My Location</button>
+			<button class="google-btn" onclick="getLocation()">Find My Location</button>
 		</div>
 
 		<script src="../assets/js/jquery.min.js"></script>
@@ -67,14 +80,54 @@
 		<script src="../assets/js/breakpoints.min.js"></script>
 		<script src="../assets/js/util.js"></script>
 		<script src="../assets/js/main.js"></script>
+		
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			function findLocation() {
-				const btn = document.querySelector('.google-btn');
-				btn.innerHTML = "Locating...";
-				// Your geolocation logic goes here
-				setTimeout(() => { btn.innerHTML = "Location Found!"; }, 2000);
+			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
+
+			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
+			L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
+
+			// --- CHANGE THE FILENAME HERE FOR EVERY NEW MAP ---
+			var gpxFile = '../GPX/REPLACE_ME_WITH_FILENAME.gpx'; 
+
+			new L.GPX(gpxFile, {
+				async: true,
+				marker_options: { 
+					startIconUrl: '../images/hiker.gif',
+					endIconUrl: '../images/route.gif',
+					iconSize: [50, 50], 
+					iconAnchor: [25, 50]
+				},
+				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+			}).on('loaded', function(e) {
+				map.fitBounds(e.target.getBounds());
+			}).addTo(map);
+
+			var userMarker, userCircle;
+			
+			function getLocation() { 
+				document.getElementById('locating-overlay').classList.add('active');
+				map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
 			}
+			
+			map.on('locationfound', function(e) {
+				document.getElementById('locating-overlay').classList.remove('active');
+				
+				if (userMarker) { map.removeLayer(userMarker); }
+				if (userCircle) { map.removeLayer(userCircle); }
+				userCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
+				userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
+				userMarker.bindPopup("You are here!").openPopup();
+			});
+
+			map.on('locationerror', function(e) {
+				document.getElementById('locating-overlay').classList.remove('active');
+				alert("Could not find your location. Please check your device permissions.");
+			});
 		</script>
 	</body>
 </html>
