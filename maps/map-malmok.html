@@ -48,9 +48,30 @@
 			}
 			#locating-overlay.active { opacity: 1; pointer-events: all; }
 			
-			/* Push Leaflet controls below the floating header and style the open menu */
+			/* Push Leaflet controls below the floating header */
 			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
-			.leaflet-control-layers-list { font-family: sans-serif; color: #000; padding: 5px; font-size: 14px; }
+			
+			/* --- FIX: Restores the Leaflet layer menu so it isn't a blank white box --- */
+			.leaflet-control-layers-expanded {
+				background: #ffffff !important;
+				padding: 12px !important;
+				border-radius: 8px !important;
+			}
+			.leaflet-control-layers label {
+				display: flex !important;
+				align-items: center !important;
+				color: #000000 !important;
+				font-family: sans-serif !important;
+				font-size: 14px !important;
+				margin: 5px 0 !important;
+			}
+			.leaflet-control-layers input[type="radio"] {
+				appearance: auto !important; 
+				-webkit-appearance: radio !important;
+				opacity: 1 !important;
+				position: relative !important;
+				margin-right: 8px !important;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -89,10 +110,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Set up the three map layers
-			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
-			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
-			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+			// 1. Set up the map layers with keepBuffer: 8 to stop the grey loading voids
+			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
+			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
+			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 
 			// 2. Initialize map with Satellite as default
 			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
@@ -110,7 +131,7 @@
 			// Delete the two slashes (//) in front of the ONE trail you want to load!
 			// =========================================================================
 			
-		
+	
 			// var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
 			// var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
 			// var gpxFile = '../GPX/Jamanota_Trail.gpx';
@@ -122,12 +143,14 @@
 
 			// =========================================================================
 
-			// 5. Draw the trail
+			// 5. Draw the trail (Fixed shadow images and overlapping icons)
 			new L.GPX(gpxFile, {
 				async: true,
 				marker_options: { 
 					startIconUrl: '../images/hiker.gif',
-					endIconUrl: '../images/route.gif',
+					endIconUrl: '',      /* Left blank so it doesn't overlap the hiker on loop trails */
+					shadowUrl: '',       /* Removes the broken missing image box */
+					waypointIconUrl: '', /* Removes any hidden waypoint markers */
 					iconSize: [50, 50], 
 					iconAnchor: [25, 50]
 				},
