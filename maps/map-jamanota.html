@@ -14,6 +14,9 @@
 			/* Full screen map locked behind the interface */
 			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
 			
+			/* Prevent template CSS from breaking map tiles */
+			.leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
+			
 			/* Floating transparent header */
 			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); }
 			
@@ -45,8 +48,9 @@
 			}
 			#locating-overlay.active { opacity: 1; pointer-events: all; }
 			
-			/* Push Leaflet controls below the floating header */
+			/* Push Leaflet controls below the floating header and style the open menu */
 			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
+			.leaflet-control-layers-list { font-family: sans-serif; color: #000; padding: 5px; font-size: 14px; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -85,15 +89,37 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
+			// 1. Set up the three map layers
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
+			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
 
+			// 2. Initialize map with Satellite as default
 			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
-			L.control.layers({"Satellite": satellite, "Streets": streets}).addTo(map);
+			
+			// 3. Add the layer control menu, forcing it to remain fully open
+			var baseMaps = {
+				"Satellite": satellite,
+				"Streets": streets,
+				"Terrain": terrain
+			};
+			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// --- CHANGE THE FILENAME HERE FOR EVERY NEW MAP ---
-			var gpxFile = '../GPX/REPLACE_ME_WITH_FILENAME.gpx'; 
+			
+			// =========================================================================
+			
+			// var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
+			// var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
+			 var gpxFile = '../GPX/Jamanota_Trail.gpx';
+			// var gpxFile = '../GPX/Sasarawichi_Trail.gpx';
+			// var gpxFile = '../GPX/Boroncana__Alto_Vista_Kapel.gpx';
+			// var gpxFile = '../GPX/Conchi_Natuurbad_Wandelroute.gpx';
+			// var gpxFile = '../GPX/Arikok_Dos_Playa_Zuidelijke_Wandelroute.gpx';
+			// var gpxFile = '../GPX/Bushiribana__Malmok_Beach.gpx';
 
+			// =========================================================================
+
+			// 5. Draw the trail
 			new L.GPX(gpxFile, {
 				async: true,
 				marker_options: { 
@@ -109,6 +135,7 @@
 
 			var userMarker, userCircle;
 			
+			// Location Logic
 			function getLocation() { 
 				document.getElementById('locating-overlay').classList.add('active');
 				map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
