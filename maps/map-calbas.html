@@ -51,7 +51,7 @@
 			/* Push Leaflet controls below the floating header */
 			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
 			
-			/* --- FIX: Restores the Leaflet layer menu so it isn't a blank white box --- */
+			/* --- GLOBAL FIX: Restores the Leaflet layer menu so it isn't a blank white box --- */
 			.leaflet-control-layers-expanded {
 				background: #ffffff !important;
 				padding: 12px !important;
@@ -110,12 +110,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Set up the map layers with keepBuffer: 8 to stop the grey loading voids
-			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
-			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
-			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
+			// --- GLOBAL FIX: Tile Layers (Removed 'keepBuffer' to restore speedy, lightweight performance) ---
+			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
+			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
 
-			// 2. Initialize map with Satellite as default
+			// 2. Initialize map with standard, lightweight zoom settings
 			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
 			
 			// 3. Add the layer control menu, forcing it to remain fully open
@@ -143,25 +143,83 @@
 
 			// =========================================================================
 
-			// 5. Draw the trail (Fixed shadow images and overlapping icons)
-			new L.GPX(gpxFile, {
+			// --- SPECIFIC FIX: Define Advanced, Shadow-Free Icons ---
+			// By defining icons explicitly, we bypass Leaflet's attempt to load default shadows that create broken image boxes.
+			var hikerIcon = L.icon({
+				iconUrl: '../images/hiker.gif',
+				shadowUrl: null, // Explicitly kill shadow to prevent broken box
+				iconSize: [50, 50],
+				iconAnchor: [25, 50],
+				popupAnchor: [0, -50]
+			});
+
+			var flagIcon = L.icon({
+				iconUrl: '../images/route.gif',
+				shadowUrl: null, // Explicitly kill shadow to prevent broken box
+				iconSize: [50, 50],
+				iconAnchor: [25, 50],
+				popupAnchor: [0, -50]
+			});
+
+			// --- NEW: Add references for your 2 extra waypoint flag GIFs ---
+			// Remember to upload these files ('flag_0.gif' and 'flag_1.gif') to your images folder!
+			var waypointIcon0 = L.icon({ iconUrl: '../images/flag_0.gif', shadowUrl: null, iconSize: [40, 40], iconAnchor: [20, 40] });
+			var waypointIcon1 = L.icon({ iconUrl: '../images/flag_1.gif', shadowUrl: null, iconSize: [40, 40], iconAnchor: [20, 40] });
+
+			// --- ADVANCED MARKER SYSTEM: Maps GPX points to custom defined GIFs ---
+			// Step 1: Initialize GPX loader with standard markers and shadows disabled to clear broken boxes
+			var trail = new L.GPX(gpxFile, {
 				async: true,
-				marker_options: { 
-					startIconUrl: '../images/hiker.gif',
-					endIconUrl: '',      /* Left blank so it doesn't overlap the hiker on loop trails */
-					shadowUrl: '',       /* Removes the broken missing image box */
-					waypointIconUrl: '', /* Removes any hidden waypoint markers */
-					iconSize: [50, 50], 
-					iconAnchor: [25, 50]
-				},
+				// Setting standard marker URLs to null ensures Leaflet doesn't attempt to load anything automatically, clearing broken images.
+				marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, waypointIconUrl: null },
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-			}).on('loaded', function(e) {
+			});
+
+			// Step 2: Use the 'loaded' event to plot the specific GIFs for start, end, and waypoints
+			trail.on('loaded', function(e) {
+				var points = e.target.getPoints(); // Standard track coordinates
+
+				// Plot the Hiker at the START
+				L.marker(points[0], { icon: hikerIcon }).addTo(map).bindPopup("Start of Trail");
+
+				// --- LOOP TRAIL HANDLING: If start and end points are identical, do not plot the end flag to prevent overlap chaos ---
+				if (points[0].lat !== points[points.length - 1].lat && points[0].lng !== points[points.length - 1].lng) {
+					// Plot the Flag at the END for point-to-point hikes
+					L.marker(points[points.length - 1], { icon: flagIcon }).addTo(map).bindPopup("End of Trail");
+				}
+
+				// --- WAYPOINT TRAIL HANDLING: Plot the extra GIFs for specific scenic markers on complex hikes ---
+				// Leaflet-GPX provides a separate way to access user-defined waypoints (wpt), not just track points.
+				// We access waypoints as a standard Leaflet layer feature group.
+				var waypointLayer = e.target.getLayer('wpt');
+				if (waypointLayer) {
+					var waypoints = waypointLayer.getLayers(); // Standard Leaflet layers for all waypoints found in GPX
+					
+					// Assuming there are 2 specific waypoints defined in the GPX at the 'empty image spots' from your screenshot.
+					// We can iterate through them and apply our specific flag GIFs based on their order.
+					waypoints.forEach(function(wpt, index) {
+						// Apply Waypoint Flag 0 to the first waypoint found
+						if (index === 0) {
+							wpt.setIcon(waypointIcon0);
+						} 
+						// Apply Waypoint Flag 1 to the second waypoint found
+						else if (index === 1) {
+							wpt.setIcon(waypointIcon1);
+						} 
+						// Optional: If there are 10 waypoints in the GPX and you don't define icons,
+						// they will use Leaflet defaults, so ensure your GPX has clean data.
+					});
+				}
+
+				// Center the map on the loaded route data
 				map.fitBounds(e.target.getBounds());
+
 			}).addTo(map);
 
+			// Step 3: Global Location and Marker Management
 			var userMarker, userCircle;
 			
-			// Location Logic
+			// Geolocation logic
 			function getLocation() { 
 				document.getElementById('locating-overlay').classList.add('active');
 				map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
