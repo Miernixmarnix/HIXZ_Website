@@ -14,19 +14,20 @@
 			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
 			.leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
 			
-			/* --- UPDATED: Custom App-Like Header Layout --- */
 			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.9); height: 3.25em; line-height: 3.25em; }
 			#header h1 { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; }
 			
-			/* The new Exit button */
+			/* --- UPDATED: Brand-Matched Exit Button --- */
 			.back-btn {
-				position: absolute; left: 20px; top: 0; height: 100%;
-				display: flex; align-items: center; color: #ffffff !important;
-				text-decoration: none; font-family: 'Archivo Black', sans-serif;
-				font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
-				transition: color 0.3s ease; border: none;
+				position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+				display: inline-flex; align-items: center; justify-content: center;
+				background-color: #1b3022; color: #ffffff !important; padding: 8px 18px;
+				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
+				font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+				transition: all 0.3s ease; border: 1px solid #ffffff;
+				box-shadow: 0 4px 10px rgba(0,0,0,0.3); line-height: normal;
 			}
-			.back-btn:hover { color: #00ccff !important; } /* Highlights blue on hover */
+			.back-btn:hover { background-color: #ffffff; color: #050a06 !important; }
 			
 			.button-container {
 				position: absolute; bottom: 40px; left: 0; width: 100%;
@@ -90,7 +91,6 @@
 
 		<header id="header" class="alt">
 			<a href="../unlocked.html" class="back-btn">&#8592; Exit</a>
-			
 			<h1><a href="../index.html">HIXZ</a></h1>
 			<nav id="nav">
 				<ul>
@@ -124,10 +124,13 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Lightweight map layers without keepBuffer to stop lag
-			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
-			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
-			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
+			// --- UPDATED: Moderate caching and zoom-update prevention for smooth, lag-free scaling ---
+			var tileOptions = { attribution: '&copy; Esri', updateWhenZooming: false, keepBuffer: 4 };
+			var osmOptions = { attribution: '&copy; OSM', updateWhenZooming: false, keepBuffer: 4 };
+
+			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', tileOptions);
+			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', osmOptions);
+			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', tileOptions);
 
 			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
 			
@@ -138,27 +141,23 @@
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// 2. The GPX file for Calbas
 			var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
 
-			// 3. The Transparent Pixel Hack (Erases broken Leaflet default images)
 			var emptyIconUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-			// 4. Load the GPX track using the invisible icons as a clean slate
+			// --- UPDATED: Strict baseline removal of all default markers and waypoints ---
 			var trail = new L.GPX(gpxFile, {
 				async: true,
 				marker_options: { 
 					startIconUrl: emptyIconUrl, 
 					endIconUrl: emptyIconUrl, 
 					shadowUrl: emptyIconUrl, 
-					wptIconUrls: { '': emptyIconUrl } // Erases default waypoints
+					wptIconUrls: { '': emptyIconUrl }
 				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			var waypointCount = 0;
-
-			// 5. Intercept the drawing process and assign our custom GIFs perfectly
+			// --- UPDATED: Plot ONLY the primary hiker GIF ---
 			trail.on('addpoint', function(e) {
 				if (e.point_type === 'start') {
 					e.point.setIcon(L.icon({
@@ -169,23 +168,14 @@
 						popupAnchor: [0, -50]
 					}));
 					e.point.bindPopup("Start & End of Trail");
-				} 
-				else if (e.point_type === 'waypoint') {
-					if (waypointCount === 0) {
-						e.point.setIcon(L.icon({ iconUrl: '../images/flag_0.gif', shadowUrl: emptyIconUrl, iconSize: [40, 40], iconAnchor: [20, 40] }));
-					} else if (waypointCount === 1) {
-						e.point.setIcon(L.icon({ iconUrl: '../images/flag_1.gif', shadowUrl: emptyIconUrl, iconSize: [40, 40], iconAnchor: [20, 40] }));
-					}
-					waypointCount++;
 				}
-				// Note: 'end' point is ignored because Calbas is a loop, preventing overlapping markers.
+				// All other points (endpoints, waypoints) are ignored
 			});
 
 			trail.on('loaded', function(e) {
 				map.fitBounds(e.target.getBounds());
 			}).addTo(map);
 
-			// 6. Geolocation functionality
 			var userMarker, userCircle;
 			
 			function getLocation() { 
