@@ -12,7 +12,6 @@
 			body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #050a06; }
 			
 			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
-			
 			.leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
 			
 			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); }
@@ -111,7 +110,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Lightweight map layers without keepBuffer
+			// 1. Lightweight map layers without keepBuffer to stop lag
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' });
 			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri' });
@@ -125,51 +124,54 @@
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// 2. The specific GPX file for this map
+			// 2. The GPX file for Calbas
 			var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
 
-			// 3. Define the custom icons with shadows explicitly removed
-			var hikerIcon = L.icon({
-				iconUrl: '../images/hiker.gif',
-				shadowUrl: null, 
-				iconSize: [50, 50],
-				iconAnchor: [25, 50],
-				popupAnchor: [0, -50]
-			});
+			// 3. The Transparent Pixel Hack (Erases broken Leaflet default images)
+			var emptyIconUrl = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-			var waypointIcon0 = L.icon({ iconUrl: '../images/route.gif', shadowUrl: null, iconSize: [40, 40], iconAnchor: [20, 40] });
-			var waypointIcon1 = L.icon({ iconUrl: '../images/route.gif', shadowUrl: null, iconSize: [40, 40], iconAnchor: [20, 40] });
-
-			// 4. Load the GPX track
+			// 4. Load the GPX track using the invisible icons as a clean slate
 			var trail = new L.GPX(gpxFile, {
 				async: true,
-				marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, waypointIconUrl: null },
+				marker_options: { 
+					startIconUrl: emptyIconUrl, 
+					endIconUrl: emptyIconUrl, 
+					shadowUrl: emptyIconUrl, 
+					wptIconUrls: { '': emptyIconUrl } // Erases default waypoints
+				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			trail.on('loaded', function(e) {
-				var points = e.target.getPoints();
+			var waypointCount = 0;
 
-				// Plot the Hiker at the Start (which is also the end for this loop)
-				L.marker(points[0], { icon: hikerIcon }).addTo(map).bindPopup("Start & End of Trail");
-
-				// Handle the extra scenic waypoints
-				var waypointLayer = e.target.getLayer('wpt');
-				if (waypointLayer) {
-					var waypoints = waypointLayer.getLayers();
-					waypoints.forEach(function(wpt, index) {
-						if (index === 0) {
-							wpt.setIcon(waypointIcon0);
-						} else if (index === 1) {
-							wpt.setIcon(waypointIcon1);
-						}
-					});
+			// 5. Intercept the drawing process and assign our custom GIFs perfectly
+			trail.on('addpoint', function(e) {
+				if (e.point_type === 'start') {
+					e.point.setIcon(L.icon({
+						iconUrl: '../images/hiker.gif',
+						shadowUrl: emptyIconUrl,
+						iconSize: [50, 50],
+						iconAnchor: [25, 50],
+						popupAnchor: [0, -50]
+					}));
+					e.point.bindPopup("Start & End of Trail");
+				} 
+				else if (e.point_type === 'waypoint') {
+					if (waypointCount === 0) {
+						e.point.setIcon(L.icon({ iconUrl: '../images/flag_0.gif', shadowUrl: emptyIconUrl, iconSize: [40, 40], iconAnchor: [20, 40] }));
+					} else if (waypointCount === 1) {
+						e.point.setIcon(L.icon({ iconUrl: '../images/flag_1.gif', shadowUrl: emptyIconUrl, iconSize: [40, 40], iconAnchor: [20, 40] }));
+					}
+					waypointCount++;
 				}
+				// Note: 'end' point is ignored because Calbas is a loop, preventing overlapping markers.
+			});
 
+			trail.on('loaded', function(e) {
 				map.fitBounds(e.target.getBounds());
 			}).addTo(map);
 
-			// 5. Geolocation functionality
+			// 6. Geolocation functionality
 			var userMarker, userCircle;
 			
 			function getLocation() { 
