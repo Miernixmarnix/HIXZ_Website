@@ -74,9 +74,19 @@
 			// CALBAS GPX
 			var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
 
+			// The invisible pixel to hide default broken images
+			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+
 			new L.GPX(gpxFile, {
 				async: true,
-				marker_options: { startIconUrl: '../images/hiker.gif', endIconUrl: '', shadowUrl: '', waypointIconUrl: '', iconSize: [50, 50], iconAnchor: [25, 50] },
+				marker_options: { 
+					startIconUrl: '../images/hiker.gif', 
+					endIconUrl: invisiblePixel, 
+					shadowUrl: invisiblePixel, 
+					wptIconUrls: { '': invisiblePixel }, // This line explicitly kills the broken waypoint boxes
+					iconSize: [50, 50], 
+					iconAnchor: [25, 50] 
+				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			}).on('loaded', function(e) { map.fitBounds(e.target.getBounds()); }).addTo(map);
 
