@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Trail Map - HIXZ</title>
+		<title>Balashi Map - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -10,73 +10,26 @@
 		
 		<style>
 			body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #050a06; }
-			
-			/* Full screen map locked behind the interface */
 			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
-			
-			/* Prevent template CSS from breaking map tiles */
 			.leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
-			
-			/* Floating transparent header */
-			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); }
-			
-			/* Floating button locked to the bottom */
-			.button-container {
-				position: absolute; bottom: 40px; left: 0; width: 100%;
-				display: flex; justify-content: center; z-index: 1000; pointer-events: none;
-			}
-			
-			.google-btn {
-				pointer-events: auto;
-				display: inline-flex; align-items: center; justify-content: center;
-				background-color: #1b3022; color: #ffffff !important; padding: 14px 36px;
-				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
-				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
-				transition: all 0.3s ease; border: 1px solid #ffffff; cursor: pointer;
-				box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-			}
+			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); height: 3.25em; line-height: 3.25em; }
+			#header h1 { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; }
+			.back-btn { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; background-color: #1b3022; color: #ffffff !important; padding: 8px 18px; border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease; border: 1px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); line-height: normal; }
+			.back-btn:hover { background-color: #ffffff; color: #050a06 !important; }
+			.button-container { position: absolute; bottom: 40px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 1000; pointer-events: none; }
+			.google-btn { pointer-events: auto; display: inline-flex; align-items: center; justify-content: center; background-color: #1b3022; color: #ffffff !important; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s ease; border: 1px solid #ffffff; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 			.google-btn:hover { background-color: #ffffff; color: #050a06 !important; }
-
-			/* Full screen loading screen */
-			#locating-overlay {
-				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(5, 10, 6, 0.9); color: #ffffff;
-				display: flex; align-items: center; justify-content: center;
-				z-index: 9999; font-family: 'Archivo Black', sans-serif;
-				font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase;
-				opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-			}
+			#locating-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: 'Archivo Black', sans-serif; font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 			#locating-overlay.active { opacity: 1; pointer-events: all; }
-			
-			/* Push Leaflet controls below the floating header */
 			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
-			
-			/* --- FIX: Restores the Leaflet layer menu so it isn't a blank white box --- */
-			.leaflet-control-layers-expanded {
-				background: #ffffff !important;
-				padding: 12px !important;
-				border-radius: 8px !important;
-			}
-			.leaflet-control-layers label {
-				display: flex !important;
-				align-items: center !important;
-				color: #000000 !important;
-				font-family: sans-serif !important;
-				font-size: 14px !important;
-				margin: 5px 0 !important;
-			}
-			.leaflet-control-layers input[type="radio"] {
-				appearance: auto !important; 
-				-webkit-appearance: radio !important;
-				opacity: 1 !important;
-				position: relative !important;
-				margin-right: 8px !important;
-			}
+			.leaflet-control-layers-expanded { background: #ffffff !important; padding: 12px !important; border-radius: 8px !important; }
+			.leaflet-control-layers label { display: flex !important; align-items: center !important; color: #000000 !important; font-family: sans-serif !important; font-size: 14px !important; margin: 5px 0 !important; }
+			.leaflet-control-layers input[type="radio"] { appearance: auto !important; -webkit-appearance: radio !important; opacity: 1 !important; position: relative !important; margin-right: 8px !important; }
 		</style>
 	</head>
 	<body class="is-preload">
-
 		<header id="header" class="alt">
+			<a href="#" onclick="exitSecurely(); return false;" class="back-btn">&#8592; Exit</a>
 			<h1><a href="../index.html">HIXZ</a></h1>
 			<nav id="nav">
 				<ul>
@@ -84,7 +37,7 @@
 						<a href="#menu" class="menuToggle"><span>Menu</span></a>
 						<div id="menu">
 							<ul>
-								<li><a href="../index.html">Home</a></li>
+								<li><a href="#" onclick="exitSecurely(); return false;">Home</a></li>
 								<li><a href="../generic.html">About Me</a></li>
 							</ul>
 						</div>
@@ -92,10 +45,8 @@
 				</ul>
 			</nav>
 		</header>
-
 		<div id="locating-overlay">Locating...</div>
 		<div id="map"></div>
-
 		<div class="button-container">
 			<button class="google-btn" onclick="getLocation()">Find My Location</button>
 		</div>
@@ -105,82 +56,40 @@
 		<script src="../assets/js/breakpoints.min.js"></script>
 		<script src="../assets/js/util.js"></script>
 		<script src="../assets/js/main.js"></script>
-		
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Set up the map layers with keepBuffer: 8 to stop the grey loading voids
+			function exitSecurely() {
+				if (localStorage.getItem('hixz_vip') === 'true') { window.location.href = '../unlocked.html'; } 
+				else { window.location.href = '../index.html'; }
+			}
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
 			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
-
-			// 2. Initialize map with Satellite as default
 			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
-			
-			// 3. Add the layer control menu, forcing it to remain fully open
-			var baseMaps = {
-				"Satellite": satellite,
-				"Streets": streets,
-				"Terrain": terrain
-			};
+			var baseMaps = { "Satellite": satellite, "Streets": streets, "Terrain": terrain };
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// =========================================================================
-			// 4. THE GPX FILE LIST 
-			// Delete the two slashes (//) in front of the ONE trail you want to load!
-			// =========================================================================
-			
-			
-			 var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
-			// var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
-			// var gpxFile = '../GPX/Jamanota_Trail.gpx';
-			// var gpxFile = '../GPX/Sasarawichi_Trail.gpx';
-			// var gpxFile = '../GPX/Boroncana__Alto_Vista_Kapel.gpx';
-			// var gpxFile = '../GPX/Conchi_Natuurbad_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Arikok_Dos_Playa_Zuidelijke_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Bushiribana__Malmok_Beach.gpx';
+			// BALASHI GPX
+			var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
 
-			// =========================================================================
-
-			// 5. Draw the trail (Fixed shadow images and overlapping icons)
 			new L.GPX(gpxFile, {
 				async: true,
-				marker_options: { 
-					startIconUrl: '../images/hiker.gif',
-					endIconUrl: '',      /* Left blank so it doesn't overlap the hiker on loop trails */
-					shadowUrl: '',       /* Removes the broken missing image box */
-					waypointIconUrl: '', /* Removes any hidden waypoint markers */
-					iconSize: [50, 50], 
-					iconAnchor: [25, 50]
-				},
+				marker_options: { startIconUrl: '../images/hiker.gif', endIconUrl: '', shadowUrl: '', waypointIconUrl: '', iconSize: [50, 50], iconAnchor: [25, 50] },
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-			}).on('loaded', function(e) {
-				map.fitBounds(e.target.getBounds());
-			}).addTo(map);
+			}).on('loaded', function(e) { map.fitBounds(e.target.getBounds()); }).addTo(map);
 
 			var userMarker, userCircle;
-			
-			// Location Logic
-			function getLocation() { 
-				document.getElementById('locating-overlay').classList.add('active');
-				map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
-			}
-			
+			function getLocation() { document.getElementById('locating-overlay').classList.add('active'); map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); }
 			map.on('locationfound', function(e) {
 				document.getElementById('locating-overlay').classList.remove('active');
-				
-				if (userMarker) { map.removeLayer(userMarker); }
-				if (userCircle) { map.removeLayer(userCircle); }
+				if (userMarker) { map.removeLayer(userMarker); } if (userCircle) { map.removeLayer(userCircle); }
 				userCircle = L.circle(e.latlng, { radius: 15, color: '#1e90ff', fillOpacity: 0.3 }).addTo(map);
 				userMarker = L.circleMarker(e.latlng, { radius: 8, color: 'white', fillColor: '#1e90ff', fillOpacity: 1, weight: 3 }).addTo(map);
 				userMarker.bindPopup("You are here!").openPopup();
 			});
-
-			map.on('locationerror', function(e) {
-				document.getElementById('locating-overlay').classList.remove('active');
-				alert("Could not find your location. Please check your device permissions.");
-			});
+			map.on('locationerror', function(e) { document.getElementById('locating-overlay').classList.remove('active'); alert("Could not find your location."); });
 		</script>
 	</body>
 </html>
