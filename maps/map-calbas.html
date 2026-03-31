@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Trail Map - HIXZ</title>
+		<title>Calbas Map - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -132,46 +132,41 @@
 				}
 			}
 
-			// 1. Set up the map layers with keepBuffer: 8 to stop the grey loading voids
+			// --- FIX: Explicitly tell Leaflet where to find its default blue markers to stop broken images ---
+			delete L.Icon.Default.prototype._getIconUrl;
+			L.Icon.Default.mergeOptions({
+				iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+				iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+				shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+			});
+
+			// 1. Set up the map layers
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
 			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 
-			// 2. Initialize map with Satellite as default
-			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
+			// 2. Initialize map (ADDED preferCanvas: true to fix the blue line clipping on computer zoom)
+			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite], preferCanvas: true });
 			
-			// 3. Add the layer control menu, forcing it to remain fully open
+			// 3. Add the layer control menu
 			var baseMaps = {
 				"Satellite": satellite,
 				"Streets": streets,
 				"Terrain": terrain
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
-
-			// =========================================================================
-			// 4. THE GPX FILE LIST 
-			// Delete the two slashes (//) in front of the ONE trail you want to load!
-			// =========================================================================
 			
-			
-			// var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
-			 var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
-			// var gpxFile = '../GPX/Jamanota_Trail.gpx';
-			// var gpxFile = '../GPX/Sasarawichi_Trail.gpx';
-			// var gpxFile = '../GPX/Boroncana__Alto_Vista_Kapel.gpx';
-			// var gpxFile = '../GPX/Conchi_Natuurbad_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Arikok_Dos_Playa_Zuidelijke_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Bushiribana__Malmok_Beach.gpx';
+			var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
+			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-			// =========================================================================
-
-			// 5. Draw the trail (Fixed shadow images and overlapping icons)
+			// 4. Draw the trail
 			new L.GPX(gpxFile, {
 				async: true,
 				marker_options: { 
 					startIconUrl: '../images/hiker.gif',
-					endIconUrl: '',      /* Left blank so it doesn't overlap the hiker on loop trails */
-					shadowUrl: '',       /* Removes the broken missing image box */
+					endIconUrl: invisiblePixel,      
+					shadowUrl: invisiblePixel,
+					// Removed wptIconUrl entirely so it falls back to the newly fixed default blue markers
 					iconSize: [50, 50], 
 					iconAnchor: [25, 50]
 				},
