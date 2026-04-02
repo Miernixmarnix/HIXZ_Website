@@ -77,38 +77,38 @@
 				margin-right: 8px !important;
 			}
 
-			/* --- NEW: Trail Stats Overlay CSS --- */
+			/* --- UPDATED: Trail Stats Overlay CSS --- */
 			#trail-stats {
 				position: absolute;
-				top: 80px;
+				top: 220px; /* Moved down to clear the layer control menu */
 				right: 15px;
 				background: rgba(5, 10, 6, 0.9);
 				color: #ffffff;
 				padding: 12px 18px;
 				border-radius: 8px;
-				border: 1px solid #00ccff;
+				border: 1px solid #5ea66e; /* Changed to calm green */
 				z-index: 1000;
 				font-family: 'Archivo Black', sans-serif;
 				font-size: 12px;
 				text-transform: uppercase;
 				letter-spacing: 1px;
 				box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-				display: none; /* Hidden until map loads */
+				display: none; 
 				pointer-events: none;
 			}
 			#trail-stats span {
 				display: block;
 				margin-bottom: 6px;
-				color: #00ccff;
+				color: #5ea66e; /* Changed to calm green */
 			}
 			#trail-stats span:last-child { margin-bottom: 0; }
 			#trail-stats span strong { color: #ffffff; }
 
-			/* --- NEW: Photo Popup Styling --- */
+			/* --- UPDATED: Photo Popup Styling --- */
 			.photo-popup .leaflet-popup-content-wrapper {
 				background: #050a06;
 				color: #ffffff;
-				border: 1px solid #00ccff;
+				border: 1px solid #5ea66e; /* Match the calm green */
 				border-radius: 8px;
 				font-family: 'Archivo Black', sans-serif;
 				text-transform: uppercase;
@@ -149,7 +149,6 @@
 		<div id="locating-overlay">Locating...</div>
 		<div id="map"></div>
 
-		<!-- NEW: Trail Stats Overlay Container -->
 		<div id="trail-stats">
 			<span id="stat-dist">Distance: <strong>Loading...</strong></span>
 			<span id="stat-time">Est. Time: <strong>45 MIN</strong></span>
@@ -170,7 +169,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// THE SECURITY LOGIC
 			function exitSecurely() {
 				if (localStorage.getItem('hixz_vip') === 'true') {
 					window.location.href = '../unlocked.html';
@@ -192,10 +190,8 @@
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// HOOIBERG GPX
 			var gpxFile = '../GPX/Hooiberg_Trail.gpx';
 
-			// Ensure waypoints appear properly so they can be clicked for photos
 			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
 
@@ -205,31 +201,24 @@
 					startIconUrl: '../images/hiker.gif',
 					endIconUrl: invisiblePixel,      
 					shadowUrl: invisiblePixel,       
-					wptIconUrls: { '': blueMarkerUrl }, /* Loads clickable pins for waypoints */
+					wptIconUrls: { '': blueMarkerUrl },
 					iconSize: [35, 35], 
 					iconAnchor: [17, 35]
 				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			// --- NEW: Intercept waypoints to add the Photo Popups ---
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					// Binds a custom styled popup with an image tag to every waypoint
 					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/hooiberg_view.jpg" alt="Trail View"></div>';
 					e.point.bindPopup(photoHTML);
 				}
 			});
 
-			// --- NEW: Calculate stats and reveal overlay when GPX finishes loading ---
 			trailLayer.on('loaded', function(e) {
 				map.fitBounds(e.target.getBounds());
-				
-				// Automatically fetch distance from GPX data and convert meters to kilometers
 				var distanceKm = (e.target.get_distance() / 1000).toFixed(2);
 				document.getElementById('stat-dist').innerHTML = 'Distance: <strong>' + distanceKm + ' KM</strong>';
-				
-				// Reveal the stats overlay
 				document.getElementById('trail-stats').style.display = 'block';
 			}).addTo(map);
 
