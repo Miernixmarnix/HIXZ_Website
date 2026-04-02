@@ -397,6 +397,7 @@
 							hiddenDiv.style.display = "none";
 							this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
 							anime.set(trailItems, { opacity: 0, translateY: 40 });
+							this.style.pointerEvents = 'auto';
 						} else {
 							hiddenDiv.style.display = "block";
 							this.innerHTML = "SHOW FEWER OPTIONS";
@@ -407,7 +408,19 @@
 								translateY: [40, 0],
 								delay: anime.stagger(120),
 								duration: 800,
-								easing: 'easeOutQuart'
+								easing: 'easeOutQuart',
+								complete: () => {
+									// Smoothly scroll to the first newly revealed item
+									const firstItem = hiddenDiv.querySelector('.spotlight');
+									const headerHeight = document.getElementById('header').offsetHeight;
+									const targetY = firstItem.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+									window.scrollTo({
+										top: targetY,
+										behavior: 'smooth'
+									});
+									this.style.pointerEvents = 'auto'; 
+								}
 							});
 						}
 						
@@ -415,10 +428,7 @@
 							targets: this,
 							opacity: 1,
 							duration: 200,
-							easing: 'easeInQuad',
-							complete: () => {
-								this.style.pointerEvents = 'auto'; 
-							}
+							easing: 'easeInQuad'
 						});
 					}
 				});
