@@ -114,7 +114,7 @@
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
 						<li>
-							<a href="#two" class="google-btn scrolly">
+							<a href="#more-trails-trigger" class="google-btn" id="view-secret-btn">
 								View Secret Trails
 							</a>
 						</li>
@@ -172,9 +172,10 @@
 					</div>
 				</section>
 
-				<div class="see-more-container style2">
+				<!-- This ID is the new target for the banner button -->
+				<div id="more-trails-trigger" class="see-more-container style2">
 					<button class="google-btn" id="see-more-btn">
-						LOOK AT ALL TRAIL OPTIONS
+						VIEW MORE TRAILS
 					</button>
 				</div>
 
@@ -375,10 +376,22 @@
 				});
 			});
 
+			// --- NEW SCROLL LOGIC ---
+			const viewSecretBtn = document.getElementById('view-secret-btn');
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
+			const triggerDiv = document.getElementById('more-trails-trigger');
 			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
 
+			// 1. Banner button scroll to "VIEW MORE TRAILS"
+			viewSecretBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				const headerHeight = document.getElementById('header').offsetHeight;
+				const targetY = triggerDiv.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+				window.scrollTo({ top: targetY, behavior: 'smooth' });
+			});
+
+			// 2. View More Trails button expansion logic
 			anime.set(trailItems, { opacity: 0, translateY: 40 });
 
 			seeMoreBtn.addEventListener('click', function() {
@@ -395,12 +408,12 @@
 					complete: () => {
 						if (isShowing) {
 							hiddenDiv.style.display = "none";
-							this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
+							this.innerHTML = "VIEW MORE TRAILS";
 							anime.set(trailItems, { opacity: 0, translateY: 40 });
 							this.style.pointerEvents = 'auto';
 						} else {
 							hiddenDiv.style.display = "block";
-							this.innerHTML = "SHOW FEWER OPTIONS";
+							this.innerHTML = "SHOW LESS";
 							
 							anime({
 								targets: trailItems,
@@ -410,15 +423,10 @@
 								duration: 800,
 								easing: 'easeOutQuart',
 								complete: () => {
-									// Smoothly scroll to the first newly revealed item
 									const firstItem = hiddenDiv.querySelector('.spotlight');
 									const headerHeight = document.getElementById('header').offsetHeight;
 									const targetY = firstItem.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-									window.scrollTo({
-										top: targetY,
-										behavior: 'smooth'
-									});
+									window.scrollTo({ top: targetY, behavior: 'smooth' });
 									this.style.pointerEvents = 'auto'; 
 								}
 							});
