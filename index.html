@@ -30,9 +30,34 @@
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
-			.video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-			.video-item { opacity: 0; position: relative; overflow: hidden; border-radius: 8px; }
-			.video-item video { width: 100%; display: block; }
+			/* --- UPDATED FOR ASPECT RATIO ENFORCEMENT --- */
+			.video-grid { 
+				display: grid; 
+				grid-template-columns: repeat(3, 1fr); 
+				gap: 20px; 
+				/* Forces rows to maintain a horizontal ratio based on width */
+				grid-auto-rows: 1fr; 
+			}
+
+			.video-item { 
+				opacity: 0; 
+				position: relative; 
+				overflow: hidden; 
+				border-radius: 8px; 
+				width: 100%;
+				/* Enforces a 16:9 aspect ratio on the container */
+				aspect-ratio: 16 / 9; 
+				background: #000; /* Pre-loads black background if video fails */
+			}
+
+			/* Prevents vertical videos from breaking out of the grid cell */
+			.video-item video { 
+				width: 100%; 
+				height: 100%; /* Force video to fill container height */
+				display: block; 
+				/* This line crops vertical videos, keeping them center-aligned and horizontal */
+				object-fit: cover; 
+			}
 
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
