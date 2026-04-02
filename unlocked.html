@@ -75,6 +75,23 @@
 			.video-overlay a:hover { transform: scale(1.2); }
 
 			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+
+			/* --- NEW STYLES FOR VIDEO SECTION AND SPACE OPTIMIZATION --- */
+			#showcase {
+				background-image: url('images/mainbackground.jpg'); /* Recommended background */
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed; /* Parallax effect */
+				position: relative;
+				padding: 6rem 0; /* Extra space above/below content */
+			}
+			#showcase::after {
+				content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(0,0,0,0.6); z-index: 1; /* Dark overlay */
+			}
+			#showcase .inner { position: relative; z-index: 2; width: 90% !important; max-width: 1400px; }
+			#showcase .major { margin-bottom: 3rem !important; }
+			#showcase h2 { color: #fff; }
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -172,7 +189,6 @@
 					</div>
 				</section>
 
-				<!-- This ID is the new target for the banner button -->
 				<div id="more-trails-trigger" class="see-more-container style2">
 					<button class="google-btn" id="see-more-btn">
 						VIEW MORE TRAILS
@@ -210,7 +226,7 @@
 					        <ul class="actions">
 					            <li><a href="maps/map-altovista.html" class="button">See Route</a></li>
 					        </ul>
-					    </div>
+					        </div>
 					</section>
 
 					<section class="spotlight">
@@ -250,7 +266,7 @@
 
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
-					<header class="major" style="margin-bottom: 4rem;">
+					<header class="major">
 						<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
 							Go on hikes with me everywhere
 						</h2>
@@ -376,19 +392,34 @@
 				});
 			});
 
-			// --- NEW SCROLL LOGIC ---
+			// --- ENHANCED SCROLL LOGIC USING ANIME.JS FOR SMOOTHNESS & ACCURACY ---
 			const viewSecretBtn = document.getElementById('view-secret-btn');
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
 			const triggerDiv = document.getElementById('more-trails-trigger');
 			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
 
+			// Adjusted stop point to match the first screenshot framing
+			const adjustedOffset = 180; 
+
+			// Function to handle Anime.js scrolling
+			function smoothScrollTo(targetElement, offset = 0) {
+				const headerHeight = document.getElementById('header').offsetHeight;
+				const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+				const stopPosition = targetPosition - headerHeight - offset;
+
+				anime({
+					targets: document.scrollingElement,
+					scrollTop: stopPosition,
+					duration: 1600, // Slightly slower (default is often 1000ms)
+					easing: 'easeInOutQuint' // Much smoother easing curve
+				});
+			}
+
 			// 1. Banner button scroll to "VIEW MORE TRAILS"
 			viewSecretBtn.addEventListener('click', function(e) {
 				e.preventDefault();
-				const headerHeight = document.getElementById('header').offsetHeight;
-				const targetY = triggerDiv.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-				window.scrollTo({ top: targetY, behavior: 'smooth' });
+				smoothScrollTo(triggerDiv, adjustedOffset);
 			});
 
 			// 2. View More Trails button expansion logic
@@ -424,9 +455,7 @@
 								easing: 'easeOutQuart',
 								complete: () => {
 									const firstItem = hiddenDiv.querySelector('.spotlight');
-									const headerHeight = document.getElementById('header').offsetHeight;
-									const targetY = firstItem.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-									window.scrollTo({ top: targetY, behavior: 'smooth' });
+									smoothScrollTo(firstItem, 80); // Standard offset for expansion
 									this.style.pointerEvents = 'auto'; 
 								}
 							});
