@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Trail Map - HIXZ</title>
+		<title>Conchi Trail - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -11,16 +11,23 @@
 		<style>
 			body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #050a06; }
 			
-			/* Full screen map locked behind the interface */
 			#map { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #2a2a2a; }
-			
-			/* Prevent template CSS from breaking map tiles */
 			.leaflet-pane img, .leaflet-tile-container img { max-width: none !important; width: auto !important; }
 			
-			/* Floating transparent header */
-			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); }
+			#header { position: absolute; top: 0; width: 100%; z-index: 1000; background: rgba(5, 10, 6, 0.8); height: 3.25em; line-height: 3.25em; }
+			#header h1 { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; }
 			
-			/* Floating button locked to the bottom */
+			.back-btn {
+				position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+				display: inline-flex; align-items: center; justify-content: center;
+				background-color: #1b3022; color: #ffffff !important; padding: 8px 18px;
+				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
+				font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+				transition: all 0.3s ease; border: 1px solid #ffffff;
+				box-shadow: 0 4px 10px rgba(0,0,0,0.3); line-height: normal;
+			}
+			.back-btn:hover { background-color: #ffffff; color: #050a06 !important; }
+
 			.button-container {
 				position: absolute; bottom: 40px; left: 0; width: 100%;
 				display: flex; justify-content: center; z-index: 1000; pointer-events: none;
@@ -37,7 +44,6 @@
 			}
 			.google-btn:hover { background-color: #ffffff; color: #050a06 !important; }
 
-			/* Full screen loading screen */
 			#locating-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: rgba(5, 10, 6, 0.9); color: #ffffff;
@@ -48,10 +54,8 @@
 			}
 			#locating-overlay.active { opacity: 1; pointer-events: all; }
 			
-			/* Push Leaflet controls below the floating header */
 			.leaflet-control-zoom, .leaflet-control-layers { margin-top: 80px !important; }
 			
-			/* --- FIX: Restores the Leaflet layer menu so it isn't a blank white box --- */
 			.leaflet-control-layers-expanded {
 				background: #ffffff !important;
 				padding: 12px !important;
@@ -72,11 +76,58 @@
 				position: relative !important;
 				margin-right: 8px !important;
 			}
+
+			#trail-stats {
+				position: absolute;
+				top: 220px; 
+				right: 15px;
+				background: rgba(5, 10, 6, 0.9);
+				color: #ffffff;
+				padding: 12px 18px;
+				border-radius: 8px;
+				border: 1px solid #5ea66e; 
+				z-index: 1000;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 12px;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+				display: none; 
+				pointer-events: none;
+			}
+			#trail-stats span {
+				display: block;
+				margin-bottom: 6px;
+				color: #5ea66e; 
+			}
+			#trail-stats span:last-child { margin-bottom: 0; }
+			#trail-stats span strong { color: #ffffff; }
+
+			.photo-popup .leaflet-popup-content-wrapper {
+				background: #050a06;
+				color: #ffffff;
+				border: 1px solid #5ea66e; 
+				border-radius: 8px;
+				font-family: 'Archivo Black', sans-serif;
+				text-transform: uppercase;
+				text-align: center;
+				letter-spacing: 1px;
+			}
+			.photo-popup .leaflet-popup-tip { background: #050a06; }
+			.photo-popup img {
+				width: 160px;
+				height: auto;
+				border-radius: 4px;
+				margin-top: 8px;
+				border: 1px solid #2a2a2a;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
 
 		<header id="header" class="alt">
+			<a href="../unlocked.html" class="back-btn">&#8592; Exit</a>
+			
 			<h1><a href="../index.html">HIXZ</a></h1>
 			<nav id="nav">
 				<ul>
@@ -84,7 +135,7 @@
 						<a href="#menu" class="menuToggle"><span>Menu</span></a>
 						<div id="menu">
 							<ul>
-								<li><a href="../index.html">Home</a></li>
+								<li><a href="../unlocked.html">Back to Trails</a></li>
 								<li><a href="../generic.html">About Me</a></li>
 							</ul>
 						</div>
@@ -95,6 +146,12 @@
 
 		<div id="locating-overlay">Locating...</div>
 		<div id="map"></div>
+
+		<div id="trail-stats">
+			<span id="stat-dist">Distance: <strong>Loading...</strong></span>
+			<span id="stat-time">Est. Time: <strong>1 HR 45 MIN</strong></span>
+			<span id="stat-diff">Difficulty: <strong>MODERATE</strong></span>
+		</div>
 
 		<div class="button-container">
 			<button class="google-btn" onclick="getLocation()">Find My Location</button>
@@ -110,15 +167,12 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
-			// 1. Set up the map layers with keepBuffer: 8 to stop the grey loading voids
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
 			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 
-			// 2. Initialize map with Satellite as default
-			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
+			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite], preferCanvas: true });
 			
-			// 3. Add the layer control menu, forcing it to remain fully open
 			var baseMaps = {
 				"Satellite": satellite,
 				"Streets": streets,
@@ -126,42 +180,41 @@
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// =========================================================================
-			// 4. THE GPX FILE LIST 
-			// Delete the two slashes (//) in front of the ONE trail you want to load!
-			// =========================================================================
-			
-			
-			// var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
-			// var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
-			// var gpxFile = '../GPX/Jamanota_Trail.gpx';
-			// var gpxFile = '../GPX/Sasarawichi_Trail.gpx';
-			// var gpxFile = '../GPX/Boroncana__Alto_Vista_Kapel.gpx';
-			 var gpxFile = '../GPX/Conchi_Natuurbad_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Arikok_Dos_Playa_Zuidelijke_Wandelroute.gpx';
-			// var gpxFile = '../GPX/Bushiribana__Malmok_Beach.gpx';
+			// CONCHI GPX
+			var gpxFile = '../GPX/Conchi_Natuurbad_Wandelroute.gpx';
 
-			// =========================================================================
+			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
 
-			// 5. Draw the trail (Fixed shadow images and overlapping icons)
-			new L.GPX(gpxFile, {
+			var trailLayer = new L.GPX(gpxFile, {
 				async: true,
 				marker_options: { 
 					startIconUrl: '../images/hiker.gif',
-					endIconUrl: '',      /* Left blank so it doesn't overlap the hiker on loop trails */
-					shadowUrl: '',       /* Removes the broken missing image box */
-					waypointIconUrl: '', /* Removes any hidden waypoint markers */
-					iconSize: [50, 50], 
-					iconAnchor: [25, 50]
+					endIconUrl: invisiblePixel,      
+					shadowUrl: invisiblePixel,       
+					wptIconUrls: { '': blueMarkerUrl },
+					iconSize: [35, 35], 
+					iconAnchor: [17, 35]
 				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-			}).on('loaded', function(e) {
+			});
+
+			trailLayer.on('addpoint', function(e) {
+				if (e.point_type === 'waypoint') {
+					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/conchi_view.jpg" alt="Trail View"></div>';
+					e.point.bindPopup(photoHTML);
+				}
+			});
+
+			trailLayer.on('loaded', function(e) {
 				map.fitBounds(e.target.getBounds());
+				var distanceKm = (e.target.get_distance() / 1000).toFixed(2);
+				document.getElementById('stat-dist').innerHTML = 'Distance: <strong>' + distanceKm + ' KM</strong>';
+				document.getElementById('trail-stats').style.display = 'block';
 			}).addTo(map);
 
 			var userMarker, userCircle;
 			
-			// Location Logic
 			function getLocation() { 
 				document.getElementById('locating-overlay').classList.add('active');
 				map.locate({setView: true, maxZoom: 17, maximumAge: 10000}); 
