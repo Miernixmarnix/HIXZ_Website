@@ -76,22 +76,32 @@
 
 			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
 
-			/* --- NEW STYLES FOR VIDEO SECTION AND SPACE OPTIMIZATION --- */
+			/* --- MODIFIED SHOWCASE STYLES (REVERTED BACK) --- */
 			#showcase {
-				background-image: url('images/mainbackground.jpg'); /* Recommended background */
-				background-size: cover;
-				background-position: center;
-				background-attachment: fixed; /* Parallax effect */
-				position: relative;
-				padding: 6rem 0; /* Extra space above/below content */
+				/* Old grey-ish background reverted */
+				background: #2e343a; 
+				padding: 6rem 0; 
 			}
 			#showcase::after {
-				content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(0,0,0,0.6); z-index: 1; /* Dark overlay */
+				display: none; /* Removed background overlay */
 			}
-			#showcase .inner { position: relative; z-index: 2; width: 90% !important; max-width: 1400px; }
-			#showcase .major { margin-bottom: 3rem !important; }
-			#showcase h2 { color: #fff; }
+			#showcase .inner { width: 90% !important; max-width: 1400px; }
+			
+			/* --- MODIFIED TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
+			#showcase .major { 
+				margin-bottom: 3rem !important; 
+				text-align: center; /* Center the text container */
+			}
+			#showcase h2 { 
+				color: #fff; 
+				font-size: 2.2rem; /* Increased size */
+				font-family: 'Archivo Black', sans-serif; 
+				letter-spacing: -1px; 
+				text-transform: uppercase;
+				border-bottom: solid 2px; /* Centered underline */
+				display: inline-block; /* Required for centered underline */
+				padding-bottom: 0.5rem;
+			}
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -226,7 +236,7 @@
 					        <ul class="actions">
 					            <li><a href="maps/map-altovista.html" class="button">See Route</a></li>
 					        </ul>
-					        </div>
+					    </div>
 					</section>
 
 					<section class="spotlight">
@@ -267,7 +277,7 @@
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
 					<header class="major">
-						<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
+						<h2>
 							Go on hikes with me everywhere
 						</h2>
 					</header>
