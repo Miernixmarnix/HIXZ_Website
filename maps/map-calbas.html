@@ -207,10 +207,17 @@
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
+			// Setup an array for your multiple marker images
+			var calbasPhotos = ['CalbasMarker1.jpg', 'CalbasMarker2.jpg'];
+			var photoIndex = 0;
+
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/calbas_view.jpg" alt="Trail View"></div>';
+					// Pulls the image from the array, defaulting back to the first if there are more than 2 waypoints
+					var currentPhoto = calbasPhotos[photoIndex] ? calbasPhotos[photoIndex] : calbasPhotos[0];
+					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/' + currentPhoto + '" alt="Trail View"></div>';
 					e.point.bindPopup(photoHTML);
+					photoIndex++;
 				}
 			});
 
