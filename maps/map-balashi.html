@@ -115,9 +115,9 @@
 			}
 			.photo-popup .leaflet-popup-tip { background: #050a06; }
 			.photo-popup img {
-				width: 250px; /* Updated to recommended size */
-				max-width: 100%;
-				height: auto;
+				width: 160px !important; /* Strictly forces width */
+				max-width: 160px !important; 
+				height: auto !important;
 				border-radius: 4px;
 				margin-top: 8px;
 				border: 1px solid #2a2a2a;
@@ -213,9 +213,9 @@
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/BalashiMarker.jpg" alt="Trail View"></div>';
-					// Constrain the Leaflet popup box so it respects our CSS image width
-					e.point.bindPopup(photoHTML, { maxWidth: 280, minWidth: 250 });
+					// Inline styles added to the container and image to ensure Leaflet doesn't override it with the native image size
+					var photoHTML = '<div class="photo-popup" style="width: 160px;"><strong>Scenic Spot</strong><br><img src="../images/BalashiMarker.jpg" alt="Trail View" style="width: 160px; height: auto;"></div>';
+					e.point.bindPopup(photoHTML, { maxWidth: 180, minWidth: 160 });
 				}
 			});
 
