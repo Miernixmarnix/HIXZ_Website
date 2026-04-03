@@ -104,8 +104,8 @@
 			#trail-stats span strong { color: #ffffff; }
 
 			.photo-popup .leaflet-popup-content-wrapper {
-				background: #050a06;
-				color: #ffffff;
+				background: #ffffff;
+				color: #000000;
 				border: 1px solid #5ea66e; 
 				border-radius: 8px;
 				font-family: 'Archivo Black', sans-serif;
@@ -113,20 +113,21 @@
 				text-align: center;
 				letter-spacing: 1px;
 			}
-			.photo-popup .leaflet-popup-tip { background: #050a06; }
+			.photo-popup .leaflet-popup-tip { background: #ffffff; }
 			.photo-popup img {
-				width: 220px !important; /* Adjusted to 220px */
-				max-width: 220px !important; 
+				width: 280px !important; 
+				max-width: 280px !important; 
 				height: auto !important;
 				border-radius: 4px;
 				margin-top: 8px;
-				border: 1px solid #2a2a2a;
+				border: 1px solid #e0e0e0;
 			}
 			.fun-fact-text {
 				font-family: sans-serif;
-				font-size: 11px;
+				font-size: 12px;
+				font-weight: bold;
 				text-transform: none;
-				color: #d1d1d1;
+				color: #000000;
 				margin-top: 10px;
 				line-height: 1.4;
 				text-align: center;
@@ -222,13 +223,12 @@
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					// Inline styles updated to 220px, and fun fact text appended below the image
-					var photoHTML = '<div class="photo-popup" style="width: 220px;">' +
+					var photoHTML = '<div class="photo-popup" style="width: 280px;">' +
 						'<strong>Scenic Spot</strong><br>' +
-						'<img src="../images/BalashiMarker.jpg" alt="Trail View" style="width: 220px; height: auto;">' +
+						'<img src="../images/BalashiMarker.jpg" alt="Trail View" style="width: 280px; height: auto;">' +
 						'<div class="fun-fact-text"><em>Fun Fact: Built in 1899, this historic mill was abandoned in 1916 due to a lack of raw materials and water.</em></div>' +
 						'</div>';
-					e.point.bindPopup(photoHTML, { maxWidth: 260, minWidth: 220 });
+					e.point.bindPopup(photoHTML, { maxWidth: 320, minWidth: 280 });
 				}
 			});
 
