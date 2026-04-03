@@ -191,26 +191,29 @@
 			// BALASHI GPX
 			var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
 
-			// Make sure these two variables are defined before your L.GPX call
-var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
+			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
 
-var trailLayer = new L.GPX(gpxFile, {
-    async: true,
-    marker_options: { 
-        startIconUrl: '../images/hiker.gif',
-        endIconUrl: invisiblePixel,      
-        shadowUrl: invisiblePixel,       
-        wptIconUrls: { '': blueMarkerUrl }, // This line fixes the broken waypoint marker
-        iconSize: [35, 35], 
-        iconAnchor: [17, 35]
-    },
-    polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
-});
+			var trailLayer = new L.GPX(gpxFile, {
+				async: true,
+				marker_options: { 
+					startIconUrl: '../images/hiker.gif',
+					endIconUrl: invisiblePixel,      
+					shadowUrl: invisiblePixel,       
+					wptIconUrls: { 
+						'': blueMarkerUrl,
+						'Marker': blueMarkerUrl // This explicitly handles the broken symbol name from your screenshot
+					}, 
+					iconSize: [35, 35], 
+					iconAnchor: [17, 35]
+				},
+				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
+			});
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/balashi_view.jpg" alt="Trail View"></div>';
+					// Updated the popup to use your specific BalashiMarker.jpg
+					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/BalashiMarker.jpg" alt="Trail View"></div>';
 					e.point.bindPopup(photoHTML);
 				}
 			});
