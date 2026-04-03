@@ -132,6 +132,41 @@
 				line-height: 1.4;
 				text-align: center;
 			}
+
+			/* --- NEW PULSING BEACON STYLES --- */
+			.custom-beacon {
+				background: transparent;
+				border: none;
+			}
+			.beacon-core {
+				width: 22px;
+				height: 22px;
+				background-color: #00ccff; /* Matches trail line */
+				border-radius: 50%;
+				border: 3px solid #ffffff;
+				box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+				position: relative;
+				cursor: pointer;
+				transition: transform 0.2s ease-in-out;
+			}
+			.beacon-core:hover {
+				transform: scale(1.2); /* Slightly enlarges on hover */
+			}
+			.beacon-core::before {
+				content: '';
+				position: absolute;
+				top: -12px;
+				left: -12px;
+				right: -12px;
+				bottom: -12px;
+				border: 2px solid #00ccff;
+				border-radius: 50%;
+				animation: pulse 1.5s linear infinite;
+			}
+			@keyframes pulse {
+				0% { transform: scale(0.5); opacity: 1; }
+				100% { transform: scale(1.3); opacity: 0; }
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -203,7 +238,6 @@
 			var gpxFile = '../GPX/Balashi_Goudmijn__Spaans_Lagoen.gpx';
 
 			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
 
 			var trailLayer = new L.GPX(gpxFile, {
 				async: true,
@@ -211,10 +245,6 @@
 					startIconUrl: '../images/hiker.gif',
 					endIconUrl: invisiblePixel,      
 					shadowUrl: invisiblePixel,       
-					wptIconUrls: { 
-						'': blueMarkerUrl,
-						'Marker': blueMarkerUrl 
-					}, 
 					iconSize: [35, 35], 
 					iconAnchor: [17, 35]
 				},
@@ -223,6 +253,17 @@
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
+					
+					// Apply the new animated custom beacon
+					var beaconIcon = L.divIcon({
+						className: 'custom-beacon',
+						html: '<div class="beacon-core"></div>',
+						iconSize: [22, 22],
+						iconAnchor: [11, 11] // Centers the custom icon
+					});
+					e.point.setIcon(beaconIcon);
+
+					// Popup payload
 					var photoHTML = '<div class="photo-popup" style="width: 320px;">' +
 						'<strong style="font-size: 16px;">Scenic Spot</strong><br>' +
 						'<img src="../images/BalashiMarker.jpg" alt="Trail View" style="width: 320px; height: auto;">' +
