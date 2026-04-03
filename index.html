@@ -30,12 +30,11 @@
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
-			/* --- UPDATED FOR ASPECT RATIO ENFORCEMENT --- */
+			/* --- ASPECT RATIO ENFORCEMENT FOR VIDEOS --- */
 			.video-grid { 
 				display: grid; 
 				grid-template-columns: repeat(3, 1fr); 
 				gap: 20px; 
-				/* Forces rows to maintain a horizontal ratio based on width */
 				grid-auto-rows: 1fr; 
 			}
 
@@ -45,17 +44,14 @@
 				overflow: hidden; 
 				border-radius: 8px; 
 				width: 100%;
-				/* Enforces a 16:9 aspect ratio on the container */
 				aspect-ratio: 16 / 9; 
-				background: #000; /* Pre-loads black background if video fails */
+				background: #000; 
 			}
 
-			/* Prevents vertical videos from breaking out of the grid cell */
 			.video-item video { 
 				width: 100%; 
-				height: 100%; /* Force video to fill container height */
+				height: 100%; 
 				display: block; 
-				/* This line crops vertical videos, keeping them center-aligned and horizontal */
 				object-fit: cover; 
 			}
 
@@ -102,6 +98,32 @@
 			.video-overlay a:hover { transform: scale(1.2); }
 
 			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+
+			/* --- SHOWCASE STYLES --- */
+			#showcase {
+				background: #2e343a; 
+				padding: 6rem 0; 
+			}
+			#showcase::after {
+				display: none; 
+			}
+			#showcase .inner { width: 90% !important; max-width: 1400px; }
+			
+			/* --- TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
+			#showcase .major { 
+				margin-bottom: 3rem !important; 
+				text-align: center; 
+			}
+			#showcase h2 { 
+				color: #fff; 
+				font-size: 2.2rem; 
+				font-family: 'Archivo Black', sans-serif; 
+				letter-spacing: -1px; 
+				text-transform: uppercase;
+				border-bottom: solid 2px; 
+				display: inline-block; 
+				padding-bottom: 0.5rem;
+			}
 		</style>
 	</head>
 	<body class="landing is-preload">
@@ -201,7 +223,7 @@
 
 				<div class="see-more-container style2">
 					<button class="google-btn" id="see-more-btn">
-						LOOK AT ALL TRAIL OPTIONS
+						VIEW MORE TRAILS
 					</button>
 				</div>
 
@@ -276,8 +298,8 @@
 
 			<section id="showcase" class="wrapper style2">
 				<div class="inner">
-					<header class="major" style="margin-bottom: 4rem;">
-						<h2 style="font-family: 'Archivo Black', sans-serif; letter-spacing: -1px; text-transform: uppercase;">
+					<header class="major">
+						<h2>
 							Go on hikes with me everywhere
 						</h2>
 					</header>
@@ -408,6 +430,20 @@
 			const hiddenDiv = document.getElementById('all-trail-options');
 			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
 
+			// Anime.js smooth scrolling function
+			function smoothScrollTo(targetElement, offset = 0) {
+				const headerHeight = document.getElementById('header').offsetHeight;
+				const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+				const stopPosition = targetPosition - headerHeight - offset;
+
+				anime({
+					targets: document.scrollingElement,
+					scrollTop: stopPosition,
+					duration: 1600,
+					easing: 'easeInOutQuint'
+				});
+			}
+
 			anime.set(trailItems, { opacity: 0, translateY: 40 });
 
 			seeMoreBtn.addEventListener('click', function() {
@@ -424,12 +460,16 @@
 					complete: () => {
 						if (isShowing) {
 							hiddenDiv.style.display = "none";
-							this.innerHTML = "LOOK AT ALL TRAIL OPTIONS";
+							this.innerHTML = "VIEW MORE TRAILS";
 							anime.set(trailItems, { opacity: 0, translateY: 40 });
 							this.style.pointerEvents = 'auto'; 
 						} else {
 							hiddenDiv.style.display = "block";
-							this.innerHTML = "SHOW FEWER OPTIONS";
+							this.innerHTML = "SHOW LESS";
+							
+							// Trigger scroll immediately
+							const firstItem = hiddenDiv.querySelector('.spotlight');
+							smoothScrollTo(firstItem, 80);
 							
 							// Animate items appearing
 							anime({
@@ -440,15 +480,6 @@
 								duration: 800,
 								easing: 'easeOutQuart',
 								complete: () => {
-									// Smoothly scroll to the first revealed item
-									const firstItem = hiddenDiv.querySelector('.spotlight');
-									const headerHeight = document.getElementById('header').offsetHeight;
-									const targetY = firstItem.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-									window.scrollTo({
-										top: targetY,
-										behavior: 'smooth'
-									});
 									this.style.pointerEvents = 'auto'; 
 								}
 							});
