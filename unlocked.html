@@ -101,30 +101,29 @@
 
 			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
 
-			/* --- MODIFIED SHOWCASE STYLES (REVERTED BACK) --- */
+			/* --- SHOWCASE STYLES --- */
 			#showcase {
-				/* Old grey-ish background reverted */
 				background: #2e343a; 
 				padding: 6rem 0; 
 			}
 			#showcase::after {
-				display: none; /* Removed background overlay */
+				display: none; 
 			}
 			#showcase .inner { width: 90% !important; max-width: 1400px; }
 			
-			/* --- MODIFIED TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
+			/* --- TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
 			#showcase .major { 
 				margin-bottom: 3rem !important; 
-				text-align: center; /* Center the text container */
+				text-align: center; 
 			}
 			#showcase h2 { 
 				color: #fff; 
-				font-size: 2.2rem; /* Increased size */
+				font-size: 2.2rem; 
 				font-family: 'Archivo Black', sans-serif; 
 				letter-spacing: -1px; 
 				text-transform: uppercase;
-				border-bottom: solid 2px; /* Centered underline */
-				display: inline-block; /* Required for centered underline */
+				border-bottom: solid 2px; 
+				display: inline-block; 
 				padding-bottom: 0.5rem;
 			}
 		</style>
@@ -434,10 +433,8 @@
 			const triggerDiv = document.getElementById('more-trails-trigger');
 			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
 
-			// Adjusted stop point to match the first screenshot framing
 			const adjustedOffset = 180; 
 
-			// Function to handle Anime.js scrolling
 			function smoothScrollTo(targetElement, offset = 0) {
 				const headerHeight = document.getElementById('header').offsetHeight;
 				const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
@@ -446,18 +443,16 @@
 				anime({
 					targets: document.scrollingElement,
 					scrollTop: stopPosition,
-					duration: 1600, // Slightly slower (default is often 1000ms)
-					easing: 'easeInOutQuint' // Much smoother easing curve
+					duration: 1600,
+					easing: 'easeInOutQuint'
 				});
 			}
 
-			// 1. Banner button scroll to "VIEW MORE TRAILS"
 			viewSecretBtn.addEventListener('click', function(e) {
 				e.preventDefault();
 				smoothScrollTo(triggerDiv, adjustedOffset);
 			});
 
-			// 2. View More Trails button expansion logic
 			anime.set(trailItems, { opacity: 0, translateY: 40 });
 
 			seeMoreBtn.addEventListener('click', function() {
@@ -481,6 +476,10 @@
 							hiddenDiv.style.display = "block";
 							this.innerHTML = "SHOW LESS";
 							
+							// Trigger scroll immediately
+							const firstItem = hiddenDiv.querySelector('.spotlight');
+							smoothScrollTo(firstItem, 80);
+							
 							anime({
 								targets: trailItems,
 								opacity: [0, 1],
@@ -489,8 +488,6 @@
 								duration: 800,
 								easing: 'easeOutQuart',
 								complete: () => {
-									const firstItem = hiddenDiv.querySelector('.spotlight');
-									smoothScrollTo(firstItem, 80); // Standard offset for expansion
 									this.style.pointerEvents = 'auto'; 
 								}
 							});
