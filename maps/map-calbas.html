@@ -104,8 +104,8 @@
 			#trail-stats span strong { color: #ffffff; }
 
 			.photo-popup .leaflet-popup-content-wrapper {
-				background: #050a06;
-				color: #ffffff;
+				background: #ffffff;
+				color: #000000;
 				border: 1px solid #5ea66e; 
 				border-radius: 8px;
 				font-family: 'Archivo Black', sans-serif;
@@ -113,13 +113,59 @@
 				text-align: center;
 				letter-spacing: 1px;
 			}
-			.photo-popup .leaflet-popup-tip { background: #050a06; }
+			.photo-popup .leaflet-popup-tip { background: #ffffff; }
 			.photo-popup img {
-				width: 160px;
-				height: auto;
+				width: 320px !important; 
+				max-width: 320px !important; 
+				height: auto !important;
 				border-radius: 4px;
 				margin-top: 8px;
-				border: 1px solid #2a2a2a;
+				border: 1px solid #e0e0e0;
+			}
+			.fun-fact-text {
+				font-family: sans-serif;
+				font-size: 15px;
+				font-weight: bold;
+				text-transform: none;
+				color: #000000;
+				margin-top: 10px;
+				line-height: 1.4;
+				text-align: center;
+			}
+
+			/* --- NEW PULSING BEACON STYLES --- */
+			.custom-beacon {
+				background: transparent;
+				border: none;
+			}
+			.beacon-core {
+				width: 22px;
+				height: 22px;
+				background-color: #00ccff; /* Matches trail line */
+				border-radius: 50%;
+				border: 3px solid #ffffff;
+				box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+				position: relative;
+				cursor: pointer;
+				transition: transform 0.2s ease-in-out;
+			}
+			.beacon-core:hover {
+				transform: scale(1.2); /* Slightly enlarges on hover */
+			}
+			.beacon-core::before {
+				content: '';
+				position: absolute;
+				top: -12px;
+				left: -12px;
+				right: -12px;
+				bottom: -12px;
+				border: 2px solid #00ccff;
+				border-radius: 50%;
+				animation: pulse 1.5s linear infinite;
+			}
+			@keyframes pulse {
+				0% { transform: scale(0.5); opacity: 1; }
+				100% { transform: scale(1.3); opacity: 0; }
 			}
 		</style>
 	</head>
@@ -192,7 +238,6 @@
 			var gpxFile = '../GPX/Bushiribana_Rondwandeling_vanaf_Calbas.gpx';
 
 			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
 
 			var trailLayer = new L.GPX(gpxFile, {
 				async: true,
@@ -200,23 +245,43 @@
 					startIconUrl: '../images/hiker.gif',
 					endIconUrl: invisiblePixel,      
 					shadowUrl: invisiblePixel,       
-					wptIconUrls: { '': blueMarkerUrl },
 					iconSize: [35, 35], 
 					iconAnchor: [17, 35]
 				},
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			// Setup an array for your multiple marker images
+			// Setup arrays for multiple marker images and unique fun facts
 			var calbasPhotos = ['CalbasMarker1.jpg', 'CalbasMarker2.jpg'];
+			var calbasFacts = [
+				'Fun Fact: The Bushiribana ruins were originally built in 1825 to process gold found in the nearby hills.',
+				'Scenic View: The rugged northern coast of Aruba offers a striking contrast to the calm southern beaches.'
+			];
 			var photoIndex = 0;
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
-					// Pulls the image from the array, defaulting back to the first if there are more than 2 waypoints
+					
+					// Apply the new animated custom beacon
+					var beaconIcon = L.divIcon({
+						className: 'custom-beacon',
+						html: '<div class="beacon-core"></div>',
+						iconSize: [22, 22],
+						iconAnchor: [11, 11] // Centers the custom icon
+					});
+					e.point.setIcon(beaconIcon);
+
+					// Pulls the image and fact from the arrays, defaulting back to the first if there are more than 2 waypoints
 					var currentPhoto = calbasPhotos[photoIndex] ? calbasPhotos[photoIndex] : calbasPhotos[0];
-					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/' + currentPhoto + '" alt="Trail View"></div>';
-					e.point.bindPopup(photoHTML);
+					var currentFact = calbasFacts[photoIndex] ? calbasFacts[photoIndex] : calbasFacts[0];
+					
+					var photoHTML = '<div class="photo-popup" style="width: 320px;">' +
+						'<strong style="font-size: 16px;">Trail Highlight</strong><br>' +
+						'<img src="../images/' + currentPhoto + '" alt="Trail View" style="width: 320px; height: auto;">' +
+						'<div class="fun-fact-text"><em>' + currentFact + '</em></div>' +
+						'</div>';
+					
+					e.point.bindPopup(photoHTML, { maxWidth: 360, minWidth: 320 });
 					photoIndex++;
 				}
 			});
