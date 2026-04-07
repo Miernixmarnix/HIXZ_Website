@@ -12,6 +12,9 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		
+		<link rel="preload" as="image" href="images/mountjamanota.webp">
+
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -31,28 +34,28 @@
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
 			/* --- ASPECT RATIO ENFORCEMENT FOR VIDEOS --- */
-			.video-grid { 
-				display: grid; 
-				grid-template-columns: repeat(3, 1fr); 
-				gap: 20px; 
-				grid-auto-rows: 1fr; 
+			.video-grid { 
+				display: grid; 
+				grid-template-columns: repeat(3, 1fr); 
+				gap: 20px; 
+				grid-auto-rows: 1fr; 
 			}
 
-			.video-item { 
-				opacity: 0; 
-				position: relative; 
-				overflow: hidden; 
-				border-radius: 8px; 
+			.video-item { 
+				opacity: 0; 
+				position: relative; 
+				overflow: hidden; 
+				border-radius: 8px; 
 				width: 100%;
-				aspect-ratio: 16 / 9; 
-				background: #000; 
+				aspect-ratio: 16 / 9; 
+				background: #000; 
 			}
 
-			.video-item video { 
-				width: 100%; 
-				height: 100%; 
-				display: block; 
-				object-fit: cover; 
+			.video-item video { 
+				width: 100%; 
+				height: 100%; 
+				display: block; 
+				object-fit: cover; 
 			}
 
 			#loader-curtain {
@@ -62,7 +65,7 @@
 			}
 			.loader-logo {
 				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
-				letter-spacing: 4px; opacity: 0; 
+				letter-spacing: 4px; opacity: 0; 
 			}
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
@@ -83,14 +86,14 @@
 				justify-content: center; align-items: center; z-index: 5;
 				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
 				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease;
-				pointer-events: none; 
+				pointer-events: none; 
 			}
 			.video-loading-overlay.hidden { opacity: 0; }
 
 			.video-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
-				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; 
+				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; 
 				transition: opacity 0.3s ease;
 			}
 			.video-item:hover .video-overlay { opacity: 1; }
@@ -101,28 +104,36 @@
 
 			/* --- SHOWCASE STYLES --- */
 			#showcase {
-				background: #2e343a; 
-				padding: 6rem 0; 
+				background: #2e343a; 
+				padding: 6rem 0; 
 			}
 			#showcase::after {
-				display: none; 
+				display: none; 
 			}
 			#showcase .inner { width: 90% !important; max-width: 1400px; }
 			
 			/* --- TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
-			#showcase .major { 
-				margin-bottom: 3rem !important; 
-				text-align: center; 
+			#showcase .major { 
+				margin-bottom: 3rem !important; 
+				text-align: center; 
 			}
-			#showcase h2 { 
-				color: #fff; 
-				font-size: 2.2rem; 
-				font-family: 'Archivo Black', sans-serif; 
-				letter-spacing: -1px; 
+			#showcase h2 { 
+				color: #fff; 
+				font-size: 2.2rem; 
+				font-family: 'Archivo Black', sans-serif; 
+				letter-spacing: -1px; 
 				text-transform: uppercase;
-				border-bottom: solid 2px; 
-				display: inline-block; 
+				border-bottom: solid 2px; 
+				display: inline-block; 
 				padding-bottom: 0.5rem;
+			}
+
+			/* --- FIX SPOTLIGHT IMAGE GAPS & FORCE ASPECT RATIO --- */
+			.spotlight .image img {
+				width: 100%;
+				height: 100%;
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
 			}
 		</style>
 	</head>
@@ -229,7 +240,7 @@
 
 				<div id="all-trail-options" class="style2">
 					<section class="spotlight">
-						<div class="image"><img src="images/mountjamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+						<div class="image"><img src="images/mountjamanota.webp" alt="Jamanota Trail" loading="lazy" /></div>
 						<div class="content">
 							<h2>Jamanota Trail</h2>
 							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
@@ -251,47 +262,47 @@
 					</section>
 					
 					<section class="spotlight">
-					    <div class="image"><img src="images/tower.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Alto Vista Chapel Route</h2>
-					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+					    <div class="image"><img src="images/tower.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Alto Vista Chapel Route</h2>
+					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
+					        <ul class="actions">
+					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					        </ul>
+					    </div>
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/blackstoneBeach.png" alt="Conchi Natural Pool" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Conchi Natural Pool</h2>
-					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+						    <div class="image"><img src="images/BlackstoneBeach.png" alt="Conchi Natural Pool" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Conchi Natural Pool</h2>
+					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
+					        <ul class="actions">
+					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					        </ul>
+					    </div>
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/anywhere3.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Dos Playa Route</h2>
-					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+					    <div class="image"><img src="images/anywhere3.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Dos Playa Route</h2>
+					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
+					        <ul class="actions">
+					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					        </ul>
+					    </div>
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/sunset.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Bushiribana to Malmok Beach</h2>
-					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+					    <div class="image"><img src="images/sunset.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Bushiribana to Malmok Beach</h2>
+					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
+					        <ul class="actions">
+					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					        </ul>
+					    </div>
 					</section>
 				</div>
 			</section>
@@ -363,16 +374,16 @@
 				})
 				.add({
 					targets: '#loader-curtain',
-					translateY: '-100%', 
-					duration: 1200, 
-					delay: 2500 
+					translateY: '-100%', 
+					duration: 1200, 
+					delay: 2500 
 				})
 				.add({
 					targets: '.google-btn',
 					opacity: [0, 1],
 					translateY: [20, 0],
 					duration: 800,
-					offset: '-=400' 
+					offset: '-=400' 
 				});
 			});
 
@@ -462,7 +473,7 @@
 							hiddenDiv.style.display = "none";
 							this.innerHTML = "VIEW MORE TRAILS";
 							anime.set(trailItems, { opacity: 0, translateY: 40 });
-							this.style.pointerEvents = 'auto'; 
+							this.style.pointerEvents = 'auto'; 
 						} else {
 							hiddenDiv.style.display = "block";
 							this.innerHTML = "SHOW LESS";
@@ -480,7 +491,7 @@
 								duration: 800,
 								easing: 'easeOutQuart',
 								complete: () => {
-									this.style.pointerEvents = 'auto'; 
+									this.style.pointerEvents = 'auto'; 
 								}
 							});
 						}
