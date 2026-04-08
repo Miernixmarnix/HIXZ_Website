@@ -243,7 +243,7 @@
 				async: true,
 				marker_options: { 
 					startIconUrl: '../images/hiker.gif',
-					endIconUrl: invisiblePixel,      
+					endIconUrl: invisiblePixel,       
 					shadowUrl: invisiblePixel,       
 					iconSize: [35, 35], 
 					iconAnchor: [17, 35]
@@ -251,27 +251,25 @@
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			// Setup arrays for multiple marker images and unique fun facts
-			var calbasPhotos = ['CalbasMarker2.jpg', 'CalbasMarker1.jpg'];
+			// --- FIX: Updated arrays with exact GitHub filenames to match the text prompts ---
+			var calbasPhotos = ['CalbasMarker.jpg', 'CalbasMarker2.jpg'];
 			var calbasFacts = [
-				'Fun Fact: The Bushiribana ruins were originally built in 1825 to process gold found in the nearby hills.',
-				'Scenic View: The rugged northern coast of Aruba offers a striking contrast to the calm southern beaches.'
+				'Scenic View: The rugged northern coast of Aruba offers a striking contrast to the calm southern beaches.',
+				'Fun Fact: The Bushiribana ruins were originally built in 1825 to process gold found in the nearby hills.'
 			];
 			var photoIndex = 0;
 
 			trailLayer.on('addpoint', function(e) {
 				if (e.point_type === 'waypoint') {
 					
-					// Apply the new animated custom beacon
 					var beaconIcon = L.divIcon({
 						className: 'custom-beacon',
 						html: '<div class="beacon-core"></div>',
 						iconSize: [22, 22],
-						iconAnchor: [11, 11] // Centers the custom icon
+						iconAnchor: [11, 11] 
 					});
 					e.point.setIcon(beaconIcon);
 
-					// Pulls the image and fact from the arrays, defaulting back to the first if there are more than 2 waypoints
 					var currentPhoto = calbasPhotos[photoIndex] ? calbasPhotos[photoIndex] : calbasPhotos[0];
 					var currentFact = calbasFacts[photoIndex] ? calbasFacts[photoIndex] : calbasFacts[0];
 					
