@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>HIXZ</title>
+		<title>Unlocked Trails - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
 		<script>
-			if (localStorage.getItem('hixz_vip') === 'true') {
-				window.location.replace('unlocked.html');
-			}
+			try {
+				localStorage.setItem('hixz_vip', 'true');
+			} catch(e) {}
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
@@ -56,20 +56,32 @@
 				object-fit: cover; 
 			}
 
+			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 0.8s;
+				pointer-events: none;
 			}
+			@keyframes removeCurtain {
+				to { transform: translateY(-100%); visibility: hidden; }
+			}
+
 			.loader-logo {
 				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
 				letter-spacing: 4px; opacity: 0; 
+				animation: fadeInLogo 0.5s ease forwards;
 			}
+			@keyframes fadeInLogo {
+				to { opacity: 1; }
+			}
+
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 1s ease forwards 0.5s;
+				animation: fadeInStatus 0.5s ease forwards 0.2s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -84,14 +96,14 @@
 				justify-content: center; align-items: center; z-index: 5;
 				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
 				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease;
-				pointer-events: none; 
+				pointer-events: none;
 			}
 			.video-loading-overlay.hidden { opacity: 0; }
 
 			.video-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
-				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; 
+				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10;
 				transition: opacity 0.3s ease;
 			}
 			.video-item:hover .video-overlay { opacity: 1; }
@@ -164,13 +176,13 @@
 
 			<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 				<div class="inner">
-					<h2>HIXZ</h2>
+					<h2>HIXZ VIP</h2>
 					<p>Welcome to the best hike and swim adventures in Aruba<br />
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
 						<li>
-							<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn">
-								Sign Up!
+							<a href="#more-trails-trigger" class="google-btn" id="view-secret-btn" style="opacity: 1; transform: translateY(0);">
+								View Secret Trails
 							</a>
 						</li>
 					</ul>
@@ -227,8 +239,8 @@
 					</div>
 				</section>
 
-				<div class="see-more-container style2">
-					<button class="google-btn" id="see-more-btn">
+				<div id="more-trails-trigger" class="see-more-container style2">
+					<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
 						VIEW MORE TRAILS
 					</button>
 				</div>
@@ -240,7 +252,7 @@
 							<h2>Jamanota Trail</h2>
 							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
 							<ul class="actions">
-								<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								<li><a href="maps/map-jamanota.html" class="button">See Jamanota Route</a></li>
 							</ul>
 						</div>
 					</section>
@@ -251,7 +263,7 @@
 							<h2>North Aruba - Sasariwichi Dunes</h2>
 							<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
 							<ul class="actions">
-								<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								<li><a href="maps/map-sasarawichi.html" class="button">See Dunes Route</a></li>
 							</ul>
 						</div>
 					</section>
@@ -262,7 +274,7 @@
 					        <h2>Alto Vista Chapel Route</h2>
 					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
 					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					            <li><a href="maps/map-altovista.html" class="button">See Route</a></li>
 					        </ul>
 					    </div>
 					</section>
@@ -273,7 +285,7 @@
 					        <h2>Conchi Natural Pool</h2>
 					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
 					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					            <li><a href="maps/map-conchi.html" class="button">See Route</a></li>
 					        </ul>
 					    </div>
 					</section>
@@ -284,7 +296,7 @@
 					        <h2>Dos Playa Route</h2>
 					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
 					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					            <li><a href="maps/map-dosplaya.html" class="button">See Route</a></li>
 					        </ul>
 					    </div>
 					</section>
@@ -295,7 +307,7 @@
 					        <h2>Bushiribana to Malmok Beach</h2>
 					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
 					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+					            <li><a href="maps/map-malmok.html" class="button">See Route</a></li>
 					        </ul>
 					    </div>
 					</section>
@@ -355,33 +367,8 @@
 		<script src="assets/js/main.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-		<script async data-uid="92566aafcc" src="https://hixz.kit.com/92566aafcc/index.js"></script>
-
 		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				const tl = anime.timeline({ easing: 'easeInOutQuart' });
-				tl.add({
-					targets: '.loader-logo',
-					opacity: [0, 1],
-					scale: [0.8, 1],
-					duration: 600,
-					delay: 0
-				})
-				.add({
-					targets: '#loader-curtain',
-					translateY: '-100%', 
-					duration: 800, 
-					delay: 500
-				})
-				.add({
-					targets: '.google-btn',
-					opacity: [0, 1],
-					translateY: [20, 0],
-					duration: 800,
-					offset: '-=400' 
-				});
-			});
-
+			// Notice: Anime.js dependency removed from loader to prevent black screen errors.
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
@@ -432,8 +419,14 @@
 				});
 			});
 
+			const viewSecretBtn = document.getElementById('view-secret-btn');
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
+
+			viewSecretBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				document.getElementById('more-trails-trigger').scrollIntoView({ behavior: 'smooth' });
+			});
 
 			seeMoreBtn.addEventListener('click', function() {
 				const isShowing = hiddenDiv.style.display === "block";
