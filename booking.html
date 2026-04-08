@@ -1,1 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Book a Hike - HIXZ</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
+		<style>
+			/* --- 3 SECOND CSS LOADER FOR TRANSITION --- */
+			#loader-curtain {
+				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+				background-color: #050a06; z-index: 10000; display: flex;
+				flex-direction: column; align-items: center; justify-content: center;
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3s; /* Stays solid for 3 seconds */
+				pointer-events: none;
+			}
+			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
+
+			.loader-logo {
+				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
+				letter-spacing: 4px; opacity: 0; animation: fadeInLogo 0.5s ease forwards;
+			}
+			@keyframes fadeInLogo { to { opacity: 1; } }
+
+			.loader-status {
+				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
+				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
+				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
+				animation: fadeInStatus 0.5s ease forwards 0.2s;
+			}
+			.loader-spinner {
+				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
+				border-top-color: #ffffff; border-radius: 50%; animation: spin 1s linear infinite;
+			}
+			@keyframes spin { to { transform: rotate(360deg); } }
+			@keyframes fadeInStatus { to { opacity: 1; } }
+
+			.major h2 { 
+				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
+				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
+				display: inline-block; padding-bottom: 0.5rem;
+			}
+		</style>
+	</head>
+	<body class="is-preload" style="background-color: #2e343a;">
+
+		<div id="loader-curtain">
+			<div class="loader-logo">HIXZ</div>
+			<div class="loader-status">
+				<div class="loader-spinner"></div>
+				<span>Loading...</span>
+			</div>
+		</div>
+
+		<div id="page-wrapper">
+
+			<header id="header" class="alt">
+				<h1><a href="index.html">HIXZ</a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="generic.html">About Me</a></li>
+									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
+
+			<section class="wrapper style2 special" style="background-color: #1b3022; padding: 8rem 0 6rem 0;">
+			    <div class="inner">
+			        <header class="major">
+			            <h2 style="color: #fff; border-bottom: none;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
+			            <p style="color: #ddd; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+			                I don't just map the trails—I guide them. Join me for a custom island exploration, from easy scenic walks to hardcore treks. Want the memory to last forever? I offer professional videography of your adventure.<br><br>
+			                <strong style="color: #5ea66e;">Subscribe to @MarnixHIXZ:</strong> Check out my website build below, and stay tuned for upcoming full-length hiking vlogs of the Natural Bridge and the hidden Mangroves!
+			            </p>
+			        </header>
+			        
+			        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 3rem auto 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+			            <iframe 
+			                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+			                src="https://www.youtube.com/embed/0BZLS98IB1M?autoplay=0&rel=0" 
+			                title="HIXZ Hiking Website Build" 
+			                frameborder="0" 
+			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+			                allowfullscreen>
+			            </iframe>
+			        </div>
+			    </div>
+			</section>
+
+			<section class="wrapper style1 special" style="padding: 6rem 0;">
+				<div class="inner">
+					<header class="major">
+						<h2>AVAILABLE PACKAGES</h2>
+						<p>More details and example videos coming soon.</p>
+					</header>
+				</div>
+			</section>
+
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+					<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+					<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; HIXZ </li>
+					<li>Built by Marnix van Pelt</li>
+				</ul>
+			</footer>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
