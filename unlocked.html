@@ -10,6 +10,8 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		<link rel="preload" as="image" href="images/mountjamanota.webp">
+
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -33,7 +35,6 @@
 				display: grid; 
 				grid-template-columns: repeat(3, 1fr); 
 				gap: 20px; 
-				/* Forces rows to maintain a horizontal ratio based on width */
 				grid-auto-rows: 1fr; 
 			}
 
@@ -43,17 +44,14 @@
 				overflow: hidden; 
 				border-radius: 8px; 
 				width: 100%;
-				/* Enforces a 16:9 aspect ratio on the container */
 				aspect-ratio: 16 / 9; 
-				background: #000; /* Pre-loads black background if video fails */
+				background: #000; 
 			}
 
-			/* Prevents vertical videos from breaking out of the grid cell */
 			.video-item video { 
 				width: 100%; 
-				height: 100%; /* Force video to fill container height */
+				height: 100%; 
 				display: block; 
-				/* This line crops vertical videos, keeping them center-aligned and horizontal */
 				object-fit: cover; 
 			}
 
@@ -125,6 +123,14 @@
 				border-bottom: solid 2px; 
 				display: inline-block; 
 				padding-bottom: 0.5rem;
+			}
+
+			/* --- FIX SPOTLIGHT IMAGE GAPS & FORCE ASPECT RATIO --- */
+			.spotlight .image img {
+				width: 100%;
+				height: 100%;
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
 			}
 		</style>
 	</head>
@@ -231,7 +237,7 @@
 
 				<div id="all-trail-options" class="style2">
 					<section class="spotlight">
-						<div class="image"><img src="images/mountjamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+						<div class="image"><img src="images/mountjamanota.webp" alt="Jamanota Trail" loading="lazy" /></div>
 						<div class="content">
 							<h2>Jamanota Trail</h2>
 							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
@@ -264,7 +270,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/blackstoneBeach.png" alt="Conchi Natural Pool" loading="lazy" /></div>
+					    <div class="image"><img src="images/BlackstoneBeach.png" alt="Conchi Natural Pool" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Conchi Natural Pool</h2>
 					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
@@ -476,7 +482,6 @@
 							hiddenDiv.style.display = "block";
 							this.innerHTML = "SHOW LESS";
 							
-							// Trigger scroll immediately
 							const firstItem = hiddenDiv.querySelector('.spotlight');
 							smoothScrollTo(firstItem, 80);
 							
