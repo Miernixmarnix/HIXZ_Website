@@ -10,7 +10,7 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
-		<link rel="preload" as="image" href="images/mountjamanota.jpg">
+		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -122,7 +122,6 @@
 				padding-bottom: 0.5rem;
 			}
 
-			/* --- FIX SPOTLIGHT IMAGE GAPS & FORCE ASPECT RATIO --- */
 			.spotlight .image img {
 				width: 100%;
 				height: 100%;
@@ -194,7 +193,7 @@
 
 			<section id="two" class="wrapper alt style2">
 				<section class="spotlight">
-					<div class="image"><img src="images/hooiberg.jpg" alt="Hooiberg Hiking Trail" loading="lazy" /></div>
+					<div class="image"><img src="images/Hooiberg (1).jpg" alt="Hooiberg Hiking Trail" loading="lazy" /></div>
 					<div class="content">
 						<h2>Hooiberg Hiking Trail</h2>
 						<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
@@ -205,7 +204,7 @@
 				</section>
 				
 				<section class="spotlight">
-					<div class="image"><img src="images/BalashiMarker.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
+					<div class="image"><img src="images/Balashi.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
 					<div class="content">
 						<h2>Balashi Gold Mine & Spanish Lagoon</h2>
 						<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
@@ -216,7 +215,7 @@
 				</section>
 
 				<section class="spotlight">
-					<div class="image"><img src="images/naturalbridgeruins.jpg" alt="Bushiribana from Calbas" loading="lazy" /></div>
+					<div class="image"><img src="images/Bushiribana.jpg" alt="Bushiribana from Calbas" loading="lazy" /></div>
 					<div class="content">
 						<h2>Bushiribana Loop (from Calbas)</h2>
 						<p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
@@ -234,8 +233,7 @@
 
 				<div id="all-trail-options" class="style2">
 					<section class="spotlight">
-						<!-- Note: Ensure this is converted to .webp in your repo for faster loading -->
-						<div class="image"><img src="images/mountjamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+						<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
 						<div class="content">
 							<h2>Jamanota Trail</h2>
 							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
@@ -246,7 +244,7 @@
 					</section>
 
 					<section class="spotlight">
-						<div class="image"><img src="images/Sarawhichi.png" alt="Sasariwichi Dunes" loading="lazy" /></div>
+						<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
 						<div class="content">
 							<h2>North Aruba - Sasariwichi Dunes</h2>
 							<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
@@ -257,7 +255,7 @@
 					</section>
 					
 					<section class="spotlight">
-					    <div class="image"><img src="images/anker.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
+					    <div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Alto Vista Chapel Route</h2>
 					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
@@ -268,7 +266,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/BlackStone.png" alt="Conchi Natural Pool" loading="lazy" /></div>
+					    <div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Conchi Natural Pool</h2>
 					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
@@ -279,7 +277,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/anywhere3.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
+					    <div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Dos Playa Route</h2>
 					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
@@ -290,7 +288,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/anywhere4.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
+					    <div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Bushiribana to Malmok Beach</h2>
 					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
@@ -369,7 +367,7 @@
 					targets: '#loader-curtain',
 					translateY: '-100%', 
 					duration: 800, 
-					delay: 500 /* Reduced delay from 2500 for a much faster load screen */
+					delay: 500
 				})
 				.add({
 					targets: '.google-btn',
@@ -430,7 +428,6 @@
 				});
 			});
 
-			/* --- REMOVED FORCED SMOOTH SCROLL FOR INSTANT POP-IN --- */
 			const viewSecretBtn = document.getElementById('view-secret-btn');
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
