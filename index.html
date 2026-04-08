@@ -6,9 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
 		<script>
-			if (localStorage.getItem('hixz_vip') === 'true') {
-				window.location.replace('unlocked.html');
-			}
+			try {
+				if (localStorage.getItem('hixz_vip') === 'true') {
+					window.location.replace('unlocked.html');
+				}
+			} catch(e) {}
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
@@ -56,20 +58,32 @@
 				object-fit: cover; 
 			}
 
+			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 0.8s;
+				pointer-events: none; /* Allows clicks to pass through instantly */
 			}
+			@keyframes removeCurtain {
+				to { transform: translateY(-100%); visibility: hidden; }
+			}
+
 			.loader-logo {
 				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
 				letter-spacing: 4px; opacity: 0; 
+				animation: fadeInLogo 0.5s ease forwards;
 			}
+			@keyframes fadeInLogo {
+				to { opacity: 1; }
+			}
+
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 1s ease forwards 0.5s;
+				animation: fadeInStatus 0.5s ease forwards 0.2s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -169,7 +183,7 @@
 					Explore the secrets this small island has to offer</p>
 					<ul class="actions special">
 						<li>
-							<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn">
+							<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
 								Sign Up!
 							</a>
 						</li>
@@ -228,7 +242,7 @@
 				</section>
 
 				<div class="see-more-container style2">
-					<button class="google-btn" id="see-more-btn">
+					<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
 						VIEW MORE TRAILS
 					</button>
 				</div>
@@ -358,30 +372,7 @@
 		<script async data-uid="92566aafcc" src="https://hixz.kit.com/92566aafcc/index.js"></script>
 
 		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				const tl = anime.timeline({ easing: 'easeInOutQuart' });
-				tl.add({
-					targets: '.loader-logo',
-					opacity: [0, 1],
-					scale: [0.8, 1],
-					duration: 600,
-					delay: 0
-				})
-				.add({
-					targets: '#loader-curtain',
-					translateY: '-100%', 
-					duration: 800, 
-					delay: 500
-				})
-				.add({
-					targets: '.google-btn',
-					opacity: [0, 1],
-					translateY: [20, 0],
-					duration: 800,
-					offset: '-=400' 
-				});
-			});
-
+			// Notice: Anime.js dependency removed from loader to prevent black screen errors.
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
