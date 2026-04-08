@@ -10,7 +10,7 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
-		<link rel="preload" as="image" href="images/mountjamanota.webp">
+		<link rel="preload" as="image" href="images/mountjamanota.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -30,7 +30,6 @@
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
-			/* --- UPDATED FOR ASPECT RATIO ENFORCEMENT --- */
 			.video-grid { 
 				display: grid; 
 				grid-template-columns: repeat(3, 1fr); 
@@ -99,7 +98,6 @@
 
 			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
 
-			/* --- SHOWCASE STYLES --- */
 			#showcase {
 				background: #2e343a; 
 				padding: 6rem 0; 
@@ -109,7 +107,6 @@
 			}
 			#showcase .inner { width: 90% !important; max-width: 1400px; }
 			
-			/* --- TEXT ALIGNMENT AND SIZE FOR VIDEO SECTION --- */
 			#showcase .major { 
 				margin-bottom: 3rem !important; 
 				text-align: center; 
@@ -208,7 +205,7 @@
 				</section>
 				
 				<section class="spotlight">
-					<div class="image"><img src="images/spaanlagoen.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
+					<div class="image"><img src="images/BalashiMarker.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
 					<div class="content">
 						<h2>Balashi Gold Mine & Spanish Lagoon</h2>
 						<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
@@ -237,7 +234,8 @@
 
 				<div id="all-trail-options" class="style2">
 					<section class="spotlight">
-						<div class="image"><img src="images/mountjamanota.webp" alt="Jamanota Trail" loading="lazy" /></div>
+						<!-- Note: Ensure this is converted to .webp in your repo for faster loading -->
+						<div class="image"><img src="images/mountjamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
 						<div class="content">
 							<h2>Jamanota Trail</h2>
 							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
@@ -259,7 +257,7 @@
 					</section>
 					
 					<section class="spotlight">
-					    <div class="image"><img src="images/tower.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
+					    <div class="image"><img src="images/anker.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Alto Vista Chapel Route</h2>
 					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
@@ -270,7 +268,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/BlackstoneBeach.png" alt="Conchi Natural Pool" loading="lazy" /></div>
+					    <div class="image"><img src="images/BlackStone.png" alt="Conchi Natural Pool" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Conchi Natural Pool</h2>
 					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
@@ -292,7 +290,7 @@
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/sunset.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
+					    <div class="image"><img src="images/anywhere4.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
 					    <div class="content">
 					        <h2>Bushiribana to Malmok Beach</h2>
 					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
@@ -364,14 +362,14 @@
 					targets: '.loader-logo',
 					opacity: [0, 1],
 					scale: [0.8, 1],
-					duration: 1000,
-					delay: 200
+					duration: 600,
+					delay: 0
 				})
 				.add({
 					targets: '#loader-curtain',
 					translateY: '-100%', 
-					duration: 1200, 
-					delay: 2500
+					duration: 800, 
+					delay: 500 /* Reduced delay from 2500 for a much faster load screen */
 				})
 				.add({
 					targets: '.google-btn',
@@ -432,80 +430,26 @@
 				});
 			});
 
-			// --- ENHANCED SCROLL LOGIC USING ANIME.JS FOR SMOOTHNESS & ACCURACY ---
+			/* --- REMOVED FORCED SMOOTH SCROLL FOR INSTANT POP-IN --- */
 			const viewSecretBtn = document.getElementById('view-secret-btn');
 			const seeMoreBtn = document.getElementById('see-more-btn');
 			const hiddenDiv = document.getElementById('all-trail-options');
-			const triggerDiv = document.getElementById('more-trails-trigger');
-			const trailItems = hiddenDiv.querySelectorAll('.spotlight');
-
-			const adjustedOffset = 180; 
-
-			function smoothScrollTo(targetElement, offset = 0) {
-				const headerHeight = document.getElementById('header').offsetHeight;
-				const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-				const stopPosition = targetPosition - headerHeight - offset;
-
-				anime({
-					targets: document.scrollingElement,
-					scrollTop: stopPosition,
-					duration: 1600,
-					easing: 'easeInOutQuint'
-				});
-			}
 
 			viewSecretBtn.addEventListener('click', function(e) {
 				e.preventDefault();
-				smoothScrollTo(triggerDiv, adjustedOffset);
+				document.getElementById('more-trails-trigger').scrollIntoView({ behavior: 'smooth' });
 			});
 
-			anime.set(trailItems, { opacity: 0, translateY: 40 });
-
 			seeMoreBtn.addEventListener('click', function() {
-				if (this.style.pointerEvents === 'none') return;
-				this.style.pointerEvents = 'none';
-				
 				const isShowing = hiddenDiv.style.display === "block";
 
-				anime({
-					targets: this,
-					opacity: 0,
-					duration: 200,
-					easing: 'easeOutQuad',
-					complete: () => {
-						if (isShowing) {
-							hiddenDiv.style.display = "none";
-							this.innerHTML = "VIEW MORE TRAILS";
-							anime.set(trailItems, { opacity: 0, translateY: 40 });
-							this.style.pointerEvents = 'auto';
-						} else {
-							hiddenDiv.style.display = "block";
-							this.innerHTML = "SHOW LESS";
-							
-							const firstItem = hiddenDiv.querySelector('.spotlight');
-							smoothScrollTo(firstItem, 80);
-							
-							anime({
-								targets: trailItems,
-								opacity: [0, 1],
-								translateY: [40, 0],
-								delay: anime.stagger(120),
-								duration: 800,
-								easing: 'easeOutQuart',
-								complete: () => {
-									this.style.pointerEvents = 'auto'; 
-								}
-							});
-						}
-						
-						anime({
-							targets: this,
-							opacity: 1,
-							duration: 200,
-							easing: 'easeInQuad'
-						});
-					}
-				});
+				if (isShowing) {
+					hiddenDiv.style.display = "none";
+					this.innerHTML = "VIEW MORE TRAILS";
+				} else {
+					hiddenDiv.style.display = "block";
+					this.innerHTML = "SHOW LESS";
+				}
 			});
 		</script>
 	</body>
