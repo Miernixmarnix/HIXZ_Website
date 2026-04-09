@@ -71,11 +71,24 @@
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
+			/* --- UPDATED LOADER LOGO --- */
 			.loader-logo {
-				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
-				letter-spacing: 4px; opacity: 0; animation: fadeInLogo 0.1s ease forwards;
+				font-family: 'Archivo Black', sans-serif; 
+				font-size: 8rem; 
+				color: #ffffff;
+				letter-spacing: 8px; 
+				opacity: 0; 
+				animation: fadeInLogo 0.1s ease forwards;
 			}
 			@keyframes fadeInLogo { to { opacity: 1; } }
+
+			/* Mobile fallback for Logo */
+			@media screen and (max-width: 736px) {
+				.loader-logo {
+					font-size: 4rem;
+					letter-spacing: 4px;
+				}
+			}
 
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
