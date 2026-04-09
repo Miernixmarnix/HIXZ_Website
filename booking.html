@@ -10,19 +10,20 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* --- 3 SECOND CSS LOADER FOR TRANSITION --- */
+			/* --- FAST 2-SECOND CSS LOADER --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 1s; /* Stays solid for 3 seconds */
+				animation: removeCurtain 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.4s; /* On screen for ~2s total */
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
 			.loader-logo {
 				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
-				letter-spacing: 4px; opacity: 0; animation: fadeInLogo 0.5s ease forwards;
+				letter-spacing: 4px; opacity: 0; 
+                animation: fadeInLogo 0.1s ease forwards; /* Almost instant */
 			}
 			@keyframes fadeInLogo { to { opacity: 1; } }
 
@@ -30,7 +31,7 @@
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.5s ease forwards 0.2s;
+				animation: fadeInStatus 0.3s ease forwards 0.1s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
