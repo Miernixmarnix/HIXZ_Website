@@ -15,7 +15,7 @@
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.4s; /* On screen for ~2s total */
+				animation: removeCurtain 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.4s;
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
@@ -23,7 +23,7 @@
 			.loader-logo {
 				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
 				letter-spacing: 4px; opacity: 0; 
-                animation: fadeInLogo 0.1s ease forwards; /* Almost instant */
+                animation: fadeInLogo 0.1s ease forwards;
 			}
 			@keyframes fadeInLogo { to { opacity: 1; } }
 
@@ -44,6 +44,19 @@
 				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
 				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
 				display: inline-block; padding-bottom: 0.5rem;
+			}
+
+			/* --- BACK BUTTON --- */
+			.back-btn {
+				display: inline-flex; align-items: center; justify-content: center;
+				background-color: transparent; color: #ffffff !important; padding: 10px 24px;
+				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
+				font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+				transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); 
+				margin-bottom: 2.5rem;
+			}
+			.back-btn:hover { 
+				background-color: #ffffff; color: #1b3022 !important; border-color: #ffffff; 
 			}
 		</style>
 	</head>
@@ -79,6 +92,9 @@
 
 			<section class="wrapper style2 special" style="background-color: #1b3022; padding: 8rem 0 6rem 0;">
 			    <div class="inner">
+			    	
+					<a href="index.html" class="back-btn">&larr; BACK TO MAIN WEBSITE</a>
+
 			        <header class="major">
 			            <h2 style="color: #fff; border-bottom: none;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
 			            <p style="color: #ddd; max-width: 800px; margin: 0 auto; line-height: 1.8;">
