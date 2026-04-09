@@ -92,8 +92,8 @@
 
 			<section class="wrapper style2 special" style="background-color: #1b3022; padding: 8rem 0 6rem 0;">
 			    <div class="inner">
-			    	
-					<a href="index.html" class="back-btn">&larr; BACK TO MAIN WEBSITE</a>
+					
+			    	<a href="#" id="dynamic-back-btn" class="back-btn">&larr; BACK TO MAIN WEBSITE</a>
 
 			        <header class="major">
 			            <h2 style="color: #fff; border-bottom: none;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
@@ -148,5 +148,20 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script>
+    document.getElementById('dynamic-back-btn').addEventListener('click', function(e) {
+        e.preventDefault(); // Stops the default link behavior
+        
+        // This checks your browser's local storage to see if the user is logged in.
+        // You will need to ensure your login page sets 'isLoggedIn' to 'true'.
+        const userIsSignedIn = localStorage.getItem('isLoggedIn') === 'true';
+        
+        if (userIsSignedIn) {
+            window.location.href = 'unlocked.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    });
+</script>
 	</body>
 </html>
