@@ -40,56 +40,51 @@
 				letter-spacing: 1px; text-transform: uppercase;
 				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
 				transition: transform 0.2s ease, background-color 0.2s ease;
-				
-				/* Ensures it waits for the loader curtain to finish */
-				opacity: 0; 
-				pointer-events: none; 
-				animation: popInButton 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 1.6s;
+				opacity: 0;
+				animation: fadeInButton 0.5s ease forwards 2s;
 			}
 			.floating-book-btn:hover { background-color: #ffffff; color: #050a06 !important; transform: translateY(-5px); }
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
-			@keyframes popInButton {
-				0% { opacity: 0; transform: translateY(20px) scale(0.9); }
-				100% { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-			}
+			@keyframes fadeInButton { to { opacity: 1; } }
 
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
-
-			.video-grid { 
-				display: grid; grid-template-columns: repeat(3, 1fr); 
-				gap: 20px; grid-auto-rows: 1fr; 
-			}
-
-			.video-item { 
-				opacity: 0; position: relative; overflow: hidden; 
-				border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; background: #000; 
-			}
-
-			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
 			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 0.8s;
+				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.5s;
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
+			/* --- UPDATED LOADER LOGO --- */
 			.loader-logo {
-				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
-				letter-spacing: 4px; opacity: 0; animation: fadeInLogo 0.5s ease forwards;
+				font-family: 'Archivo Black', sans-serif; 
+				font-size: 8rem; 
+				color: #ffffff;
+				letter-spacing: 8px; 
+				opacity: 0; 
+				animation: fadeInLogo 0.1s ease forwards;
 			}
 			@keyframes fadeInLogo { to { opacity: 1; } }
+
+			/* Mobile fallback for Logo */
+			@media screen and (max-width: 736px) {
+				.loader-logo {
+					font-size: 4rem;
+					letter-spacing: 4px;
+				}
+			}
 
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.5s ease forwards 0.2s;
+				animation: fadeInStatus 0.1s ease forwards 0.1s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -97,37 +92,6 @@
 			}
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
-
-			.video-loading-overlay {
-				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
-				justify-content: center; align-items: center; z-index: 5;
-				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease; pointer-events: none; 
-			}
-			.video-loading-overlay.hidden { opacity: 0; }
-
-			.video-overlay {
-				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
-				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; transition: opacity 0.3s ease;
-			}
-			.video-item:hover .video-overlay { opacity: 1; }
-			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
-			.video-overlay a:hover { transform: scale(1.2); }
-
-			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
-
-			#showcase { background: #2e343a; padding: 6rem 0; }
-			#showcase::after { display: none; }
-			#showcase .inner { width: 90% !important; max-width: 1400px; }
-			
-			#showcase .major { margin-bottom: 3rem !important; text-align: center; }
-			#showcase h2 { 
-				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
-				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
-				display: inline-block; padding-bottom: 0.5rem;
-			}
 
 			.spotlight .image img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 		</style>
