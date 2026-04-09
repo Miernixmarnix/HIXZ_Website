@@ -51,6 +51,17 @@
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
+			/* --- MISSING VIDEO GRID CSS RESTORED --- */
+			.video-grid { 
+				display: grid; grid-template-columns: repeat(3, 1fr); 
+				gap: 20px; grid-auto-rows: 1fr; 
+			}
+			.video-item { 
+				opacity: 0; position: relative; overflow: hidden; 
+				border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; background: #000; 
+			}
+			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
+
 			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -92,6 +103,38 @@
 			}
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
+
+			/* --- REST OF MISSING VIDEO CSS RESTORED --- */
+			.video-loading-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
+				justify-content: center; align-items: center; z-index: 5;
+				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
+				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease; pointer-events: none;
+			}
+			.video-loading-overlay.hidden { opacity: 0; }
+
+			.video-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
+				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; transition: opacity 0.3s ease;
+			}
+			.video-item:hover .video-overlay { opacity: 1; }
+			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
+			.video-overlay a:hover { transform: scale(1.2); }
+
+			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+
+			#showcase { background: #2e343a; padding: 6rem 0; }
+			#showcase::after { display: none; }
+			#showcase .inner { width: 90% !important; max-width: 1400px; }
+			
+			#showcase .major { margin-bottom: 3rem !important; text-align: center; }
+			#showcase h2 { 
+				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
+				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
+				display: inline-block; padding-bottom: 0.5rem;
+			}
 
 			.spotlight .image img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 		</style>
