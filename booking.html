@@ -41,7 +41,7 @@
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
 			.major h2 { 
-				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
+				color: #fff; font-family: 'Archivo Black', sans-serif; 
 				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
 				display: inline-block; padding-bottom: 0.5rem;
 			}
@@ -59,35 +59,38 @@
 				background-color: #ffffff; color: #1b3022 !important; border-color: #ffffff; 
 			}
 
-            /* --- UPDATED, BOLDER, LARGER HIKE ACCORDION CSS --- */
+            /* --- PREMIUM HIKE ACCORDION CSS --- */
             .hike-accordion-container {
-                max-width: 700px; /* MODIFICATION: Made overall structure wider */
-                margin: 40px auto; /* MODIFICATION: Increased spacing */
+                max-width: 700px; 
+                margin: 50px auto; 
                 font-family: inherit;
             }
             .hike-accordion {
                 background-color: transparent;
-                border-radius: 8px;
+                border-radius: 12px; /* Matches video iframe corners */
             }
             .hike-btn {
-                background-color: #24292e; /* MODIFICATION: Dark grey for dropdown button style match */
+                background-color: #1b3022; /* Matches your header dark green */
                 color: #ffffff !important;
-                padding: 24px 30px; /* MODIFICATION: Increased padding for bigger button */
-                font-size: 1.3rem; /* MODIFICATION: Larger font size */
+                padding: 24px 30px; 
+                font-size: 1.3rem; 
                 font-weight: bold;
                 cursor: pointer;
                 list-style: none;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border-radius: 8px;
+                border-radius: 12px; /* Smoother rounded corners */
                 text-transform: uppercase;
                 letter-spacing: 1.5px;
-                transition: background-color 0.2s ease;
+                transition: all 0.3s ease;
                 border: none;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Adds the floating depth effect */
             }
             .hike-btn:hover {
-                background-color: #3a424a;
+                background-color: #2d4f38; /* The lighter dark green hover */
+                transform: translateY(-4px); /* Physically lifts up when hovered */
+                box-shadow: 0 12px 30px rgba(0,0,0,0.25);
             }
             .hike-btn::-webkit-details-marker {
                 display: none;
@@ -95,38 +98,41 @@
             .hike-details {
                 background-color: #ffffff;
                 color: #333333;
-                padding: 30px; /* MODIFICATION: Larger padding inside the card */
+                padding: 30px; 
                 text-align: left;
-                border-bottom-left-radius: 8px;
-                border-bottom-right-radius: 8px;
-                margin-top: -5px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-                font-family: inherit; /* MODIFICATION: Force site font */
-                font-weight: bold; /* MODIFICATION: Bold everything inside for legibility */
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+                margin-top: -8px; /* Tucks it slightly under the lifted button */
+                box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+                font-family: inherit; 
+                font-weight: bold; 
             }
             .detail-row {
-                margin-bottom: 12px; /* MODIFICATION: Increased spacing between rows */
-                font-size: 1.1rem; /* MODIFICATION: Larger text for details */
+                margin-bottom: 12px; 
+                font-size: 1.1rem; 
                 line-height: 1.6;
             }
             .join-btn {
                 display: block;
-                margin-top: 25px; /* MODIFICATION: Increased spacing */
-                padding: 15px 25px; /* MODIFICATION: Bigger internal padding */
-                background-color: #24292e; 
+                margin-top: 25px; 
+                padding: 16px 25px; 
+                background-color: #1b3022; /* Green CTA */
                 color: white !important;
                 text-decoration: none;
                 font-weight: bold;
-                border-radius: 5px;
+                border-radius: 50px; /* High-converting pill shape */
                 text-align: center;
                 text-transform: uppercase;
-                font-size: 1.1rem; /* MODIFICATION: Bigger font on action button */
-                transition: transform 0.2s ease;
+                font-size: 1.1rem; 
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
                 border: none;
             }
             .join-btn:hover {
+                background-color: #2d4f38;
                 transform: translateY(-2px);
                 color: white !important;
+                box-shadow: 0 6px 15px rgba(45,79,56,0.4);
             }
 		</style>
 	</head>
@@ -166,7 +172,7 @@
 			    	<a href="#" id="dynamic-back-btn" class="back-btn">&larr; BACK TO MAIN WEBSITE</a>
 
 			        <header class="major">
-			            <h2 style="color: #fff; border-bottom: none;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
+			            <h2 style="color: #fff; border-bottom: none; font-size: 2.2rem;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
 			            <p style="color: #ddd; max-width: 800px; margin: 0 auto; line-height: 1.8;">
 			                Some people visit Aruba. Others actually experience it. I take small groups off the beaten path, to more exciting trail! Hidden coves, and trails the tourist buses never reach. Easy or challenging, I'll match the hike to you. Want it on film? That's what I'm here for, I can use my DJI Osmo Action 5 Camera to make you a insane adventure video!<br><br>
 			                <strong style="color: #5ea66e;">Subscribe to @MarnixHIXZ:</strong> Check out my website build below, and stay tuned for upcoming full-length hiking vlogs!
@@ -189,22 +195,18 @@
 			<section class="wrapper style1 special" style="padding: 6rem 0;">
 				<div class="inner">
 					<header class="major">
-						<h2>AVAILABLE PACKAGES</h2>
+                        <h2 style="font-size: 3.5rem; letter-spacing: 2px;">AVAILABLE PACKAGES</h2>
 					</header>
                     
                     <div class="hike-accordion-container">
                         <details class="hike-accordion">
                             <summary class="hike-btn">
-                                Upcoming Expedition: The Savaneta Coastal Trail <span class="arrow">▼</span>
+                                Coming Soon <span class="arrow">▼</span>
                             </summary>
                             <div class="hike-details">
-                                <div class="detail-row"><strong>Date:</strong> Saturday, May 16th</div>
-                                <div class="detail-row"><strong>Time:</strong> 6:30 AM (Sunrise Start)</div>
-                                <div class="detail-row"><strong>Meeting Point:</strong> Mangel Halto Beach, Savaneta</div>
-                                <div class="detail-row"><strong>Difficulty:</strong> Moderate (Rocky terrain)</div>
-                                <div class="detail-row"><strong>Bring:</strong> 2L Water, trail boots, and your camera.</div>
+                                <div class="detail-row" style="text-align: center; font-size: 1.3rem;"><strong>Details Coming Soon.</strong></div>
                                 
-                                <a href="mailto:marnixvanpelt11@gmail.com?subject=RSVP for Savaneta Hike" class="join-btn">RSVP & Join the Crew</a>
+                                <a href="mailto:marnixvanpelt11@gmail.com" class="join-btn">Contact for Inquiries</a>
                             </div>
                         </details>
                     </div>
@@ -237,10 +239,8 @@
 		<script src="assets/js/main.js"></script>
 		<script>
     document.getElementById('dynamic-back-btn').addEventListener('click', function(e) {
-        e.preventDefault(); // Stops the default link behavior
+        e.preventDefault(); 
         
-        // This checks your browser's local storage to see if the user is logged in.
-        // You will need to ensure your login page sets 'isLoggedIn' to 'true'.
         const userIsSignedIn = localStorage.getItem('isLoggedIn') === 'true';
         
         if (userIsSignedIn) {
