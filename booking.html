@@ -58,6 +58,73 @@
 			.back-btn:hover { 
 				background-color: #ffffff; color: #1b3022 !important; border-color: #ffffff; 
 			}
+
+            /* --- NEW HIKE ACCORDION CSS --- */
+            .hike-accordion-container {
+                max-width: 600px;
+                margin: 30px auto;
+                font-family: inherit;
+            }
+            .hike-accordion {
+                background-color: transparent;
+                border-radius: 8px;
+            }
+            .hike-btn {
+                background-color: #24292e; 
+                color: #ffffff !important;
+                padding: 18px 24px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 8px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                transition: background-color 0.2s ease;
+                border: none;
+            }
+            .hike-btn:hover {
+                background-color: #3a424a;
+            }
+            .hike-btn::-webkit-details-marker {
+                display: none;
+            }
+            .hike-details {
+                background-color: #ffffff;
+                color: #333333;
+                padding: 25px;
+                text-align: left;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                margin-top: -5px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            }
+            .detail-row {
+                margin-bottom: 10px;
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            .join-btn {
+                display: block;
+                margin-top: 20px;
+                padding: 12px 20px;
+                background-color: #24292e; 
+                color: white !important;
+                text-decoration: none;
+                font-weight: bold;
+                border-radius: 5px;
+                text-align: center;
+                text-transform: uppercase;
+                transition: transform 0.2s ease;
+                border: none;
+            }
+            .join-btn:hover {
+                transform: translateY(-2px);
+                color: white !important;
+            }
 		</style>
 	</head>
 	<body class="is-preload" style="background-color: #2e343a;">
@@ -120,8 +187,25 @@
 				<div class="inner">
 					<header class="major">
 						<h2>AVAILABLE PACKAGES</h2>
-						<p>More details and example videos coming soon.</p>
 					</header>
+                    
+                    <div class="hike-accordion-container">
+                        <details class="hike-accordion">
+                            <summary class="hike-btn">
+                                Upcoming Expedition: The Savaneta Coastal Trail <span class="arrow">▼</span>
+                            </summary>
+                            <div class="hike-details">
+                                <div class="detail-row"><strong>Date:</strong> Saturday, May 16th</div>
+                                <div class="detail-row"><strong>Time:</strong> 6:30 AM (Sunrise Start)</div>
+                                <div class="detail-row"><strong>Meeting Point:</strong> Mangel Halto Beach, Savaneta</div>
+                                <div class="detail-row"><strong>Difficulty:</strong> Moderate (Rocky terrain)</div>
+                                <div class="detail-row"><strong>Bring:</strong> 2L Water, trail boots, and your camera.</div>
+                                
+                                <a href="mailto:marnixvanpelt11@gmail.com?subject=RSVP for Savaneta Hike" class="join-btn">RSVP & Join the Crew</a>
+                            </div>
+                        </details>
+                    </div>
+
 				</div>
 			</section>
 
@@ -162,6 +246,6 @@
             window.location.href = 'index.html';
         }
     });
-</script>
+        </script>
 	</body>
 </html>
