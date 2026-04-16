@@ -1,38 +1,105 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Book a Hike - HIXZ</title>
-		<link rel="icon" type="image/png" href="images/favicon.png">
+		<title>Unlocked Trails - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		
+		<link rel="icon" type="image/png" href="images/favicon.png">
+		<script>
+			try {
+				localStorage.setItem('hixz_vip', 'true');
+			} catch(e) {}
+		</script>
+
+		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		<link rel="preload" as="image" href="images/MountJamanota.jpg">
+
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* --- FAST 2-SECOND CSS LOADER --- */
+			.google-btn {
+				display: inline-flex; align-items: center; justify-content: center;
+				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
+				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
+				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
+				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
+				opacity: 0; box-shadow: none; text-shadow: none;
+			}
+			.google-btn:hover { background-color: #1b3022; }
+
+			/* --- FLOATING BOOK NOW BUTTON --- */
+			.floating-book-btn {
+				position: fixed; bottom: 30px; right: 30px;
+				background-color: #5ea66e; color: #ffffff !important;
+				padding: 16px 32px; border-radius: 50px; text-decoration: none;
+				font-family: 'Archivo Black', sans-serif; font-size: 15px;
+				letter-spacing: 1px; text-transform: uppercase;
+				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
+				transition: transform 0.2s ease, background-color 0.2s ease;
+				opacity: 0;
+				animation: fadeInButton 0.5s ease forwards 2s;
+			}
+			.floating-book-btn:hover { background-color: #ffffff; color: #050a06 !important; transform: translateY(-5px); }
+			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
+
+			@keyframes fadeInButton { to { opacity: 1; } }
+
+			#all-trail-options { display: none; }
+			.see-more-container { text-align: center; padding: 4rem 0; }
+
+			.video-grid { 
+				display: grid; grid-template-columns: repeat(3, 1fr); 
+				gap: 20px; grid-auto-rows: 1fr; 
+			}
+
+			.video-item { 
+				opacity: 0; position: relative; overflow: hidden; 
+				border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; background: #000; 
+			}
+
+			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.4s;
+				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.5s;
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
+			/* --- UPDATED LOADER LOGO --- */
 			.loader-logo {
-				font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: #ffffff;
-				letter-spacing: 4px; opacity: 0; 
-                animation: fadeInLogo 0.1s ease forwards;
+				opacity: 0; 
+				animation: fadeInLogo 0.1s ease forwards;
 			}
 			@keyframes fadeInLogo { to { opacity: 1; } }
+
+			/* Mobile fallback for Logo */
+			@media screen and (max-width: 736px) {
+				.loader-logo img {
+					max-width: 300px !important;
+				}
+			}
+
+			/* --- HERO BANNER TITLE SIZING --- */
+			#banner h2 {
+				font-size: 5rem !important;
+			}
+			@media screen and (max-width: 736px) {
+				#banner h2 {
+					font-size: 3rem !important;
+				}
+			}
 
 			.loader-status {
 				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.3s ease forwards 0.1s;
+				animation: fadeInStatus 0.1s ease forwards 0.1s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -41,106 +108,46 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-			.major h2 { 
-				color: #fff; font-family: 'Archivo Black', sans-serif; 
+			.video-loading-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
+				justify-content: center; align-items: center; z-index: 5;
+				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
+				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease; pointer-events: none;
+			}
+			.video-loading-overlay.hidden { opacity: 0; }
+
+			.video-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
+				align-items: center; gap: 1.5rem; opacity: 0; z-index: 10; transition: opacity 0.3s ease;
+			}
+			.video-item:hover .video-overlay { opacity: 1; }
+			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
+			.video-overlay a:hover { transform: scale(1.2); }
+
+			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+
+			#showcase { background: #2e343a; padding: 6rem 0; }
+			#showcase::after { display: none; }
+			#showcase .inner { width: 90% !important; max-width: 1400px; }
+			
+			#showcase .major { margin-bottom: 3rem !important; text-align: center; }
+			#showcase h2 { 
+				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
 				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
 				display: inline-block; padding-bottom: 0.5rem;
 			}
 
-			/* --- BACK BUTTON --- */
-			.back-btn {
-				display: inline-flex; align-items: center; justify-content: center;
-				background-color: transparent; color: #ffffff !important; padding: 10px 24px;
-				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
-				font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
-				transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); 
-				margin-bottom: 2.5rem;
-			}
-			.back-btn:hover { 
-				background-color: #ffffff; color: #1b3022 !important; border-color: #ffffff; 
-			}
-
-            /* --- PREMIUM HIKE ACCORDION CSS --- */
-            .hike-accordion-container {
-                max-width: 700px; 
-                margin: 50px auto; 
-                font-family: inherit;
-            }
-            .hike-accordion {
-                background-color: transparent;
-                border-radius: 12px; 
-            }
-            .hike-btn {
-                background-color: #1b3022; 
-                color: #ffffff !important;
-                padding: 24px 30px; 
-                font-size: 1.3rem; 
-                font-weight: bold;
-                cursor: pointer;
-                list-style: none;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-radius: 12px; 
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-                transition: all 0.3s ease;
-                border: none;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
-            }
-            .hike-btn:hover {
-                background-color: #2d4f38; 
-                transform: translateY(-4px); 
-                box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-            }
-            .hike-btn::-webkit-details-marker {
-                display: none;
-            }
-            .hike-details {
-                background-color: #ffffff;
-                color: #333333;
-                padding: 30px; 
-                text-align: left;
-                border-bottom-left-radius: 12px;
-                border-bottom-right-radius: 12px;
-                margin-top: -8px; 
-                box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-                font-family: inherit; 
-                font-weight: bold; 
-            }
-            .detail-row {
-                margin-bottom: 12px; 
-                font-size: 1.1rem; 
-                line-height: 1.6;
-            }
-            .join-btn {
-                display: block;
-                margin-top: 25px; 
-                padding: 16px 25px; 
-                background-color: #1b3022; 
-                color: white !important;
-                text-decoration: none;
-                font-weight: bold;
-                border-radius: 50px; 
-                text-align: center;
-                text-transform: uppercase;
-                font-size: 1.1rem; 
-                letter-spacing: 1px;
-                transition: all 0.3s ease;
-                border: none;
-            }
-            .join-btn:hover {
-                background-color: #2d4f38;
-                transform: translateY(-2px);
-                color: white !important;
-                box-shadow: 0 6px 15px rgba(45,79,56,0.4);
-            }
+			.spotlight .image img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 		</style>
 	</head>
-	<body class="is-preload" style="background-color: #2e343a;">
+	<body class="landing is-preload">
+
+		<a href="booking.html" class="floating-book-btn">BOOK NOW</a>
 
 		<div id="loader-curtain">
-			<div class="loader-logo">HIXZ</div>
+			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 500px; width: 90%; height: auto;" /></div>
 			<div class="loader-status">
 				<div class="loader-spinner"></div>
 				<span>Loading...</span>
@@ -150,7 +157,7 @@
 		<div id="page-wrapper">
 
 			<header id="header" class="alt">
-				<h1><a href="index.html">HIXZ</a></h1>
+				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
 				<nav id="nav">
 					<ul>
 						<li class="special">
@@ -167,51 +174,170 @@
 				</nav>
 			</header>
 
-			<section class="wrapper style2 special" style="background-color: #1b3022; padding: 8rem 0 6rem 0;">
-			    <div class="inner">
-					
-			    	<a href="#" id="dynamic-back-btn" class="back-btn">&larr; BACK TO MAIN WEBSITE</a>
-
-			        <header class="major">
-			            <h2 style="color: #fff; border-bottom: none; font-size: 2.2rem;">HIKE, EXPLORE, AND CAPTURE ARUBA</h2>
-			            <p style="color: #ddd; max-width: 800px; margin: 0 auto; line-height: 1.8;">
-			                Some people visit Aruba. Others actually experience it. I take small groups off the beaten path, to more exciting trails! Hidden coves, and trails the tourist buses never reach. Easy or challenging, I'll match the hike to you. Want it on film? That's what I'm here for, I can use my DJI Osmo Action 5 Camera to make you a insane adventure video!<br><br>
-			                <strong style="color: #5ea66e;">Subscribe to @MarnixHIXZ:</strong> Join the waiting room below for the LIVE premiere of our epic Natural Bridge to Conchi trek!
-			            </p>
-			        </header>
-			        
-			        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 3rem auto 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-			            <iframe 
-			                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-			                src="https://www.youtube.com/embed/nO4cs90sY2M?autoplay=0&rel=0" 
-			                title="This Natural Bridge Hike Was INSANE!" 
-			                frameborder="0" 
-			                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-			                allowfullscreen>
-			            </iframe>
-			        </div>
-			    </div>
+			<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<div class="inner">
+					<h2>HIXZ VIP</h2>
+					<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
+					Let's hit the trails and capture the best of Aruba.</p>
+					<ul class="actions special">
+						<li>
+							<a href="#more-trails-trigger" class="google-btn" id="view-secret-btn" style="opacity: 1; transform: translateY(0);">
+								View Secret Trails
+							</a>
+						</li>
+					</ul>
+				</div>
 			</section>
 
-			<section class="wrapper style1 special" style="padding: 6rem 0;">
+			<section id="one" class="wrapper style1 special">
 				<div class="inner">
 					<header class="major">
-						<h2 style="font-size: 3.5rem; letter-spacing: 2px;">AVAILABLE PACKAGES</h2>
+						<h2>Explore what Aruba's nature has to offer<br />
+						Step by step.</h2>
+						<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
+						Those are the principles I bring to every project.</p>
 					</header>
-                    
-                    <div class="hike-accordion-container">
-                        <details class="hike-accordion">
-                            <summary class="hike-btn">
-                                Coming Soon <span class="arrow">▼</span>
-                            </summary>
-                            <div class="hike-details">
-                                <div class="detail-row" style="text-align: center; font-size: 1.3rem;"><strong>Details Coming Soon.</strong></div>
-                                
-                                <a href="mailto:marnixvanpelt11@gmail.com" class="join-btn">Contact for Inquiries</a>
-                            </div>
-                        </details>
-                    </div>
+					<ul class="icons major">
+						<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
+						<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
+						<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
+					</ul>
+				</div>
+			</section>
 
+			<section id="two" class="wrapper alt style2">
+				<section class="spotlight">
+					<div class="image"><img src="images/Hooiberg (1).jpg" alt="Hooiberg Hiking Trail" loading="lazy" /></div>
+					<div class="content">
+						<h2>Hooiberg Hiking Trail</h2>
+						<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
+						<ul class="actions">
+							<li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li>
+						</ul>
+					</div>
+				</section>
+				
+				<section class="spotlight">
+					<div class="image"><img src="images/Balashi.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
+					<div class="content">
+						<h2>Balashi Gold Mine & Spanish Lagoon</h2>
+						<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
+						<ul class="actions">
+							<li><a href="maps/map-balashi.html" class="button">See Route</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="spotlight">
+					<div class="image"><img src="images/Bushiribana.jpg" alt="Bushiribana from Calbas" loading="lazy" /></div>
+					<div class="content">
+						<h2>Bushiribana Loop (from Calbas)</h2>
+						<p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
+						<ul class="actions">
+							<li><a href="maps/map-calbas.html" class="button">See Route</a></li>
+						</ul>
+					</div>
+				</section>
+
+				<div id="more-trails-trigger" class="see-more-container style2">
+					<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
+						VIEW MORE TRAILS
+					</button>
+				</div>
+
+				<div id="all-trail-options" class="style2">
+					<section class="spotlight">
+						<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+						<div class="content">
+							<h2>Jamanota Trail</h2>
+							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
+							<ul class="actions">
+								<li><a href="maps/map-jamanota.html" class="button">See Jamanota Route</a></li>
+							</ul>
+						</div>
+					</section>
+
+					<section class="spotlight">
+						<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
+						<div class="content">
+							<h2>North Aruba - Sasariwichi Dunes</h2>
+							<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
+							<ul class="actions">
+								<li><a href="maps/map-sasarawichi.html" class="button">See Dunes Route</a></li>
+							</ul>
+						</div>
+					</section>
+					
+					<section class="spotlight">
+					    <div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Alto Vista Chapel Route</h2>
+					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-altovista.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Conchi Natural Pool</h2>
+					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-conchi.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Dos Playa Route</h2>
+					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-dosplaya.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+
+					<section class="spotlight">
+					    <div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
+					    <div class="content">
+					        <h2>Bushiribana to Malmok Beach</h2>
+					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
+					        <ul class="actions">
+					            <li><a href="maps/map-malmok.html" class="button">See Route</a></li>
+					        </ul>
+					    </div>
+					</section>
+				</div>
+			</section>
+
+			<section id="showcase" class="wrapper style2">
+				<div class="inner">
+					<header class="major">
+						<h2>MY FILMING PORTFOLIO</h2>
+					</header>
+
+					<div class="video-grid">
+						<script>
+							const clips = [1, 2, 3, 4, 5, 6];
+							clips.forEach(i => {
+								document.write(`
+									<div class="video-item">
+										<div class="video-loading-overlay">Loading...</div>
+										<video data-src="videos/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+										<div class="video-overlay">
+											<a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"></a>
+											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+											<a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"></a>
+										</div>
+									</div>
+								`);
+							});
+						</script>
+					</div>
 				</div>
 			</section>
 
@@ -238,18 +364,80 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		
 		<script>
-    document.getElementById('dynamic-back-btn').addEventListener('click', function(e) {
-        e.preventDefault(); 
-        
-        const userIsSignedIn = localStorage.getItem('isLoggedIn') === 'true';
-        
-        if (userIsSignedIn) {
-            window.location.href = 'unlocked.html';
-        } else {
-            window.location.href = 'index.html';
-        }
-    });
-        </script>
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const videoItem = entry.target;
+						videoItem.style.transform = 'translateY(0)';
+						videoItem.style.filter = 'blur(0px)';
+						videoItem.style.opacity = '1';
+						videoItem.style.transition = 'all 1.5s ease-out';
+						observer.unobserve(videoItem);
+					}
+				});
+			}, { threshold: 0.1 });
+
+			setTimeout(() => {
+				document.querySelectorAll('.video-item').forEach(item => {
+					item.style.transform = 'translateY(60px)';
+					item.style.filter = 'blur(15px)';
+					item.style.opacity = '0';
+					observer.observe(item);
+				});
+			}, 100);
+
+			setTimeout(() => {
+				document.querySelectorAll('.lazy-video').forEach(video => {
+					if (!video.src) {
+						video.src = video.getAttribute('data-src');
+					}
+				});
+			}, 4000);
+
+			const videoObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					const video = entry.target;
+					if (entry.isIntersecting) {
+						video.play();
+					} else {
+						video.pause();
+					}
+				});
+			}, { threshold: 0.1 });
+
+			document.querySelectorAll('.lazy-video').forEach(video => {
+				videoObserver.observe(video);
+				
+				video.addEventListener('loadeddata', function() {
+					const overlay = this.parentElement.querySelector('.video-loading-overlay');
+					if (overlay) {
+						overlay.classList.add('hidden');
+					}
+				});
+			});
+
+			const viewSecretBtn = document.getElementById('view-secret-btn');
+			const seeMoreBtn = document.getElementById('see-more-btn');
+			const hiddenDiv = document.getElementById('all-trail-options');
+
+			viewSecretBtn.addEventListener('click', function(e) {
+				e.preventDefault();
+				document.getElementById('more-trails-trigger').scrollIntoView({ behavior: 'smooth' });
+			});
+
+			seeMoreBtn.addEventListener('click', function() {
+				const isShowing = hiddenDiv.style.display === "block";
+
+				if (isShowing) {
+					hiddenDiv.style.display = "none";
+					this.innerHTML = "VIEW MORE TRAILS";
+				} else {
+					hiddenDiv.style.display = "block";
+					this.innerHTML = "SHOW LESS";
+				}
+			});
+		</script>
 	</body>
 </html>
