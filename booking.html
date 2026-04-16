@@ -19,21 +19,10 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* --- CORE BUTTON STYLE (Matches rest of site) --- */
-			.google-btn {
-				display: inline-flex; align-items: center; justify-content: center;
-				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
-				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
-				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
-				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
-				box-shadow: none; text-shadow: none;
-			}
-			.google-btn:hover { background-color: #1b3022; }
-
 			/* --- TOP SECTION: Dark Charcoal --- */
 			.booking-top-section {
-				background-color: #2b3036; /* Dark charcoal matching screenshot */
-				padding: 4em 0 6em 0; /* Less padding on top to fit button */
+				background-color: #2b3036; 
+				padding: 4em 0 6em 0; 
 				color: #ffffff;
 				text-align: center;
 				position: relative;
@@ -69,7 +58,7 @@
 				text-transform: uppercase;
 				margin-bottom: 1em;
 				font-size: 2rem;
-				border: none; /* Removed the underline from previous version */
+				border: none; 
 			}
 
 			.booking-top-section p {
@@ -83,16 +72,16 @@
 				line-height: 1.8;
 			}
 
-			/* Square Video Container with specific shadow */
+			/* Square Video Container */
 			.square-video-container {
 				position: relative;
 				width: 100%;
 				max-width: 600px;
 				margin: 0 auto;
 				aspect-ratio: 1 / 1;
-				background: #111; /* Slightly lighter than pure black to show edge */
+				background: #111; 
 				border-radius: 12px;
-				box-shadow: 0 20px 50px rgba(0,0,0,0.6); /* Heavy shadow matching screenshot */
+				box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
 				overflow: hidden;
 			}
 
@@ -106,39 +95,69 @@
 
 			/* --- BOTTOM SECTION: Bright Teal --- */
 			.packages-section {
-				background-color: #28b7a3; /* Restored the teal color */
+				background-color: #28b7a3; 
 				padding: 6em 0;
 				color: #ffffff;
 				text-align: center;
 			}
 
-			.packages-section h3 {
-				color: #ffffff;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1.8rem;
-				margin-bottom: 2em;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-			}
-
-			/* --- SMOOTH ACCORDION --- */
-			#packages-content {
-				display: none; 
-				margin-top: 2em;
-				padding: 2em;
-				background: rgba(0, 0, 0, 0.2);
+			/* --- SCREENSHOT ACCORDION CARD --- */
+			.coming-soon-card {
+				background: #ffffff;
 				border-radius: 8px;
 				max-width: 600px;
-				margin-left: auto;
-				margin-right: auto;
+				margin: 0 auto;
+				box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+				overflow: hidden;
 				text-align: center;
 			}
 
-			#packages-content h4 {
+			.coming-soon-header {
+				background-color: #1e2b22; 
 				color: #ffffff;
-				font-family: 'Inter', sans-serif;
-				font-weight: 400;
-				margin-bottom: 0;
+				padding: 1.5em 2em;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.2rem;
+				letter-spacing: 2px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				cursor: pointer;
+			}
+
+			.dropdown-icon {
+				background-color: #0056b3; 
+				color: #ffffff;
+				width: 32px;
+				height: 32px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 4px;
+				font-size: 1rem;
+			}
+
+			.coming-soon-body {
+				padding: 2.5em;
+				display: none; 
+			}
+
+			.inquiries-btn {
+				display: block;
+				width: 100%;
+				background-color: #1e2b22 !important;
+				color: #ffffff !important;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.1rem;
+				letter-spacing: 1px;
+				padding: 18px;
+				border-radius: 50px;
+				text-decoration: none;
+				transition: background-color 0.2s ease;
+			}
+
+			.inquiries-btn:hover {
+				background-color: #5ea66e !important;
 			}
 
 			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
@@ -234,7 +253,7 @@
 						<p>I am your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, from the volcanic steps of Hooiberg to the hidden Natural Pool. But I don't just guide—I film. Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Watch a real HIXZ expedition below.</p>
 
 						<div class="square-video-container">
-							<iframe src="https://www.youtube.com/embed/4WkX9y_1eG0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 
 					</div>
@@ -243,13 +262,14 @@
 				<section class="packages-section">
 					<div class="inner">
 						
-						<h3>Available Packages</h3>
-						<button class="google-btn" id="toggle-packages-btn">
-							VIEW EXPEDITIONS
-						</button>
-
-						<div id="packages-content">
-							<h4>More details and example videos coming soon.</h4>
+						<div class="coming-soon-card">
+							<div class="coming-soon-header" id="coming-soon-trigger">
+								<span>COMING SOON</span>
+								<div class="dropdown-icon">▼</div>
+							</div>
+							<div class="coming-soon-body" id="coming-soon-body">
+								<a href="mailto:marnixvanpelt11@gmail.com" class="inquiries-btn">CONTACT FOR INQUIRIES</a>
+							</div>
 						</div>
 
 					</div>
@@ -282,18 +302,17 @@
 		<script src="assets/js/main.js"></script>
 
 		<script>
-			const toggleBtn = document.getElementById('toggle-packages-btn');
-			const packagesContent = document.getElementById('packages-content');
+			const trigger = document.getElementById('coming-soon-trigger');
+			const body = document.getElementById('coming-soon-body');
+			const icon = trigger.querySelector('.dropdown-icon');
 
-			toggleBtn.addEventListener('click', function() {
-				const isShowing = packagesContent.style.display === "block";
-
-				if (isShowing) {
-					packagesContent.style.display = "none";
-					this.innerHTML = "VIEW EXPEDITIONS";
+			trigger.addEventListener('click', function() {
+				if (body.style.display === "block") {
+					body.style.display = "none";
+					icon.innerHTML = "▼";
 				} else {
-					packagesContent.style.display = "block";
-					this.innerHTML = "CLOSE";
+					body.style.display = "block";
+					icon.innerHTML = "▲";
 				}
 			});
 		</script>
