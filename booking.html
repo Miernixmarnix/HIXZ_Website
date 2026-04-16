@@ -5,16 +5,22 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="images/favicon.png">
-		
+		<script>
+			try {
+				localStorage.setItem('hixz_vip', 'true');
+			} catch(e) {}
+		</script>
+
+		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		<link rel="preload" as="image" href="images/MountJamanota.jpg">
+
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
 			/* --- HEADER --- */
-			#header.alt {
-				background-color: #142017 !important;
-			}
+			#header.alt { background-color: #142017 !important; }
 
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
@@ -26,15 +32,16 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- TOP SECTION: Charcoal Gradient --- */
+			/* --- TOP SECTION: Charcoal/Green Gradient --- */
 			.booking-top-section {
 				background: linear-gradient(135deg, #1e2b22 0%, #2b3036 100%);
 				padding: 5em 0 6em 0; 
 				color: #ffffff;
 				text-align: center;
+				position: relative;
 			}
 
-			/* Pill-shaped Back Button */
+			/* Pill-shaped Back Button (Matching Map Exit Button) */
 			.top-back-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				gap: 8px; padding: 10px 24px; 
@@ -44,6 +51,7 @@
 				letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
 				margin-bottom: 4em; transition: all 0.2s ease;
 			}
+			/* Noticeable Lighter Hover */
 			.top-back-btn:hover { background-color: #ffffff; color: #1a241c !important; }
 
 			.booking-top-section h2 {
@@ -57,36 +65,22 @@
 				color: rgba(255, 255, 255, 0.9);
 				font-family: 'Inter', sans-serif;
 				font-weight: 300;
-				font-size: 1.15rem; 
-				line-height: 1.9; 
+				font-size: 1.15rem; /* Larger font */
+				line-height: 1.9; /* More breathing room */
 				max-width: 850px;
-				margin: 0 auto 1.5em auto; 
+				margin: 0 auto 1.5em auto; /* Spaced out paragraphs */
 			}
 
-			/* --- TRUST BADGE LINK --- */
-			.trust-badge-link {
-				border-bottom: none !important;
-				text-decoration: none !important;
-				display: inline-block;
-				margin-bottom: 4em;
-				margin-top: 1em;
-			}
-			
+			/* --- TRUST BADGE --- */
 			.trust-badge {
 				display: inline-flex; align-items: center; gap: 12px;
-				background: rgba(94, 166, 110, 0.15); 
+				background: rgba(94, 166, 110, 0.15); /* Soft green tint */
 				border: 1px solid #5ea66e;
 				padding: 12px 24px;
 				border-radius: 50px;
-				transition: all 0.2s ease;
+				margin-bottom: 4em;
+				margin-top: 1em;
 			}
-			
-			.trust-badge-link:hover .trust-badge {
-				background: rgba(94, 166, 110, 0.3);
-				transform: translateY(-3px);
-				box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-			}
-
 			.trust-badge i { color: #5ea66e; font-size: 1.2rem; }
 			.trust-badge span {
 				color: #5ea66e; font-family: 'Inter', sans-serif;
@@ -115,13 +109,13 @@
 				align-items: center; cursor: pointer; color: #ffffff;
 				font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: 1px;
 			}
-			.dark-accordion-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; }
+			.dark-accordion-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; }
 			.dark-accordion-header.active span::after { content: "▲"; }
 			.dark-accordion-body {
 				padding: 0 2em 2em 2em; display: none;
 				font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.8;
 			}
-			.dark-accordion-body ul { margin-top: 1em; padding-left: 1.5em; }
+			.dark-accordion-body ul { margin-top: 1em; padding-left: 1.5em; list-style: disc; }
 			.dark-accordion-body li { margin-bottom: 0.5em; }
 
 			/* --- BOTTOM SECTION: Bright Teal --- */
@@ -131,25 +125,28 @@
 			
 			.packages-section h3 {
 				color: #ffffff; font-family: 'Archivo Black', sans-serif;
-				font-size: 2.8rem; 
+				font-size: 2.8rem; /* Made significantly larger than the button */
 				text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5em;
 			}
 
 			/* --- LIGHT ACCORDION CARD (Packages) --- */
 			.coming-soon-card {
-				background: #ffffff; border-radius: 8px; 
-				max-width: 450px; /* SLIMMED DOWN FROM 600px */
+				background: #ffffff; border-radius: 8px; max-width: 600px;
 				margin: 0 auto; box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 				overflow: hidden; text-align: center;
 			}
 			.coming-soon-header {
 				background-color: #1e2b22; color: #ffffff; padding: 1.5em 2em;
 				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 2px; 
-				display: flex; justify-content: center; /* CENTERED TEXT */
+				letter-spacing: 2px; display: flex; justify-content: space-between;
 				align-items: center; cursor: pointer;
 			}
-			.coming-soon-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; }
+			/* Noticeable Lighter Hover */
+			.coming-soon-header:hover { 
+				background-color: #ffffff; /* Lighter background */
+				color: #1e2b22 !important; /* Dark green text */
+			}
+			.coming-soon-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; }
 			.coming-soon-header.active span::after { content: "▲"; }
 			
 			.coming-soon-body { padding: 3em; display: none; }
@@ -163,6 +160,7 @@
 				color: #ffffff !important; font-family: 'Archivo Black', sans-serif;
 				font-size: 1.3rem; letter-spacing: 1px; padding: 24px; 
 				border-radius: 50px; text-decoration: none; transition: background-color 0.2s ease;
+				text-transform: uppercase;
 			}
 			.inquiries-btn:hover { background-color: #5ea66e !important; }
 		</style>
@@ -206,12 +204,10 @@
 						
 						<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
 
-						<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" class="trust-badge-link">
-							<div class="trust-badge">
-								<i class="icon solid fa-medkit"></i>
-								<span>Official Red Cross Certified First Aid Responder (View Certificate)</span>
-							</div>
-						</a>
+						<div class="trust-badge">
+							<i class="icon solid fa-medkit"></i>
+							<span>Official Red Cross Certified First Aid Responder</span>
+						</div>
 
 						<div class="video-container">
 							<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
