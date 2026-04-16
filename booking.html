@@ -6,11 +6,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="images/favicon.png">
 		
-		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
+			/* --- HEADER --- */
+			#header.alt {
+				background-color: #142017 !important; /* Deep Forest Green for the top bar */
+			}
+
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
 				display: inline-flex; align-items: center; justify-content: center;
@@ -18,170 +23,139 @@
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
-				box-shadow: none; text-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- TOP SECTION: Charcoal with Forest Green Gradient --- */
+			/* --- TOP SECTION: Charcoal Gradient --- */
 			.booking-top-section {
-				/* Added a subtle gradient to make the background less dull */
 				background: linear-gradient(135deg, #1e2b22 0%, #2b3036 100%);
-				padding: 4em 0 6em 0; 
+				padding: 5em 0 6em 0; 
 				color: #ffffff;
 				text-align: center;
-				position: relative;
 			}
 
-			/* Pill-shaped Back Button (Matching Map Exit Button) */
+			/* Pill-shaped Back Button */
 			.top-back-btn {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				gap: 8px;
-				padding: 10px 24px; /* Thicker padding for pill shape */
-				border: 2px solid #ffffff; /* Solid white border */
-				background-color: #1a241c; /* Very dark green background */
-				border-radius: 50px; /* Fully rounded edges */
-				color: #ffffff !important;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1rem;
-				letter-spacing: 1px;
-				text-transform: uppercase;
-				text-decoration: none;
-				margin-bottom: 3em;
-				transition: all 0.2s ease;
+				display: inline-flex; align-items: center; justify-content: center;
+				gap: 8px; padding: 10px 24px; 
+				border: 2px solid #ffffff; background-color: #1a241c; 
+				border-radius: 50px; color: #ffffff !important;
+				font-family: 'Archivo Black', sans-serif; font-size: 0.9rem;
+				letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+				margin-bottom: 4em; transition: all 0.2s ease;
 			}
-			.top-back-btn:hover {
-				background-color: #ffffff;
-				color: #1a241c !important;
-			}
+			.top-back-btn:hover { background-color: #ffffff; color: #1a241c !important; }
 
 			.booking-top-section h2 {
-				color: #ffffff;
-				font-family: 'Archivo Black', sans-serif;
-				letter-spacing: 2px;
-				text-transform: uppercase;
-				margin-bottom: 1em;
-				font-size: 2.2rem;
-				border: none; 
+				color: #ffffff; font-family: 'Archivo Black', sans-serif;
+				letter-spacing: 2px; text-transform: uppercase;
+				margin-bottom: 1.5em; font-size: 2.2rem; border: none; 
 			}
 
-			.booking-top-section p {
-				color: rgba(255, 255, 255, 0.85);
-				margin-bottom: 4em;
+			/* Upgraded Readability for Text */
+			.description-text {
+				color: rgba(255, 255, 255, 0.9);
 				font-family: 'Inter', sans-serif;
 				font-weight: 300;
-				max-width: 900px;
-				margin-left: auto;
-				margin-right: auto;
-				line-height: 1.8;
-				font-size: 1.05rem;
+				font-size: 1.15rem; /* Larger font */
+				line-height: 1.9; /* More breathing room */
+				max-width: 850px;
+				margin: 0 auto 1.5em auto; /* Spaced out paragraphs */
 			}
 
-			/* Video Container (Strict 16:9 Aspect Ratio) */
+			/* --- TRUST BADGE --- */
+			.trust-badge {
+				display: inline-flex; align-items: center; gap: 12px;
+				background: rgba(94, 166, 110, 0.15); /* Soft green tint */
+				border: 1px solid #5ea66e;
+				padding: 12px 24px;
+				border-radius: 50px;
+				margin-bottom: 4em;
+				margin-top: 1em;
+			}
+			.trust-badge i { color: #5ea66e; font-size: 1.2rem; }
+			.trust-badge span {
+				color: #5ea66e; font-family: 'Inter', sans-serif;
+				font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px;
+			}
+
+			/* Widescreen Video Container */
 			.video-container {
-				position: relative;
-				width: 100%;
-				max-width: 850px; /* Increased size to fill space */
-				margin: 0 auto;
-				aspect-ratio: 16 / 9; /* Widescreen format */
-				background: #000; 
-				border-radius: 12px;
-				box-shadow: 0 25px 60px rgba(0,0,0,0.6); 
-				overflow: hidden;
+				position: relative; width: 100%; max-width: 900px;
+				margin: 0 auto; aspect-ratio: 16 / 9;
+				background: #000; border-radius: 12px;
+				box-shadow: 0 25px 60px rgba(0,0,0,0.6); overflow: hidden;
+			}
+			.video-container iframe {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 			}
 
-			.video-container iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
+			/* --- DARK ACCORDION (Fun Facts) --- */
+			.dark-accordion {
+				background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1);
+				border-radius: 8px; max-width: 900px; margin: 3em auto 0 auto;
+				overflow: hidden; text-align: left;
 			}
+			.dark-accordion-header {
+				padding: 1.5em 2em; display: flex; justify-content: space-between;
+				align-items: center; cursor: pointer; color: #ffffff;
+				font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: 1px;
+			}
+			.dark-accordion-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; }
+			.dark-accordion-header.active span::after { content: "▲"; }
+			.dark-accordion-body {
+				padding: 0 2em 2em 2em; display: none;
+				font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.8;
+			}
+			.dark-accordion-body ul { margin-top: 1em; padding-left: 1.5em; }
+			.dark-accordion-body li { margin-bottom: 0.5em; }
 
 			/* --- BOTTOM SECTION: Bright Teal --- */
 			.packages-section {
-				background-color: #28b7a3; 
-				padding: 6em 0;
-				color: #ffffff;
-				text-align: center;
+				background-color: #28b7a3; padding: 6em 0; color: #ffffff; text-align: center;
 			}
 			
-			/* New Header for Packages Section */
 			.packages-section h3 {
-				color: #ffffff;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1.8rem;
-				text-transform: uppercase;
-				letter-spacing: 2px;
-				margin-bottom: 2em; /* Spacing between title and card */
+				color: #ffffff; font-family: 'Archivo Black', sans-serif;
+				font-size: 2.8rem; /* Made significantly larger than the button */
+				text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5em;
 			}
 
-			/* --- SCREENSHOT ACCORDION CARD --- */
+			/* --- LIGHT ACCORDION CARD (Packages) --- */
 			.coming-soon-card {
-				background: #ffffff;
-				border-radius: 8px;
-				max-width: 600px;
-				margin: 0 auto;
-				box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-				overflow: hidden;
-				text-align: center;
+				background: #ffffff; border-radius: 8px; max-width: 600px;
+				margin: 0 auto; box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+				overflow: hidden; text-align: center;
 			}
-
 			.coming-soon-header {
-				background-color: #1e2b22; 
-				color: #ffffff;
-				padding: 1.5em 2em;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1.2rem;
-				letter-spacing: 2px;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				cursor: pointer;
+				background-color: #1e2b22; color: #ffffff; padding: 1.5em 2em;
+				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
+				letter-spacing: 2px; display: flex; justify-content: space-between;
+				align-items: center; cursor: pointer;
 			}
-
-			/* Dropdown Toggle Arrow */
-			.coming-soon-header span::after {
-				content: "▼";
-				margin-left: 10px;
-				font-size: 0.8rem;
-				transition: transform 0.2s ease;
-			}
-			.coming-soon-header.active span::after {
-				content: "▲";
-			}
-
-			.coming-soon-body {
-				padding: 3em; 
-				display: none; 
+			.coming-soon-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; }
+			.coming-soon-header.active span::after { content: "▲"; }
+			
+			.coming-soon-body { padding: 3em; display: none; }
+			.coming-soon-body p {
+				color: #333; font-family: 'Inter', sans-serif; font-weight: 400;
+				font-size: 1.05rem; line-height: 1.6; margin-bottom: 2em;
 			}
 
 			.inquiries-btn {
-				display: block;
-				width: 100%;
-				background-color: #1e2b22 !important; 
-				color: #ffffff !important;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1.3rem; 
-				letter-spacing: 1px;
-				padding: 24px; 
-				border-radius: 50px;
-				text-decoration: none;
-				transition: background-color 0.2s ease;
-				text-transform: uppercase;
+				display: block; width: 100%; background-color: #1e2b22 !important; 
+				color: #ffffff !important; font-family: 'Archivo Black', sans-serif;
+				font-size: 1.3rem; letter-spacing: 1px; padding: 24px; 
+				border-radius: 50px; text-decoration: none; transition: background-color 0.2s ease;
 			}
-
-			.inquiries-btn:hover {
-				background-color: #5ea66e !important;
-			}
+			.inquiries-btn:hover { background-color: #5ea66e !important; }
 		</style>
 	</head>
 	<body class="is-preload">
 
 		<div id="page-wrapper">
 
-			<header id="header" class="alt" style="background: rgba(0,0,0,0.5);">
+			<header id="header" class="alt">
 				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
 				<nav id="nav">
 					<ul>
@@ -210,10 +184,33 @@
 
 						<h2>Guided Hikes & Filming</h2>
 						
-						<p>I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specialized in making hiking and swimming adventures in Aruba fun, safe, and unforgettable for everyone. While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film. Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by. Watch a real HIXZ expedition below.</p>
+						<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
+						
+						<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film.</p>
+						
+						<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
+
+						<div class="trust-badge">
+							<i class="icon solid fa-medkit"></i>
+							<span>Official Red Cross Certified First Aid Responder</span>
+						</div>
 
 						<div class="video-container">
 							<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+
+						<div class="dark-accordion">
+							<div class="dark-accordion-header" id="fun-facts-trigger">
+								<span>TRAIL FUN FACTS: NATURAL BRIDGE TO CONCHI</span>
+							</div>
+							<div class="dark-accordion-body" id="fun-facts-body">
+								<p>Want to know what you're getting into? Here is some history on this specific route:</p>
+								<ul>
+									<li><strong>Blackstone Beach:</strong> This is the only beach in Aruba entirely made of black volcanic stones instead of white sand.</li>
+									<li><strong>The Original Bridge:</strong> The famous Natural Bridge collapsed in 2005, but the rugged windward coast remains completely untouched by commercial development.</li>
+									<li><strong>Conchi (Natural Pool):</strong> Protected by a wall of volcanic rock, this hidden pool requires a serious trek through Arikok National Park to access safely.</li>
+								</ul>
+							</div>
 						</div>
 
 					</div>
@@ -229,6 +226,8 @@
 								<span>COMING SOON</span>
 							</div>
 							<div class="coming-soon-body" id="coming-soon-body">
+								<p>We are currently finalizing our premium filming packages and group hike schedules for the upcoming season. The trails are waiting.</p>
+								<p><strong>Want to lock in a date early? Reach out directly.</strong></p>
 								<a href="mailto:marnixvanpelt11@gmail.com" class="inquiries-btn">CONTACT FOR INQUIRIES</a>
 							</div>
 						</div>
@@ -263,17 +262,20 @@
 		<script src="assets/js/main.js"></script>
 
 		<script>
-			const trigger = document.getElementById('coming-soon-trigger');
-			const body = document.getElementById('coming-soon-body');
-
-			trigger.addEventListener('click', function() {
+			// Packages Accordion
+			const pkgTrigger = document.getElementById('coming-soon-trigger');
+			const pkgBody = document.getElementById('coming-soon-body');
+			pkgTrigger.addEventListener('click', function() {
 				this.classList.toggle('active');
-				
-				if (body.style.display === "block") {
-					body.style.display = "none";
-				} else {
-					body.style.display = "block";
-				}
+				pkgBody.style.display = pkgBody.style.display === "block" ? "none" : "block";
+			});
+
+			// Fun Facts Accordion
+			const factsTrigger = document.getElementById('fun-facts-trigger');
+			const factsBody = document.getElementById('fun-facts-body');
+			factsTrigger.addEventListener('click', function() {
+				this.classList.toggle('active');
+				factsBody.style.display = factsBody.style.display === "block" ? "none" : "block";
 			});
 		</script>
 
