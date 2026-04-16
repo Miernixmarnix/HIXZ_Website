@@ -66,7 +66,7 @@
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
 				background-color: #050a06; z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.5s;
+				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 4s; /* STAYS STATIC LONGER */
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
@@ -81,13 +81,17 @@
 			/* Mobile fallback for Logo */
 			@media screen and (max-width: 736px) {
 				.loader-logo img {
-					max-width: 300px !important;
+					max-width: 400px !important; /* Larger on mobile too */
 				}
+                #loader-curtain .welcome-text {
+                    font-size: 1rem !important; /* Smaller text on mobile */
+                }
 			}
 
-			/* --- HERO BANNER TITLE SIZING --- */
+			/* --- HERO BANNER TITLE SIZING & CONTRAST --- */
 			#banner h2 {
 				font-size: 5rem !important;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Added text shadow for contrast */
 			}
 			@media screen and (max-width: 736px) {
 				#banner h2 {
@@ -96,7 +100,7 @@
 			}
 
 			.loader-status {
-				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
+				display: flex; align-items: center; gap: 12px; margin-top: 20px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
 				animation: fadeInStatus 0.1s ease forwards 0.1s;
@@ -107,6 +111,19 @@
 			}
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
+
+            /* --- LOADER WELCOME TEXT --- */
+            #loader-curtain .welcome-text {
+                font-family: 'Archivo Black', sans-serif;
+                font-size: 1.2rem;
+                color: #ffffff;
+                letter-spacing: 1px;
+                text-transform: lowercase; /* small letters */
+                opacity: 0;
+                animation: fadeInWelcome 0.5s ease forwards 0.5s; /* Fades in after logo/status */
+                margin-top: 10px; /* spacing below status */
+            }
+            @keyframes fadeInWelcome { to { opacity: 1; } }
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -147,11 +164,12 @@
 		<a href="booking.html" class="floating-book-btn">BOOK NOW</a>
 
 		<div id="loader-curtain">
-			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 500px; width: 90%; height: auto;" /></div>
+			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 800px; max-height: 80vh; width: 90%; height: auto;" /></div>
 			<div class="loader-status">
 				<div class="loader-spinner"></div>
 				<span>Loading...</span>
 			</div>
+            <div class="welcome-text">welcome to our adventurous website</div>
 		</div>
 
 		<div id="page-wrapper">
