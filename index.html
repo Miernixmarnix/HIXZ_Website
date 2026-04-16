@@ -16,42 +16,58 @@
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
 		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
-		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
+			/* --- HEADER --- */
+			#header.alt { background-color: #142017 !important; }
+
+			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
-				opacity: 0; box-shadow: none; text-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
-				background-color: #5ea66e; color: #ffffff !important;
+				background-color: #1e2b22; /* HIXZ dark green */
+				color: #ffffff !important;
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
 				letter-spacing: 1px; text-transform: uppercase;
 				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
-				transition: transform 0.2s ease, background-color 0.2s ease;
+				transition: all 0.2s ease;
 				opacity: 0;
-				animation: fadeInButton 0.5s ease forwards 2s;
+				/* FIXED TIMING: Now waits 4.5s to appear after the curtain lifts */
+				animation: fadeInButton 0.5s ease forwards 4.5s; 
 			}
-			.floating-book-btn:hover { background-color: #ffffff; color: #050a06 !important; transform: translateY(-5px); }
+			/* Noticeable Lighter Hover */
+			.floating-book-btn:hover { 
+				background-color: #ffffff; /* Lighter background */
+				color: #1e2b22 !important; /* Dark green text */
+				transform: translateY(-5px);
+			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			@keyframes fadeInButton { to { opacity: 1; } }
 
+			/* --- COORDINATED CONTENT REVEAL --- */
+			.main-content-wrapper {
+				opacity: 0;
+				animation: fadeInContent 0.8s ease forwards 4s; /* Fades in smoothly as curtain lifts */
+			}
+			@keyframes fadeInContent { to { opacity: 1; } }
+
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
-			/* --- MISSING VIDEO GRID CSS RESTORED --- */
 			.video-grid { 
 				display: grid; grid-template-columns: repeat(3, 1fr); 
 				gap: 20px; grid-auto-rows: 1fr; 
@@ -65,42 +81,40 @@
 			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #050a06; z-index: 10000; display: flex;
+				background-color: #020402; 
+				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 1.5s;
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; /* Stays static, then slides up */
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
-			/* --- UPDATED LOADER LOGO --- */
+			/* --- UPDATED LOADER LOGO WITH BLUR/SLIDE ANIMATION --- */
 			.loader-logo {
 				opacity: 0; 
-				animation: fadeInLogo 0.1s ease forwards;
+				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
 			}
-			@keyframes fadeInLogo { to { opacity: 1; } }
+			
+			@keyframes blurFadeSlide { 
+				0% { opacity: 0; filter: blur(12px); transform: translateY(30px); }
+				100% { opacity: 1; filter: blur(0px); transform: translateY(0); } 
+			}
 
 			/* Mobile fallback for Logo */
 			@media screen and (max-width: 736px) {
-				.loader-logo img {
-					max-width: 300px !important;
-				}
+				.loader-logo img { max-width: 400px !important; }
+                #loader-curtain .welcome-text { font-size: 0.9rem !important; letter-spacing: 2px !important; }
 			}
 
-			/* --- HERO BANNER TITLE SIZING --- */
-			#banner h2 {
-				font-size: 5rem !important;
-			}
-			@media screen and (max-width: 736px) {
-				#banner h2 {
-					font-size: 3rem !important;
-				}
-			}
+			/* --- HERO BANNER TITLE SIZING & CONTRAST --- */
+			#banner h2 { font-size: 5rem !important; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+			@media screen and (max-width: 736px) { #banner h2 { font-size: 3rem !important; } }
 
 			.loader-status {
-				position: absolute; bottom: 40px; display: flex; align-items: center; gap: 12px;
+				display: flex; align-items: center; gap: 12px; margin-top: 30px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.1s ease forwards 0.1s;
+				animation: fadeInStatus 0.5s ease forwards 1s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -109,7 +123,14 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-			/* --- REST OF MISSING VIDEO CSS RESTORED --- */
+            /* --- NEW LOADER WELCOME TEXT --- */
+            #loader-curtain .welcome-text {
+                font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
+                opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px; 
+            }
+            @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
+
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
@@ -149,215 +170,218 @@
 		<a href="booking.html" class="floating-book-btn">BOOK NOW</a>
 
 		<div id="loader-curtain">
-			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 500px; width: 90%; height: auto;" /></div>
+			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 800px; max-height: 80vh; width: 90%; height: auto;" /></div>
 			<div class="loader-status">
 				<div class="loader-spinner"></div>
 				<span>Loading...</span>
 			</div>
+            <div class="welcome-text">discover the beauty of aruba's majestic trails.</div>
 		</div>
 
 		<div id="page-wrapper">
+			
+			<div class="main-content-wrapper">
 
-			<header id="header" class="alt">
-				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-				<nav id="nav">
-					<ul>
-						<li class="special">
-							<a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.html">Home</a></li>
-									<li><a href="generic.html">About Me</a></li>
-									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</nav>
-			</header>
-
-			<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-				<div class="inner">
-					<h2>HIXZ</h2>
-					<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
-					Let's hit the trails and capture the best of Aruba.</p>
-					<ul class="actions special">
-						<li>
-							<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
-								Unlock Trail Maps
-							</a>
-						</li>
-					</ul>
-				</div>
-			</section>
-
-			<section id="one" class="wrapper style1 special">
-				<div class="inner">
-					<header class="major">
-						<h2>Explore what Aruba's nature has to offer<br />
-						Step by step.</h2>
-						<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
-						Those are the principles I bring to every project.</p>
-					</header>
-					<ul class="icons major">
-						<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
-						<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
-						<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
-					</ul>
-				</div>
-			</section>
-
-			<section id="two" class="wrapper alt style2">
-				<section class="spotlight">
-					<div class="image"><img src="images/Hooiberg (1).jpg" alt="Hooiberg Hiking Trail" loading="lazy" /></div>
-					<div class="content">
-						<h2>Hooiberg Hiking Trail</h2>
-						<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
-						<ul class="actions">
-							<li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li>
+				<header id="header" class="alt">
+					<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="special">
+								<a href="#menu" class="menuToggle"><span>Menu</span></a>
+								<div id="menu">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li><a href="generic.html">About Me</a></li>
+										<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+									</ul>
+								</div>
+							</li>
 						</ul>
-					</div>
-				</section>
-				
-				<section class="spotlight">
-					<div class="image"><img src="images/Balashi.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
-					<div class="content">
-						<h2>Balashi Gold Mine & Spanish Lagoon</h2>
-						<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
-						<ul class="actions">
-							<li><a href="maps/map-balashi.html" class="button">See Route</a></li>
+					</nav>
+				</header>
+
+				<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+					<div class="inner">
+						<h2>HIXZ</h2>
+						<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
+						Let's hit the trails and capture the best of Aruba.</p>
+						<ul class="actions special">
+							<li>
+								<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
+									Unlock Trail Maps
+								</a>
+							</li>
 						</ul>
 					</div>
 				</section>
 
-				<section class="spotlight">
-					<div class="image"><img src="images/Bushiribana.jpg" alt="Bushiribana from Calbas" loading="lazy" /></div>
-					<div class="content">
-						<h2>Bushiribana Loop (from Calbas)</h2>
-						<p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
-						<ul class="actions">
-							<li><a href="maps/map-calbas.html" class="button">See Route</a></li>
+				<section id="one" class="wrapper style1 special">
+					<div class="inner">
+						<header class="major">
+							<h2>Explore what Aruba's nature has to offer<br />
+							Step by step.</h2>
+							<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
+							Those are the principles I bring to every project.</p>
+						</header>
+						<ul class="icons major">
+							<li><span class="icon solid fa-hiking major style1"><span class="label">Adventure</span></span></li>
+							<li><span class="icon solid fa-mountain major style2"><span class="label">Nature</span></span></li>
+							<li><span class="icon solid fa-compass major style3"><span class="label">Exploration</span></span></li>
 						</ul>
 					</div>
 				</section>
 
-				<div class="see-more-container style2">
-					<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
-						VIEW MORE TRAILS
-					</button>
-				</div>
-
-				<div id="all-trail-options" class="style2">
+				<section id="two" class="wrapper alt style2">
 					<section class="spotlight">
-						<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+						<div class="image"><img src="images/Hooiberg (1).jpg" alt="Hooiberg Hiking Trail" loading="lazy" /></div>
 						<div class="content">
-							<h2>Jamanota Trail</h2>
-							<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
+							<h2>Hooiberg Hiking Trail</h2>
+							<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
 							<ul class="actions">
-								<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-							</ul>
-						</div>
-					</section>
-
-					<section class="spotlight">
-						<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
-						<div class="content">
-							<h2>North Aruba - Sasariwichi Dunes</h2>
-							<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
-							<ul class="actions">
-								<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								<li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li>
 							</ul>
 						</div>
 					</section>
 					
 					<section class="spotlight">
-					    <div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Alto Vista Chapel Route</h2>
-					        <p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+						<div class="image"><img src="images/Balashi.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
+						<div class="content">
+							<h2>Balashi Gold Mine & Spanish Lagoon</h2>
+							<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
+							<ul class="actions">
+								<li><a href="maps/map-balashi.html" class="button">See Route</a></li>
+							</ul>
+						</div>
 					</section>
 
 					<section class="spotlight">
-					    <div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Conchi Natural Pool</h2>
-					        <p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
+						<div class="image"><img src="images/Bushiribana.jpg" alt="Bushiribana from Calbas" loading="lazy" /></div>
+						<div class="content">
+							<h2>Bushiribana Loop (from Calbas)</h2>
+							<p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
+							<ul class="actions">
+								<li><a href="maps/map-calbas.html" class="button">See Route</a></li>
+							</ul>
+						</div>
 					</section>
 
-					<section class="spotlight">
-					    <div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Dos Playa Route</h2>
-					        <p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
-					</section>
-
-					<section class="spotlight">
-					    <div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
-					    <div class="content">
-					        <h2>Bushiribana to Malmok Beach</h2>
-					        <p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
-					        <ul class="actions">
-					            <li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
-					        </ul>
-					    </div>
-					</section>
-				</div>
-			</section>
-
-			<section id="showcase" class="wrapper style2">
-				<div class="inner">
-					<header class="major">
-						<h2>MY FILMING PORTFOLIO</h2>
-					</header>
-
-					<div class="video-grid">
-						<script>
-							const clips = [1, 2, 3, 4, 5, 6];
-							clips.forEach(i => {
-								document.write(`
-									<div class="video-item">
-										<div class="video-loading-overlay">Loading...</div>
-										<video data-src="videos/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
-										<div class="video-overlay">
-											<a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"></a>
-											<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
-											<a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"></a>
-										</div>
-									</div>
-								`);
-							});
-						</script>
+					<div class="see-more-container style2">
+						<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
+							VIEW MORE TRAILS
+						</button>
 					</div>
-				</div>
-			</section>
 
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
-					<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
-					<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; HIXZ </li>
-					<li>Built by Marnix van Pelt</li>
-				</ul>
-			</footer>
+					<div id="all-trail-options" class="style2">
+						<section class="spotlight">
+							<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
+							<div class="content">
+								<h2>Jamanota Trail</h2>
+								<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
 
-		</div>
+						<section class="spotlight">
+							<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
+							<div class="content">
+								<h2>North Aruba - Sasariwichi Dunes</h2>
+								<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
+						
+						<section class="spotlight">
+							<div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
+							<div class="content">
+								<h2>Alto Vista Chapel Route</h2>
+								<p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
+
+						<section class="spotlight">
+							<div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
+							<div class="content">
+								<h2>Conchi Natural Pool</h2>
+								<p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
+
+						<section class="spotlight">
+							<div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
+							<div class="content">
+								<h2>Dos Playa Route</h2>
+								<p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
+
+						<section class="spotlight">
+							<div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
+							<div class="content">
+								<h2>Bushiribana to Malmok Beach</h2>
+								<p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
+								<ul class="actions">
+									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+								</ul>
+							</div>
+						</section>
+					</div>
+				</section>
+
+				<section id="showcase" class="wrapper style2">
+					<div class="inner">
+						<header class="major">
+							<h2>MY FILMING PORTFOLIO</h2>
+						</header>
+
+						<div class="video-grid">
+							<script>
+								const clips = [1, 2, 3, 4, 5, 6];
+								clips.forEach(i => {
+									document.write(`
+										<div class="video-item">
+											<div class="video-loading-overlay">Loading...</div>
+											<video data-src="videos/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+											<div class="video-overlay">
+												<a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"></a>
+												<a href="https://www.instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"></a>
+												<a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"></a>
+											</div>
+										</div>
+									`);
+								});
+							</script>
+						</div>
+					</div>
+				</section>
+
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+						<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+						<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; HIXZ </li>
+						<li>Built by Marnix van Pelt</li>
+					</ul>
+				</footer>
+			
+			</div> </div>
 
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
