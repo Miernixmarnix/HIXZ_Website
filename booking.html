@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Available Packages - HIXZ</title>
+		<title>Book an Adventure - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="images/favicon.png">
@@ -12,33 +12,76 @@
 
 		<style>
 			/* --- CUSTOM BOOKING PAGE STYLES --- */
-			.packages-section {
-				background-color: #28b7a3; /* Teal background from screenshot */
+			.teal-section {
+				background-color: #28b7a3; /* Exact teal from your screenshot */
 				padding: 6em 0;
 				color: #ffffff;
+				text-align: center; /* Centers all content in this section */
 			}
 			
-			.packages-section h2 {
+			.teal-section h2 {
 				color: #ffffff;
 				font-family: 'Archivo Black', sans-serif;
-				letter-spacing: 1px;
+				letter-spacing: 2px;
 				text-transform: uppercase;
-				border: none;
-				margin-bottom: 0.5em;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subtle line under header */
+				display: inline-block;
+				padding-bottom: 0.5em;
+				margin-bottom: 1em;
+				font-size: 1.5rem;
 			}
 
-			.packages-section p {
-				color: rgba(255, 255, 255, 0.9);
+			.teal-section p {
+				color: #ffffff;
 				margin-bottom: 3em;
+				font-family: 'Inter', sans-serif;
+				font-weight: 300;
+				max-width: 800px;
+				margin-left: auto;
+				margin-right: auto;
 			}
 
+			/* Square Video Container */
+			.square-video-container {
+				position: relative;
+				width: 100%;
+				max-width: 600px; /* Adjust this to change the size of the square */
+				margin: 0 auto;
+				aspect-ratio: 1 / 1; /* Forces a perfect square */
+				background: #000;
+				border-radius: 8px;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+				overflow: hidden;
+			}
+
+			.square-video-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			/* Centered Back Button */
+			.center-back-btn {
+				display: inline-block;
+				margin-bottom: 3em;
+				background-color: transparent !important;
+				box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
+				color: #ffffff !important;
+			}
+            .center-back-btn:hover {
+                box-shadow: inset 0 0 0 2px #ffffff !important;
+            }
+
+			/* --- Expedition Card Styles --- */
 			.expedition-card {
 				background: #ffffff;
 				border-radius: 4px;
 				max-width: 650px;
-				margin: 0 auto;
+				margin: 4em auto 0 auto; /* Added margin-top to separate from video */
 				color: #333333;
-				text-align: center;
+				text-align: left; /* Keep card content left-aligned */
 				overflow: hidden;
 				box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 			}
@@ -79,29 +122,11 @@
 				margin-top: 1.5em;
 				text-decoration: none;
 				transition: background-color 0.2s ease;
+				text-align: center;
 			}
 
 			.rsvp-btn:hover {
 				background-color: #5ea66e !important;
-			}
-
-			.video-container {
-				position: relative;
-				padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-				height: 0;
-				overflow: hidden;
-				max-width: 800px;
-				margin: 0 auto 2em auto;
-				border-radius: 8px;
-				box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-			}
-
-			.video-container iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
 			}
 		</style>
 	</head>
@@ -128,27 +153,21 @@
 			</header>
 
 			<article id="main">
-				<section class="wrapper style1">
+				
+				<section class="teal-section">
 					<div class="inner">
-						<div style="margin-bottom: 2em;">
-							<a href="unlocked.html" class="button small icon solid fa-arrow-left">Back to Trails</a>
-						</div>
 						
-						<header class="major" style="text-align: center;">
-							<h2>Guided Hikes & Filming</h2>
-							<p>This is what I do. Watch the video below to see a real HIXZ expedition in action.</p>
-						</header>
+						<a href="unlocked.html" class="button small center-back-btn">Back to Trails</a>
+						
+						<br>
 
-						<div class="video-container">
+						<h2>Guided Hikes & Filming</h2>
+						
+						<p>This is what I do. Watch the video below to see a real HIXZ expedition in action. I specialize in making hiking and swimming adventures in Aruba fun, safe, and unforgettable for everyone. While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild, rugged, and truly majestic side of the island that most people never get to see.</p>
+
+						<div class="square-video-container">
 							<iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
-					</div>
-				</section>
-
-				<section class="packages-section">
-					<div class="inner" style="text-align: center;">
-						<h2>Available Packages</h2>
-						<p>More details and example videos coming soon.</p>
 
 						<div class="expedition-card">
 							<div class="expedition-header">
@@ -165,6 +184,7 @@
 								<a href="mailto:marnixvanpelt11@gmail.com?subject=RSVP: Savaneta Coastal Trail" class="rsvp-btn">RSVP & JOIN THE CREW</a>
 							</div>
 						</div>
+
 					</div>
 				</section>
 			</article>
