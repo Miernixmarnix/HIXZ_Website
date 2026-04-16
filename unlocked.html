@@ -14,7 +14,7 @@
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
 		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
-		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
@@ -64,34 +64,48 @@
 			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #050a06; z-index: 10000; display: flex;
+				background-color: #020402; /* Darkened slightly for better logo contrast */
+				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards 4s; /* STAYS STATIC LONGER */
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; /* Stays static, then slides up */
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
-			/* --- UPDATED LOADER LOGO --- */
+			/* --- UPDATED LOADER LOGO WITH BLUR/SLIDE ANIMATION --- */
 			.loader-logo {
 				opacity: 0; 
-				animation: fadeInLogo 0.1s ease forwards;
+				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
 			}
-			@keyframes fadeInLogo { to { opacity: 1; } }
+			
+			@keyframes blurFadeSlide { 
+				0% { 
+					opacity: 0; 
+					filter: blur(12px); 
+					transform: translateY(30px); 
+				}
+				100% { 
+					opacity: 1; 
+					filter: blur(0px); 
+					transform: translateY(0); 
+				} 
+			}
 
 			/* Mobile fallback for Logo */
 			@media screen and (max-width: 736px) {
 				.loader-logo img {
-					max-width: 400px !important; /* Larger on mobile too */
+					max-width: 400px !important; 
 				}
                 #loader-curtain .welcome-text {
-                    font-size: 1rem !important; /* Smaller text on mobile */
+                    font-size: 0.9rem !important; 
+					letter-spacing: 2px !important;
                 }
 			}
 
 			/* --- HERO BANNER TITLE SIZING & CONTRAST --- */
 			#banner h2 {
 				font-size: 5rem !important;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Added text shadow for contrast */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 			}
 			@media screen and (max-width: 736px) {
 				#banner h2 {
@@ -100,10 +114,10 @@
 			}
 
 			.loader-status {
-				display: flex; align-items: center; gap: 12px; margin-top: 20px;
+				display: flex; align-items: center; gap: 12px; margin-top: 30px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.1s ease forwards 0.1s;
+				animation: fadeInStatus 0.5s ease forwards 1s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -112,18 +126,19 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-            /* --- LOADER WELCOME TEXT --- */
+            /* --- NEW LOADER WELCOME TEXT --- */
             #loader-curtain .welcome-text {
-                font-family: 'Archivo Black', sans-serif;
-                font-size: 1.2rem;
-                color: #ffffff;
-                letter-spacing: 1px;
-                text-transform: lowercase; /* small letters */
+                font-family: 'Inter', sans-serif;
+				font-weight: 300;
+                font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.8);
+                letter-spacing: 4px;
+                text-transform: lowercase;
                 opacity: 0;
-                animation: fadeInWelcome 0.5s ease forwards 0.5s; /* Fades in after logo/status */
-                margin-top: 10px; /* spacing below status */
+                animation: fadeInWelcome 1s ease forwards 1.2s; 
+                margin-top: 15px; 
             }
-            @keyframes fadeInWelcome { to { opacity: 1; } }
+            @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -169,7 +184,7 @@
 				<div class="loader-spinner"></div>
 				<span>Loading...</span>
 			</div>
-            <div class="welcome-text">welcome to our adventurous website</div>
+            <div class="welcome-text">discover the beauty of aruba's majestic trails.</div>
 		</div>
 
 		<div id="page-wrapper">
@@ -417,7 +432,7 @@
 			const videoObserver = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					const video = entry.target;
-					if (entry.isIntersecting) {
+					if (entry.is流水isIntersecting) {
 						video.play();
 					} else {
 						video.pause();
