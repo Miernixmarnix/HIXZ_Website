@@ -34,25 +34,24 @@
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
-				position: fixed; bottom: 30px; right: 30px;
-				background-color: #1e2b22; /* HIXZ dark green */
-				color: #ffffff !important;
-				padding: 16px 32px; border-radius: 50px; text-decoration: none;
-				font-family: 'Archivo Black', sans-serif; font-size: 15px;
-				letter-spacing: 1px; text-transform: uppercase;
-				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
-				transition: all 0.2s ease;
-				opacity: 0;
-				/* FIXED TIMING: Now waits 4.5s to appear after the curtain lifts */
-				animation: fadeInButton 0.5s ease forwards 4.5s; 
-			}
-			/* Noticeable Lighter Hover */
-			.floating-book-btn:hover { 
-				background-color: #ffffff; /* Lighter background */
-				color: #1e2b22 !important; /* Dark green text */
-				transform: translateY(-5px);
-			}
-			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
+    position: fixed; bottom: 30px; right: 30px;
+    background-color: #39FF14; /* VIBRANT LIGHT GREEN (REVERTED) */
+    color: #050a06 !important; /* DARK TEXT FOR CONTRAST */
+    padding: 16px 32px; border-radius: 50px; text-decoration: none;
+    font-family: 'Archivo Black', sans-serif; font-size: 15px;
+    letter-spacing: 1px; text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
+    transition: all 0.2s ease;
+    opacity: 0;
+    animation: fadeInButton 0.5s ease forwards 4.5s; /* Kept smooth reveal timing */
+}
+/* Noticeable Lighter Hover */
+.floating-book-btn:hover { 
+    background-color: #ffffff; /* Turns white on hover */
+    color: #1e2b22 !important; /* Very dark green text */
+    transform: translateY(-5px);
+}
+@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			@keyframes fadeInButton { to { opacity: 1; } }
 
