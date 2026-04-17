@@ -181,15 +181,10 @@
 			}
 			
 			.coming-soon-header span {
-				display: flex;
-				align-items: center;
-				gap: 12px;
+				display: flex; align-items: center; gap: 12px;
 			}
 
-			/* Subtle Dark Forest Green Hover */
-			.coming-soon-header:hover { 
-				background-color: #273b2c !important; 
-			}
+			.coming-soon-header:hover { background-color: #1b3022 !important; }
 			.coming-soon-header span::after { content: "▼"; font-size: 0.8rem; transition: transform 0.2s ease; }
 			.coming-soon-header.active span::after { content: "▲"; }
 			
@@ -207,6 +202,35 @@
 				text-transform: uppercase;
 			}
 			.inquiries-btn:hover { background-color: #5ea66e !important; }
+
+			/* --- MOBILE OPTIMIZATION FIXES --- */
+			@media screen and (max-width: 736px) {
+				/* Fix Red Cross Badge */
+				.trust-badge {
+					padding: 8px 16px;
+					gap: 10px;
+				}
+				.trust-badge span {
+					font-size: 0.75rem;
+					line-height: 1.4;
+				}
+				.trust-badge i {
+					font-size: 1rem;
+				}
+
+				/* Fix Coming Soon Button/Header */
+				.coming-soon-header {
+					padding: 1em 1.5em;
+					font-size: 1rem;
+				}
+				.inquiries-btn {
+					padding: 16px;
+					font-size: 1rem;
+				}
+				.packages-section h3 {
+					font-size: 2rem; /* Scale down header too */
+				}
+			}
 		</style>
 	</head>
 	<body class="is-preload">
