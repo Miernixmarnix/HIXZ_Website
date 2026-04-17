@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="images/favicon.png">
+		
 		<script>
 			try {
 				if (localStorage.getItem('hixz_vip') === 'true') {
@@ -34,34 +35,33 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- FLOATING BOOK NOW BUTTON --- */
-			/* --- FLOATING BOOK NOW BUTTON --- */
-.floating-book-btn {
-	position: fixed; bottom: 30px; right: 30px;
-	background-color: #5ea66e; /* Restored the exact soft, natural green */
-	color: #ffffff !important; /* Restored white text */
-	padding: 16px 32px; border-radius: 50px; text-decoration: none;
-	font-family: 'Archivo Black', sans-serif; font-size: 15px;
-	letter-spacing: 1px; text-transform: uppercase;
-	box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
-	transition: all 0.2s ease;
-	opacity: 0;
-	animation: fadeInButton 0.5s ease forwards 4.5s; 
-}
-/* Noticeable Lighter Hover */
-.floating-book-btn:hover { 
-	background-color: #ffffff; /* Lighter background */
-	color: #1e2b22 !important; /* Dark green text */
-	transform: translateY(-5px);
-}
-@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
+			/* --- FLOATING BOOK NOW BUTTON (REVERTED TO VIBRANT GREEN) --- */
+			.floating-book-btn {
+				position: fixed; bottom: 30px; right: 30px;
+				background-color: #39FF14; /* Eye-popping light green */
+				color: #050a06 !important; /* Dark text for readability */
+				padding: 16px 32px; border-radius: 50px; text-decoration: none;
+				font-family: 'Archivo Black', sans-serif; font-size: 15px;
+				letter-spacing: 1px; text-transform: uppercase;
+				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
+				transition: all 0.2s ease;
+				opacity: 0;
+				animation: fadeInButton 0.5s ease forwards 4.5s; 
+			}
+			/* Noticeable Lighter Hover */
+			.floating-book-btn:hover { 
+				background-color: #ffffff; /* Flips to white */
+				color: #1e2b22 !important; /* Dark green text */
+				transform: translateY(-5px);
+			}
+			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			@keyframes fadeInButton { to { opacity: 1; } }
 
 			/* --- COORDINATED CONTENT REVEAL --- */
 			.main-content-wrapper {
 				opacity: 0;
-				animation: fadeInContent 0.8s ease forwards 4s; /* Fades in smoothly as curtain lifts */
+				animation: fadeInContent 0.8s ease forwards 4s; 
 			}
 			@keyframes fadeInContent { to { opacity: 1; } }
 
@@ -78,23 +78,25 @@
 			}
 			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-			/* --- FOOLPROOF CSS LOADER OVERRIDE --- */
+			/* --- HIGH CONTRAST LOADER CURTAIN --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #020402; 
+				background-color: #050a06 !important; 
 				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; /* Stays static, then slides up */
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; 
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
-			/* --- UPDATED LOADER LOGO WITH BLUR/SLIDE ANIMATION --- */
+			/* --- LOADER LOGO WITH GLOW FOR VISIBILITY --- */
 			.loader-logo {
 				opacity: 0; 
 				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
 			}
-			
+			.loader-logo img {
+				filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.15));
+			}
 			@keyframes blurFadeSlide { 
 				0% { opacity: 0; filter: blur(12px); transform: translateY(30px); }
 				100% { opacity: 1; filter: blur(0px); transform: translateY(0); } 
@@ -102,11 +104,10 @@
 
 			/* Mobile fallback for Logo */
 			@media screen and (max-width: 736px) {
-				.loader-logo img { max-width: 400px !important; }
-                #loader-curtain .welcome-text { font-size: 0.9rem !important; letter-spacing: 2px !important; }
+				.loader-logo img { max-width: 320px !important; }
 			}
 
-			/* --- HERO BANNER TITLE SIZING & CONTRAST --- */
+			/* --- TEXT HEADERS --- */
 			#banner h2 { font-size: 5rem !important; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
 			@media screen and (max-width: 736px) { #banner h2 { font-size: 3rem !important; } }
 
@@ -123,12 +124,16 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-            /* --- NEW LOADER WELCOME TEXT --- */
+            /* --- CENTERED LOADER WELCOME TEXT --- */
             #loader-curtain .welcome-text {
                 font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
                 color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
                 opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px; 
+				text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;
             }
+			@media screen and (max-width: 736px) {
+				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
+			}
             @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
 
 			.video-loading-overlay {
@@ -154,7 +159,6 @@
 			#showcase { background: #2e343a; padding: 6rem 0; }
 			#showcase::after { display: none; }
 			#showcase .inner { width: 90% !important; max-width: 1400px; }
-			
 			#showcase .major { margin-bottom: 3rem !important; text-align: center; }
 			#showcase h2 { 
 				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
