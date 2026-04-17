@@ -59,7 +59,6 @@
 				margin-bottom: 1.5em; font-size: 2.2rem; border: none; 
 			}
 
-			/* Upgraded Readability for Text */
 			.description-text {
 				color: rgba(255, 255, 255, 0.9);
 				font-family: 'Inter', sans-serif;
@@ -75,7 +74,7 @@
 				border-bottom: none !important;
 				text-decoration: none !important;
 				display: inline-block;
-				margin-bottom: 2em; /* Reduced spacing */
+				margin-bottom: 2em; 
 				margin-top: 1em;
 			}
 			.trust-badge {
@@ -97,19 +96,31 @@
 				font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px;
 			}
 
-			/* --- SMART SCROLL-DOWN BUTTON --- */
-			.scroll-down-btn {
-				text-align: center; margin-bottom: 4em; cursor: pointer;
+			/* --- CUSTOM SCROLL DOWN LINK --- */
+			.custom-scroll-link {
+				display: inline-block;
+				color: rgba(255, 255, 255, 0.9);
+				font-family: 'Inter', sans-serif;
+				font-size: 1.15rem;
+				text-decoration: none;
+				position: relative;
+				margin-bottom: 4em;
+				padding-bottom: 6px;
+				cursor: pointer;
+				border-bottom: none !important;
 			}
-			.scroll-down-btn i {
-				color: rgba(94, 166, 110, 0.7); /* Subtle green */
-				font-size: 2rem;
-				transition: all 0.3s ease;
+			.custom-scroll-link::after {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				background-color: #ffffff;
+				bottom: 0;
+				left: 0;
+				transition: transform 0.3s ease;
 			}
-			/* Interactive line movement and noticeability */
-			.scroll-down-btn:hover i {
-				color: #5ea66e; /* Noticeable darker green */
-				transform: translateY(10px); /* Line slides down smoothly */
+			.custom-scroll-link:hover::after {
+				transform: translateY(6px);
 			}
 
 			/* Widescreen Video Container */
@@ -164,17 +175,22 @@
 			.coming-soon-header {
 				background-color: #1e2b22; color: #ffffff; padding: 1.5em 2em;
 				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 2px; 
-				display: flex; justify-content: center; 
+				letter-spacing: 2px; display: flex; justify-content: center; 
 				align-items: center; cursor: pointer;
-				transition: all 0.2s ease;
+				transition: background-color 0.3s ease;
 			}
-			/* --- UPDATED: Subtle Forest Green Hover --- */
+			
+			.coming-soon-header span {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+
+			/* Subtle Dark Forest Green Hover */
 			.coming-soon-header:hover { 
-				background-color: #1b3022 !important; /* Lighter, subtle green */
-				color: #ffffff !important; /* Kept white text */
+				background-color: #273b2c !important; 
 			}
-			.coming-soon-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; }
+			.coming-soon-header span::after { content: "▼"; font-size: 0.8rem; transition: transform 0.2s ease; }
 			.coming-soon-header.active span::after { content: "▲"; }
 			
 			.coming-soon-body { padding: 3em; display: none; }
@@ -188,6 +204,7 @@
 				color: #ffffff !important; font-family: 'Archivo Black', sans-serif;
 				font-size: 1.3rem; letter-spacing: 1px; padding: 24px; 
 				border-radius: 50px; text-decoration: none; transition: background-color 0.2s ease;
+				text-transform: uppercase;
 			}
 			.inquiries-btn:hover { background-color: #5ea66e !important; }
 		</style>
@@ -231,16 +248,15 @@
 						
 						<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
 
-						<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" class="trust-badge-link">
+						<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="trust-badge-link">
 							<div class="trust-badge">
 								<i class="icon solid fa-medkit"></i>
 								<span>Official Red Cross Certified First Aid Responder (View Certificate)</span>
 							</div>
 						</a>
+						<br>
 
-						<div class="scroll-down-btn" id="scroll-down-trigger">
-							<i class="icon solid fa-chevron-down"></i>
-						</div>
+						<a class="custom-scroll-link" id="scroll-down-trigger">view available packages</a>
 
 						<div class="video-container">
 							<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
