@@ -20,7 +20,7 @@
 
 		<style>
 			/* --- HEADER --- */
-			#header.alt { background-color: #142017 !important; }
+			#header.alt { background-color: transparent !important; border-bottom: none; box-shadow: none; }
 
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
@@ -29,13 +29,14 @@
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
+				-webkit-appearance: none; appearance: none; box-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
-				background-color: #5ea66e; /* Restored soft green */
+				background-color: #5ea66e; 
 				color: #ffffff !important;
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
@@ -74,10 +75,10 @@
 			}
 			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-			/* --- CSS LOADER WITH HIGH CONTRAST BACKGROUND --- */
+			/* --- SLATE-TEAL LOADER CURTAIN --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #050a06 !important; /* Forced very dark background */
+				background-color: #39605e !important; 
 				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
 				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; 
@@ -91,7 +92,6 @@
 				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
 			}
 			.loader-logo img {
-				/* Adds a subtle white backlight to make the dark logo pop */
 				filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.15));
 			}
 			
@@ -100,7 +100,6 @@
 				100% { opacity: 1; filter: blur(0px); transform: translateY(0); } 
 			}
 
-			/* Mobile fallback for Logo and Status */
 			@media screen and (max-width: 736px) {
 				.loader-logo img { max-width: 320px !important; }
 			}
@@ -126,11 +125,7 @@
                 font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
                 color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
                 opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px; 
-				/* Alignment Fixes */
-				text-align: center;
-				width: 100%;
-				padding: 0 20px;
-				box-sizing: border-box;
+				text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;
             }
 			@media screen and (max-width: 736px) {
 				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
