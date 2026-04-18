@@ -414,24 +414,24 @@
 				});
 			}, 100);
 
-			setTimeout(() => {
-				document.querySelectorAll('.lazy-video').forEach(video => {
-					if (!video.src) {
-						video.src = video.getAttribute('data-src');
-					}
-				});
-			}, 4000);
-
-			const videoObserver = new IntersectionObserver((entries) => {
+			// --- OPTIMIZED LAZY LOADING FOR PORTFOLIO VIDEOS ---
+			const videoObserver = new IntersectionObserver((entries, observer) => {
 				entries.forEach(entry => {
 					const video = entry.target;
 					if (entry.isIntersecting) {
-						video.play();
+						if (!video.src) {
+							video.src = video.getAttribute('data-src');
+							video.load();
+						}
+						video.play().catch(e => {}); 
 					} else {
 						video.pause();
 					}
 				});
-			}, { threshold: 0.1 });
+			}, { 
+				rootMargin: '300px 0px', 
+				threshold: 0.1 
+			});
 
 			document.querySelectorAll('.lazy-video').forEach(video => {
 				videoObserver.observe(video);
