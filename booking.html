@@ -36,7 +36,7 @@
 			/* --- NOTICEABLE CONTENT REVEAL --- */
 			.main-content-wrapper {
 				opacity: 0;
-				transform: translateY(30px); /* Makes the glide much more noticeable */
+				transform: translateY(30px); 
 				animation: fadeInContent 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; 
 			}
 			@keyframes fadeInContent {
@@ -229,25 +229,25 @@
 
 		<div id="page-wrapper">
 
-			<div class="main-content-wrapper">
+			<header id="header" class="alt">
+				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
+				<nav id="nav">
+					<ul>
+						<li class="special">
+							<a href="#menu" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.html">Home</a></li>
+									<li><a href="generic.html">About Me</a></li>
+									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</header>
 
-				<header id="header" class="alt">
-					<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="special">
-								<a href="#menu" class="menuToggle"><span>Menu</span></a>
-								<div id="menu">
-									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li><a href="generic.html">About Me</a></li>
-										<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
-									</ul>
-								</div>
-							</li>
-						</ul>
-					</nav>
-				</header>
+			<div class="main-content-wrapper">
 
 				<article id="main">
 					
