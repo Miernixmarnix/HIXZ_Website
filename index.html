@@ -23,7 +23,7 @@
 
 		<style>
 			/* --- HEADER --- */
-			#header.alt { background-color: #142017 !important; }
+			#header.alt { background-color: transparent !important; border-bottom: none; box-shadow: none; }
 
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
@@ -32,14 +32,15 @@
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
+				-webkit-appearance: none; appearance: none; box-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- FLOATING BOOK NOW BUTTON (REVERTED TO VIBRANT GREEN) --- */
+			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
-				background-color: #39FF14; /* Eye-popping light green */
-				color: #050a06 !important; /* Dark text for readability */
+				background-color: #5ea66e; 
+				color: #ffffff !important; 
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
 				letter-spacing: 1px; text-transform: uppercase;
@@ -48,10 +49,9 @@
 				opacity: 0;
 				animation: fadeInButton 0.5s ease forwards 4.5s; 
 			}
-			/* Noticeable Lighter Hover */
 			.floating-book-btn:hover { 
-				background-color: #ffffff; /* Flips to white */
-				color: #1e2b22 !important; /* Dark green text */
+				background-color: #ffffff; 
+				color: #1e2b22 !important; 
 				transform: translateY(-5px);
 			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
@@ -78,10 +78,10 @@
 			}
 			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-			/* --- HIGH CONTRAST LOADER CURTAIN --- */
+			/* --- SLATE-TEAL LOADER CURTAIN --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #050a06 !important; 
+				background-color: #39605e !important; 
 				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
 				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; 
@@ -102,7 +102,6 @@
 				100% { opacity: 1; filter: blur(0px); transform: translateY(0); } 
 			}
 
-			/* Mobile fallback for Logo */
 			@media screen and (max-width: 736px) {
 				.loader-logo img { max-width: 320px !important; }
 			}
