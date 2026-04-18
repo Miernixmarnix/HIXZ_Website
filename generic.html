@@ -2,14 +2,25 @@
 <html>
 	<head>
 		<title>About Me - HIXZ</title>
-		<link rel="icon" type="image/png" href="images/favicon.png">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<meta property="og:title" content="HIXZ - About Marnix" />
+		<meta property="og:description" content="Your guide to Aruba's best-kept secrets. Learn about the HIXZ mission and professional filming." />
+		<meta property="og:image" content="https://www.hixzofficial.com/images/NatureBridgepath.jpg" />
+		<meta property="og:url" content="https://www.hixzofficial.com/generic.html" />
+		<meta property="og:type" content="website" />
+
+		<link rel="icon" type="image/png" href="images/favicon.png">
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         
 		<style>
+			/* --- PREMIUM SAGE GREEN MENU OVERRIDE --- */
+			#menu { background: #1e2b22 !important; }
+			#menu ul li a:hover { color: #5ea66e !important; }
+
 			.google-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
@@ -19,6 +30,24 @@
 				box-shadow: none; text-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
+
+			/* --- FLOATING BOOK NOW BUTTON --- */
+			.floating-book-btn {
+				position: fixed; bottom: 30px; right: 30px;
+				background-color: #5ea66e; 
+				color: #ffffff !important; 
+				padding: 16px 32px; border-radius: 50px; text-decoration: none;
+				font-family: 'Archivo Black', sans-serif; font-size: 15px;
+				letter-spacing: 1px; text-transform: uppercase;
+				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
+				transition: all 0.2s ease;
+			}
+			.floating-book-btn:hover { 
+				background-color: #ffffff; 
+				color: #1e2b22 !important; 
+				transform: translateY(-5px);
+			}
+			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			.about-header {
 				font-family: 'Archivo Black', sans-serif;
@@ -38,10 +67,13 @@
 	</head>
 	<body class="is-preload">
 
+		<a href="booking.html#available-packages-anchor" class="floating-book-btn">BOOK NOW</a>
+
 		<div id="page-wrapper">
 
 			<header id="header">
 				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
+				
 				<nav id="nav">
 					<ul>
 						<li class="special">
@@ -49,7 +81,8 @@
 							<div id="menu">
 								<ul>
 									<li><a href="index.html">Home</a></li>
-									<li><a href="maps/map.html">Hike Map</a></li> 
+									<li><a href="unlocked.html">Trail Maps</a></li>
+									<li><a href="booking.html#available-packages-anchor">Book a Tour</a></li>
 									<li><a href="generic.html">About Me</a></li>
 									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
 								</ul>
@@ -94,7 +127,7 @@
 						<p>After the hike, you will receive fully edited, high-quality video clips—expertly cut and color-graded—perfectly formatted for your TikTok or Instagram feeds. You get to leave the island with an amazing experience and the exact content you need to remember it by.</p>
 						
 						<div style="text-align: center; margin-top: 3em;">
-							<a href="booking.html" class="google-btn">Book an Adventure With Me</a>
+							<a href="booking.html#available-packages-anchor" class="google-btn">Book an Adventure With Me</a>
 						</div>
 
 					</div>
@@ -103,8 +136,9 @@
 
 			<footer id="footer">
 				<ul class="icons">
+					<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
 					<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="https://www.tiktok.com/@eh6563" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+					<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
 					<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
