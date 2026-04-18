@@ -2,10 +2,11 @@
 <html>
 	<head>
 		<title>HIXZ</title>
-		<meta name="google-site-verification" content="1GB8daHoGs1wBe0ikxcO7piGJ6EDoJ6WHu0D78WcjJo" />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="images/favicon.png">
+		
+		<meta name="google-site-verification" content="1GB8daHoGs1wBe0ikxcO7piGJ6EDoJ6WHu0D78WcjJo" />
 		
 		<script>
 			try {
@@ -395,6 +396,8 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		
+		<script async data-uid="92566aafcc" src="https://hixz.kit.com/92566aafcc/index.js"></script>
+		
 		<script>
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
@@ -460,6 +463,25 @@
 				} else {
 					hiddenDiv.style.display = "block";
 					this.innerHTML = "SHOW LESS";
+				}
+			});
+
+			// --- 50% SCROLL POPUP TRIGGER ---
+			let popupTriggered = false;
+			window.addEventListener('scroll', () => {
+				if (popupTriggered) return;
+
+				const scrollPosition = window.scrollY;
+				const windowSize = window.innerHeight;
+				const bodyHeight = document.body.offsetHeight;
+				const scrollPercentage = Math.max(0, Math.min(100, (scrollPosition / (bodyHeight - windowSize)) * 100));
+
+				if (scrollPercentage >= 50) {
+					const mainSignupBtn = document.getElementById('signup-btn');
+					if (mainSignupBtn) {
+						mainSignupBtn.click();
+						popupTriggered = true; 
+					}
 				}
 			});
 		</script>
