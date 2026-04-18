@@ -33,6 +33,16 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
+			/* --- NOTICEABLE CONTENT REVEAL --- */
+			.main-content-wrapper {
+				opacity: 0;
+				transform: translateY(30px); /* Makes the glide much more noticeable */
+				animation: fadeInContent 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; 
+			}
+			@keyframes fadeInContent {
+				to { opacity: 1; transform: translateY(0); }
+			}
+
 			/* --- TOP SECTION: Charcoal/Green Gradient --- */
 			.booking-top-section {
 				background: linear-gradient(135deg, #1e2b22 0%, #2b3036 100%);
@@ -219,108 +229,110 @@
 
 		<div id="page-wrapper">
 
-			<header id="header" class="alt">
-				<h1><a href="index.html"><img src="images/HIXZLogo_Light.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-				<nav id="nav">
-					<ul>
-						<li class="special">
-							<a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.html">Home</a></li>
-									<li><a href="generic.html">About Me</a></li>
-									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
-								</ul>
+			<div class="main-content-wrapper">
+
+				<header id="header" class="alt">
+					<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="special">
+								<a href="#menu" class="menuToggle"><span>Menu</span></a>
+								<div id="menu">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li><a href="generic.html">About Me</a></li>
+										<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<article id="main">
+					
+					<section class="booking-top-section">
+						<div class="inner">
+							
+							<a href="unlocked.html" class="top-back-btn">
+								← BACK TO TRAILS
+							</a>
+
+							<h2>Guided Hikes & Filming</h2>
+							
+							<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
+							
+							<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film.</p>
+							
+							<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
+
+							<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="trust-badge-link">
+								<div class="trust-badge">
+									<i class="icon solid fa-medkit"></i>
+									<span>Official Red Cross Certified First Aid Responder (View Certificate)</span>
+								</div>
+							</a>
+							<br>
+
+							<a class="custom-scroll-link" id="scroll-down-trigger">view available packages</a>
+
+							<div class="video-container">
+								<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 							</div>
-						</li>
+
+							<div class="dark-accordion">
+								<div class="dark-accordion-header" id="fun-facts-trigger">
+									<span>TRAIL FUN FACTS: NATURAL BRIDGE TO CONCHI</span>
+								</div>
+								<div class="dark-accordion-body" id="fun-facts-body">
+									<p>Want to know what you're getting into? Here is some history on this specific route:</p>
+									<ul>
+										<li><strong>Blackstone Beach:</strong> This is the only beach in Aruba entirely made of black volcanic stones instead of white sand.</li>
+										<li><strong>The Original Bridge:</strong> The famous Natural Bridge collapsed in 2005, but the rugged windward coast remains completely untouched by commercial development.</li>
+										<li><strong>Conchi (Natural Pool):</strong> Protected by a wall of volcanic rock, this hidden pool requires a serious trek through Arikok National Park to access safely.</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+					<section class="packages-section" id="available-packages-anchor">
+						<div class="inner">
+							
+							<h3>AVAILABLE PACKAGES</h3>
+
+							<div class="coming-soon-card">
+								<div class="coming-soon-header" id="coming-soon-trigger">
+									<span>COMING SOON</span>
+								</div>
+								<div class="coming-soon-body" id="coming-soon-body">
+									<p>We are currently finalizing our premium filming packages and group hike schedules for the upcoming season. The trails are waiting.</p>
+									<p><strong>Want to lock in a date early? Reach out directly.</strong></p>
+									<a href="mailto:marnixvanpelt11@gmail.com" class="inquiries-btn">CONTACT FOR INQUIRIES</a>
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+				</article>
+
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+						<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+						<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
-				</nav>
-			</header>
+					<ul class="copyright">
+						<li>&copy; HIXZ </li>
+						<li>Built by Marnix van Pelt</li>
+					</ul>
+				</footer>
 
-			<article id="main">
-				
-				<section class="booking-top-section">
-					<div class="inner">
-						
-						<a href="unlocked.html" class="top-back-btn">
-							← BACK TO TRAILS
-						</a>
-
-						<h2>Guided Hikes & Filming</h2>
-						
-						<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
-						
-						<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film.</p>
-						
-						<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
-
-						<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="trust-badge-link">
-							<div class="trust-badge">
-								<i class="icon solid fa-medkit"></i>
-								<span>Official Red Cross Certified First Aid Responder (View Certificate)</span>
-							</div>
-						</a>
-						<br>
-
-						<a class="custom-scroll-link" id="scroll-down-trigger">view available packages</a>
-
-						<div class="video-container">
-							<iframe src="https://www.youtube.com/embed/nO4cs90sY2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						</div>
-
-						<div class="dark-accordion">
-							<div class="dark-accordion-header" id="fun-facts-trigger">
-								<span>TRAIL FUN FACTS: NATURAL BRIDGE TO CONCHI</span>
-							</div>
-							<div class="dark-accordion-body" id="fun-facts-body">
-								<p>Want to know what you're getting into? Here is some history on this specific route:</p>
-								<ul>
-									<li><strong>Blackstone Beach:</strong> This is the only beach in Aruba entirely made of black volcanic stones instead of white sand.</li>
-									<li><strong>The Original Bridge:</strong> The famous Natural Bridge collapsed in 2005, but the rugged windward coast remains completely untouched by commercial development.</li>
-									<li><strong>Conchi (Natural Pool):</strong> Protected by a wall of volcanic rock, this hidden pool requires a serious trek through Arikok National Park to access safely.</li>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-				<section class="packages-section" id="available-packages-anchor">
-					<div class="inner">
-						
-						<h3>AVAILABLE PACKAGES</h3>
-
-						<div class="coming-soon-card">
-							<div class="coming-soon-header" id="coming-soon-trigger">
-								<span>COMING SOON</span>
-							</div>
-							<div class="coming-soon-body" id="coming-soon-body">
-								<p>We are currently finalizing our premium filming packages and group hike schedules for the upcoming season. The trails are waiting.</p>
-								<p><strong>Want to lock in a date early? Reach out directly.</strong></p>
-								<a href="mailto:marnixvanpelt11@gmail.com" class="inquiries-btn">CONTACT FOR INQUIRIES</a>
-							</div>
-						</div>
-
-					</div>
-				</section>
-
-			</article>
-
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
-					<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
-					<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; HIXZ </li>
-					<li>Built by Marnix van Pelt</li>
-				</ul>
-			</footer>
-
-		</div>
+			</div> </div>
 
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
