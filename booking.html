@@ -20,7 +20,7 @@
 
 		<style>
 			/* --- HEADER --- */
-			#header.alt { background-color: #142017 !important; }
+			#header.alt { background-color: transparent !important; border-bottom: none; box-shadow: none; }
 
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
@@ -29,6 +29,7 @@
 				border-radius: 50px; text-decoration: none; font-family: 'Archivo Black', sans-serif;
 				font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
 				transition: all 0.3s ease; border: none; outline: none; cursor: pointer;
+				-webkit-appearance: none; appearance: none; box-shadow: none;
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
@@ -228,7 +229,7 @@
 					font-size: 1rem;
 				}
 				.packages-section h3 {
-					font-size: 2rem; /* Scale down header too */
+					font-size: 2rem;
 				}
 			}
 		</style>
