@@ -206,31 +206,12 @@
 
 			/* --- MOBILE OPTIMIZATION FIXES --- */
 			@media screen and (max-width: 736px) {
-				/* Fix Red Cross Badge */
-				.trust-badge {
-					padding: 8px 16px;
-					gap: 10px;
-				}
-				.trust-badge span {
-					font-size: 0.75rem;
-					line-height: 1.4;
-				}
-				.trust-badge i {
-					font-size: 1rem;
-				}
-
-				/* Fix Coming Soon Button/Header */
-				.coming-soon-header {
-					padding: 1em 1.5em;
-					font-size: 1rem;
-				}
-				.inquiries-btn {
-					padding: 16px;
-					font-size: 1rem;
-				}
-				.packages-section h3 {
-					font-size: 2rem;
-				}
+				.trust-badge { padding: 8px 16px; gap: 10px; }
+				.trust-badge span { font-size: 0.75rem; line-height: 1.4; }
+				.trust-badge i { font-size: 1rem; }
+				.coming-soon-header { padding: 1em 1.5em; font-size: 1rem; }
+				.inquiries-btn { padding: 16px; font-size: 1rem; }
+				.packages-section h3 { font-size: 2rem; }
 			}
 		</style>
 	</head>
@@ -239,7 +220,7 @@
 		<div id="page-wrapper">
 
 			<header id="header" class="alt">
-				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
+				<h1><a href="index.html"><img src="images/HIXZLogo_Light.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
 				<nav id="nav">
 					<ul>
 						<li class="special">
@@ -350,13 +331,11 @@
 		<script src="assets/js/main.js"></script>
 
 		<script>
-			// Smooth Scroll to Packages
 			document.getElementById('scroll-down-trigger').addEventListener('click', function(e) {
 				e.preventDefault();
 				document.getElementById('available-packages-anchor').scrollIntoView({ behavior: 'smooth' });
 			});
 
-			// Packages Accordion
 			const pkgTrigger = document.getElementById('coming-soon-trigger');
 			const pkgBody = document.getElementById('coming-soon-body');
 			pkgTrigger.addEventListener('click', function() {
@@ -364,7 +343,6 @@
 				pkgBody.style.display = pkgBody.style.display === "block" ? "none" : "block";
 			});
 
-			// Fun Facts Accordion
 			const factsTrigger = document.getElementById('fun-facts-trigger');
 			const factsBody = document.getElementById('fun-facts-body');
 			factsTrigger.addEventListener('click', function() {
