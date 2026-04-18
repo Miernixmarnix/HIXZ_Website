@@ -19,8 +19,14 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* --- HEADER --- */
-			#header.alt { background-color: transparent !important; border-bottom: none; box-shadow: none; }
+			/* --- FORCED STICKY HEADER FOR INNER PAGE --- */
+			#header { 
+				position: fixed !important; 
+				top: 0; left: 0; width: 100%; 
+				background-color: #1e2b22 !important; 
+				z-index: 10000; border-bottom: none !important; 
+				box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+			}
 
 			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
@@ -37,7 +43,7 @@
 			.main-content-wrapper {
 				opacity: 0;
 				transform: translateY(30px); 
-				animation: fadeInContent 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; 
+				animation: fadeInContent 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.1s; 
 			}
 			@keyframes fadeInContent {
 				to { opacity: 1; transform: translateY(0); }
@@ -46,7 +52,7 @@
 			/* --- TOP SECTION: Charcoal/Green Gradient --- */
 			.booking-top-section {
 				background: linear-gradient(135deg, #1e2b22 0%, #2b3036 100%);
-				padding: 5em 0 6em 0; 
+				padding: 8em 0 6em 0; /* Increased top padding so content isn't hidden under the fixed header */
 				color: #ffffff;
 				text-align: center;
 				position: relative;
@@ -229,7 +235,7 @@
 
 		<div id="page-wrapper">
 
-			<header id="header" class="alt">
+			<header id="header">
 				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
 				<nav id="nav">
 					<ul>
