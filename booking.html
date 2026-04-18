@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Book an Adventure - HIXZ</title>
-		<meta charset="utf-8" />
+		<title>Aruba Adventures & Filming - HIXZ Hub</title> <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
-		<meta property="og:title" content="HIXZ - Book an Adventure" />
-		<meta property="og:description" content="Lock in your date for a guided hike and professional video shoot in Aruba." />
+		<meta property="og:title" content="HIXZ - Aruba Adventure & Filming Hub" />
+		<meta property="og:description" content="Packages, vlogs, history, and booking for guided hikes and professional video shoots in Aruba." />
 		<meta property="og:image" content="https://www.hixzofficial.com/images/mainbackground.jpg" />
 		<meta property="og:url" content="https://www.hixzofficial.com/booking.html" />
 		<meta property="og:type" content="website" />
@@ -162,21 +161,35 @@
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 			}
 
-			/* --- DARK ACCORDION (Fun Facts) --- */
-			.dark-accordion {
-				background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1);
-				border-radius: 8px; max-width: 900px; margin: 3em auto 0 auto;
-				overflow: hidden; text-align: left;
+			/* --- MODERNIZED ACCORDION BASE --- */
+			.dark-accordion, .coming-soon-card {
+				background: transparent !important; border: none !important; box-shadow: none !important;
+				overflow: visible; margin-top: 3em auto;
 			}
+
+			/* --- TRAIL FACTS ACCORDION (Modernized Pill Button) --- */
 			.dark-accordion-header {
-				padding: 1.5em 2em; display: flex; justify-content: space-between;
-				align-items: center; cursor: pointer; color: #ffffff;
-				font-family: 'Archivo Black', sans-serif; font-size: 1rem; letter-spacing: 1px;
+				display: flex; justify-content: center; align-items: center; 
+				padding: 14px 36px; border-radius: 50px;
+				background-color: #050a06; color: #ffffff;
+				font-family: 'Archivo Black', sans-serif; font-size: 14px;
+				letter-spacing: 1px; text-transform: uppercase;
+				cursor: pointer; transition: all 0.3s ease;
 			}
-			.dark-accordion-header span::after { content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; }
-			.dark-accordion-header.active span::after { content: "▲"; }
+			.dark-accordion-header:hover { background-color: #1b3022; }
+
+			.dark-accordion-header span::after, .coming-soon-header span::after { 
+				content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; 
+			}
+			.dark-accordion-header.active span::after, .coming-soon-header.active span::after { 
+				transform: rotate(-180deg);
+			}
+
+			/* Facts Body Container (Less blocky) */
 			.dark-accordion-body {
-				padding: 0 2em 2em 2em; display: none;
+				padding: 2em; margin-top: 15px; display: none;
+				background: rgba(0, 0, 0, 0.2); border-radius: 12px;
+				text-align: left;
 				font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.8;
 			}
 			.dark-accordion-body ul { margin-top: 1em; padding-left: 1.5em; list-style: disc; }
@@ -196,35 +209,29 @@
 				text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5em;
 			}
 
-			/* --- LIGHT ACCORDION CARD (Packages) --- */
-			.coming-soon-card {
-				background: #ffffff; border-radius: 8px; 
-				max-width: 450px; 
-				margin: 0 auto; box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-				overflow: hidden; text-align: center;
-			}
+			/* --- COMING SOON ACCORDION (Modernized Pill Button) --- */
 			.coming-soon-header {
-				background-color: #1e2b22; color: #ffffff; padding: 1.5em 2em;
-				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 2px; display: flex; justify-content: center; 
-				align-items: center; cursor: pointer;
-				transition: background-color 0.3s ease;
+				display: flex; justify-content: center; align-items: center; 
+				padding: 14px 36px; border-radius: 50px;
+				background-color: #1e2b22 !important; color: #ffffff !important;
+				font-family: 'Archivo Black', sans-serif; font-size: 14px;
+				letter-spacing: 1px; text-transform: uppercase;
+				cursor: pointer; transition: background-color 0.3s ease;
 			}
 			
-			.coming-soon-header span {
-				display: flex; align-items: center; gap: 12px;
-			}
-
 			.coming-soon-header:hover { background-color: #1b3022 !important; }
-			.coming-soon-header span::after { content: "▼"; font-size: 0.8rem; transition: transform 0.2s ease; }
-			.coming-soon-header.active span::after { content: "▲"; }
 			
-			.coming-soon-body { padding: 3em; display: none; }
+			/* Coming Soon Body Container (Less blocky) */
+			.coming-soon-body { 
+				padding: 3em; margin-top: 15px; display: none; 
+				background: #ffffff; border-radius: 12px;
+			}
 			.coming-soon-body p {
 				color: #333; font-family: 'Inter', sans-serif; font-weight: 400;
 				font-size: 1.05rem; line-height: 1.6; margin-bottom: 2em;
 			}
 
+			/* Button *inside* body is already a pill */
 			.inquiries-btn {
 				display: block; width: 100%; background-color: #1e2b22 !important; 
 				color: #ffffff !important; font-family: 'Archivo Black', sans-serif;
@@ -239,7 +246,7 @@
 				.trust-badge { padding: 8px 16px; gap: 10px; }
 				.trust-badge span { font-size: 0.75rem; line-height: 1.4; }
 				.trust-badge i { font-size: 1rem; }
-				.coming-soon-header { padding: 1em 1.5em; font-size: 1rem; }
+				.coming-soon-header, .dark-accordion-header { padding: 12px 24px; font-size: 12px; }
 				.inquiries-btn { padding: 16px; font-size: 1rem; }
 				.packages-section h3 { font-size: 2rem; }
 			}
@@ -259,9 +266,7 @@
 							<div id="menu">
 								<ul>
 									<li><a href="index.html">Home</a></li>
-									<li><a href="unlocked.html">Trail Maps</a></li>
-									<li><a href="booking.html#available-packages-anchor">Book a Tour</a></li>
-									<li><a href="generic.html">About Me</a></li>
+									<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li> <li><a href="generic.html">About Me</a></li>
 									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
 								</ul>
 							</div>
@@ -281,9 +286,7 @@
 								← BACK TO TRAILS
 							</a>
 
-							<h2>Guided Hikes & Filming</h2>
-							
-							<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
+							<h2>Aruba Adventures & Filming Hub</h2> <p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
 							
 							<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film.</p>
 							
@@ -371,6 +374,7 @@
 				document.getElementById('available-packages-anchor').scrollIntoView({ behavior: 'smooth' });
 			});
 
+			// Unified active class logic
 			const pkgTrigger = document.getElementById('coming-soon-trigger');
 			const pkgBody = document.getElementById('coming-soon-body');
 			pkgTrigger.addEventListener('click', function() {
