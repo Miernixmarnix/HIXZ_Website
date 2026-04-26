@@ -49,6 +49,17 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
+			/* --- PRIMARY VARIANT (sage green) for high-priority CTAs like "View More Trails" --- */
+			.google-btn-primary {
+				background-color: #5ea66e !important;
+				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45);
+			}
+			.google-btn-primary:hover {
+				background-color: #4a8559 !important;
+				transform: translateY(-3px);
+				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
+			}
+
 			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
@@ -57,8 +68,8 @@
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
 				letter-spacing: 1px; text-transform: uppercase;
-				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
-				transition: all 0.2s ease;
+				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45); z-index: 10001;
+				transition: all 0.25s ease;
 				opacity: 0;
 				animation: fadeInButton 0.5s ease forwards 4.5s; 
 			}
@@ -66,6 +77,7 @@
 				background-color: #ffffff; 
 				color: #1e2b22 !important; 
 				transform: translateY(-5px);
+				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
@@ -283,7 +295,7 @@
 					</section>
 
 					<div class="see-more-container style2">
-						<button class="google-btn" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
+						<button class="google-btn google-btn-primary" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
 							VIEW MORE TRAILS
 						</button>
 					</div>
