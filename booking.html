@@ -124,6 +124,64 @@
 				font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px;
 			}
 
+			/* --- CERTIFICATE MODAL (Lightbox) --- */
+			.cert-modal {
+				display: none;
+				position: fixed;
+				top: 0; left: 0;
+				width: 100%; height: 100%;
+				background: rgba(0, 0, 0, 0.92);
+				z-index: 99999;
+				overflow-y: auto;
+				-webkit-overflow-scrolling: touch;
+				padding: 2em 1em;
+				box-sizing: border-box;
+			}
+			.cert-modal.active { display: block; }
+			.cert-modal-close {
+				position: fixed;
+				top: 20px; right: 20px;
+				width: 44px; height: 44px;
+				background: rgba(255, 255, 255, 0.15);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				border-radius: 50%;
+				color: #ffffff;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.2rem;
+				line-height: 44px;
+				text-align: center;
+				cursor: pointer;
+				z-index: 100000;
+				transition: all 0.2s ease;
+				border-bottom: none !important;
+			}
+			.cert-modal-close:hover {
+				background: rgba(255, 255, 255, 0.3);
+				transform: rotate(90deg);
+			}
+			.cert-modal-content {
+				max-width: 900px;
+				margin: 0 auto;
+				text-align: center;
+			}
+			.cert-modal-content img {
+				width: 100%;
+				max-width: 100%;
+				height: auto;
+				border-radius: 8px;
+				margin-bottom: 1.5em;
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+				display: block;
+			}
+			.cert-modal-label {
+				color: rgba(255, 255, 255, 0.6);
+				font-family: 'Inter', sans-serif;
+				font-size: 0.85rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				margin: 0 0 0.75em 0;
+			}
+
 			/* --- CUSTOM SCROLL DOWN LINK --- */
 			.custom-scroll-link {
 				display: inline-block;
@@ -337,7 +395,7 @@
 							
 							<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
 
-							<a href="assets/docs/RedCross_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="trust-badge-link">
+							<a href="#" id="cert-modal-trigger" class="trust-badge-link">
 								<div class="trust-badge">
 									<i class="icon solid fa-medkit"></i>
 									<span>Official Red Cross Certified First Aid Responder (View Certificate)</span>
@@ -405,6 +463,17 @@
 
 			</div> </div>
 
+		<!-- Certificate viewer modal (opens both pages of the Red Cross certificate) -->
+		<div class="cert-modal" id="cert-modal" role="dialog" aria-label="Red Cross Certificate" aria-hidden="true">
+			<button class="cert-modal-close" id="cert-modal-close" aria-label="Close">×</button>
+			<div class="cert-modal-content">
+				<p class="cert-modal-label">Page 1 of 2</p>
+				<img src="images/RedCross_Certificate1.jpg" alt="Red Cross First Aid Certificate - Page 1" loading="lazy" />
+				<p class="cert-modal-label">Page 2 of 2</p>
+				<img src="images/RedCross_Certificate2.jpg" alt="Red Cross First Aid Certificate - Page 2" loading="lazy" />
+			</div>
+		</div>
+
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
 		<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -432,6 +501,34 @@
 			factsTrigger.addEventListener('click', function() {
 				this.classList.toggle('active');
 				factsBody.style.display = factsBody.style.display === "block" ? "none" : "block";
+			});
+
+			// Certificate modal — opens lightbox with both pages of the Red Cross certificate
+			const certTrigger = document.getElementById('cert-modal-trigger');
+			const certModal = document.getElementById('cert-modal');
+			const certClose = document.getElementById('cert-modal-close');
+
+			certTrigger.addEventListener('click', function(e) {
+				e.preventDefault();
+				certModal.classList.add('active');
+				certModal.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden'; // Prevent background scroll while modal is open
+			});
+
+			function closeCertModal() {
+				certModal.classList.remove('active');
+				certModal.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+			}
+
+			certClose.addEventListener('click', closeCertModal);
+			// Close when tapping the dark backdrop (but not the images themselves)
+			certModal.addEventListener('click', function(e) {
+				if (e.target === certModal) closeCertModal();
+			});
+			// Close on Escape key (desktop)
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && certModal.classList.contains('active')) closeCertModal();
 			});
 		</script>
 
