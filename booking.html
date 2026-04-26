@@ -249,12 +249,48 @@
 
 			/* --- MOBILE OPTIMIZATION FIXES --- */
 			@media screen and (max-width: 736px) {
-				.trust-badge { padding: 8px 16px; gap: 10px; }
+				/* Tighten the top section's huge vertical padding */
+				.booking-top-section { padding: 6em 0 4em 0; }
+
+				/* Smaller hero heading on mobile */
+				.booking-top-section h2 { font-size: 1.6rem; letter-spacing: 1.5px; margin-bottom: 1.2em; }
+
+				/* Right-size the intro paragraphs — readable but not overwhelming */
+				.description-text { font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2em; padding: 0 0.5em; }
+
+				/* Back button stays compact */
+				.top-back-btn { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 2em; }
+
+				/* Trust badge — tighter and prevents edge-touching */
+				.trust-badge { padding: 8px 16px; gap: 10px; max-width: 90%; }
 				.trust-badge span { font-size: 0.75rem; line-height: 1.4; }
 				.trust-badge i { font-size: 1rem; }
-				.coming-soon-header, .dark-accordion-header { padding: 12px 24px; font-size: 12px; }
+
+				/* Pill buttons — tighter padding, centered */
+				.coming-soon-header, .dark-accordion-header, .google-btn { 
+					padding: 12px 24px; font-size: 12px; 
+				}
 				.inquiries-btn { padding: 12px 24px; font-size: 12px; }
-				.packages-section h3 { font-size: 2rem; }
+
+				/* Section heading scales down */
+				.packages-section h3 { font-size: 1.8rem; margin-bottom: 1em; }
+				.packages-section { padding: 4em 0; }
+
+				/* White "Coming Soon" body card — narrower so it doesn't hit screen edges */
+				.coming-soon-body { 
+					padding: 1.5em 1.25em; 
+					max-width: 90%; 
+					margin: 15px auto 0 auto; 
+				}
+				.coming-soon-body p { font-size: 0.9rem; line-height: 1.55; margin-bottom: 1.25em; }
+
+				/* Trail facts body — same edge breathing room */
+				.dark-accordion-body { 
+					padding: 1.5em 1.25em; 
+					max-width: 90%; 
+					font-size: 0.9rem; 
+					line-height: 1.65;
+				}
 			}
 		</style>
 	</head>
@@ -355,10 +391,10 @@
 
 				<footer id="footer">
 					<ul class="icons">
-						<li><a href="https://www.youtube.com/@MarnixHIXZ" target="_blank" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
-						<li><a href="https://instagram.com/marnix_van_pelt/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="https://www.tiktok.com/@ilikeh1xz" target="_blank" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
-						<li><a href="https://www.facebook.com/profile.php?id=61560405287193" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
+						<li><a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"><span class="label">TikTok</span></a></li>
+						<li><a href="https://www.facebook.com/hixzofficial" target="_blank" rel="noopener" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 						<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 					<ul class="copyright">
