@@ -246,10 +246,16 @@
 				background-color: #050a06; color: #ffffff;
 				font-family: 'Archivo Black', sans-serif; font-size: 14px;
 				letter-spacing: 1px; text-transform: uppercase;
-				cursor: pointer; transition: all 0.3s ease;
+				cursor: pointer; transition: all 0.25s ease;
 				margin: 0 auto;
+				box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+				border: 1px solid rgba(255, 255, 255, 0.08);
 			}
-			.dark-accordion-header:hover { background-color: #1b3022; }
+			.dark-accordion-header:hover { 
+				background-color: #1b3022; 
+				transform: translateY(-2px);
+				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+			}
 
 			.dark-accordion-header span::after, .coming-soon-header span::after { 
 				content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; 
@@ -290,11 +296,17 @@
 				background-color: #1e2b22 !important; color: #ffffff !important;
 				font-family: 'Archivo Black', sans-serif; font-size: 14px;
 				letter-spacing: 1px; text-transform: uppercase;
-				cursor: pointer; transition: background-color 0.3s ease;
+				cursor: pointer; transition: all 0.25s ease;
 				margin: 0 auto;
+				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+				border: 1px solid rgba(255, 255, 255, 0.1);
 			}
 			
-			.coming-soon-header:hover { background-color: #1b3022 !important; }
+			.coming-soon-header:hover { 
+				background-color: #1b3022 !important;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+			}
 			
 			/* Coming Soon Body Container (Contained width and smaller padding) */
 			.coming-soon-body { 
@@ -307,34 +319,40 @@
 				font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5em;
 			}
 
-			/* Scaled down inline pill button */
+			/* Primary inline CTA pill (Contact Me!) — sage green to drive conversion */
 			.inquiries-btn {
 				display: inline-flex; align-items: center; justify-content: center;
-				background-color: #1e2b22 !important; color: #ffffff !important; 
+				background-color: #5ea66e !important; color: #ffffff !important; 
 				font-family: 'Archivo Black', sans-serif; font-size: 14px; 
 				letter-spacing: 1px; padding: 14px 36px; 
-				border-radius: 50px; text-decoration: none; transition: background-color 0.2s ease;
+				border-radius: 50px; text-decoration: none; 
+				transition: all 0.25s ease;
 				text-transform: uppercase;
+				box-shadow: 0 8px 22px rgba(94, 166, 110, 0.4);
 			}
-			.inquiries-btn:hover { background-color: #5ea66e !important; }
+			.inquiries-btn:hover { 
+				background-color: #4a8559 !important;
+				transform: translateY(-3px);
+				box-shadow: 0 12px 28px rgba(94, 166, 110, 0.55);
+			}
 
 			/* --- MOBILE OPTIMIZATION FIXES --- */
 			@media screen and (max-width: 736px) {
 				/* Tighten the top section's huge vertical padding */
-				.booking-top-section { padding: 6em 0 4em 0; }
+				.booking-top-section { padding: 5em 0 3em 0; }
 
 				/* Smaller hero heading on mobile */
-				.booking-top-section h2 { font-size: 1.6rem; letter-spacing: 1.5px; margin-bottom: 1.2em; }
+				.booking-top-section h2 { font-size: 1.5rem; letter-spacing: 1.5px; margin-bottom: 1em; }
 
 				/* Right-size the intro paragraphs — readable but not overwhelming */
-				.description-text { font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.2em; padding: 0 0.5em; }
+				.description-text { font-size: 0.88rem; line-height: 1.65; margin-bottom: 1em; padding: 0 0.5em; }
 
 				/* Back button stays compact */
-				.top-back-btn { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 2em; }
+				.top-back-btn { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 1.5em; }
 
 				/* Trust badge — tighter and prevents edge-touching */
 				.trust-badge { padding: 8px 16px; gap: 10px; max-width: 90%; }
-				.trust-badge span { font-size: 0.75rem; line-height: 1.4; }
+				.trust-badge span { font-size: 0.72rem; line-height: 1.4; }
 				.trust-badge i { font-size: 1rem; }
 
 				/* Pill buttons — tighter padding, centered */
@@ -344,8 +362,8 @@
 				.inquiries-btn { padding: 12px 24px; font-size: 12px; }
 
 				/* Section heading scales down */
-				.packages-section h3 { font-size: 1.8rem; margin-bottom: 1em; }
-				.packages-section { padding: 4em 0; }
+				.packages-section h3 { font-size: 1.7rem; margin-bottom: 1em; }
+				.packages-section { padding: 3em 0; }
 
 				/* White "Coming Soon" body card — narrower so it doesn't hit screen edges */
 				.coming-soon-body { 
@@ -353,13 +371,13 @@
 					max-width: 90%; 
 					margin: 15px auto 0 auto; 
 				}
-				.coming-soon-body p { font-size: 0.9rem; line-height: 1.55; margin-bottom: 1.25em; }
+				.coming-soon-body p { font-size: 0.88rem; line-height: 1.55; margin-bottom: 1.25em; }
 
 				/* Trail facts body — same edge breathing room */
 				.dark-accordion-body { 
 					padding: 1.5em 1.25em; 
 					max-width: 90%; 
-					font-size: 0.9rem; 
+					font-size: 0.88rem; 
 					line-height: 1.65;
 				}
 			}
