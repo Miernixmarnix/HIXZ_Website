@@ -162,12 +162,20 @@
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
+				background: linear-gradient(110deg, rgba(5, 10, 6, 0.95) 25%, rgba(30, 43, 34, 0.85) 50%, rgba(5, 10, 6, 0.95) 75%);
+				background-size: 200% 100%;
+				animation: videoShimmer 1.6s ease-in-out infinite;
+				color: rgba(255, 255, 255, 0.7); display: flex;
 				justify-content: center; align-items: center; z-index: 5;
-				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease; pointer-events: none;
+				font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300;
+				letter-spacing: 3px; text-transform: uppercase; 
+				transition: opacity 0.5s ease; pointer-events: none;
 			}
 			.video-loading-overlay.hidden { opacity: 0; }
+			@keyframes videoShimmer {
+				0% { background-position: 200% 0; }
+				100% { background-position: -200% 0; }
+			}
 
 			.video-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -178,7 +186,38 @@
 			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
 			.video-overlay a:hover { transform: scale(1.2); }
 
-			@media screen and (max-width: 736px) { .video-grid { grid-template-columns: 1fr 1fr; } }
+			/* --- LOCATION LABEL on each video clip --- */
+			/* Pulled from data-location="..." on .video-item — desktop reveals on hover, mobile shows always */
+			.video-item::after {
+				content: attr(data-location);
+				position: absolute;
+				left: 0; right: 0; bottom: 0;
+				padding: 14px 16px 12px 16px;
+				background: linear-gradient(to top, rgba(5, 10, 6, 0.92) 0%, rgba(5, 10, 6, 0.6) 60%, rgba(5, 10, 6, 0) 100%);
+				color: rgba(255, 255, 255, 0.95);
+				font-family: 'Inter', sans-serif;
+				font-weight: 600;
+				font-size: 0.75rem;
+				letter-spacing: 2.5px;
+				text-transform: uppercase;
+				text-align: center;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+				pointer-events: none;
+				z-index: 8;
+			}
+			.video-item:hover::after { opacity: 1; }
+
+			@media screen and (max-width: 736px) { 
+				.video-grid { grid-template-columns: 1fr 1fr; } 
+				/* On mobile, always show location labels (no hover available on touch) */
+				.video-item::after { 
+					opacity: 1; 
+					font-size: 0.65rem;
+					letter-spacing: 1.8px;
+					padding: 10px 8px 8px 8px;
+				}
+			}
 
 			#showcase { background: #2e343a; padding: 6rem 0; }
 			#showcase::after { display: none; }
@@ -376,22 +415,61 @@
 						</header>
 
 						<div class="video-grid">
-							<script>
-								const clips = [1, 2, 3, 4, 5, 6];
-								clips.forEach(i => {
-									document.write(`
-										<div class="video-item">
-											<div class="video-loading-overlay">Loading...</div>
-											<video data-src="videos/clip${i}.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
-											<div class="video-overlay">
-												<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
-												<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
-												<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
-											</div>
-										</div>
-									`);
-								});
-							</script>
+							<!-- Each clip is its own block — edit data-location below to change the label -->
+							<div class="video-item" data-location="LOCATION 1">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip1.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
+							<div class="video-item" data-location="LOCATION 2">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip2.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
+							<div class="video-item" data-location="LOCATION 3">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip3.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
+							<div class="video-item" data-location="LOCATION 4">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip4.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
+							<div class="video-item" data-location="LOCATION 5">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip5.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
+							<div class="video-item" data-location="LOCATION 6">
+								<div class="video-loading-overlay">Loading</div>
+								<video data-src="videos/clip6.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
+								<div class="video-overlay">
+									<a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"></a>
+									<a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"></a>
+									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -460,11 +538,19 @@
 					}
 				});
 			}, { 
-				rootMargin: '300px 0px', 
-				threshold: 0.1 
+				rootMargin: '600px 0px', /* Pre-load 600px before video enters viewport for smoother experience */
+				threshold: 0.01 
 			});
 
-			document.querySelectorAll('.lazy-video').forEach(video => {
+			// Eagerly load the first 2 videos so visitors see motion immediately
+			// even before they scroll — feels much more alive on initial page load
+			const allVideos = document.querySelectorAll('.lazy-video');
+			allVideos.forEach((video, index) => {
+				if (index < 2 && !video.src) {
+					video.src = video.getAttribute('data-src');
+					video.load();
+					video.play().catch(e => {});
+				}
 				videoObserver.observe(video);
 				
 				video.addEventListener('loadeddata', function() {
