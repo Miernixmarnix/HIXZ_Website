@@ -163,12 +163,20 @@
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-				background: rgba(5, 10, 6, 0.9); color: #ffffff; display: flex;
+				background: linear-gradient(110deg, rgba(5, 10, 6, 0.95) 25%, rgba(30, 43, 34, 0.85) 50%, rgba(5, 10, 6, 0.95) 75%);
+				background-size: 200% 100%;
+				animation: videoShimmer 1.6s ease-in-out infinite;
+				color: rgba(255, 255, 255, 0.7); display: flex;
 				justify-content: center; align-items: center; z-index: 5;
-				font-family: 'Archivo Black', sans-serif; font-size: 1.2rem;
-				letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.4s ease; pointer-events: none;
+				font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300;
+				letter-spacing: 3px; text-transform: uppercase; 
+				transition: opacity 0.5s ease; pointer-events: none;
 			}
 			.video-loading-overlay.hidden { opacity: 0; }
+			@keyframes videoShimmer {
+				0% { background-position: 200% 0; }
+				100% { background-position: -200% 0; }
+			}
 
 			.video-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -458,11 +466,19 @@
 					}
 				});
 			}, { 
-				rootMargin: '300px 0px', 
-				threshold: 0.1 
+				rootMargin: '600px 0px', /* Pre-load 600px before video enters viewport for smoother experience */
+				threshold: 0.01 
 			});
 
-			document.querySelectorAll('.lazy-video').forEach(video => {
+			// Eagerly load the first 2 videos so visitors see motion immediately
+			// even before they scroll — feels much more alive on initial page load
+			const allVideos = document.querySelectorAll('.lazy-video');
+			allVideos.forEach((video, index) => {
+				if (index < 2 && !video.src) {
+					video.src = video.getAttribute('data-src');
+					video.load();
+					video.play().catch(e => {});
+				}
 				videoObserver.observe(video);
 				
 				video.addEventListener('loadeddata', function() {
