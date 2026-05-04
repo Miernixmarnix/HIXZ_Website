@@ -90,28 +90,219 @@
 				100% { opacity: 1; transform: scale(1); }
 			}
 
-			/* --- KIT FORM OVERRIDES: brand-match the popup --- */
-			/* Targets Kit's modal classes — these are stable but could change in future Kit updates */
-			.formkit-modal {
-				backdrop-filter: blur(6px);
-				-webkit-backdrop-filter: blur(6px);
+			/* --- KIT FORM OVERRIDES (legacy — kept for backward compat in case Kit modal ever loads) --- */
+			.formkit-modal { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+			/* --- CUSTOM HIXZ SIGNUP MODAL --- */
+			/* Self-contained popup that submits silently to Kit's API in the background.
+			   No Kit JS loaded — fully under our control for animations and brand match. */
+			.hixz-modal {
+				position: fixed;
+				top: 0; left: 0;
+				width: 100%; height: 100%;
+				background: rgba(5, 10, 6, 0.78);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				z-index: 99999;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 1.5rem;
+				box-sizing: border-box;
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 0.35s ease, visibility 0.35s ease;
 			}
-			.formkit-form .formkit-submit {
-				background-color: #5ea66e !important;
-				box-shadow: 0 8px 24px rgba(94, 166, 110, 0.45) !important;
-				transition: all 0.25s ease !important;
-				font-family: 'Archivo Black', sans-serif !important;
-				letter-spacing: 1.5px !important;
-				text-transform: uppercase !important;
+			.hixz-modal.is-open {
+				opacity: 1;
+				visibility: visible;
 			}
-			.formkit-form .formkit-submit:hover {
-				background-color: #4a8559 !important;
-				transform: translateY(-2px) !important;
-				box-shadow: 0 12px 32px rgba(94, 166, 110, 0.6) !important;
+			.hixz-modal-card {
+				width: 100%;
+				max-width: 460px;
+				background: linear-gradient(160deg, #1e2b22 0%, #15201a 100%);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				border-radius: 20px;
+				padding: 2.5rem 2rem;
+				box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+				transform: translateY(30px) scale(0.96);
+				opacity: 0;
+				transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+				position: relative;
+				text-align: center;
 			}
-			.formkit-form .formkit-input:focus {
-				outline: 2px solid #5ea66e !important;
-				outline-offset: 2px !important;
+			.hixz-modal.is-open .hixz-modal-card {
+				transform: translateY(0) scale(1);
+				opacity: 1;
+			}
+			.hixz-modal-close {
+				position: absolute;
+				top: 14px; right: 14px;
+				width: 36px; height: 36px;
+				background: rgba(255, 255, 255, 0.08);
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				border-radius: 50%;
+				color: rgba(255, 255, 255, 0.7);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0;
+				transition: all 0.2s ease;
+			}
+			.hixz-modal-close:hover {
+				background: rgba(255, 255, 255, 0.15);
+				color: #ffffff;
+				transform: scale(1.08);
+			}
+			.hixz-modal-close svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; fill: none; }
+			.hixz-modal-label {
+				color: #5ea66e;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.7rem;
+				letter-spacing: 2.5px;
+				text-transform: uppercase;
+				margin: 0 0 0.75rem 0;
+			}
+			.hixz-modal-title {
+				color: #ffffff;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.55rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				line-height: 1.2;
+				margin: 0 0 0.75rem 0;
+			}
+			.hixz-modal-subtitle {
+				color: rgba(255, 255, 255, 0.7);
+				font-family: 'Inter', sans-serif;
+				font-weight: 300;
+				font-size: 0.9rem;
+				line-height: 1.55;
+				margin: 0 0 1.75rem 0;
+			}
+			.hixz-modal-input {
+				width: 100%;
+				background: rgba(255, 255, 255, 0.06);
+				border: 1px solid rgba(255, 255, 255, 0.15);
+				border-radius: 50px;
+				color: #ffffff;
+				font-family: 'Inter', sans-serif;
+				font-size: 0.95rem;
+				padding: 16px 22px;
+				margin-bottom: 12px;
+				box-sizing: border-box;
+				outline: none;
+				transition: border-color 0.2s ease, background 0.2s ease;
+			}
+			.hixz-modal-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+			.hixz-modal-input:focus {
+				border-color: #5ea66e;
+				background: rgba(255, 255, 255, 0.1);
+			}
+			.hixz-modal-submit {
+				width: 100%;
+				background: #5ea66e;
+				color: #ffffff;
+				border: none;
+				border-radius: 50px;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 14px;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				padding: 16px;
+				cursor: pointer;
+				box-shadow: 0 8px 24px rgba(94, 166, 110, 0.45);
+				transition: all 0.25s ease;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+			}
+			.hixz-modal-submit:hover:not(:disabled) {
+				background: #4a8559;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 30px rgba(94, 166, 110, 0.6);
+			}
+			.hixz-modal-submit:disabled {
+				opacity: 0.7;
+				cursor: not-allowed;
+			}
+			.hixz-modal-spinner {
+				width: 16px; height: 16px;
+				border: 2px solid rgba(255, 255, 255, 0.3);
+				border-top-color: #ffffff;
+				border-radius: 50%;
+				animation: hixzSpin 0.7s linear infinite;
+				display: none;
+			}
+			.hixz-modal-submit.is-loading .hixz-modal-spinner { display: inline-block; }
+			.hixz-modal-submit.is-loading .hixz-modal-submit-text { opacity: 0.7; }
+			@keyframes hixzSpin { to { transform: rotate(360deg); } }
+			.hixz-modal-disclaimer {
+				color: rgba(255, 255, 255, 0.4);
+				font-family: 'Inter', sans-serif;
+				font-weight: 300;
+				font-size: 0.72rem;
+				margin: 1rem 0 0 0;
+				line-height: 1.5;
+			}
+			.hixz-modal-error {
+				color: #ff8a8a;
+				font-family: 'Inter', sans-serif;
+				font-size: 0.85rem;
+				margin: 0 0 12px 0;
+				display: none;
+			}
+			.hixz-modal-error.is-visible { display: block; }
+			/* Success state — the form gets replaced with this when submission succeeds */
+			.hixz-modal-success {
+				display: none;
+				padding: 1rem 0;
+			}
+			.hixz-modal.is-success .hixz-modal-form { display: none; }
+			.hixz-modal.is-success .hixz-modal-success { display: block; animation: hixzSuccessIn 0.5s ease-out; }
+			.hixz-modal.is-success .hixz-modal-subtitle { display: none; }
+			@keyframes hixzSuccessIn {
+				from { opacity: 0; transform: translateY(10px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+			.hixz-success-check {
+				width: 64px; height: 64px;
+				background: #5ea66e;
+				border-radius: 50%;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 1rem;
+				box-shadow: 0 8px 24px rgba(94, 166, 110, 0.5);
+				animation: hixzCheckPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+			}
+			.hixz-success-check svg { width: 28px; height: 28px; stroke: #ffffff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+			@keyframes hixzCheckPop {
+				0% { opacity: 0; transform: scale(0); }
+				100% { opacity: 1; transform: scale(1); }
+			}
+			.hixz-success-message {
+				color: #ffffff;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.2rem;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				margin: 0 0 0.5rem 0;
+			}
+			.hixz-success-sub {
+				color: rgba(255, 255, 255, 0.7);
+				font-family: 'Inter', sans-serif;
+				font-weight: 300;
+				font-size: 0.9rem;
+				margin: 0;
+			}
+			/* Mobile tweaks */
+			@media screen and (max-width: 480px) {
+				.hixz-modal-card { padding: 2rem 1.5rem; border-radius: 18px; }
+				.hixz-modal-title { font-size: 1.3rem; }
+				.hixz-modal-subtitle { font-size: 0.85rem; }
 			}
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
@@ -329,7 +520,7 @@
 						Let's hit the trails and capture the best of Aruba.</p>
 						<ul class="actions special">
 							<li>
-								<a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
+								<a data-hixz-signup href="#" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
 									Unlock Trail Maps
 								</a>
 							</li>
@@ -400,7 +591,7 @@
 								<h2>Jamanota Trail</h2>
 								<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -411,7 +602,7 @@
 								<h2>North Aruba - Sasariwichi Dunes</h2>
 								<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -422,7 +613,7 @@
 								<h2>Alto Vista Chapel Route</h2>
 								<p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -433,7 +624,7 @@
 								<h2>Conchi Natural Pool</h2>
 								<p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -444,7 +635,7 @@
 								<h2>Dos Playa Route</h2>
 								<p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -455,7 +646,7 @@
 								<h2>Bushiribana to Malmok Beach</h2>
 								<p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
+									<li><a data-hixz-signup href="#" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -552,86 +743,195 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		
-		<script async data-uid="acbd19e446" src="https://hixz.kit.com/acbd19e446/index.js"></script>
-		
+		<!-- Kit JS loader removed — we use a custom HTML form posting directly to Kit's API -->
+
+		<!-- ============================================================
+		     CUSTOM HIXZ SIGNUP MODAL
+		     Submits silently to Kit's API endpoint; never navigates away.
+		     ============================================================ -->
+		<div class="hixz-modal" id="hixz-signup-modal" role="dialog" aria-label="Sign up to unlock secret trails" aria-hidden="true">
+			<div class="hixz-modal-card">
+				<button type="button" class="hixz-modal-close" id="hixz-modal-close" aria-label="Close">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+				</button>
+
+				<form class="hixz-modal-form" id="hixz-signup-form" action="https://app.kit.com/forms/9371830/subscriptions" method="post" novalidate>
+					<p class="hixz-modal-label">Free · Limited Access</p>
+					<h2 class="hixz-modal-title">Aruba's Secret Hiking Routes</h2>
+					<p class="hixz-modal-subtitle">Drop your email to unlock all trail maps. No spam — just the routes most tourists never find.</p>
+
+					<p class="hixz-modal-error" id="hixz-modal-error">Something went wrong. Please try again.</p>
+
+					<input type="email" class="hixz-modal-input" name="email_address" placeholder="Your email address" required autocomplete="email" />
+
+					<button type="submit" class="hixz-modal-submit" id="hixz-modal-submit">
+						<span class="hixz-modal-spinner"></span>
+						<span class="hixz-modal-submit-text">Unlock Now</span>
+					</button>
+
+					<p class="hixz-modal-disclaimer">We won't send spam. Unsubscribe anytime.</p>
+				</form>
+
+				<!-- Success state shown after submit succeeds -->
+				<div class="hixz-modal-success">
+					<div class="hixz-success-check">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12 10 17 19 8"/></svg>
+					</div>
+					<h2 class="hixz-success-message">You're In!</h2>
+					<p class="hixz-success-sub">Unlocking your secret trails…</p>
+				</div>
+			</div>
+		</div>
+
 		<script>
 			/* ============================================================
-			   HIXZ UNLOCK SYSTEM
-			   - Listens for Kit form submission → marks user as unlocked
-			   - Persists unlock state via localStorage (survives across visits)
-			   - Transforms "Sign Up to Unlock" buttons into "View Map" links
-			   - Adds visual unlocked state to each trail card
+			   HIXZ UNLOCK SYSTEM (combined modal + unlock logic)
+			   - Custom modal opens when "Sign Up to Unlock" is clicked
+			   - Posts email silently to Kit's API endpoint
+			   - On success: stores unlock flag, reveals trail cards in place
+			   - Returning subscribers skip the modal entirely
 			   ============================================================ */
 			(function() {
 				const STORAGE_KEY = 'hixz_vip_unlocked';
 				const LEGACY_KEY = 'hixz_vip'; // Legacy key still used by map pages and booking.html — keep both in sync
 
-				// Apply the unlocked visual state to all trail cards
+				// --- UNLOCK STATE: applied to trail cards once user has subscribed ---
 				function applyUnlockedState() {
 					document.querySelectorAll('.spotlight[data-map]').forEach(card => {
 						const mapPage = card.getAttribute('data-map');
 						const button = card.querySelector('.actions .button');
 						if (!button) return;
-
-						// Mark card as unlocked (triggers CSS changes + badge)
 						card.classList.add('is-unlocked');
-
-						// Replace "Sign Up to Unlock" with "View Map" linking directly to the map page
 						button.textContent = 'View Map';
 						button.setAttribute('href', mapPage);
-						button.removeAttribute('data-formkit-toggle');
-						// Stop the click from triggering Kit's modal — let it follow the href naturally
-						button.addEventListener('click', function(e) {
-							e.stopPropagation();
-						});
+						button.removeAttribute('data-hixz-signup');
 					});
-				}
-
-				// Run on page load — if already unlocked (either key), apply immediately
-				function checkUnlockOnLoad() {
-					try {
-						const isUnlocked = 
-							localStorage.getItem(STORAGE_KEY) === 'true' ||
-							localStorage.getItem(LEGACY_KEY) === 'true';
-						
-						if (isUnlocked) {
-							// Sync both keys so the rest of the site stays consistent
-							localStorage.setItem(STORAGE_KEY, 'true');
-							localStorage.setItem(LEGACY_KEY, 'true');
-							applyUnlockedState();
-						}
-					} catch (e) {
-						// localStorage might be blocked (private browsing, strict settings) — fail silently
+					// Also update the standalone "signup-btn" if it exists
+					const standaloneBtn = document.getElementById('signup-btn');
+					if (standaloneBtn) {
+						standaloneBtn.textContent = 'View Secret Trails';
+						standaloneBtn.setAttribute('href', 'unlocked.html');
+						standaloneBtn.removeAttribute('data-hixz-signup');
 					}
 				}
 
-				// Listen for the Kit form submission event
-				// Kit fires a custom event when their form is submitted successfully
-				function watchForUnlock() {
-					document.addEventListener('submit', function(e) {
-						// Match Kit's form element
-						if (e.target && e.target.classList && e.target.classList.contains('formkit-form')) {
-							// Wait briefly to confirm submission succeeded, then unlock
-							setTimeout(function() {
-								try {
-									localStorage.setItem(STORAGE_KEY, 'true');
-									localStorage.setItem(LEGACY_KEY, 'true'); // Keep both keys in sync
-								} catch (err) {}
-								applyUnlockedState();
-							}, 800);
-						}
-					}, true);
+				function isUnlocked() {
+					try {
+						return localStorage.getItem(STORAGE_KEY) === 'true' ||
+						       localStorage.getItem(LEGACY_KEY) === 'true';
+					} catch (e) { return false; }
+				}
+
+				function setUnlocked() {
+					try {
+						localStorage.setItem(STORAGE_KEY, 'true');
+						localStorage.setItem(LEGACY_KEY, 'true'); // Keep both keys in sync for legacy map pages
+					} catch (e) {}
+				}
+
+				// --- MODAL CONTROL ---
+				const modal = document.getElementById('hixz-signup-modal');
+				const form = document.getElementById('hixz-signup-form');
+				const submitBtn = document.getElementById('hixz-modal-submit');
+				const errorEl = document.getElementById('hixz-modal-error');
+				const closeBtn = document.getElementById('hixz-modal-close');
+				const emailInput = form.querySelector('input[name="email_address"]');
+
+				function openModal() {
+					modal.classList.add('is-open');
+					modal.setAttribute('aria-hidden', 'false');
+					document.body.style.overflow = 'hidden'; // Prevent background scroll
+					// Auto-focus the email field after the open animation
+					setTimeout(() => { try { emailInput.focus(); } catch(e) {} }, 400);
+				}
+
+				function closeModal() {
+					modal.classList.remove('is-open');
+					modal.setAttribute('aria-hidden', 'true');
+					document.body.style.overflow = '';
+					// Reset error state for next open
+					errorEl.classList.remove('is-visible');
+				}
+
+				// Wire up all "Sign Up to Unlock" triggers
+				document.addEventListener('click', function(e) {
+					const trigger = e.target.closest('[data-hixz-signup]');
+					if (trigger) {
+						e.preventDefault();
+						openModal();
+					}
+				});
+
+				// Close modal: × button, ESC key, click on backdrop
+				closeBtn.addEventListener('click', closeModal);
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+				});
+				modal.addEventListener('click', function(e) {
+					if (e.target === modal) closeModal();
+				});
+
+				// --- FORM SUBMISSION (silent post to Kit's API) ---
+				form.addEventListener('submit', function(e) {
+					e.preventDefault();
+					errorEl.classList.remove('is-visible');
+
+					const email = emailInput.value.trim();
+					if (!email || !email.includes('@')) {
+						errorEl.textContent = 'Please enter a valid email address.';
+						errorEl.classList.add('is-visible');
+						return;
+					}
+
+					submitBtn.classList.add('is-loading');
+					submitBtn.disabled = true;
+
+					// Post to Kit using FormData (Kit's endpoint accepts standard form encoding).
+					// Note: Kit's CORS may block reading the response, but the submission still
+					// reaches their server successfully — we treat any non-network error as success.
+					const formData = new FormData();
+					formData.append('email_address', email);
+
+					fetch(form.action, {
+						method: 'POST',
+						body: formData,
+						mode: 'no-cors' // Kit endpoint doesn't return CORS headers; opaque response is fine
+					}).then(function() {
+						handleSuccess();
+					}).catch(function() {
+						// Network failure (no internet, DNS issue, etc.) — show error
+						submitBtn.classList.remove('is-loading');
+						submitBtn.disabled = false;
+						errorEl.textContent = 'Connection problem. Please check your internet and try again.';
+						errorEl.classList.add('is-visible');
+					});
+				});
+
+				function handleSuccess() {
+					// Show success state inside the modal
+					modal.classList.add('is-success');
+					setUnlocked();
+
+					// Apply unlock to trail cards in the background while success message shows
+					applyUnlockedState();
+
+					// Auto-close the modal after 1.8 seconds — user sees confirmation, then it fades out
+					setTimeout(closeModal, 1800);
+				}
+
+				// --- ON PAGE LOAD: check if already unlocked, apply state immediately ---
+				function checkUnlockOnLoad() {
+					if (isUnlocked()) {
+						setUnlocked(); // Sync both keys in case only one was set
+						applyUnlockedState();
+					}
 				}
 
 				// Start the system once the DOM is ready
 				if (document.readyState === 'loading') {
-					document.addEventListener('DOMContentLoaded', function() {
-						checkUnlockOnLoad();
-						watchForUnlock();
-					});
+					document.addEventListener('DOMContentLoaded', checkUnlockOnLoad);
 				} else {
 					checkUnlockOnLoad();
-					watchForUnlock();
 				}
 			})();
 		</script>
