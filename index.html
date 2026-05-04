@@ -15,14 +15,6 @@
 		
 		<meta name="google-site-verification" content="1GB8daHoGs1wBe0ikxcO7piGJ6EDoJ6WHu0D78WcjJo" />
 		
-		<script>
-			try {
-				if (localStorage.getItem('hixz_vip') === 'true') {
-					window.location.replace('unlocked.html');
-				}
-			} catch(e) {}
-		</script>
-
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
 		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
@@ -58,6 +50,68 @@
 				background-color: #4a8559 !important;
 				transform: translateY(-3px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
+			}
+
+			/* --- UNLOCKED STATE: applied via JavaScript when user has subscribed --- */
+			/* Trail card "Sign Up to Unlock" buttons turn into sage "View Map" buttons */
+			.spotlight.is-unlocked .actions .button {
+				background-color: #5ea66e !important;
+				color: #ffffff !important;
+				border-color: #5ea66e !important;
+				box-shadow: 0 8px 22px rgba(94, 166, 110, 0.4);
+				transition: all 0.25s ease;
+			}
+			.spotlight.is-unlocked .actions .button:hover {
+				background-color: #4a8559 !important;
+				border-color: #4a8559 !important;
+				transform: translateY(-2px);
+				box-shadow: 0 12px 28px rgba(94, 166, 110, 0.55);
+			}
+			/* Subtle "VIP unlocked" badge that appears on each card after signup */
+			.spotlight.is-unlocked::before {
+				content: "✓ UNLOCKED";
+				position: absolute;
+				top: 16px; right: 16px;
+				background: rgba(94, 166, 110, 0.95);
+				color: #ffffff;
+				font-family: 'Inter', sans-serif;
+				font-weight: 600;
+				font-size: 0.65rem;
+				letter-spacing: 1.5px;
+				padding: 5px 11px;
+				border-radius: 50px;
+				z-index: 5;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+				animation: unlockedBadgePop 0.5s ease-out;
+			}
+			.spotlight { position: relative; }
+			@keyframes unlockedBadgePop {
+				0% { opacity: 0; transform: scale(0.7); }
+				100% { opacity: 1; transform: scale(1); }
+			}
+
+			/* --- KIT FORM OVERRIDES: brand-match the popup --- */
+			/* Targets Kit's modal classes — these are stable but could change in future Kit updates */
+			.formkit-modal {
+				backdrop-filter: blur(6px);
+				-webkit-backdrop-filter: blur(6px);
+			}
+			.formkit-form .formkit-submit {
+				background-color: #5ea66e !important;
+				box-shadow: 0 8px 24px rgba(94, 166, 110, 0.45) !important;
+				transition: all 0.25s ease !important;
+				font-family: 'Archivo Black', sans-serif !important;
+				letter-spacing: 1.5px !important;
+				text-transform: uppercase !important;
+			}
+			.formkit-form .formkit-submit:hover {
+				background-color: #4a8559 !important;
+				transform: translateY(-2px) !important;
+				box-shadow: 0 12px 32px rgba(94, 166, 110, 0.6) !important;
+			}
+			.formkit-form .formkit-input:focus {
+				outline: 2px solid #5ea66e !important;
+				outline-offset: 2px !important;
 			}
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
@@ -275,7 +329,7 @@
 						Let's hit the trails and capture the best of Aruba.</p>
 						<ul class="actions special">
 							<li>
-								<a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
+								<a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="google-btn" id="signup-btn" style="opacity: 1; transform: translateY(0);">
 									Unlock Trail Maps
 								</a>
 							</li>
@@ -340,68 +394,68 @@
 					</div>
 
 					<div id="all-trail-options" class="style2">
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-jamanota.html">
 							<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Jamanota Trail</h2>
 								<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
 
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-sasarawichi.html">
 							<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
 							<div class="content">
 								<h2>North Aruba - Sasariwichi Dunes</h2>
 								<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
 						
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-altovista.html">
 							<div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Alto Vista Chapel Route</h2>
 								<p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
 
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-conchi.html">
 							<div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
 							<div class="content">
 								<h2>Conchi Natural Pool</h2>
 								<p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
 
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-dosplaya.html">
 							<div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Dos Playa Route</h2>
 								<p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
 
-						<section class="spotlight">
+						<section class="spotlight" data-map="map-malmok.html">
 							<div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
 							<div class="content">
 								<h2>Bushiribana to Malmok Beach</h2>
 								<p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
 								<ul class="actions">
-									<li><a data-formkit-toggle="92566aafcc" href="https://hixz.kit.com/92566aafcc" class="button">Sign Up to Unlock</a></li>
+									<li><a data-formkit-toggle="acbd19e446" href="https://hixz.kit.com/acbd19e446" class="button">Sign Up to Unlock</a></li>
 								</ul>
 							</div>
 						</section>
@@ -498,7 +552,89 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		
-		<script async data-uid="92566aafcc" src="https://hixz.kit.com/92566aafcc/index.js"></script>
+		<script async data-uid="acbd19e446" src="https://hixz.kit.com/acbd19e446/index.js"></script>
+		
+		<script>
+			/* ============================================================
+			   HIXZ UNLOCK SYSTEM
+			   - Listens for Kit form submission → marks user as unlocked
+			   - Persists unlock state via localStorage (survives across visits)
+			   - Transforms "Sign Up to Unlock" buttons into "View Map" links
+			   - Adds visual unlocked state to each trail card
+			   ============================================================ */
+			(function() {
+				const STORAGE_KEY = 'hixz_vip_unlocked';
+				const LEGACY_KEY = 'hixz_vip'; // Legacy key still used by map pages and booking.html — keep both in sync
+
+				// Apply the unlocked visual state to all trail cards
+				function applyUnlockedState() {
+					document.querySelectorAll('.spotlight[data-map]').forEach(card => {
+						const mapPage = card.getAttribute('data-map');
+						const button = card.querySelector('.actions .button');
+						if (!button) return;
+
+						// Mark card as unlocked (triggers CSS changes + badge)
+						card.classList.add('is-unlocked');
+
+						// Replace "Sign Up to Unlock" with "View Map" linking directly to the map page
+						button.textContent = 'View Map';
+						button.setAttribute('href', mapPage);
+						button.removeAttribute('data-formkit-toggle');
+						// Stop the click from triggering Kit's modal — let it follow the href naturally
+						button.addEventListener('click', function(e) {
+							e.stopPropagation();
+						});
+					});
+				}
+
+				// Run on page load — if already unlocked (either key), apply immediately
+				function checkUnlockOnLoad() {
+					try {
+						const isUnlocked = 
+							localStorage.getItem(STORAGE_KEY) === 'true' ||
+							localStorage.getItem(LEGACY_KEY) === 'true';
+						
+						if (isUnlocked) {
+							// Sync both keys so the rest of the site stays consistent
+							localStorage.setItem(STORAGE_KEY, 'true');
+							localStorage.setItem(LEGACY_KEY, 'true');
+							applyUnlockedState();
+						}
+					} catch (e) {
+						// localStorage might be blocked (private browsing, strict settings) — fail silently
+					}
+				}
+
+				// Listen for the Kit form submission event
+				// Kit fires a custom event when their form is submitted successfully
+				function watchForUnlock() {
+					document.addEventListener('submit', function(e) {
+						// Match Kit's form element
+						if (e.target && e.target.classList && e.target.classList.contains('formkit-form')) {
+							// Wait briefly to confirm submission succeeded, then unlock
+							setTimeout(function() {
+								try {
+									localStorage.setItem(STORAGE_KEY, 'true');
+									localStorage.setItem(LEGACY_KEY, 'true'); // Keep both keys in sync
+								} catch (err) {}
+								applyUnlockedState();
+							}, 800);
+						}
+					}, true);
+				}
+
+				// Start the system once the DOM is ready
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', function() {
+						checkUnlockOnLoad();
+						watchForUnlock();
+					});
+				} else {
+					checkUnlockOnLoad();
+					watchForUnlock();
+				}
+			})();
+		</script>
 		
 		<script>
 			const observer = new IntersectionObserver((entries) => {
