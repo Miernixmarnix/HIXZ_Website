@@ -53,7 +53,6 @@
 			}
 
 			/* --- UNLOCKED STATE: applied via JavaScript when user has subscribed --- */
-			/* Trail card "Sign Up to Unlock" buttons turn into sage "View Map" buttons */
 			.spotlight.is-unlocked .actions .button {
 				background-color: #5ea66e !important;
 				color: #ffffff !important;
@@ -67,7 +66,6 @@
 				transform: translateY(-2px);
 				box-shadow: 0 12px 28px rgba(94, 166, 110, 0.55);
 			}
-			/* Subtle "VIP unlocked" badge that appears on each card after signup */
 			.spotlight.is-unlocked::before {
 				content: "✓ UNLOCKED";
 				position: absolute;
@@ -90,12 +88,7 @@
 				100% { opacity: 1; transform: scale(1); }
 			}
 
-			/* --- KIT FORM OVERRIDES (legacy — kept for backward compat in case Kit modal ever loads) --- */
-			.formkit-modal { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-
 			/* --- CUSTOM HIXZ SIGNUP MODAL --- */
-			/* Self-contained popup that submits silently to Kit's API in the background.
-			   No Kit JS loaded — fully under our control for animations and brand match. */
 			.hixz-modal {
 				position: fixed;
 				top: 0; left: 0;
@@ -255,7 +248,6 @@
 				display: none;
 			}
 			.hixz-modal-error.is-visible { display: block; }
-			/* Success state — the form gets replaced with this when submission succeeds */
 			.hixz-modal-success {
 				display: none;
 				padding: 1rem 0;
@@ -298,7 +290,6 @@
 				font-size: 0.9rem;
 				margin: 0;
 			}
-			/* Mobile tweaks */
 			@media screen and (max-width: 480px) {
 				.hixz-modal-card { padding: 2rem 1.5rem; border-radius: 18px; }
 				.hixz-modal-title { font-size: 1.3rem; }
@@ -324,6 +315,11 @@
 				transform: translateY(-5px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
+			/* Skip animation if loader was already seen */
+			.floating-book-btn.no-animate {
+				opacity: 1;
+				animation: none;
+			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			@keyframes fadeInButton { to { opacity: 1; } }
@@ -332,6 +328,11 @@
 			.main-content-wrapper {
 				opacity: 0;
 				animation: fadeInContent 0.8s ease forwards 4s; 
+			}
+			/* Skip animation if loader was already seen */
+			.main-content-wrapper.no-animate {
+				opacity: 1;
+				animation: none;
 			}
 			@keyframes fadeInContent { to { opacity: 1; } }
 
@@ -431,8 +432,6 @@
 			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
 			.video-overlay a:hover { transform: scale(1.2); }
 
-			/* --- LOCATION LABEL on each video clip --- */
-			/* Pulled from data-location="..." on .video-item — desktop reveals on hover, mobile shows always */
 			.video-item::after {
 				content: attr(data-location);
 				position: absolute;
@@ -455,7 +454,6 @@
 
 			@media screen and (max-width: 736px) { 
 				.video-grid { grid-template-columns: 1fr 1fr; } 
-				/* On mobile, always show location labels (no hover available on touch) */
 				.video-item::after { 
 					opacity: 1; 
 					font-size: 0.65rem;
@@ -504,7 +502,8 @@
 								<div id="menu">
 									<ul>
 										<li><a href="index.html">Home</a></li>
-										<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li> <li><a href="generic.html">About Me</a></li>
+										<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li>
+										<li><a href="generic.html">About Me</a></li>
 										<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
 									</ul>
 								</div>
@@ -584,8 +583,9 @@
 						</button>
 					</div>
 
+					<!-- FIX: data-map paths now include maps/ subfolder prefix -->
 					<div id="all-trail-options" class="style2">
-						<section class="spotlight" data-map="map-jamanota.html">
+						<section class="spotlight" data-map="maps/map-jamanota.html">
 							<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Jamanota Trail</h2>
@@ -596,7 +596,7 @@
 							</div>
 						</section>
 
-						<section class="spotlight" data-map="map-sasarawichi.html">
+						<section class="spotlight" data-map="maps/map-sasarawichi.html">
 							<div class="image"><img src="images/Sarawichi.jpg" alt="Sasariwichi Dunes" loading="lazy" /></div>
 							<div class="content">
 								<h2>North Aruba - Sasariwichi Dunes</h2>
@@ -607,7 +607,7 @@
 							</div>
 						</section>
 						
-						<section class="spotlight" data-map="map-altovista.html">
+						<section class="spotlight" data-map="maps/map-altovista.html">
 							<div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Alto Vista Chapel Route</h2>
@@ -618,7 +618,9 @@
 							</div>
 						</section>
 
-						<section class="spotlight" data-map="map-conchi.html">
+						<!-- NOTE: Conchi and Dos Playa are inside Arikok National Park (ACF permit required).
+						     Consider replacing with "Coming Soon" cards or removing until permits are sorted. -->
+						<section class="spotlight" data-map="maps/map-conchi.html">
 							<div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
 							<div class="content">
 								<h2>Conchi Natural Pool</h2>
@@ -629,7 +631,7 @@
 							</div>
 						</section>
 
-						<section class="spotlight" data-map="map-dosplaya.html">
+						<section class="spotlight" data-map="maps/map-dosplaya.html">
 							<div class="image"><img src="images/DosPlaya.jpg" alt="Dos Playa Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Dos Playa Route</h2>
@@ -640,7 +642,7 @@
 							</div>
 						</section>
 
-						<section class="spotlight" data-map="map-malmok.html">
+						<section class="spotlight" data-map="maps/map-malmok.html">
 							<div class="image"><img src="images/Park.jpg" alt="Bushiribana to Malmok" loading="lazy" /></div>
 							<div class="content">
 								<h2>Bushiribana to Malmok Beach</h2>
@@ -660,7 +662,6 @@
 						</header>
 
 						<div class="video-grid">
-							<!-- Each clip is its own block — edit data-location below to change the label -->
 							<div class="video-item" data-location="LOCATION 1">
 								<div class="video-loading-overlay">Loading</div>
 								<video data-src="videos/clip1.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
@@ -733,7 +734,8 @@
 					</ul>
 				</footer>
 			
-			</div> </div>
+			</div>
+		</div>
 
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -742,12 +744,36 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		
-		<!-- Kit JS loader removed — we use a custom HTML form posting directly to Kit's API -->
+
+		<!-- ============================================================
+		     LOADER SKIP: if user already saw the intro this session
+		     (e.g. returning from a map page), skip it entirely.
+		     Runs inline before DOM paint to avoid any flash.
+		     ============================================================ -->
+		<script>
+			(function() {
+				try {
+					if (sessionStorage.getItem('hixz_loader_seen')) {
+						// Hide curtain immediately
+						var style = document.createElement('style');
+						style.textContent = '#loader-curtain { display: none !important; }';
+						document.head.appendChild(style);
+						// Mark content wrappers to skip their delay animations
+						document.addEventListener('DOMContentLoaded', function() {
+							var content = document.querySelector('.main-content-wrapper');
+							if (content) content.classList.add('no-animate');
+							var btn = document.querySelector('.floating-book-btn');
+							if (btn) btn.classList.add('no-animate');
+						});
+					} else {
+						sessionStorage.setItem('hixz_loader_seen', 'true');
+					}
+				} catch(e) {}
+			})();
+		</script>
 
 		<!-- ============================================================
 		     CUSTOM HIXZ SIGNUP MODAL
-		     Submits silently to Kit's API endpoint; never navigates away.
 		     ============================================================ -->
 		<div class="hixz-modal" id="hixz-signup-modal" role="dialog" aria-label="Sign up to unlock secret trails" aria-hidden="true">
 			<div class="hixz-modal-card">
@@ -772,7 +798,6 @@
 					<p class="hixz-modal-disclaimer">We won't send spam. Unsubscribe anytime.</p>
 				</form>
 
-				<!-- Success state shown after submit succeeds -->
 				<div class="hixz-modal-success">
 					<div class="hixz-success-check">
 						<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5 12 10 17 19 8"/></svg>
@@ -785,17 +810,12 @@
 
 		<script>
 			/* ============================================================
-			   HIXZ UNLOCK SYSTEM (combined modal + unlock logic)
-			   - Custom modal opens when "Sign Up to Unlock" is clicked
-			   - Posts email silently to Kit's API endpoint
-			   - On success: stores unlock flag, reveals trail cards in place
-			   - Returning subscribers skip the modal entirely
+			   HIXZ UNLOCK SYSTEM
 			   ============================================================ */
 			(function() {
 				const STORAGE_KEY = 'hixz_vip_unlocked';
-				const LEGACY_KEY = 'hixz_vip'; // Legacy key still used by map pages and booking.html — keep both in sync
+				const LEGACY_KEY = 'hixz_vip';
 
-				// --- UNLOCK STATE: applied to trail cards once user has subscribed ---
 				function applyUnlockedState() {
 					document.querySelectorAll('.spotlight[data-map]').forEach(card => {
 						const mapPage = card.getAttribute('data-map');
@@ -806,7 +826,6 @@
 						button.setAttribute('href', mapPage);
 						button.removeAttribute('data-hixz-signup');
 					});
-					// Also update the standalone "signup-btn" if it exists
 					const standaloneBtn = document.getElementById('signup-btn');
 					if (standaloneBtn) {
 						standaloneBtn.textContent = 'View Secret Trails';
@@ -825,11 +844,10 @@
 				function setUnlocked() {
 					try {
 						localStorage.setItem(STORAGE_KEY, 'true');
-						localStorage.setItem(LEGACY_KEY, 'true'); // Keep both keys in sync for legacy map pages
+						localStorage.setItem(LEGACY_KEY, 'true');
 					} catch (e) {}
 				}
 
-				// --- MODAL CONTROL ---
 				const modal = document.getElementById('hixz-signup-modal');
 				const form = document.getElementById('hixz-signup-form');
 				const submitBtn = document.getElementById('hixz-modal-submit');
@@ -840,8 +858,7 @@
 				function openModal() {
 					modal.classList.add('is-open');
 					modal.setAttribute('aria-hidden', 'false');
-					document.body.style.overflow = 'hidden'; // Prevent background scroll
-					// Auto-focus the email field after the open animation
+					document.body.style.overflow = 'hidden';
 					setTimeout(() => { try { emailInput.focus(); } catch(e) {} }, 400);
 				}
 
@@ -849,11 +866,9 @@
 					modal.classList.remove('is-open');
 					modal.setAttribute('aria-hidden', 'true');
 					document.body.style.overflow = '';
-					// Reset error state for next open
 					errorEl.classList.remove('is-visible');
 				}
 
-				// Wire up all "Sign Up to Unlock" triggers
 				document.addEventListener('click', function(e) {
 					const trigger = e.target.closest('[data-hixz-signup]');
 					if (trigger) {
@@ -862,7 +877,6 @@
 					}
 				});
 
-				// Close modal: × button, ESC key, click on backdrop
 				closeBtn.addEventListener('click', closeModal);
 				document.addEventListener('keydown', function(e) {
 					if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
@@ -871,7 +885,6 @@
 					if (e.target === modal) closeModal();
 				});
 
-				// --- FORM SUBMISSION (silent post to Kit's API) ---
 				form.addEventListener('submit', function(e) {
 					e.preventDefault();
 					errorEl.classList.remove('is-visible');
@@ -886,20 +899,16 @@
 					submitBtn.classList.add('is-loading');
 					submitBtn.disabled = true;
 
-					// Post to Kit using FormData (Kit's endpoint accepts standard form encoding).
-					// Note: Kit's CORS may block reading the response, but the submission still
-					// reaches their server successfully — we treat any non-network error as success.
 					const formData = new FormData();
 					formData.append('email_address', email);
 
 					fetch(form.action, {
 						method: 'POST',
 						body: formData,
-						mode: 'no-cors' // Kit endpoint doesn't return CORS headers; opaque response is fine
+						mode: 'no-cors'
 					}).then(function() {
 						handleSuccess();
 					}).catch(function() {
-						// Network failure (no internet, DNS issue, etc.) — show error
 						submitBtn.classList.remove('is-loading');
 						submitBtn.disabled = false;
 						errorEl.textContent = 'Connection problem. Please check your internet and try again.';
@@ -908,26 +917,19 @@
 				});
 
 				function handleSuccess() {
-					// Show success state inside the modal
 					modal.classList.add('is-success');
 					setUnlocked();
-
-					// Apply unlock to trail cards in the background while success message shows
 					applyUnlockedState();
-
-					// Auto-close the modal after 1.8 seconds — user sees confirmation, then it fades out
 					setTimeout(closeModal, 1800);
 				}
 
-				// --- ON PAGE LOAD: check if already unlocked, apply state immediately ---
 				function checkUnlockOnLoad() {
 					if (isUnlocked()) {
-						setUnlocked(); // Sync both keys in case only one was set
+						setUnlocked();
 						applyUnlockedState();
 					}
 				}
 
-				// Start the system once the DOM is ready
 				if (document.readyState === 'loading') {
 					document.addEventListener('DOMContentLoaded', checkUnlockOnLoad);
 				} else {
@@ -959,7 +961,6 @@
 				});
 			}, 100);
 
-			// --- OPTIMIZED LAZY LOADING FOR PORTFOLIO VIDEOS ---
 			const videoObserver = new IntersectionObserver((entries, observer) => {
 				entries.forEach(entry => {
 					const video = entry.target;
@@ -974,12 +975,10 @@
 					}
 				});
 			}, { 
-				rootMargin: '600px 0px', /* Pre-load 600px before video enters viewport for smoother experience */
+				rootMargin: '600px 0px',
 				threshold: 0.01 
 			});
 
-			// Eagerly load the first 2 videos so visitors see motion immediately
-			// even before they scroll — feels much more alive on initial page load
 			const allVideos = document.querySelectorAll('.lazy-video');
 			allVideos.forEach((video, index) => {
 				if (index < 2 && !video.src) {
@@ -1002,7 +1001,6 @@
 
 			seeMoreBtn.addEventListener('click', function() {
 				const isShowing = hiddenDiv.style.display === "block";
-
 				if (isShowing) {
 					hiddenDiv.style.display = "none";
 					this.innerHTML = "VIEW MORE TRAILS";
@@ -1013,9 +1011,17 @@
 			});
 
 			// --- 50% SCROLL POPUP TRIGGER ---
+			// Only fires if user is NOT already unlocked, and only once per session
 			let popupTriggered = false;
 			window.addEventListener('scroll', () => {
 				if (popupTriggered) return;
+				// Don't interrupt unlocked users with a signup popup
+				try {
+					if (localStorage.getItem('hixz_vip_unlocked') === 'true' || localStorage.getItem('hixz_vip') === 'true') {
+						popupTriggered = true;
+						return;
+					}
+				} catch(e) {}
 
 				const scrollPosition = window.scrollY;
 				const windowSize = window.innerHeight;
@@ -1023,9 +1029,8 @@
 				const scrollPercentage = Math.max(0, Math.min(100, (scrollPosition / (bodyHeight - windowSize)) * 100));
 
 				if (scrollPercentage >= 50) {
-					// Use main signup button as target
 					const mainSignupBtn = document.getElementById('signup-btn');
-					if (mainSignupBtn) {
+					if (mainSignupBtn && mainSignupBtn.hasAttribute('data-hixz-signup')) {
 						mainSignupBtn.click();
 						popupTriggered = true; 
 					}
