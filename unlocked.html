@@ -15,7 +15,29 @@
 		<script>
 			try {
 				localStorage.setItem('hixz_vip', 'true');
+				localStorage.setItem('hixz_vip_unlocked', 'true');
 			} catch(e) {}
+		</script>
+
+		<!-- LOADER SKIP: if user already saw the intro this session, skip it immediately -->
+		<script>
+			(function() {
+				try {
+					if (sessionStorage.getItem('hixz_loader_seen')) {
+						var style = document.createElement('style');
+						style.textContent = '#loader-curtain { display: none !important; }';
+						document.head.appendChild(style);
+						document.addEventListener('DOMContentLoaded', function() {
+							var content = document.querySelector('.main-content-wrapper');
+							if (content) content.classList.add('no-animate');
+							var btn = document.querySelector('.floating-book-btn');
+							if (btn) btn.classList.add('no-animate');
+						});
+					} else {
+						sessionStorage.setItem('hixz_loader_seen', 'true');
+					}
+				} catch(e) {}
+			})();
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
@@ -55,7 +77,7 @@
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
 
-			/* --- HERO TEXT LEGIBILITY (sits over bright sky in mainbackground.jpg) --- */
+			/* --- HERO TEXT LEGIBILITY --- */
 			#banner h2,
 			#banner p {
 				text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -80,6 +102,11 @@
 				transform: translateY(-5px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
+			/* Skip animation if loader was already seen */
+			.floating-book-btn.no-animate {
+				opacity: 1;
+				animation: none;
+			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
 			@keyframes fadeInButton { to { opacity: 1; } }
@@ -88,6 +115,11 @@
 			.main-content-wrapper {
 				opacity: 0;
 				animation: fadeInContent 0.8s ease forwards 4s; 
+			}
+			/* Skip animation if loader was already seen */
+			.main-content-wrapper.no-animate {
+				opacity: 1;
+				animation: none;
 			}
 			@keyframes fadeInContent { to { opacity: 1; } }
 
@@ -187,8 +219,6 @@
 			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
 			.video-overlay a:hover { transform: scale(1.2); }
 
-			/* --- LOCATION LABEL on each video clip --- */
-			/* Pulled from data-location="..." on .video-item — desktop reveals on hover, mobile shows always */
 			.video-item::after {
 				content: attr(data-location);
 				position: absolute;
@@ -211,7 +241,6 @@
 
 			@media screen and (max-width: 736px) { 
 				.video-grid { grid-template-columns: 1fr 1fr; } 
-				/* On mobile, always show location labels (no hover available on touch) */
 				.video-item::after { 
 					opacity: 1; 
 					font-size: 0.65rem;
@@ -260,7 +289,8 @@
 								<div id="menu">
 									<ul>
 										<li><a href="index.html">Home</a></li>
-										<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li> <li><a href="generic.html">About Me</a></li>
+										<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li>
+										<li><a href="generic.html">About Me</a></li>
 										<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
 									</ul>
 								</div>
@@ -374,6 +404,8 @@
 							</div>
 						</section>
 
+						<!-- NOTE: Conchi and Dos Playa require ACF permits (Arikok National Park).
+						     Consider replacing with "Coming Soon" cards until permits are sorted. -->
 						<section class="spotlight">
 							<div class="image"><img src="images/NaturalBridge.jpg" alt="Conchi Natural Pool" loading="lazy" /></div>
 							<div class="content">
@@ -416,7 +448,6 @@
 						</header>
 
 						<div class="video-grid">
-							<!-- Each clip is its own block — edit data-location below to change the label -->
 							<div class="video-item" data-location="LOCATION 1">
 								<div class="video-loading-overlay">Loading</div>
 								<video data-src="videos/clip1.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
@@ -489,7 +520,8 @@
 					</ul>
 				</footer>
 			
-			</div> </div>
+			</div>
+		</div>
 
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -536,12 +568,10 @@
 					}
 				});
 			}, { 
-				rootMargin: '600px 0px', /* Pre-load 600px before video enters viewport for smoother experience */
+				rootMargin: '600px 0px',
 				threshold: 0.01 
 			});
 
-			// Eagerly load the first 2 videos so visitors see motion immediately
-			// even before they scroll — feels much more alive on initial page load
 			const allVideos = document.querySelectorAll('.lazy-video');
 			allVideos.forEach((video, index) => {
 				if (index < 2 && !video.src) {
@@ -570,7 +600,6 @@
 
 			seeMoreBtn.addEventListener('click', function() {
 				const isShowing = hiddenDiv.style.display === "block";
-
 				if (isShowing) {
 					hiddenDiv.style.display = "none";
 					this.innerHTML = "VIEW MORE TRAILS";
