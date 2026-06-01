@@ -15,7 +15,7 @@
 		
 		<meta name="google-site-verification" content="1GB8daHoGs1wBe0ikxcO7piGJ6EDoJ6WHu0D78WcjJo" />
 		
-		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		<link rel="preload" as="image" href="images/BackgroundBlackstone.png">
 		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -315,7 +315,6 @@
 				transform: translateY(-5px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
-			/* Skip animation if loader was already seen */
 			.floating-book-btn.no-animate {
 				opacity: 1;
 				animation: none;
@@ -329,7 +328,6 @@
 				opacity: 0;
 				animation: fadeInContent 0.8s ease forwards 4s; 
 			}
-			/* Skip animation if loader was already seen */
 			.main-content-wrapper.no-animate {
 				opacity: 1;
 				animation: none;
@@ -360,7 +358,6 @@
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
-			/* --- LOADER LOGO WITH GLOW FOR VISIBILITY --- */
 			.loader-logo {
 				opacity: 0; 
 				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
@@ -377,7 +374,6 @@
 				.loader-logo img { max-width: 320px !important; }
 			}
 
-			/* --- TEXT HEADERS --- */
 			#banner h2 { font-size: 5rem !important; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
 			@media screen and (max-width: 736px) { #banner h2 { font-size: 3rem !important; } }
 
@@ -394,7 +390,6 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-            /* --- CENTERED LOADER WELCOME TEXT --- */
             #loader-curtain .welcome-text {
                 font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
                 color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
@@ -405,6 +400,28 @@
 				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
 			}
             @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
+
+			/* --- HERO BANNER OVERLAY for text legibility --- */
+			#banner {
+				position: relative;
+			}
+			#banner::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0.45) 0%,
+					rgba(0, 0, 0, 0.25) 50%,
+					rgba(0, 0, 0, 0.55) 100%
+				);
+				z-index: 1;
+				pointer-events: none;
+			}
+			#banner .inner {
+				position: relative;
+				z-index: 2;
+			}
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -512,7 +529,7 @@
 					</nav>
 				</header>
 
-				<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<section id="banner" style="background-image: url('images/BackgroundBlackstone.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 					<div class="inner">
 						<h2>HIXZ</h2>
 						<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
@@ -583,7 +600,6 @@
 						</button>
 					</div>
 
-					<!-- FIX: data-map paths now include maps/ subfolder prefix -->
 					<div id="all-trail-options" class="style2">
 						<section class="spotlight" data-map="maps/map-jamanota.html">
 							<div class="image"><img src="images/MountJamanota.jpg" alt="Jamanota Trail" loading="lazy" /></div>
@@ -745,20 +761,13 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 
-		<!-- ============================================================
-		     LOADER SKIP: if user already saw the intro this session
-		     (e.g. returning from a map page), skip it entirely.
-		     Runs inline before DOM paint to avoid any flash.
-		     ============================================================ -->
 		<script>
 			(function() {
 				try {
 					if (sessionStorage.getItem('hixz_loader_seen')) {
-						// Hide curtain immediately
 						var style = document.createElement('style');
 						style.textContent = '#loader-curtain { display: none !important; }';
 						document.head.appendChild(style);
-						// Mark content wrappers to skip their delay animations
 						document.addEventListener('DOMContentLoaded', function() {
 							var content = document.querySelector('.main-content-wrapper');
 							if (content) content.classList.add('no-animate');
@@ -772,9 +781,6 @@
 			})();
 		</script>
 
-		<!-- ============================================================
-		     CUSTOM HIXZ SIGNUP MODAL
-		     ============================================================ -->
 		<div class="hixz-modal" id="hixz-signup-modal" role="dialog" aria-label="Sign up to unlock secret trails" aria-hidden="true">
 			<div class="hixz-modal-card">
 				<button type="button" class="hixz-modal-close" id="hixz-modal-close" aria-label="Close">
@@ -809,9 +815,6 @@
 		</div>
 
 		<script>
-			/* ============================================================
-			   HIXZ UNLOCK SYSTEM
-			   ============================================================ */
 			(function() {
 				const STORAGE_KEY = 'hixz_vip_unlocked';
 				const LEGACY_KEY = 'hixz_vip';
@@ -1010,12 +1013,9 @@
 				}
 			});
 
-			// --- 50% SCROLL POPUP TRIGGER ---
-			// Only fires if user is NOT already unlocked, and only once per session
 			let popupTriggered = false;
 			window.addEventListener('scroll', () => {
 				if (popupTriggered) return;
-				// Don't interrupt unlocked users with a signup popup
 				try {
 					if (localStorage.getItem('hixz_vip_unlocked') === 'true' || localStorage.getItem('hixz_vip') === 'true') {
 						popupTriggered = true;
