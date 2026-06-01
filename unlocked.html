@@ -19,7 +19,6 @@
 			} catch(e) {}
 		</script>
 
-		<!-- LOADER SKIP: if user already saw the intro this session, skip it immediately -->
 		<script>
 			(function() {
 				try {
@@ -40,7 +39,7 @@
 			})();
 		</script>
 
-		<link rel="preload" as="image" href="images/mainbackground.jpg">
+		<link rel="preload" as="image" href="images/BackgroundSpookytrail.png">
 		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -66,7 +65,7 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- PRIMARY VARIANT (sage green) for high-priority CTAs like "View More Trails" --- */
+			/* --- PRIMARY VARIANT (sage green) --- */
 			.google-btn-primary {
 				background-color: #5ea66e !important;
 				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45);
@@ -75,12 +74,6 @@
 				background-color: #4a8559 !important;
 				transform: translateY(-3px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
-			}
-
-			/* --- HERO TEXT LEGIBILITY --- */
-			#banner h2,
-			#banner p {
-				text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
 			}
 
 			/* --- FLOATING BOOK NOW BUTTON --- */
@@ -102,7 +95,6 @@
 				transform: translateY(-5px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
-			/* Skip animation if loader was already seen */
 			.floating-book-btn.no-animate {
 				opacity: 1;
 				animation: none;
@@ -116,7 +108,6 @@
 				opacity: 0;
 				animation: fadeInContent 0.8s ease forwards 4s; 
 			}
-			/* Skip animation if loader was already seen */
 			.main-content-wrapper.no-animate {
 				opacity: 1;
 				animation: none;
@@ -147,7 +138,6 @@
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
-			/* --- LOADER LOGO WITH GLOW FOR VISIBILITY --- */
 			.loader-logo {
 				opacity: 0; 
 				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
@@ -181,7 +171,6 @@
 			@keyframes spin { to { transform: rotate(360deg); } }
 			@keyframes fadeInStatus { to { opacity: 1; } }
 
-            /* --- CENTERED LOADER WELCOME TEXT --- */
             #loader-curtain .welcome-text {
                 font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
                 color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
@@ -192,6 +181,29 @@
 				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
 			}
             @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
+
+			/* --- HERO BANNER OVERLAY for text legibility --- */
+			/* Slightly stronger overlay than index.html to tame the busier trail photo */
+			#banner {
+				position: relative;
+			}
+			#banner::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0.55) 0%,
+					rgba(0, 0, 0, 0.30) 50%,
+					rgba(0, 0, 0, 0.60) 100%
+				);
+				z-index: 1;
+				pointer-events: none;
+			}
+			#banner .inner {
+				position: relative;
+				z-index: 2;
+			}
 
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -299,7 +311,7 @@
 					</nav>
 				</header>
 
-				<section id="banner" style="background-image: url('images/mainbackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<section id="banner" style="background-image: url('images/BackgroundSpookytrail.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 					<div class="inner">
 						<h2>HIXZ VIP</h2>
 						<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
