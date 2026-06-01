@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<title>About Me - HIXZ</title>
 		<meta charset="utf-8" />
@@ -7,20 +7,21 @@
 
 		<meta property="og:title" content="HIXZ - About Marnix" />
 		<meta property="og:description" content="Your guide to Aruba's best-kept secrets. Learn about the HIXZ mission and professional filming." />
-		<meta property="og:image" content="https://www.hixzofficial.com/images/NatureBridgepath.jpg" />
+		<meta property="og:image" content="https://www.hixzofficial.com/images/AboutMarnix.jpg" />
 		<meta property="og:url" content="https://www.hixzofficial.com/generic.html" />
 		<meta property="og:type" content="website" />
 
 		<link rel="icon" type="image/png" href="images/favicon.png">
-		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        
+
 		<style>
-			/* --- PREMIUM SAGE GREEN MENU OVERRIDE --- */
+			/* --- MENU --- */
 			#menu { background: #1e2b22 !important; }
 			#menu ul li a:hover { color: #5ea66e !important; }
 
+			/* --- BUTTONS --- */
 			.google-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
@@ -31,37 +32,139 @@
 			}
 			.google-btn:hover { background-color: #1b3022; }
 
-			/* --- FLOATING BOOK NOW BUTTON --- */
+			.google-btn-primary {
+				background-color: #5ea66e !important;
+				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45);
+			}
+			.google-btn-primary:hover {
+				background-color: #4a8559 !important;
+				transform: translateY(-3px);
+				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
+			}
+
+			/* --- FLOATING BOOK NOW --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
-				background-color: #5ea66e; 
-				color: #ffffff !important; 
+				background-color: #5ea66e;
+				color: #ffffff !important;
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
 				letter-spacing: 1px; text-transform: uppercase;
-				box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10001;
-				transition: all 0.2s ease;
+				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45); z-index: 10001;
+				transition: all 0.25s ease;
 			}
-			.floating-book-btn:hover { 
-				background-color: #ffffff; 
-				color: #1e2b22 !important; 
+			.floating-book-btn:hover {
+				background-color: #ffffff;
+				color: #1e2b22 !important;
 				transform: translateY(-5px);
+				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
 
+			/* --- HERO BANNER OVERLAY --- */
+			article#main > header {
+				position: relative;
+			}
+			article#main > header::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0.45) 0%,
+					rgba(0, 0, 0, 0.25) 50%,
+					rgba(0, 0, 0, 0.55) 100%
+				);
+				z-index: 1;
+				pointer-events: none;
+			}
+			article#main > header h2,
+			article#main > header p {
+				position: relative;
+				z-index: 2;
+				text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5);
+			}
+
+			/* --- ABOUT SECTION LAYOUT --- */
 			.about-header {
 				font-family: 'Archivo Black', sans-serif;
 				text-transform: uppercase;
 				letter-spacing: -1px;
-				margin-bottom: 1em;
+				margin-bottom: 0.75em;
 			}
-			
-			.profile-image {
+
+			.about-block {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 2.5em;
+				margin-bottom: 3em;
+			}
+
+			.about-block .text { flex: 1 1 280px; }
+			.about-block .text p { margin: 0; font-size: 1.05em; line-height: 1.7; }
+
+			.about-block .photo { flex: 1 1 280px; }
+			.about-block .photo img {
 				width: 100%;
-				max-width: 600px;
-				border-radius: 8px;
-				box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-				margin-bottom: 2em;
+				height: 260px;
+				object-fit: cover;
+				border-radius: 10px;
+				box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+				display: block;
+			}
+
+			/* Stat pills row */
+			.about-stats {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				margin: 2.5em 0;
+			}
+			.about-stat {
+				background: #1e2b22;
+				color: #ffffff;
+				border-radius: 50px;
+				padding: 12px 24px;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.75rem;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+			}
+			.about-stat span {
+				color: #5ea66e;
+				display: block;
+				font-size: 1.3rem;
+				letter-spacing: 0;
+				margin-bottom: 2px;
+			}
+
+			/* Gear highlight box */
+			.gear-box {
+				background: #f7f7f7;
+				border-left: 4px solid #5ea66e;
+				border-radius: 0 8px 8px 0;
+				padding: 1.25em 1.5em;
+				margin: 1.5em 0;
+				font-family: 'Inter', sans-serif;
+				font-size: 0.95em;
+				color: #333;
+				line-height: 1.6;
+			}
+			.gear-box strong {
+				font-family: 'Archivo Black', sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				font-size: 0.75rem;
+				color: #5ea66e;
+				display: block;
+				margin-bottom: 0.4em;
+			}
+
+			@media screen and (max-width: 736px) {
+				.about-block { gap: 1.5em; }
+				.about-block .photo img { height: 200px; }
+				.about-stats { gap: 0.75em; }
 			}
 		</style>
 	</head>
@@ -72,8 +175,11 @@
 		<div id="page-wrapper">
 
 			<header id="header">
-				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-				
+				<h1>
+					<a href="index.html">
+						<img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" />
+					</a>
+				</h1>
 				<nav id="nav">
 					<ul>
 						<li class="special">
@@ -81,7 +187,8 @@
 							<div id="menu">
 								<ul>
 									<li><a href="index.html">Home</a></li>
-									<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li> <li><a href="generic.html">About Me</a></li>
+									<li><a href="booking.html#available-packages-anchor">Explore Adventures</a></li>
+									<li><a href="generic.html">About Me</a></li>
 									<li><a href="mailto:marnixvanpelt11@gmail.com">Contact Me</a></li>
 								</ul>
 							</div>
@@ -91,41 +198,58 @@
 			</header>
 
 			<article id="main">
-				<header style="background-image: url('images/NatureBridgepath.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<header style="background-image: url('images/AboutMarnix.jpg'); background-size: cover; background-position: center top; background-repeat: no-repeat;">
 					<h2>About Marnix</h2>
 					<p>Your guide to Aruba's best-kept secrets.</p>
 				</header>
+
 				<section class="wrapper style5">
 					<div class="inner">
 
 						<h3 class="about-header">The HIXZ Mission</h3>
-						
-						<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2em; margin-bottom: 2em;">
-							<div style="flex: 1 1 300px;">
-								<p style="margin-bottom: 0;">Welcome! I specialize in making hiking and swimming adventures in Aruba fun, safe, and unforgettable for everyone. While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild, rugged, and truly majestic side of the island that most people never get to see.</p>
+
+						<!-- Block 1: text left, photo right -->
+						<div class="about-block">
+							<div class="text">
+								<p>Welcome! I specialize in making hiking and adventure experiences in Aruba fun, safe, and unforgettable for everyone. While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild, rugged, and truly majestic side of the island that most people never get to see.</p>
 							</div>
-							<div style="flex: 1 1 300px; text-align: center;">
-								<img src="images/NatureBridgepath.jpg" alt="Hiking path to Nature Bridge" style="max-width: 100%; height: auto; border-radius: 8px;" />
-							</div>
-						</div>
-						
-						<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2em; margin-bottom: 2em;">
-							<div style="flex: 1 1 300px; text-align: center;">
-								<img src="images/BridgeBridge.jpg" alt="Aruba Bridge view" style="max-width: 100%; height: auto; border-radius: 8px;" />
-							</div>
-							<div style="flex: 1 1 300px;">
-								<p style="margin-bottom: 0;">Whether we are navigating the volcanic steps of Hooiberg, exploring the hidden Natural Pool, or trekking through the Sasariwichi Dunes, my goal is to guide you step-by-step through the best nature Aruba has to offer. I believe the best way to see Aruba is on foot, away from the crowds, where the real desert meets the sea.</p>
+							<div class="photo">
+								<img src="images/AboutGroup.jpg" alt="Group hiking with HIXZ in Aruba" />
 							</div>
 						</div>
-						
+
+						<!-- Block 2: photo left, text right -->
+						<div class="about-block">
+							<div class="photo">
+								<img src="images/AboutGear.jpg" alt="HIXZ filming gear on location" />
+							</div>
+							<div class="text">
+								<p>Whether we're navigating the volcanic steps of Hooiberg, exploring the rugged Sasariwichi Dunes, or trekking through Aruba's most hidden coastal trails — my goal is to guide you step by step through the best nature the island has to offer. The best way to see Aruba is on foot, away from the crowds, where the real desert meets the sea.</p>
+							</div>
+						</div>
+
+						<!-- Quick-stat pills -->
+						<div class="about-stats">
+							<div class="about-stat"><span>6+</span>Active Trails</div>
+							<div class="about-stat"><span>4K</span>Cinematic Filming</div>
+							<div class="about-stat"><span>100%</span>Private Guided</div>
+							<div class="about-stat"><span>DJI</span>Osmo Action 5</div>
+						</div>
+
 						<hr />
 
 						<h3 class="about-header">Adventure Filming Packages</h3>
-						<p>You focus on the hike, I'll focus on the camera. I offer professional filming options to capture your entire adventure using a DJI Osmo Action 5 camera paired with professional DJI microphones for crystal-clear audio. Whether we are trekking through the desert or swimming at the Natural Pool, my specialized underwater housing ensures we don't miss a single moment above or below the surface.</p>
-						<p>After the hike, you will receive fully edited, high-quality video clips—expertly cut and color-graded—perfectly formatted for your TikTok or Instagram feeds. You get to leave the island with an amazing experience and the exact content you need to remember it by.</p>
-						
+						<p>You focus on the hike — I'll focus on the camera. Every adventure can be professionally filmed so you leave the island with content, not just memories.</p>
+
+						<div class="gear-box">
+							<strong>What I shoot with</strong>
+							DJI Osmo Action 5 · DJI professional microphones for crystal-clear audio · Specialized underwater housing — so nothing gets missed above or below the surface.
+						</div>
+
+						<p>After the hike you receive fully edited, high-quality video clips — expertly cut and color-graded — perfectly formatted for TikTok or Instagram. You get to leave Aruba with an amazing experience and the exact content you need to remember it by.</p>
+
 						<div style="text-align: center; margin-top: 3em;">
-							<a href="booking.html#available-packages-anchor" class="google-btn">Book an Adventure With Me</a>
+							<a href="booking.html#available-packages-anchor" class="google-btn google-btn-primary">Book an Adventure With Me</a>
 						</div>
 
 					</div>
@@ -141,7 +265,7 @@
 					<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; HIXZ </li>
+					<li>&copy; HIXZ</li>
 					<li>Built by Marnix van Pelt</li>
 				</ul>
 			</footer>
