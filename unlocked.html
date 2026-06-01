@@ -1,17 +1,19 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 	<head>
 		<title>Unlocked Trails - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		
+
 		<meta property="og:title" content="HIXZ - Aruba VIP Trails" />
 		<meta property="og:description" content="Access the hidden, rugged trails of Aruba." />
-		<meta property="og:image" content="https://www.hixzofficial.com/images/mainbackground.jpg" />
+		<meta property="og:image" content="https://www.hixzofficial.com/images/BackgroundSpookytrail.jpg" />
 		<meta property="og:url" content="https://www.hixzofficial.com" />
 		<meta property="og:type" content="website" />
 
 		<link rel="icon" type="image/png" href="images/favicon.png">
+
+		<!-- Set unlocked state immediately on page load -->
 		<script>
 			try {
 				localStorage.setItem('hixz_vip', 'true');
@@ -19,6 +21,7 @@
 			} catch(e) {}
 		</script>
 
+		<!-- Loader skip: fires before paint so curtain never flashes on return visits -->
 		<script>
 			(function() {
 				try {
@@ -40,7 +43,6 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/BackgroundSpookytrail.jpg">
-		<link rel="preload" as="image" href="images/MountJamanota.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -79,7 +81,7 @@
 			/* --- FLOATING BOOK NOW BUTTON --- */
 			.floating-book-btn {
 				position: fixed; bottom: 30px; right: 30px;
-				background-color: #5ea66e; 
+				background-color: #5ea66e;
 				color: #ffffff !important;
 				padding: 16px 32px; border-radius: 50px; text-decoration: none;
 				font-family: 'Archivo Black', sans-serif; font-size: 15px;
@@ -87,106 +89,71 @@
 				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45); z-index: 10001;
 				transition: all 0.25s ease;
 				opacity: 0;
-				animation: fadeInButton 0.5s ease forwards 4.5s; 
+				animation: fadeInButton 0.5s ease forwards 4.5s;
 			}
-			.floating-book-btn:hover { 
-				background-color: #ffffff; 
-				color: #1e2b22 !important; 
+			.floating-book-btn:hover {
+				background-color: #ffffff;
+				color: #1e2b22 !important;
 				transform: translateY(-5px);
 				box-shadow: 0 14px 36px rgba(94, 166, 110, 0.6);
 			}
-			.floating-book-btn.no-animate {
-				opacity: 1;
-				animation: none;
-			}
+			.floating-book-btn.no-animate { opacity: 1; animation: none; }
 			@media screen and (max-width: 736px) { .floating-book-btn { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 12px; } }
-
 			@keyframes fadeInButton { to { opacity: 1; } }
 
-			/* --- COORDINATED CONTENT REVEAL --- */
-			.main-content-wrapper {
-				opacity: 0;
-				animation: fadeInContent 0.8s ease forwards 4s; 
-			}
-			.main-content-wrapper.no-animate {
-				opacity: 1;
-				animation: none;
-			}
+			/* --- CONTENT REVEAL --- */
+			.main-content-wrapper { opacity: 0; animation: fadeInContent 0.8s ease forwards 4s; }
+			.main-content-wrapper.no-animate { opacity: 1; animation: none; }
 			@keyframes fadeInContent { to { opacity: 1; } }
 
 			#all-trail-options { display: none; }
 			.see-more-container { text-align: center; padding: 4rem 0; }
 
-			.video-grid { 
-				display: grid; grid-template-columns: repeat(3, 1fr); 
-				gap: 20px; grid-auto-rows: 1fr; 
+			/* --- VIDEO GRID --- */
+			.video-grid {
+				display: grid; grid-template-columns: repeat(3, 1fr);
+				gap: 20px; grid-auto-rows: 1fr;
 			}
-			.video-item { 
-				opacity: 0; position: relative; overflow: hidden; 
-				border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; background: #000; 
+			.video-item {
+				opacity: 0; position: relative; overflow: hidden;
+				border-radius: 8px; width: 100%; aspect-ratio: 16 / 9; background: #000;
 			}
 			.video-item video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-			/* --- SLATE-TEAL LOADER CURTAIN --- */
+			/* --- LOADER CURTAIN --- */
 			#loader-curtain {
 				position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-				background-color: #39605e !important; 
+				background-color: #39605e !important;
 				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s; 
+				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s;
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
 			.loader-logo {
-				opacity: 0; 
+				opacity: 0;
 				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
 			}
-			.loader-logo img {
-				filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.15));
-			}
-			
-			@keyframes blurFadeSlide { 
+			.loader-logo img { filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.15)); }
+			@keyframes blurFadeSlide {
 				0% { opacity: 0; filter: blur(12px); transform: translateY(30px); }
-				100% { opacity: 1; filter: blur(0px); transform: translateY(0); } 
+				100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
 			}
+			@media screen and (max-width: 736px) { .loader-logo img { max-width: 320px !important; } }
 
-			@media screen and (max-width: 736px) {
-				.loader-logo img { max-width: 320px !important; }
+			/* --- HERO BANNER --- */
+			/* Softer multi-layer text shadow looks more premium than hard 2px offset */
+			#banner h2 {
+				font-size: 5rem !important;
+				text-shadow:
+					0 2px 8px rgba(0, 0, 0, 0.8),
+					0 4px 24px rgba(0, 0, 0, 0.5);
 			}
-
-			#banner h2 { font-size: 5rem !important; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
 			@media screen and (max-width: 736px) { #banner h2 { font-size: 3rem !important; } }
 
-			.loader-status {
-				display: flex; align-items: center; gap: 12px; margin-top: 30px;
-				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
-				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.5s ease forwards 1s;
-			}
-			.loader-spinner {
-				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
-				border-top-color: #ffffff; border-radius: 50%; animation: spin 1s linear infinite;
-			}
-			@keyframes spin { to { transform: rotate(360deg); } }
-			@keyframes fadeInStatus { to { opacity: 1; } }
-
-            #loader-curtain .welcome-text {
-                font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
-                color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
-                opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px; 
-				text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;
-            }
-			@media screen and (max-width: 736px) {
-				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
-			}
-            @keyframes fadeInWelcome { to { opacity: 1; transform: translateY(0); } 0% { transform: translateY(10px); } }
-
-			/* --- HERO BANNER OVERLAY for text legibility --- */
 			/* Slightly stronger overlay than index.html to tame the busier trail photo */
-			#banner {
-				position: relative;
-			}
+			#banner { position: relative; }
 			#banner::before {
 				content: '';
 				position: absolute;
@@ -200,11 +167,37 @@
 				z-index: 1;
 				pointer-events: none;
 			}
-			#banner .inner {
-				position: relative;
-				z-index: 2;
+			#banner .inner { position: relative; z-index: 2; }
+
+			/* --- LOADER STATUS --- */
+			.loader-status {
+				display: flex; align-items: center; gap: 12px; margin-top: 30px;
+				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
+				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
+				animation: fadeInStatus 0.5s ease forwards 1s;
+			}
+			.loader-spinner {
+				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
+				border-top-color: #ffffff; border-radius: 50%; animation: spin 1s linear infinite;
+			}
+			@keyframes spin { to { transform: rotate(360deg); } }
+			@keyframes fadeInStatus { to { opacity: 1; } }
+
+			#loader-curtain .welcome-text {
+				font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
+				color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
+				opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px;
+				text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;
+			}
+			@media screen and (max-width: 736px) {
+				#loader-curtain .welcome-text { font-size: 0.85rem !important; letter-spacing: 2px !important; }
+			}
+			@keyframes fadeInWelcome {
+				0% { opacity: 0; transform: translateY(10px); }
+				100% { opacity: 1; transform: translateY(0); }
 			}
 
+			/* --- VIDEO OVERLAYS --- */
 			.video-loading-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: linear-gradient(110deg, rgba(5, 10, 6, 0.95) 25%, rgba(30, 43, 34, 0.85) 50%, rgba(5, 10, 6, 0.95) 75%);
@@ -213,7 +206,7 @@
 				color: rgba(255, 255, 255, 0.7); display: flex;
 				justify-content: center; align-items: center; z-index: 5;
 				font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300;
-				letter-spacing: 3px; text-transform: uppercase; 
+				letter-spacing: 3px; text-transform: uppercase;
 				transition: opacity 0.5s ease; pointer-events: none;
 			}
 			.video-loading-overlay.hidden { opacity: 0; }
@@ -221,7 +214,6 @@
 				0% { background-position: 200% 0; }
 				100% { background-position: -200% 0; }
 			}
-
 			.video-overlay {
 				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 				background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
@@ -230,47 +222,32 @@
 			.video-item:hover .video-overlay { opacity: 1; }
 			.video-overlay a { color: #fff; font-size: 1.5rem; text-decoration: none; transition: transform 0.2s ease; }
 			.video-overlay a:hover { transform: scale(1.2); }
-
 			.video-item::after {
 				content: attr(data-location);
-				position: absolute;
-				left: 0; right: 0; bottom: 0;
+				position: absolute; left: 0; right: 0; bottom: 0;
 				padding: 14px 16px 12px 16px;
 				background: linear-gradient(to top, rgba(5, 10, 6, 0.92) 0%, rgba(5, 10, 6, 0.6) 60%, rgba(5, 10, 6, 0) 100%);
 				color: rgba(255, 255, 255, 0.95);
-				font-family: 'Inter', sans-serif;
-				font-weight: 600;
-				font-size: 0.75rem;
-				letter-spacing: 2.5px;
-				text-transform: uppercase;
-				text-align: center;
-				opacity: 0;
-				transition: opacity 0.3s ease;
-				pointer-events: none;
-				z-index: 8;
+				font-family: 'Inter', sans-serif; font-weight: 600;
+				font-size: 0.75rem; letter-spacing: 2.5px; text-transform: uppercase; text-align: center;
+				opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 8;
 			}
 			.video-item:hover::after { opacity: 1; }
-
-			@media screen and (max-width: 736px) { 
-				.video-grid { grid-template-columns: 1fr 1fr; } 
-				.video-item::after { 
-					opacity: 1; 
-					font-size: 0.65rem;
-					letter-spacing: 1.8px;
-					padding: 10px 8px 8px 8px;
-				}
+			@media screen and (max-width: 736px) {
+				.video-grid { grid-template-columns: 1fr 1fr; }
+				.video-item::after { opacity: 1; font-size: 0.65rem; letter-spacing: 1.8px; padding: 10px 8px 8px 8px; }
 			}
 
+			/* --- SHOWCASE SECTION --- */
 			#showcase { background: #2e343a; padding: 6rem 0; }
 			#showcase::after { display: none; }
 			#showcase .inner { width: 90% !important; max-width: 1400px; }
 			#showcase .major { margin-bottom: 3rem !important; text-align: center; }
-			#showcase h2 { 
-				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif; 
-				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px; 
+			#showcase h2 {
+				color: #fff; font-size: 2.2rem; font-family: 'Archivo Black', sans-serif;
+				letter-spacing: -1px; text-transform: uppercase; border-bottom: solid 2px;
 				display: inline-block; padding-bottom: 0.5rem;
 			}
-
 			.spotlight .image img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 		</style>
 	</head>
@@ -279,21 +256,25 @@
 		<a href="booking.html#available-packages-anchor" class="floating-book-btn">BOOK NOW</a>
 
 		<div id="loader-curtain">
-			<div class="loader-logo"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 800px; max-height: 80vh; width: 90%; height: auto;" /></div>
+			<div class="loader-logo">
+				<img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-width: 800px; max-height: 80vh; width: 90%; height: auto;" />
+			</div>
 			<div class="loader-status">
 				<div class="loader-spinner"></div>
 				<span>Loading...</span>
 			</div>
-            <div class="welcome-text">discover the beauty of aruba's majestic trails.</div>
+			<div class="welcome-text">discover the beauty of aruba's majestic trails.</div>
 		</div>
 
 		<div id="page-wrapper">
-			
 			<div class="main-content-wrapper">
 
 				<header id="header" class="alt">
-					<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-					
+					<h1>
+						<a href="index.html">
+							<img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" />
+						</a>
+					</h1>
 					<nav id="nav">
 						<ul>
 							<li class="special">
@@ -311,14 +292,14 @@
 					</nav>
 				</header>
 
-				<section id="banner" style="background-image: url('images/BackgroundSpookytrail.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+				<section id="banner" style="background-image: url('images/BackgroundSpookytrail.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 					<div class="inner">
 						<h2>HIXZ VIP</h2>
 						<p>Guided Hikes, Island Exploration, and Professional Adventure Filming.<br />
 						Let's hit the trails and capture the best of Aruba.</p>
 						<ul class="actions special">
 							<li>
-								<a href="#more-trails-trigger" class="google-btn" id="view-secret-btn" style="opacity: 1; transform: translateY(0);">
+								<a href="#more-trails-trigger" class="google-btn" id="view-secret-btn">
 									View Secret Trails
 								</a>
 							</li>
@@ -329,8 +310,7 @@
 				<section id="one" class="wrapper style1 special">
 					<div class="inner">
 						<header class="major">
-							<h2>Explore what Aruba's nature has to offer<br />
-							Step by step.</h2>
+							<h2>Explore what Aruba's nature has to offer<br />Step by step.</h2>
 							<p>I specialize in making the experience fun, and enjoyable for everyone.<br />
 							Those are the principles I bring to every project.</p>
 						</header>
@@ -348,20 +328,16 @@
 						<div class="content">
 							<h2>Hooiberg Hiking Trail</h2>
 							<p>Climb the iconic stairs of this volcanic rock formation right in the middle of the island for an amazing workout and sunset views.</p>
-							<ul class="actions">
-								<li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li>
-							</ul>
+							<ul class="actions"><li><a href="maps/map-hooiberg.html" class="button">See Hooiberg Route</a></li></ul>
 						</div>
 					</section>
-					
+
 					<section class="spotlight">
 						<div class="image"><img src="images/Balashi.jpg" alt="Balashi Gold Mine Trail" loading="lazy" /></div>
 						<div class="content">
 							<h2>Balashi Gold Mine & Spanish Lagoon</h2>
 							<p>Hike through historic gold mill ruins and along the beautiful Spanish Lagoon.</p>
-							<ul class="actions">
-								<li><a href="maps/map-balashi.html" class="button">See Route</a></li>
-							</ul>
+							<ul class="actions"><li><a href="maps/map-balashi.html" class="button">See Route</a></li></ul>
 						</div>
 					</section>
 
@@ -370,16 +346,12 @@
 						<div class="content">
 							<h2>Bushiribana Loop (from Calbas)</h2>
 							<p>A great loop trail starting from Calbas and heading out to the Bushiribana ruins.</p>
-							<ul class="actions">
-								<li><a href="maps/map-calbas.html" class="button">See Route</a></li>
-							</ul>
+							<ul class="actions"><li><a href="maps/map-calbas.html" class="button">See Route</a></li></ul>
 						</div>
 					</section>
 
 					<div id="more-trails-trigger" class="see-more-container style2">
-						<button class="google-btn google-btn-primary" id="see-more-btn" style="opacity: 1; transform: translateY(0);">
-							VIEW MORE TRAILS
-						</button>
+						<button class="google-btn google-btn-primary" id="see-more-btn">VIEW MORE TRAILS</button>
 					</div>
 
 					<div id="all-trail-options" class="style2">
@@ -388,9 +360,7 @@
 							<div class="content">
 								<h2>Jamanota Trail</h2>
 								<p>Hike to the highest point in Aruba. Experience breathtaking panoramic views of the entire island from the top of this rugged loop.</p>
-								<ul class="actions">
-									<li><a href="maps/map-jamanota.html" class="button">See Jamanota Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-jamanota.html" class="button">See Jamanota Route</a></li></ul>
 							</div>
 						</section>
 
@@ -399,20 +369,16 @@
 							<div class="content">
 								<h2>North Aruba - Sasariwichi Dunes</h2>
 								<p>Explore the rugged northern coast, weaving through the white sand dunes near the famous California Lighthouse.</p>
-								<ul class="actions">
-									<li><a href="maps/map-sasarawichi.html" class="button">See Dunes Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-sasarawichi.html" class="button">See Dunes Route</a></li></ul>
 							</div>
 						</section>
-						
+
 						<section class="spotlight">
 							<div class="image"><img src="images/AltoVista.jpg" alt="Alto Vista Chapel Trail" loading="lazy" /></div>
 							<div class="content">
 								<h2>Alto Vista Chapel Route</h2>
 								<p>Explore the scenic desert trails surrounding the historic Alto Vista Chapel.</p>
-								<ul class="actions">
-									<li><a href="maps/map-altovista.html" class="button">See Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-altovista.html" class="button">See Route</a></li></ul>
 							</div>
 						</section>
 
@@ -423,9 +389,7 @@
 							<div class="content">
 								<h2>Conchi Natural Pool</h2>
 								<p>Discover the rugged, beautiful path leading to Aruba's famous Natural Pool.</p>
-								<ul class="actions">
-									<li><a href="maps/map-conchi.html" class="button">See Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-conchi.html" class="button">See Route</a></li></ul>
 							</div>
 						</section>
 
@@ -434,9 +398,7 @@
 							<div class="content">
 								<h2>Dos Playa Route</h2>
 								<p>Experience the dramatic coastline and crashing ocean waves of Dos Playa.</p>
-								<ul class="actions">
-									<li><a href="maps/map-dosplaya.html" class="button">See Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-dosplaya.html" class="button">See Route</a></li></ul>
 							</div>
 						</section>
 
@@ -445,9 +407,7 @@
 							<div class="content">
 								<h2>Bushiribana to Malmok Beach</h2>
 								<p>A stunning coastal hike connecting the gold mill ruins directly to Malmok Beach.</p>
-								<ul class="actions">
-									<li><a href="maps/map-malmok.html" class="button">See Route</a></li>
-								</ul>
+								<ul class="actions"><li><a href="maps/map-malmok.html" class="button">See Route</a></li></ul>
 							</div>
 						</section>
 					</div>
@@ -458,7 +418,6 @@
 						<header class="major">
 							<h2>MY FILMING PORTFOLIO</h2>
 						</header>
-
 						<div class="video-grid">
 							<div class="video-item" data-location="MANGEL HALTO MANGROVES">
 								<div class="video-loading-overlay">Loading</div>
@@ -527,11 +486,11 @@
 						<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 					<ul class="copyright">
-						<li>&copy; HIXZ </li>
+						<li>&copy; HIXZ</li>
 						<li>Built by Marnix van Pelt</li>
 					</ul>
 				</footer>
-			
+
 			</div>
 		</div>
 
@@ -542,17 +501,18 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		
+
 		<script>
-			const observer = new IntersectionObserver((entries) => {
+			// Video scroll-in animation
+			const observer = new IntersectionObserver(entries => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
-						const videoItem = entry.target;
-						videoItem.style.transform = 'translateY(0)';
-						videoItem.style.filter = 'blur(0px)';
-						videoItem.style.opacity = '1';
-						videoItem.style.transition = 'all 1.5s ease-out';
-						observer.unobserve(videoItem);
+						const item = entry.target;
+						item.style.transform  = 'translateY(0)';
+						item.style.filter     = 'blur(0px)';
+						item.style.opacity    = '1';
+						item.style.transition = 'all 1.5s ease-out';
+						observer.unobserve(item);
 					}
 				});
 			}, { threshold: 0.1 });
@@ -560,65 +520,50 @@
 			setTimeout(() => {
 				document.querySelectorAll('.video-item').forEach(item => {
 					item.style.transform = 'translateY(60px)';
-					item.style.filter = 'blur(15px)';
-					item.style.opacity = '0';
+					item.style.filter    = 'blur(15px)';
+					item.style.opacity   = '0';
 					observer.observe(item);
 				});
 			}, 100);
 
-			const videoObserver = new IntersectionObserver((entries, observer) => {
+			// Lazy video loading
+			const videoObserver = new IntersectionObserver(entries => {
 				entries.forEach(entry => {
 					const video = entry.target;
 					if (entry.isIntersecting) {
-						if (!video.src) {
-							video.src = video.getAttribute('data-src');
-							video.load();
-						}
-						video.play().catch(e => {}); 
+						if (!video.src) { video.src = video.getAttribute('data-src'); video.load(); }
+						video.play().catch(() => {});
 					} else {
 						video.pause();
 					}
 				});
-			}, { 
-				rootMargin: '600px 0px',
-				threshold: 0.01 
-			});
+			}, { rootMargin: '600px 0px', threshold: 0.01 });
 
-			const allVideos = document.querySelectorAll('.lazy-video');
-			allVideos.forEach((video, index) => {
+			document.querySelectorAll('.lazy-video').forEach((video, index) => {
 				if (index < 2 && !video.src) {
 					video.src = video.getAttribute('data-src');
 					video.load();
-					video.play().catch(e => {});
+					video.play().catch(() => {});
 				}
 				videoObserver.observe(video);
-				
 				video.addEventListener('loadeddata', function() {
 					const overlay = this.parentElement.querySelector('.video-loading-overlay');
-					if (overlay) {
-						overlay.classList.add('hidden');
-					}
+					if (overlay) overlay.classList.add('hidden');
 				});
 			});
 
-			const viewSecretBtn = document.getElementById('view-secret-btn');
-			const seeMoreBtn = document.getElementById('see-more-btn');
-			const hiddenDiv = document.getElementById('all-trail-options');
-
-			viewSecretBtn.addEventListener('click', function(e) {
+			// View Secret Trails scroll + See more / show less
+			document.getElementById('view-secret-btn').addEventListener('click', function(e) {
 				e.preventDefault();
 				document.getElementById('more-trails-trigger').scrollIntoView({ behavior: 'smooth' });
 			});
 
+			const seeMoreBtn = document.getElementById('see-more-btn');
+			const hiddenDiv  = document.getElementById('all-trail-options');
 			seeMoreBtn.addEventListener('click', function() {
-				const isShowing = hiddenDiv.style.display === "block";
-				if (isShowing) {
-					hiddenDiv.style.display = "none";
-					this.innerHTML = "VIEW MORE TRAILS";
-				} else {
-					hiddenDiv.style.display = "block";
-					this.innerHTML = "SHOW LESS";
-				}
+				const isShowing = hiddenDiv.style.display === 'block';
+				hiddenDiv.style.display = isShowing ? 'none' : 'block';
+				this.textContent = isShowing ? 'VIEW MORE TRAILS' : 'SHOW LESS';
 			});
 		</script>
 	</body>
