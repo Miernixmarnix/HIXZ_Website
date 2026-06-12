@@ -19,7 +19,7 @@
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
-		<link rel="preload" as="image" href="images/MountJamanota.jpg">
+		<link rel="preload" as="image" href="images/spookytrail.jpg">
 
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -157,70 +157,37 @@
 				border-bottom: none !important;
 			}
 			.cert-modal-close svg {
-				width: 16px;
-				height: 16px;
-				stroke: currentColor;
-				stroke-width: 2.5;
-				stroke-linecap: round;
-				fill: none;
+				width: 16px; height: 16px;
+				stroke: currentColor; stroke-width: 2.5;
+				stroke-linecap: round; fill: none;
 			}
-			.cert-modal-close:hover {
-				background: #5ea66e;
-				color: #ffffff;
-				transform: scale(1.08);
-			}
-			.cert-modal-close:active {
-				transform: scale(0.95);
-			}
-			.cert-modal-content {
-				max-width: 900px;
-				margin: 0 auto;
-				text-align: center;
-			}
+			.cert-modal-close:hover { background: #5ea66e; color: #ffffff; transform: scale(1.08); }
+			.cert-modal-close:active { transform: scale(0.95); }
+			.cert-modal-content { max-width: 900px; margin: 0 auto; text-align: center; }
 			.cert-modal-content img {
-				width: 100%;
-				max-width: 100%;
-				height: auto;
-				border-radius: 8px;
-				margin-bottom: 1.5em;
-				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-				display: block;
+				width: 100%; max-width: 100%; height: auto;
+				border-radius: 8px; margin-bottom: 1.5em;
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); display: block;
 			}
 			.cert-modal-label {
-				color: rgba(255, 255, 255, 0.6);
-				font-family: 'Inter', sans-serif;
-				font-size: 0.85rem;
-				letter-spacing: 1px;
-				text-transform: uppercase;
-				margin: 0 0 0.75em 0;
+				color: rgba(255, 255, 255, 0.6); font-family: 'Inter', sans-serif;
+				font-size: 0.85rem; letter-spacing: 1px;
+				text-transform: uppercase; margin: 0 0 0.75em 0;
 			}
 
 			/* --- CUSTOM SCROLL DOWN LINK --- */
 			.custom-scroll-link {
-				display: inline-block;
-				color: rgba(255, 255, 255, 0.9);
-				font-family: 'Inter', sans-serif;
-				font-size: 1.15rem;
-				text-decoration: none;
-				position: relative;
-				margin-bottom: 4em;
-				padding-bottom: 6px;
-				cursor: pointer;
-				border-bottom: none !important;
+				display: inline-block; color: rgba(255, 255, 255, 0.9);
+				font-family: 'Inter', sans-serif; font-size: 1.15rem;
+				text-decoration: none; position: relative;
+				margin-bottom: 4em; padding-bottom: 6px;
+				cursor: pointer; border-bottom: none !important;
 			}
 			.custom-scroll-link::after {
-				content: '';
-				position: absolute;
-				width: 100%;
-				height: 2px;
-				background-color: #ffffff;
-				bottom: 0;
-				left: 0;
-				transition: transform 0.3s ease;
+				content: ''; position: absolute; width: 100%; height: 2px;
+				background-color: #ffffff; bottom: 0; left: 0; transition: transform 0.3s ease;
 			}
-			.custom-scroll-link:hover::after {
-				transform: translateY(6px);
-			}
+			.custom-scroll-link:hover::after { transform: translateY(6px); }
 
 			/* Widescreen Video Container */
 			.video-container {
@@ -229,9 +196,7 @@
 				background: #000; border-radius: 12px;
 				box-shadow: 0 25px 60px rgba(0,0,0,0.6); overflow: hidden;
 			}
-			.video-container iframe {
-				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-			}
+			.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 			/* --- MODERNIZED ACCORDION BASE --- */
 			.dark-accordion, .coming-soon-card {
@@ -239,147 +204,368 @@
 				overflow: visible; margin: 3em auto 0 auto;
 			}
 
-			/* --- TRAIL FACTS ACCORDION (Modernized Pill Button) --- */
+			/* --- TRAIL FACTS ACCORDION --- */
 			.dark-accordion-header {
 				display: inline-flex; justify-content: center; align-items: center; 
 				padding: 14px 36px; border-radius: 50px;
 				background-color: #050a06; color: #ffffff;
 				font-family: 'Archivo Black', sans-serif; font-size: 14px;
 				letter-spacing: 1px; text-transform: uppercase;
-				cursor: pointer; transition: all 0.25s ease;
-				margin: 0 auto;
+				cursor: pointer; transition: all 0.25s ease; margin: 0 auto;
 				box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 				border: 1px solid rgba(255, 255, 255, 0.08);
 			}
 			.dark-accordion-header:hover { 
-				background-color: #1b3022; 
-				transform: translateY(-2px);
+				background-color: #1b3022; transform: translateY(-2px);
 				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
 			}
-
 			.dark-accordion-header span::after, .coming-soon-header span::after { 
 				content: "▼"; margin-left: 10px; font-size: 0.8rem; transition: transform 0.2s ease; 
 			}
 			.dark-accordion-header.active span::after, .coming-soon-header.active span::after { 
 				transform: rotate(-180deg);
 			}
-
-			/* Facts Body Container (Contained width) */
 			.dark-accordion-body {
 				padding: 2em; margin: 15px auto 0 auto; display: none;
-				max-width: 800px; /* Restricts infinite width */
-				background: rgba(0, 0, 0, 0.2); border-radius: 12px;
-				text-align: left;
-				font-family: 'Inter', sans-serif; font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.8;
+				max-width: 800px; background: rgba(0, 0, 0, 0.2); border-radius: 12px;
+				text-align: left; font-family: 'Inter', sans-serif;
+				font-weight: 300; color: rgba(255,255,255,0.8); line-height: 1.8;
 			}
 			.dark-accordion-body ul { margin-top: 1em; padding-left: 1.5em; list-style: disc; }
 			.dark-accordion-body li { margin-bottom: 0.5em; }
 
-			/* --- BOTTOM SECTION: Forest Green with Jump Fix --- */
+			/* --- PACKAGES SECTION --- */
 			.packages-section {
 				background-color: #4a7556; padding: 6em 0; color: #ffffff; text-align: center;
 			}
-			#available-packages-anchor {
-				scroll-margin-top: 60px; /* Prevents sticky header from covering the title */
-			}
-			
+			#available-packages-anchor { scroll-margin-top: 60px; }
 			.packages-section h3 {
 				color: #ffffff; font-family: 'Archivo Black', sans-serif;
-				font-size: 2.8rem; 
-				text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.5em;
+				font-size: 2.8rem; text-transform: uppercase;
+				letter-spacing: 2px; margin-bottom: 1.5em;
 			}
 
-			/* --- COMING SOON ACCORDION (Modernized Pill Button) --- */
+			/* --- HIKE CARD --- */
+			.hike-card {
+				background: #ffffff;
+				border-radius: 16px;
+				max-width: 680px;
+				margin: 0 auto 3em auto;
+				overflow: hidden;
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+				text-align: left;
+			}
+
+			.hike-card-image {
+				width: 100%;
+				height: 280px;
+				object-fit: cover;
+				display: block;
+			}
+
+			.hike-card-body {
+				padding: 2em 2.2em 2.2em 2.2em;
+			}
+
+			.hike-card-eyebrow {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.7rem;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				color: #5ea66e;
+				margin-bottom: 0.5em;
+			}
+
+			.hike-card-title {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.6rem;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: #1e2b22;
+				margin-bottom: 0.3em;
+				border: none !important;
+			}
+
+			.hike-card-subtitle {
+				font-family: 'Inter', sans-serif;
+				font-weight: 400;
+				font-size: 0.9rem;
+				color: #777;
+				margin-bottom: 1.4em;
+			}
+
+			.hike-card-desc {
+				font-family: 'Inter', sans-serif;
+				font-weight: 300;
+				font-size: 0.95rem;
+				line-height: 1.75;
+				color: #444;
+				margin-bottom: 1.6em;
+			}
+
+			/* Details grid — two columns of small info pills */
+			.hike-details-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 10px;
+				margin-bottom: 1.8em;
+			}
+
+			.hike-detail-pill {
+				background: #f3f7f4;
+				border-radius: 10px;
+				padding: 10px 14px;
+				display: flex;
+				align-items: flex-start;
+				gap: 10px;
+			}
+
+			.hike-detail-pill i {
+				color: #5ea66e;
+				font-size: 1rem;
+				margin-top: 2px;
+				flex-shrink: 0;
+			}
+
+			.hike-detail-pill-text {
+				font-family: 'Inter', sans-serif;
+				font-size: 0.82rem;
+				line-height: 1.4;
+			}
+
+			.hike-detail-pill-label {
+				display: block;
+				font-weight: 700;
+				color: #1e2b22;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				font-size: 0.72rem;
+				margin-bottom: 2px;
+			}
+
+			.hike-detail-pill-value {
+				display: block;
+				color: #555;
+				font-weight: 400;
+			}
+
+			/* What's included list */
+			.hike-includes {
+				background: #f3f7f4;
+				border-radius: 10px;
+				padding: 1.2em 1.4em;
+				margin-bottom: 1.8em;
+			}
+
+			.hike-includes-label {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.72rem;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				color: #1e2b22;
+				margin-bottom: 0.75em;
+			}
+
+			.hike-includes ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.hike-includes ul li {
+				font-family: 'Inter', sans-serif;
+				font-size: 0.88rem;
+				color: #444;
+				padding: 4px 0;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			.hike-includes ul li::before {
+				content: "✓";
+				color: #5ea66e;
+				font-weight: 700;
+				font-size: 0.9rem;
+				flex-shrink: 0;
+			}
+
+			/* Price + CTA row */
+			.hike-card-footer {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+
+			.hike-price-block {}
+
+			.hike-price-amount {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 2rem;
+				color: #1e2b22;
+				line-height: 1;
+			}
+
+			.hike-price-label {
+				font-family: 'Inter', sans-serif;
+				font-size: 0.8rem;
+				color: #888;
+				margin-top: 3px;
+			}
+
+			/* WhatsApp CTA button */
+			.whatsapp-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				background-color: #25D366;
+				color: #ffffff !important;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 13px;
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				padding: 14px 28px;
+				border-radius: 50px;
+				text-decoration: none !important;
+				transition: all 0.25s ease;
+				box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+				border-bottom: none !important;
+			}
+			.whatsapp-btn:hover {
+				background-color: #1ebe5a;
+				transform: translateY(-3px);
+				box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
+			}
+			.whatsapp-btn svg {
+				width: 18px; height: 18px; fill: #ffffff; flex-shrink: 0;
+			}
+
+			/* Spots notice */
+			.hike-spots-notice {
+				margin-top: 1.2em;
+				font-family: 'Inter', sans-serif;
+				font-size: 0.8rem;
+				color: #888;
+				text-align: center;
+			}
+
+			/* How to book — 3-step explainer below the card */
+			.how-to-book {
+				max-width: 680px;
+				margin: 0 auto;
+				text-align: center;
+			}
+
+			.how-to-book-title {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.75rem;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				color: rgba(255,255,255,0.6);
+				margin-bottom: 1.2em;
+			}
+
+			.how-to-book-steps {
+				display: flex;
+				justify-content: center;
+				gap: 1.5em;
+				flex-wrap: wrap;
+			}
+
+			.how-to-book-step {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 6px;
+				max-width: 160px;
+			}
+
+			.how-to-book-step-num {
+				width: 32px; height: 32px;
+				background: rgba(255,255,255,0.12);
+				border-radius: 50%;
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 0.85rem;
+				color: #ffffff;
+				display: flex; align-items: center; justify-content: center;
+			}
+
+			.how-to-book-step-text {
+				font-family: 'Inter', sans-serif;
+				font-size: 0.8rem;
+				color: rgba(255,255,255,0.7);
+				line-height: 1.4;
+			}
+
+			/* --- COMING SOON ACCORDION --- */
 			.coming-soon-header {
 				display: inline-flex; justify-content: center; align-items: center; 
 				padding: 14px 36px; border-radius: 50px;
 				background-color: #1e2b22 !important; color: #ffffff !important;
 				font-family: 'Archivo Black', sans-serif; font-size: 14px;
 				letter-spacing: 1px; text-transform: uppercase;
-				cursor: pointer; transition: all 0.25s ease;
-				margin: 0 auto;
+				cursor: pointer; transition: all 0.25s ease; margin: 0 auto;
 				box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 				border: 1px solid rgba(255, 255, 255, 0.1);
 			}
-			
 			.coming-soon-header:hover { 
-				background-color: #1b3022 !important;
-				transform: translateY(-2px);
+				background-color: #1b3022 !important; transform: translateY(-2px);
 				box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 			}
-			
-			/* Coming Soon Body Container (Contained width and smaller padding) */
 			.coming-soon-body { 
 				padding: 2em; margin: 15px auto 0 auto; display: none; 
-				max-width: 500px; /* Restricts the white box from being too massive */
-				background: #ffffff; border-radius: 12px;
+				max-width: 500px; background: #ffffff; border-radius: 12px;
 			}
 			.coming-soon-body p {
 				color: #333; font-family: 'Inter', sans-serif; font-weight: 400;
 				font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5em;
 			}
 
-			/* Primary inline CTA pill (Contact Me!) — sage green to drive conversion */
+			/* Primary inline CTA pill */
 			.inquiries-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #5ea66e !important; color: #ffffff !important; 
 				font-family: 'Archivo Black', sans-serif; font-size: 14px; 
 				letter-spacing: 1px; padding: 14px 36px; 
 				border-radius: 50px; text-decoration: none; 
-				transition: all 0.25s ease;
-				text-transform: uppercase;
+				transition: all 0.25s ease; text-transform: uppercase;
 				box-shadow: 0 8px 22px rgba(94, 166, 110, 0.4);
 			}
 			.inquiries-btn:hover { 
-				background-color: #4a8559 !important;
-				transform: translateY(-3px);
+				background-color: #4a8559 !important; transform: translateY(-3px);
 				box-shadow: 0 12px 28px rgba(94, 166, 110, 0.55);
 			}
 
-			/* --- MOBILE OPTIMIZATION FIXES --- */
+			/* --- MOBILE --- */
 			@media screen and (max-width: 736px) {
-				/* Tighten the top section's huge vertical padding */
 				.booking-top-section { padding: 5em 0 3em 0; }
-
-				/* Smaller hero heading on mobile */
 				.booking-top-section h2 { font-size: 1.5rem; letter-spacing: 1.5px; margin-bottom: 1em; }
-
-				/* Right-size the intro paragraphs — readable but not overwhelming */
 				.description-text { font-size: 0.88rem; line-height: 1.65; margin-bottom: 1em; padding: 0 0.5em; }
-
-				/* Back button stays compact */
 				.top-back-btn { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 1.5em; }
-
-				/* Trust badge — tighter and prevents edge-touching */
 				.trust-badge { padding: 8px 16px; gap: 10px; max-width: 90%; }
 				.trust-badge span { font-size: 0.72rem; line-height: 1.4; }
 				.trust-badge i { font-size: 1rem; }
-
-				/* Pill buttons — tighter padding, centered */
-				.coming-soon-header, .dark-accordion-header, .google-btn { 
-					padding: 12px 24px; font-size: 12px; 
-				}
+				.coming-soon-header, .dark-accordion-header, .google-btn { padding: 12px 24px; font-size: 12px; }
 				.inquiries-btn { padding: 12px 24px; font-size: 12px; }
-
-				/* Section heading scales down */
 				.packages-section h3 { font-size: 1.7rem; margin-bottom: 1em; }
 				.packages-section { padding: 3em 0; }
-
-				/* White "Coming Soon" body card — narrower so it doesn't hit screen edges */
-				.coming-soon-body { 
-					padding: 1.5em 1.25em; 
-					max-width: 90%; 
-					margin: 15px auto 0 auto; 
-				}
+				.coming-soon-body { padding: 1.5em 1.25em; max-width: 90%; margin: 15px auto 0 auto; }
 				.coming-soon-body p { font-size: 0.88rem; line-height: 1.55; margin-bottom: 1.25em; }
+				.dark-accordion-body { padding: 1.5em 1.25em; max-width: 90%; font-size: 0.88rem; line-height: 1.65; }
 
-				/* Trail facts body — same edge breathing room */
-				.dark-accordion-body { 
-					padding: 1.5em 1.25em; 
-					max-width: 90%; 
-					font-size: 0.88rem; 
-					line-height: 1.65;
-				}
+				/* Card mobile fixes */
+				.hike-card { margin: 0 1em 2.5em 1em; max-width: calc(100% - 2em); }
+				.hike-card-image { height: 200px; }
+				.hike-card-body { padding: 1.5em; }
+				.hike-card-title { font-size: 1.3rem; }
+				.hike-details-grid { grid-template-columns: 1fr; }
+				.hike-card-footer { flex-direction: column; align-items: flex-start; }
+				.whatsapp-btn { width: 100%; justify-content: center; }
+				.how-to-book-steps { gap: 1em; }
+				.how-to-book { padding: 0 1em; }
 			}
 		</style>
 	</head>
@@ -389,7 +575,6 @@
 
 			<header id="header">
 				<h1><a href="index.html"><img src="images/HIXZLogo2.png" alt="HIXZ Logo" style="max-height: 35px; width: auto; vertical-align: middle; margin-top: -5px;" /></a></h1>
-				
 				<nav id="nav">
 					<ul>
 						<li class="special">
@@ -414,15 +599,13 @@
 					<section class="booking-top-section">
 						<div class="inner">
 							
-							<a href="unlocked.html" class="top-back-btn">
-								← BACK TO TRAILS
-							</a>
+							<a href="unlocked.html" class="top-back-btn">← BACK TO TRAILS</a>
 
 							<h2>Aruba Adventures & Filming Hub</h2> 
 							
 							<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
 							
-							<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide—I film.</p>
+							<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide — I film.</p>
 							
 							<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
 
@@ -462,13 +645,101 @@
 							
 							<h3>AVAILABLE PACKAGES</h3>
 
-							<div class="coming-soon-card">
+							<!-- SPOOKY TRAIL HIKE CARD -->
+							<div class="hike-card">
+								<img src="images/spookytrail.jpg" alt="Spooky Trail - Aruba" class="hike-card-image" />
+								<div class="hike-card-body">
+
+									<p class="hike-card-eyebrow">Guided Group Hike · Limited Spots</p>
+									<h4 class="hike-card-title">Spooky Trail</h4>
+									<p class="hike-card-subtitle">Saturday, June 20 · 7:00 AM · Noord, Aruba</p>
+
+									<p class="hike-card-desc">One of Aruba's most unique trails — a rugged cactus-lined path through the island's wild northern side that most tourists never see. I've walked this trail over 20 times and know every turn. This is the real Aruba, not the resort beach.</p>
+
+									<div class="hike-details-grid">
+										<div class="hike-detail-pill">
+											<i class="icon solid fa-calendar"></i>
+											<div class="hike-detail-pill-text">
+												<span class="hike-detail-pill-label">Date</span>
+												<span class="hike-detail-pill-value">Saturday, June 20</span>
+											</div>
+										</div>
+										<div class="hike-detail-pill">
+											<i class="icon solid fa-clock"></i>
+											<div class="hike-detail-pill-text">
+												<span class="hike-detail-pill-label">Start Time</span>
+												<span class="hike-detail-pill-value">7:00 AM</span>
+											</div>
+										</div>
+										<div class="hike-detail-pill">
+											<i class="icon solid fa-hourglass-half"></i>
+											<div class="hike-detail-pill-text">
+												<span class="hike-detail-pill-label">Duration</span>
+												<span class="hike-detail-pill-value">Approx. 2–3 hours</span>
+											</div>
+										</div>
+										<div class="hike-detail-pill">
+											<i class="icon solid fa-user-friends"></i>
+											<div class="hike-detail-pill-text">
+												<span class="hike-detail-pill-label">Age Requirement</span>
+												<span class="hike-detail-pill-value">16 and up only</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="hike-includes">
+										<p class="hike-includes-label">What's Included</p>
+										<ul>
+											<li>Expert local guide (20+ trail walks)</li>
+											<li>Cold water bottles</li>
+											<li>Red Cross certified first aid on-trail</li>
+											<li>Small group — personal experience</li>
+										</ul>
+									</div>
+
+									<div class="hike-card-footer">
+										<div class="hike-price-block">
+											<div class="hike-price-amount">Afl 15</div>
+											<div class="hike-price-label">per person · paid in advance</div>
+										</div>
+										<a href="https://wa.me/297661696?text=Hi%20Marnix!%20I%20want%20to%20join%20the%20Spooky%20Trail%20hike%20on%20June%2020.%20How%20do%20I%20pay%20and%20confirm%20my%20spot%3F" target="_blank" rel="noopener" class="whatsapp-btn">
+											<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+											BOOK VIA WHATSAPP
+										</a>
+									</div>
+
+									<p class="hike-spots-notice">⚡ Small group only — spots are limited. Message to confirm availability.</p>
+
+								</div>
+							</div>
+
+							<!-- HOW TO BOOK STEPS -->
+							<div class="how-to-book">
+								<p class="how-to-book-title">How booking works</p>
+								<div class="how-to-book-steps">
+									<div class="how-to-book-step">
+										<div class="how-to-book-step-num">1</div>
+										<div class="how-to-book-step-text">Message via WhatsApp to claim your spot</div>
+									</div>
+									<div class="how-to-book-step">
+										<div class="how-to-book-step-num">2</div>
+										<div class="how-to-book-step-text">Receive Arubabank payment details privately</div>
+									</div>
+									<div class="how-to-book-step">
+										<div class="how-to-book-step-num">3</div>
+										<div class="how-to-book-step-text">Send payment screenshot — you're confirmed!</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- MORE PACKAGES COMING SOON -->
+							<div class="coming-soon-card" style="margin-top: 4em;">
 								<div class="coming-soon-header" id="coming-soon-trigger">
-									<span>COMING SOON</span>
+									<span>MORE PACKAGES COMING SOON</span>
 								</div>
 								<div class="coming-soon-body" id="coming-soon-body">
-									<p>We are currently finalizing our premium filming packages and group hike schedules for the upcoming season. The trails are waiting.</p>
-									<p><strong>Want to lock in a date early? Reach out directly.</strong></p>
+									<p>More hikes and premium filming packages are coming this season. Want to request a private hike on a specific trail or date? Reach out directly.</p>
+									<p><strong>Custom bookings and private groups welcome.</strong></p>
 									<a href="mailto:marnixvanpelt11@gmail.com" class="inquiries-btn">CONTACT ME!</a>
 								</div>
 							</div>
@@ -487,14 +758,15 @@
 						<li><a href="mailto:marnixvanpelt11@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 					<ul class="copyright">
-						<li>&copy; HIXZ </li>
+						<li>&copy; HIXZ</li>
 						<li>Built by Marnix van Pelt</li>
 					</ul>
 				</footer>
 
-			</div> </div>
+			</div>
+		</div>
 
-		<!-- Certificate viewer modal (opens both pages of the Red Cross certificate) -->
+		<!-- Certificate modal -->
 		<div class="cert-modal" id="cert-modal" role="dialog" aria-label="Red Cross Certificate" aria-hidden="true">
 			<button class="cert-modal-close" id="cert-modal-close" aria-label="Close">
 				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
@@ -521,7 +793,6 @@
 				document.getElementById('available-packages-anchor').scrollIntoView({ behavior: 'smooth' });
 			});
 
-			// Unified active class logic
 			const pkgTrigger = document.getElementById('coming-soon-trigger');
 			const pkgBody = document.getElementById('coming-soon-body');
 			pkgTrigger.addEventListener('click', function() {
@@ -536,7 +807,6 @@
 				factsBody.style.display = factsBody.style.display === "block" ? "none" : "block";
 			});
 
-			// Certificate modal — opens lightbox with both pages of the Red Cross certificate
 			const certTrigger = document.getElementById('cert-modal-trigger');
 			const certModal = document.getElementById('cert-modal');
 			const certClose = document.getElementById('cert-modal-close');
@@ -545,7 +815,7 @@
 				e.preventDefault();
 				certModal.classList.add('active');
 				certModal.setAttribute('aria-hidden', 'false');
-				document.body.style.overflow = 'hidden'; // Prevent background scroll while modal is open
+				document.body.style.overflow = 'hidden';
 			});
 
 			function closeCertModal() {
@@ -555,11 +825,9 @@
 			}
 
 			certClose.addEventListener('click', closeCertModal);
-			// Close when tapping the dark backdrop (but not the images themselves)
 			certModal.addEventListener('click', function(e) {
 				if (e.target === certModal) closeCertModal();
 			});
-			// Close on Escape key (desktop)
 			document.addEventListener('keydown', function(e) {
 				if (e.key === 'Escape' && certModal.classList.contains('active')) closeCertModal();
 			});
