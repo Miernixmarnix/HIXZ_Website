@@ -13,9 +13,7 @@
 
 		<link rel="icon" type="image/png" href="images/favicon.png">
 		<script>
-			try {
-				localStorage.setItem('hixz_vip', 'true');
-			} catch(e) {}
+			try { localStorage.setItem('hixz_vip', 'true'); } catch(e) {}
 		</script>
 
 		<link rel="preload" as="image" href="images/mainbackground.jpg">
@@ -26,20 +24,15 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 		<style>
-			/* --- FORCED STICKY HEADER FOR INNER PAGE --- */
+			/* --- STICKY HEADER --- */
 			#header { 
-				position: fixed !important; 
-				top: 0; left: 0; width: 100%; 
-				background-color: #1e2b22 !important; 
-				z-index: 10000; border-bottom: none !important; 
-				box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+				position: fixed !important; top: 0; left: 0; width: 100%; 
+				background-color: #1e2b22 !important; z-index: 10000;
+				border-bottom: none !important; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 			}
-
-			/* --- PREMIUM SAGE GREEN MENU OVERRIDE --- */
 			#menu { background: #1e2b22 !important; }
 			#menu ul li a:hover { color: #5ea66e !important; }
 
-			/* --- CORE BUTTON STYLE --- */
 			.google-btn {
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #050a06; color: #ffffff !important; padding: 14px 36px;
@@ -52,69 +45,48 @@
 
 			/* --- CONTENT REVEAL --- */
 			.main-content-wrapper {
-				opacity: 0;
-				transform: translateY(30px); 
+				opacity: 0; transform: translateY(30px); 
 				animation: fadeInContent 1s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.1s; 
 			}
-			@keyframes fadeInContent {
-				to { opacity: 1; transform: translateY(0); }
-			}
+			@keyframes fadeInContent { to { opacity: 1; transform: translateY(0); } }
 
 			/* --- TOP SECTION --- */
 			.booking-top-section {
 				background: linear-gradient(135deg, #1e2b22 0%, #2b3036 100%);
-				padding: 8em 0 6em 0; 
-				color: #ffffff;
-				text-align: center;
-				position: relative;
+				padding: 8em 0 6em 0; color: #ffffff; text-align: center; position: relative;
 			}
-
 			.top-back-btn {
 				display: inline-flex; align-items: center; justify-content: center;
-				gap: 8px; padding: 10px 24px; 
-				border: 2px solid #ffffff; background-color: #1a241c; 
-				border-radius: 50px; color: #ffffff !important;
+				gap: 8px; padding: 10px 24px; border: 2px solid #ffffff;
+				background-color: #1a241c; border-radius: 50px; color: #ffffff !important;
 				font-family: 'Archivo Black', sans-serif; font-size: 0.9rem;
 				letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
 				margin-bottom: 3em; transition: all 0.2s ease;
 			}
 			.top-back-btn:hover { background-color: #ffffff; color: #1a241c !important; }
-
 			.booking-top-section h2 {
 				color: #ffffff; font-family: 'Archivo Black', sans-serif;
 				letter-spacing: 2px; text-transform: uppercase;
 				margin-bottom: 1.5em; font-size: 2.2rem; border: none; 
 			}
-
 			.description-text {
-				color: rgba(255, 255, 255, 0.9);
-				font-family: 'Inter', sans-serif;
-				font-weight: 300;
-				font-size: 1.15rem; 
-				line-height: 1.9; 
-				max-width: 850px;
-				margin: 0 auto 1.5em auto; 
+				color: rgba(255, 255, 255, 0.9); font-family: 'Inter', sans-serif;
+				font-weight: 300; font-size: 1.15rem; line-height: 1.9; 
+				max-width: 850px; margin: 0 auto 1.5em auto; 
 			}
 
 			/* --- TRUST BADGE --- */
 			.trust-badge-link {
-				border-bottom: none !important;
-				text-decoration: none !important;
-				display: inline-block;
-				margin-bottom: 2em; 
-				margin-top: 1em;
+				border-bottom: none !important; text-decoration: none !important;
+				display: inline-block; margin-bottom: 2em; margin-top: 1em;
 			}
 			.trust-badge {
 				display: inline-flex; align-items: center; gap: 12px;
-				background: rgba(94, 166, 110, 0.15); 
-				border: 1px solid #5ea66e;
-				padding: 12px 24px;
-				border-radius: 50px;
-				transition: all 0.2s ease;
+				background: rgba(94, 166, 110, 0.15); border: 1px solid #5ea66e;
+				padding: 12px 24px; border-radius: 50px; transition: all 0.2s ease;
 			}
 			.trust-badge-link:hover .trust-badge {
-				background: rgba(94, 166, 110, 0.3);
-				transform: translateY(-3px);
+				background: rgba(94, 166, 110, 0.3); transform: translateY(-3px);
 				box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 			}
 			.trust-badge i { color: #5ea66e; font-size: 1.2rem; }
@@ -125,53 +97,30 @@
 
 			/* --- CERTIFICATE MODAL --- */
 			.cert-modal {
-				display: none;
-				position: fixed;
-				top: 0; left: 0;
-				width: 100%; height: 100%;
-				background: rgba(0, 0, 0, 0.92);
-				z-index: 99999;
-				overflow-y: auto;
-				-webkit-overflow-scrolling: touch;
-				padding: 2em 1em;
-				box-sizing: border-box;
+				display: none; position: fixed; top: 0; left: 0;
+				width: 100%; height: 100%; background: rgba(0, 0, 0, 0.92);
+				z-index: 99999; overflow-y: auto; -webkit-overflow-scrolling: touch;
+				padding: 2em 1em; box-sizing: border-box;
 			}
 			.cert-modal.active { display: block; }
 			.cert-modal-close {
-				position: fixed;
-				top: 16px; right: 16px;
-				width: 44px; height: 44px;
-				background: #ffffff;
-				border: none;
-				border-radius: 50%;
-				color: #1e2b22;
-				padding: 0;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				cursor: pointer;
-				z-index: 100000;
+				position: fixed; top: 16px; right: 16px; width: 44px; height: 44px;
+				background: #ffffff; border: none; border-radius: 50%; color: #1e2b22;
+				padding: 0; display: flex; align-items: center; justify-content: center;
+				cursor: pointer; z-index: 100000;
 				transition: background-color 0.2s ease, transform 0.15s ease;
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-				border-bottom: none !important;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); border-bottom: none !important;
 			}
-			.cert-modal-close svg {
-				width: 16px; height: 16px;
-				stroke: currentColor; stroke-width: 2.5;
-				stroke-linecap: round; fill: none;
-			}
+			.cert-modal-close svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; fill: none; }
 			.cert-modal-close:hover { background: #5ea66e; color: #ffffff; transform: scale(1.08); }
-			.cert-modal-close:active { transform: scale(0.95); }
 			.cert-modal-content { max-width: 900px; margin: 0 auto; text-align: center; }
 			.cert-modal-content img {
-				width: 100%; max-width: 100%; height: auto;
-				border-radius: 8px; margin-bottom: 1.5em;
-				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); display: block;
+				width: 100%; max-width: 100%; height: auto; border-radius: 8px;
+				margin-bottom: 1.5em; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); display: block;
 			}
 			.cert-modal-label {
 				color: rgba(255, 255, 255, 0.6); font-family: 'Inter', sans-serif;
-				font-size: 0.85rem; letter-spacing: 1px;
-				text-transform: uppercase; margin: 0 0 0.75em 0;
+				font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 0.75em 0;
 			}
 
 			/* --- SCROLL LINK --- */
@@ -197,10 +146,10 @@
 			}
 			.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-			/* --- ACCORDION BASE --- */
+			/* --- TRAIL FACTS ACCORDION --- */
 			.dark-accordion, .coming-soon-card {
-				background: transparent !important; border: none !important; box-shadow: none !important;
-				overflow: visible; margin: 3em auto 0 auto;
+				background: transparent !important; border: none !important;
+				box-shadow: none !important; overflow: visible; margin: 3em auto 0 auto;
 			}
 			.dark-accordion-header {
 				display: inline-flex; justify-content: center; align-items: center; 
@@ -244,226 +193,147 @@
 
 			/* --- HIKE CARD --- */
 			.hike-card {
-				background: #ffffff;
-				border-radius: 16px;
-				max-width: 680px;
-				margin: 0 auto 3em auto;
-				overflow: hidden;
-				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-				text-align: left;
+				background: #ffffff; border-radius: 16px; max-width: 680px;
+				margin: 0 auto 3em auto; overflow: hidden;
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); text-align: left;
 			}
-			.hike-card-image {
-				width: 100%;
-				height: 280px;
-				object-fit: cover;
-				display: block;
-			}
-			.hike-card-body {
-				padding: 2em 2.2em 2.2em 2.2em;
-			}
+			.hike-card-image { width: 100%; height: 280px; object-fit: cover; display: block; }
+			.hike-card-body { padding: 2em 2.2em 2.2em 2.2em; }
 			.hike-card-eyebrow {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 0.7rem;
-				letter-spacing: 2px;
-				text-transform: uppercase;
-				color: #5ea66e;
-				margin-bottom: 0.5em;
+				font-family: 'Archivo Black', sans-serif; font-size: 0.7rem;
+				letter-spacing: 2px; text-transform: uppercase; color: #5ea66e; margin-bottom: 0.5em;
 			}
 			.hike-card-title {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 1.6rem;
-				text-transform: uppercase;
-				letter-spacing: 1px;
-				color: #1e2b22;
-				margin-bottom: 0.3em;
-				border: none !important;
+				font-family: 'Archivo Black', sans-serif; font-size: 1.6rem;
+				text-transform: uppercase; letter-spacing: 1px; color: #1e2b22;
+				margin-bottom: 0.3em; border: none !important;
 			}
 			.hike-card-subtitle {
-				font-family: 'Inter', sans-serif;
-				font-weight: 400;
-				font-size: 0.9rem;
-				color: #777;
-				margin-bottom: 1.4em;
+				font-family: 'Inter', sans-serif; font-weight: 400;
+				font-size: 0.9rem; color: #777; margin-bottom: 1.4em;
 			}
-			.hike-card-desc {
-				font-family: 'Inter', sans-serif;
-				font-weight: 300;
-				font-size: 0.95rem;
-				line-height: 1.75;
-				color: #444;
-				margin-bottom: 1.6em;
-			}
-			.hike-details-grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 10px;
-				margin-bottom: 1.8em;
-			}
-			.hike-detail-pill {
-				background: #f3f7f4;
-				border-radius: 10px;
-				padding: 10px 14px;
-				display: flex;
-				align-items: flex-start;
-				gap: 10px;
-			}
-			.hike-detail-pill i {
-				color: #5ea66e;
-				font-size: 1rem;
-				margin-top: 2px;
-				flex-shrink: 0;
-			}
-			.hike-detail-pill-text {
-				font-family: 'Inter', sans-serif;
-				font-size: 0.82rem;
-				line-height: 1.4;
-			}
-			.hike-detail-pill-label {
-				display: block;
-				font-weight: 700;
-				color: #1e2b22;
-				text-transform: uppercase;
-				letter-spacing: 0.5px;
-				font-size: 0.72rem;
-				margin-bottom: 2px;
-			}
-			.hike-detail-pill-value {
-				display: block;
-				color: #555;
-				font-weight: 400;
-			}
-			.hike-includes {
-				background: #f3f7f4;
-				border-radius: 10px;
-				padding: 1.2em 1.4em;
-				margin-bottom: 1.8em;
-			}
-			.hike-includes-label {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 0.72rem;
-				letter-spacing: 1.5px;
-				text-transform: uppercase;
-				color: #1e2b22;
-				margin-bottom: 0.75em;
-			}
-			.hike-includes ul {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-			.hike-includes ul li {
-				font-family: 'Inter', sans-serif;
-				font-size: 0.88rem;
-				color: #444;
-				padding: 4px 0;
-				display: flex;
-				align-items: center;
-				gap: 8px;
-			}
-			.hike-includes ul li::before {
-				content: "✓";
-				color: #5ea66e;
-				font-weight: 700;
-				font-size: 0.9rem;
-				flex-shrink: 0;
-			}
-			.hike-card-footer {
+
+			/* --- COLLAPSIBLE CARD DETAILS --- */
+			/* Summary row: always visible — price + CTA + toggle */
+			.hike-card-summary {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				gap: 1em;
 				flex-wrap: wrap;
+				padding-top: 0.5em;
 			}
 			.hike-price-amount {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 2rem;
-				color: #1e2b22;
-				line-height: 1;
+				font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+				color: #1e2b22; line-height: 1;
+			}
+			.hike-price-secondary {
+				font-family: 'Inter', sans-serif; font-size: 0.82rem;
+				color: #5ea66e; font-weight: 600; margin-top: 2px;
 			}
 			.hike-price-label {
-				font-family: 'Inter', sans-serif;
-				font-size: 0.8rem;
-				color: #888;
-				margin-top: 3px;
+				font-family: 'Inter', sans-serif; font-size: 0.8rem;
+				color: #888; margin-top: 3px;
+			}
+			.hike-card-cta-group {
+				display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+			}
+
+			/* Toggle details button */
+			.hike-details-toggle {
+				background: none; border: none; cursor: pointer;
+				font-family: 'Inter', sans-serif; font-size: 0.8rem;
+				color: #5ea66e; font-weight: 600; letter-spacing: 0.5px;
+				padding: 0; display: flex; align-items: center; gap: 5px;
+				transition: color 0.2s ease;
+			}
+			.hike-details-toggle:hover { color: #4a8559; }
+			.hike-details-toggle::after {
+				content: "▼"; font-size: 0.65rem; transition: transform 0.2s ease;
+			}
+			.hike-details-toggle.open::after { transform: rotate(-180deg); }
+
+			/* Collapsible body */
+			.hike-card-details {
+				display: none;
+				padding-top: 1.6em;
+			}
+
+			.hike-card-desc {
+				font-family: 'Inter', sans-serif; font-weight: 300;
+				font-size: 0.95rem; line-height: 1.75; color: #444; margin-bottom: 1.6em;
+			}
+			.hike-details-grid {
+				display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.8em;
+			}
+			.hike-detail-pill {
+				background: #f3f7f4; border-radius: 10px; padding: 10px 14px;
+				display: flex; align-items: flex-start; gap: 10px;
+			}
+			.hike-detail-pill i { color: #5ea66e; font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+			.hike-detail-pill-text { font-family: 'Inter', sans-serif; font-size: 0.82rem; line-height: 1.4; }
+			.hike-detail-pill-label {
+				display: block; font-weight: 700; color: #1e2b22;
+				text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.72rem; margin-bottom: 2px;
+			}
+			.hike-detail-pill-value { display: block; color: #555; font-weight: 400; }
+			.hike-includes {
+				background: #f3f7f4; border-radius: 10px;
+				padding: 1.2em 1.4em; margin-bottom: 1.4em;
+			}
+			.hike-includes-label {
+				font-family: 'Archivo Black', sans-serif; font-size: 0.72rem;
+				letter-spacing: 1.5px; text-transform: uppercase; color: #1e2b22; margin-bottom: 0.75em;
+			}
+			.hike-includes ul { list-style: none; padding: 0; margin: 0; }
+			.hike-includes ul li {
+				font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #444;
+				padding: 4px 0; display: flex; align-items: center; gap: 8px;
+			}
+			.hike-includes ul li::before {
+				content: "✓"; color: #5ea66e; font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
 			}
 
 			/* --- WHATSAPP BUTTON --- */
 			.whatsapp-btn {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				gap: 10px;
-				background-color: #25D366;
-				color: #ffffff !important;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 13px;
-				letter-spacing: 1px;
-				text-transform: uppercase;
-				padding: 14px 28px;
-				border-radius: 50px;
-				text-decoration: none !important;
-				transition: all 0.25s ease;
-				box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+				display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+				background-color: #25D366; color: #ffffff !important;
+				font-family: 'Archivo Black', sans-serif; font-size: 13px;
+				letter-spacing: 1px; text-transform: uppercase; padding: 14px 28px;
+				border-radius: 50px; text-decoration: none !important;
+				transition: all 0.25s ease; box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
 				border-bottom: none !important;
 			}
 			.whatsapp-btn:hover {
-				background-color: #1ebe5a;
-				transform: translateY(-3px);
+				background-color: #1ebe5a; transform: translateY(-3px);
 				box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
 			}
-			.whatsapp-btn svg {
-				width: 18px; height: 18px; fill: #ffffff; flex-shrink: 0;
-			}
+			.whatsapp-btn svg { width: 18px; height: 18px; fill: #ffffff; flex-shrink: 0; }
 
 			.hike-spots-notice {
-				margin-top: 1.2em;
-				font-family: 'Inter', sans-serif;
-				font-size: 0.8rem;
-				color: #888;
-				text-align: center;
+				margin-top: 1.2em; font-family: 'Inter', sans-serif;
+				font-size: 0.8rem; color: #888; text-align: center;
 			}
 
 			/* --- HOW TO BOOK --- */
-			.how-to-book {
-				max-width: 680px;
-				margin: 0 auto;
-				text-align: center;
-			}
+			.how-to-book { max-width: 680px; margin: 0 auto; text-align: center; }
 			.how-to-book-title {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 0.75rem;
-				letter-spacing: 2px;
-				text-transform: uppercase;
-				color: rgba(255,255,255,0.6);
-				margin-bottom: 1.2em;
+				font-family: 'Archivo Black', sans-serif; font-size: 0.75rem;
+				letter-spacing: 2px; text-transform: uppercase;
+				color: rgba(255,255,255,0.6); margin-bottom: 1.2em;
 			}
-			.how-to-book-steps {
-				display: flex;
-				justify-content: center;
-				gap: 1.5em;
-				flex-wrap: wrap;
-			}
+			.how-to-book-steps { display: flex; justify-content: center; gap: 1.5em; flex-wrap: wrap; }
 			.how-to-book-step {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap: 6px;
-				max-width: 160px;
+				display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 160px;
 			}
 			.how-to-book-step-num {
-				width: 32px; height: 32px;
-				background: rgba(255,255,255,0.12);
-				border-radius: 50%;
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 0.85rem;
-				color: #ffffff;
-				display: flex; align-items: center; justify-content: center;
+				width: 32px; height: 32px; background: rgba(255,255,255,0.12);
+				border-radius: 50%; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem;
+				color: #ffffff; display: flex; align-items: center; justify-content: center;
 			}
 			.how-to-book-step-text {
-				font-family: 'Inter', sans-serif;
-				font-size: 0.8rem;
-				color: rgba(255,255,255,0.7);
-				line-height: 1.4;
+				font-family: 'Inter', sans-serif; font-size: 0.8rem;
+				color: rgba(255,255,255,0.7); line-height: 1.4;
 			}
 
 			/* --- COMING SOON --- */
@@ -493,9 +363,8 @@
 				display: inline-flex; align-items: center; justify-content: center;
 				background-color: #5ea66e !important; color: #ffffff !important; 
 				font-family: 'Archivo Black', sans-serif; font-size: 14px; 
-				letter-spacing: 1px; padding: 14px 36px; 
-				border-radius: 50px; text-decoration: none; 
-				transition: all 0.25s ease; text-transform: uppercase;
+				letter-spacing: 1px; padding: 14px 36px; border-radius: 50px;
+				text-decoration: none; transition: all 0.25s ease; text-transform: uppercase;
 				box-shadow: 0 8px 22px rgba(94, 166, 110, 0.4);
 			}
 			.inquiries-btn:hover { 
@@ -511,20 +380,20 @@
 				.top-back-btn { padding: 8px 18px; font-size: 0.75rem; margin-bottom: 1.5em; }
 				.trust-badge { padding: 8px 16px; gap: 10px; max-width: 90%; }
 				.trust-badge span { font-size: 0.72rem; line-height: 1.4; }
-				.trust-badge i { font-size: 1rem; }
 				.coming-soon-header, .dark-accordion-header, .google-btn { padding: 12px 24px; font-size: 12px; }
 				.inquiries-btn { padding: 12px 24px; font-size: 12px; }
 				.packages-section h3 { font-size: 1.7rem; margin-bottom: 1em; }
 				.packages-section { padding: 3em 0; }
-				.coming-soon-body { padding: 1.5em 1.25em; max-width: 90%; margin: 15px auto 0 auto; }
-				.coming-soon-body p { font-size: 0.88rem; line-height: 1.55; margin-bottom: 1.25em; }
-				.dark-accordion-body { padding: 1.5em 1.25em; max-width: 90%; font-size: 0.88rem; line-height: 1.65; }
+				.coming-soon-body { padding: 1.5em 1.25em; max-width: 90%; }
+				.coming-soon-body p { font-size: 0.88rem; }
+				.dark-accordion-body { padding: 1.5em 1.25em; max-width: 90%; font-size: 0.88rem; }
 				.hike-card { margin: 0 1em 2.5em 1em; max-width: calc(100% - 2em); }
 				.hike-card-image { height: 200px; }
 				.hike-card-body { padding: 1.5em; }
 				.hike-card-title { font-size: 1.3rem; }
 				.hike-details-grid { grid-template-columns: 1fr; }
-				.hike-card-footer { flex-direction: column; align-items: flex-start; }
+				.hike-card-summary { flex-direction: column; align-items: flex-start; }
+				.hike-card-cta-group { align-items: flex-start; width: 100%; }
 				.whatsapp-btn { width: 100%; justify-content: center; }
 				.how-to-book-steps { gap: 1em; }
 				.how-to-book { padding: 0 1em; }
@@ -555,20 +424,16 @@
 			</header>
 
 			<div class="main-content-wrapper">
-
 				<article id="main">
 					
 					<section class="booking-top-section">
 						<div class="inner">
 							
 							<a href="unlocked.html" class="top-back-btn">← BACK TO TRAILS</a>
-
 							<h2>Aruba Adventures & Filming Hub</h2> 
 							
 							<p class="description-text">I am Marnix van Pelt, your guide to Aruba's best-kept secrets. I lead group hikes through the island's most rugged and majestic trails, specializing in making hiking and swimming adventures fun, safe, and unforgettable for everyone.</p>
-							
 							<p class="description-text">While most visitors stick to the crowded hotel beaches, I built HIXZ to show you the wild desert-meets-the-sea side of the island. But I don't just guide — I film.</p>
-							
 							<p class="description-text">Using a DJI Osmo Action 5 and professional audio, I capture your entire adventure, providing you with fully edited, color-graded footage ready for TikTok and Instagram. Leave the island with an amazing experience and the exact content you need to remember it by.</p>
 
 							<a href="#" id="cert-modal-trigger" class="trust-badge-link">
@@ -607,7 +472,14 @@
 							
 							<h3>AVAILABLE PACKAGES</h3>
 
-							<!-- SPOOKY TRAIL HIKE CARD -->
+							<!-- =============================================
+							     HIKE CARD TEMPLATE — copy this block to add
+							     a new hike. Update: image src, eyebrow, title,
+							     subtitle, desc, detail pills, includes list,
+							     price, and the wa.me link + message text.
+							     ============================================= -->
+
+							<!-- SPOOKY TRAIL CARD -->
 							<div class="hike-card">
 								<img src="images/BackgroundSpookytrail.jpg" alt="Spooky Trail - Aruba" class="hike-card-image" />
 								<div class="hike-card-body">
@@ -616,63 +488,63 @@
 									<h4 class="hike-card-title">Spooky Trail</h4>
 									<p class="hike-card-subtitle">Saturday, June 20 · 7:00 AM · Noord, Aruba</p>
 
-									<p class="hike-card-desc">One of Aruba's most unique trails — a rugged cactus-lined path through the island's wild northern side that most tourists never see. I've walked this trail over 20 times and know every turn. This is the real Aruba, not the resort beach.</p>
-
-									<div class="hike-details-grid">
-										<div class="hike-detail-pill">
-											<i class="icon solid fa-calendar"></i>
-											<div class="hike-detail-pill-text">
-												<span class="hike-detail-pill-label">Date</span>
-												<span class="hike-detail-pill-value">Saturday, June 20</span>
-											</div>
-										</div>
-										<div class="hike-detail-pill">
-											<i class="icon solid fa-clock"></i>
-											<div class="hike-detail-pill-text">
-												<span class="hike-detail-pill-label">Start Time</span>
-												<span class="hike-detail-pill-value">7:00 AM</span>
-											</div>
-										</div>
-										<div class="hike-detail-pill">
-											<i class="icon solid fa-hourglass-half"></i>
-											<div class="hike-detail-pill-text">
-												<span class="hike-detail-pill-label">Duration</span>
-												<span class="hike-detail-pill-value">Approx. 2–3 hours</span>
-											</div>
-										</div>
-										<div class="hike-detail-pill">
-											<i class="icon solid fa-user-friends"></i>
-											<div class="hike-detail-pill-text">
-												<span class="hike-detail-pill-label">Age Requirement</span>
-												<span class="hike-detail-pill-value">16 and up only</span>
-											</div>
-										</div>
-									</div>
-
-									<div class="hike-includes">
-										<p class="hike-includes-label">What's Included</p>
-										<ul>
-											<li>Expert local guide (20+ trail walks)</li>
-											<li>Cold water bottles</li>
-											<li>Red Cross certified first aid on-trail</li>
-											<li>Small group — personal experience</li>
-										</ul>
-									</div>
-
-									<div class="hike-card-footer">
+									<!-- Always-visible summary: price + CTA + toggle -->
+									<div class="hike-card-summary">
 										<div class="hike-price-block">
 											<div class="hike-price-amount">Afl 15</div>
 											<div class="hike-price-label">per person · paid in advance</div>
 										</div>
-										<!-- 
-											WhatsApp link format: https://wa.me/[country code + number, no spaces or +]
-											Number: +297 661 6966 → 2976616966
-											Message is URL-encoded. To update: write your message, then encode it at urlencoder.org
-										-->
-										<a href="https://wa.me/2976616966?text=Hi%20Marnix!%20I%20found%20you%20on%20HIXZ%20and%20I%27d%20like%20to%20join%20the%20Spooky%20Trail%20hike%20on%20June%2020.%20How%20do%20I%20confirm%20my%20spot%20and%20pay%3F" target="_blank" rel="noopener" class="whatsapp-btn">
-											<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-											BOOK VIA WHATSAPP
-										</a>
+										<div class="hike-card-cta-group">
+											<a href="https://wa.me/2976616966?text=Hi%20Marnix!%20I%20found%20you%20on%20HIXZ%20and%20I%27d%20like%20to%20join%20the%20Spooky%20Trail%20hike%20on%20June%2020.%20How%20do%20I%20confirm%20my%20spot%20and%20pay%3F" target="_blank" rel="noopener" class="whatsapp-btn">
+												<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+												BOOK VIA WHATSAPP
+											</a>
+											<button class="hike-details-toggle" data-target="spooky-details">Show details</button>
+										</div>
+									</div>
+
+									<!-- Collapsible details -->
+									<div class="hike-card-details" id="spooky-details">
+										<p class="hike-card-desc">One of Aruba's most unique trails — a rugged cactus-lined path through the island's wild northern side that most tourists never see. I've walked this trail over 20 times and know every turn. This is the real Aruba, not the resort beach.</p>
+										<div class="hike-details-grid">
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-calendar"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Date</span>
+													<span class="hike-detail-pill-value">Saturday, June 20</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-clock"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Start Time</span>
+													<span class="hike-detail-pill-value">7:00 AM</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-hourglass-half"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Duration</span>
+													<span class="hike-detail-pill-value">Approx. 2–3 hours</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-user-friends"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Age Requirement</span>
+													<span class="hike-detail-pill-value">16 and up only</span>
+												</div>
+											</div>
+										</div>
+										<div class="hike-includes">
+											<p class="hike-includes-label">What's Included</p>
+											<ul>
+												<li>Expert local guide (20+ trail walks)</li>
+												<li>Cold water bottles</li>
+												<li>Red Cross certified first aid on-trail</li>
+												<li>Small group — personal experience</li>
+											</ul>
+										</div>
 									</div>
 
 									<p class="hike-spots-notice">⚡ Small group only — spots are limited. Message to confirm availability.</p>
@@ -680,7 +552,96 @@
 								</div>
 							</div>
 
-							<!-- HOW TO BOOK STEPS -->
+							<!-- NATURAL BRIDGE CARD -->
+							<div class="hike-card">
+								<img src="images/NaturalBridgePack.jpg" alt="Natural Bridge Trail - Aruba" class="hike-card-image" />
+								<div class="hike-card-body">
+
+									<p class="hike-card-eyebrow">Guided Group Hike · Limited Spots</p>
+									<h4 class="hike-card-title">Natural Bridge to the Dunes</h4>
+									<p class="hike-card-subtitle">Saturday, June 27 · 7:30 AM · Natural Bridge, Aruba</p>
+
+									<!-- Always-visible summary: price + CTA + toggle -->
+									<div class="hike-card-summary">
+										<div class="hike-price-block">
+											<div class="hike-price-amount">Afl 36</div>
+											<div class="hike-price-secondary">≈ $20 USD</div>
+											<div class="hike-price-label">per person · paid in advance</div>
+										</div>
+										<div class="hike-card-cta-group">
+											<a href="https://wa.me/2976616966?text=Hi%20Marnix!%20I%20found%20you%20on%20HIXZ%20and%20I%27d%20like%20to%20join%20the%20Natural%20Bridge%20hike%20on%20June%2027.%20How%20do%20I%20confirm%20my%20spot%20and%20pay%3F" target="_blank" rel="noopener" class="whatsapp-btn">
+												<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+												BOOK VIA WHATSAPP
+											</a>
+											<button class="hike-details-toggle" data-target="naturalbridge-details">Show details</button>
+										</div>
+									</div>
+
+									<!-- Collapsible details -->
+									<div class="hike-card-details" id="naturalbridge-details">
+										<p class="hike-card-desc">Start at the iconic yellow first aid station beside Aruba's collapsed Natural Bridge — one of the most dramatic coastlines on the island — and trek through rugged volcanic terrain toward the remote sand dunes of the northern windward coast. This is a longer, more demanding route through landscapes most tourists never reach on foot. Conditions permitting, we may push further toward Conchi. Your guide has walked this route many times and knows the terrain in every season.</p>
+										<div class="hike-details-grid">
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-calendar"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Date</span>
+													<span class="hike-detail-pill-value">Saturday, June 27</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-clock"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Start Time</span>
+													<span class="hike-detail-pill-value">7:30 AM</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-hourglass-half"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Duration</span>
+													<span class="hike-detail-pill-value">Approx. 3–4 hours</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-map-marker-alt"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Meeting Point</span>
+													<span class="hike-detail-pill-value">Yellow building, Natural Bridge</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-user-friends"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Age Requirement</span>
+													<span class="hike-detail-pill-value">16 and up only</span>
+												</div>
+											</div>
+											<div class="hike-detail-pill">
+												<i class="icon solid fa-mountain"></i>
+												<div class="hike-detail-pill-text">
+													<span class="hike-detail-pill-label">Difficulty</span>
+													<span class="hike-detail-pill-value">Moderate — rocky terrain</span>
+												</div>
+											</div>
+										</div>
+										<div class="hike-includes">
+											<p class="hike-includes-label">What's Included</p>
+											<ul>
+												<li>Expert local guide (trail-tested route)</li>
+												<li>Cold water bottles</li>
+												<li>Red Cross certified first aid on-trail</li>
+												<li>Small group — personal experience</li>
+												<li>DJI Osmo Action 5 filming available</li>
+											</ul>
+										</div>
+									</div>
+
+									<p class="hike-spots-notice">⚡ Small group only — spots are limited. Message to confirm availability.</p>
+
+								</div>
+							</div>
+
+							<!-- HOW TO BOOK -->
 							<div class="how-to-book">
 								<p class="how-to-book-title">How booking works</p>
 								<div class="how-to-book-steps">
@@ -755,28 +716,44 @@
 		<script src="assets/js/main.js"></script>
 
 		<script>
+			// Scroll to packages
 			document.getElementById('scroll-down-trigger').addEventListener('click', function(e) {
 				e.preventDefault();
 				document.getElementById('available-packages-anchor').scrollIntoView({ behavior: 'smooth' });
 			});
 
+			// Coming soon accordion
 			const pkgTrigger = document.getElementById('coming-soon-trigger');
-			const pkgBody = document.getElementById('coming-soon-body');
+			const pkgBody    = document.getElementById('coming-soon-body');
 			pkgTrigger.addEventListener('click', function() {
 				this.classList.toggle('active');
 				pkgBody.style.display = pkgBody.style.display === 'block' ? 'none' : 'block';
 			});
 
+			// Trail facts accordion
 			const factsTrigger = document.getElementById('fun-facts-trigger');
-			const factsBody = document.getElementById('fun-facts-body');
+			const factsBody    = document.getElementById('fun-facts-body');
 			factsTrigger.addEventListener('click', function() {
 				this.classList.toggle('active');
 				factsBody.style.display = factsBody.style.display === 'block' ? 'none' : 'block';
 			});
 
+			// Collapsible card details — works for any number of cards
+			document.querySelectorAll('.hike-details-toggle').forEach(function(btn) {
+				btn.addEventListener('click', function() {
+					const targetId = this.getAttribute('data-target');
+					const details  = document.getElementById(targetId);
+					const isOpen   = details.style.display === 'block';
+					details.style.display = isOpen ? 'none' : 'block';
+					this.textContent = isOpen ? 'Show details' : 'Hide details';
+					this.classList.toggle('open', !isOpen);
+				});
+			});
+
+			// Certificate modal
 			const certTrigger = document.getElementById('cert-modal-trigger');
-			const certModal = document.getElementById('cert-modal');
-			const certClose = document.getElementById('cert-modal-close');
+			const certModal   = document.getElementById('cert-modal');
+			const certClose   = document.getElementById('cert-modal-close');
 
 			certTrigger.addEventListener('click', function(e) {
 				e.preventDefault();
@@ -792,9 +769,7 @@
 			}
 
 			certClose.addEventListener('click', closeCertModal);
-			certModal.addEventListener('click', function(e) {
-				if (e.target === certModal) closeCertModal();
-			});
+			certModal.addEventListener('click', function(e) { if (e.target === certModal) closeCertModal(); });
 			document.addEventListener('keydown', function(e) {
 				if (e.key === 'Escape' && certModal.classList.contains('active')) closeCertModal();
 			});
