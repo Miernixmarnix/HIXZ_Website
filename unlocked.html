@@ -89,7 +89,7 @@
 				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45); z-index: 10001;
 				transition: all 0.25s ease;
 				opacity: 0;
-				animation: fadeInButton 0.5s ease forwards 4.5s;
+				animation: fadeInButton 0.5s ease forwards 3s;
 			}
 			.floating-book-btn:hover {
 				background-color: #ffffff;
@@ -102,7 +102,7 @@
 			@keyframes fadeInButton { to { opacity: 1; } }
 
 			/* --- CONTENT REVEAL --- */
-			.main-content-wrapper { opacity: 0; animation: fadeInContent 0.8s ease forwards 4s; }
+			.main-content-wrapper { opacity: 0; animation: fadeInContent 0.6s ease forwards 2.6s; }
 			.main-content-wrapper.no-animate { opacity: 1; animation: none; }
 			@keyframes fadeInContent { to { opacity: 1; } }
 
@@ -126,14 +126,14 @@
 				background-color: #39605e !important;
 				z-index: 10000; display: flex;
 				flex-direction: column; align-items: center; justify-content: center;
-				animation: removeCurtain 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards 3.5s;
+				animation: removeCurtain 0.6s cubic-bezier(0.77, 0, 0.175, 1) forwards 2.2s;
 				pointer-events: none;
 			}
 			@keyframes removeCurtain { to { transform: translateY(-100%); visibility: hidden; } }
 
 			.loader-logo {
 				opacity: 0;
-				animation: blurFadeSlide 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s;
+				animation: blurFadeSlide 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.1s;
 			}
 			.loader-logo img { filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.15)); }
 			@keyframes blurFadeSlide {
@@ -174,7 +174,7 @@
 				display: flex; align-items: center; gap: 12px; margin-top: 30px;
 				color: rgba(255, 255, 255, 0.7); font-family: 'Archivo Black', sans-serif;
 				font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0;
-				animation: fadeInStatus 0.5s ease forwards 1s;
+				animation: fadeInStatus 0.4s ease forwards 0.6s;
 			}
 			.loader-spinner {
 				width: 18px; height: 18px; border: 2px solid rgba(255, 255, 255, 0.2);
@@ -186,7 +186,7 @@
 			#loader-curtain .welcome-text {
 				font-family: 'Inter', sans-serif; font-weight: 300; font-size: 1.1rem;
 				color: rgba(255, 255, 255, 0.8); letter-spacing: 4px; text-transform: lowercase;
-				opacity: 0; animation: fadeInWelcome 1s ease forwards 1.2s; margin-top: 15px;
+				opacity: 0; animation: fadeInWelcome 0.7s ease forwards 0.7s; margin-top: 15px;
 				text-align: center; width: 100%; padding: 0 20px; box-sizing: border-box;
 			}
 			@media screen and (max-width: 736px) {
