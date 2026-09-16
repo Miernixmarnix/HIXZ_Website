@@ -67,6 +67,7 @@
 				animation: hixzLocatingPulse 1.4s ease-in-out infinite;
 			}
 			#locating-overlay.active { opacity: 1; pointer-events: all; }
+			#locating-overlay { text-align: center; padding: 0 24px; box-sizing: border-box; line-height: 1.6; }
 			@keyframes hixzLocatingPulse {
 				0%, 100% { color: rgba(255, 255, 255, 0.6); }
 				50% { color: #ffffff; }
@@ -247,13 +248,6 @@
 				polyline_options: { color: '#00ccff', weight: 6, opacity: 0.9 }
 			});
 
-			trailLayer.on('addpoint', function(e) {
-				if (e.point_type === 'waypoint') {
-					var photoHTML = '<div class="photo-popup"><strong>Scenic Spot</strong><br><img src="../images/sasarawichi_view.jpg" alt="Trail View"></div>';
-					e.point.bindPopup(photoHTML);
-				}
-			});
-
 			trailLayer.on('loaded', function(e) {
 				map.fitBounds(e.target.getBounds());
 				var distanceKm = (e.target.get_distance() / 1000).toFixed(2);
@@ -279,9 +273,13 @@
 			});
 
 			map.on('locationerror', function(e) {
-				document.getElementById('locating-overlay').classList.remove('active');
-				alert("Could not find your location. Please check your device permissions.");
+				var overlay = document.getElementById('locating-overlay');
+				overlay.textContent = 'Location unavailable. Check your permissions.';
+				overlay.classList.add('active');
+				setTimeout(function() { overlay.classList.remove('active'); setTimeout(function() { overlay.textContent = 'Locating...'; }, 300); }, 2500);
 			});
 		</script>
+		<!-- GoatCounter analytics (cookieless). Dashboard: https://hixzofficial.goatcounter.com -->
+		<script data-goatcounter="https://hixzofficial.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 	</body>
 </html>

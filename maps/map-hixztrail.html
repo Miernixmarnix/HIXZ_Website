@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Malmok Trail - HIXZ</title>
+		<title>HIXZ Trail - HIXZ</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
@@ -116,6 +116,7 @@
 			}
 			.leaflet-control-layers-separator { border-top-color: rgba(255, 255, 255, 0.1) !important; }
 
+			/* --- UPDATED: Trail Stats Overlay CSS --- */
 			#trail-stats {
 				position: absolute;
 				top: 220px;
@@ -152,10 +153,11 @@
 				margin-top: 2px;
 			}
 
+			/* --- UPDATED: Photo Popup Styling --- */
 			.photo-popup .leaflet-popup-content-wrapper {
 				background: #050a06;
 				color: #ffffff;
-				border: 1px solid #5ea66e; 
+				border: 1px solid #5ea66e; /* Match the calm green */
 				border-radius: 8px;
 				font-family: 'Archivo Black', sans-serif;
 				text-transform: uppercase;
@@ -175,7 +177,7 @@
 	<body class="is-preload">
 
 		<header id="header" class="alt">
-			<a href="../unlocked.html" class="back-btn">&#8592; Exit</a>
+			<a href="#" onclick="exitSecurely(); return false;" class="back-btn">&#8592; Exit</a>
 			
 			<h1><a href="../index.html">HIXZ</a></h1>
 			<nav id="nav">
@@ -184,7 +186,7 @@
 						<a href="#menu" class="menuToggle"><span>Menu</span></a>
 						<div id="menu">
 							<ul>
-								<li><a href="../unlocked.html">Back to Trails</a></li>
+								<li><a href="#" onclick="exitSecurely(); return false;">Home</a></li>
 								<li><a href="../generic.html">About Me</a></li>
 							</ul>
 						</div>
@@ -198,7 +200,7 @@
 
 		<div id="trail-stats">
 			<span id="stat-dist">Distance: <strong>Loading...</strong></span>
-			<span id="stat-time">Est. Time: <strong>2 HOURS</strong></span>
+			<span id="stat-time">Est. Time: <strong>2-3 HOURS</strong></span>
 			<span id="stat-diff">Difficulty: <strong>MODERATE</strong></span>
 		</div>
 
@@ -216,11 +218,19 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
 		<script>
+			function exitSecurely() {
+				if (localStorage.getItem('hixz_vip') === 'true') {
+					window.location.href = '../unlocked.html';
+				} else {
+					window.location.href = '../index.html';
+				}
+			}
+
 			var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', keepBuffer: 8 });
 			var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', keepBuffer: 8 });
 
-			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite], preferCanvas: true });
+			var map = L.map('map', { center: [12.5092, -69.9702], zoom: 12, layers: [satellite] });
 			
 			var baseMaps = {
 				"Satellite": satellite,
@@ -229,8 +239,7 @@
 			};
 			L.control.layers(baseMaps, null, { collapsed: false }).addTo(map);
 
-			// MALMOK GPX
-			var gpxFile = '../GPX/Bushiribana__Malmok_Beach.gpx';
+			var gpxFile = '../GPX/SpookyTrail.gpx';
 
 			var invisiblePixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 			var blueMarkerUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>Trail Not Found - HIXZ</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<link rel="icon" type="image/png" href="/images/favicon.png">
+		<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+		<!-- Absolute paths (/...) on purpose: GitHub Pages shows this page for broken links at any folder depth -->
+		<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css" />
+
+		<style>
+			html, body { margin: 0; padding: 0; min-height: 100vh; }
+			body {
+				font-family: 'Inter', sans-serif;
+				color: #ffffff;
+				-webkit-font-smoothing: antialiased;
+				background:
+					linear-gradient(135deg, rgba(30, 43, 34, 0.86) 0%, rgba(43, 48, 54, 0.92) 100%),
+					url('/images/BackgroundSpookytrail.jpg') center center / cover no-repeat;
+				background-color: #1e2b22;
+			}
+			.wrap {
+				min-height: 100vh;
+				display: flex; flex-direction: column; align-items: center; justify-content: center;
+				padding: 3rem 1.5rem; box-sizing: border-box; text-align: center;
+				opacity: 0; animation: fadeIn 0.6s ease forwards 0.1s;
+			}
+			@keyframes fadeIn { to { opacity: 1; } }
+			.logo { width: 100%; max-width: 200px; height: auto; filter: drop-shadow(0 4px 24px rgba(0,0,0,0.5)); margin-bottom: 2rem; }
+			.code {
+				font-family: 'Archivo Black', sans-serif; font-size: 4.5rem; line-height: 1;
+				color: #5ea66e; letter-spacing: 6px; margin: 0 0 0.5rem 0;
+				text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+			}
+			h1 {
+				font-family: 'Archivo Black', sans-serif; font-weight: normal;
+				font-size: 1.3rem; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 1rem 0;
+			}
+			p { max-width: 380px; margin: 0 0 2.2rem 0; color: rgba(255,255,255,0.8); font-weight: 300; line-height: 1.7; font-size: 0.95rem; }
+			.stack { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 14px; }
+			.btn {
+				display: flex; align-items: center; justify-content: center; gap: 10px;
+				min-height: 56px; padding: 16px 24px; border-radius: 50px; box-sizing: border-box;
+				font-family: 'Archivo Black', sans-serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+				text-decoration: none; color: #ffffff; transition: all 0.25s ease;
+			}
+			.btn-primary { background-color: #5ea66e; box-shadow: 0 10px 30px rgba(94,166,110,0.45); }
+			.btn-primary:hover { background-color: #4a8559; transform: translateY(-2px); }
+			.btn-secondary { background-color: rgba(5,10,6,0.85); border: 1px solid rgba(255,255,255,0.18); }
+			.btn-secondary:hover { border-color: #5ea66e; color: #8dd49d; }
+			@media (max-width: 480px) { .code { font-size: 3.6rem; } h1 { font-size: 1.1rem; } }
+		</style>
+	</head>
+	<body>
+		<main class="wrap">
+			<a href="/"><img src="/images/HIXZLogo2.png" alt="HIXZ" class="logo" /></a>
+			<div class="code">404</div>
+			<h1>You've wandered off the trail</h1>
+			<p>This page doesn't exist or has moved. Even the best hikers take a wrong turn sometimes. Let's get you back on track.</p>
+			<div class="stack">
+				<a href="/" class="btn btn-primary"><i class="fas fa-mountain"></i> Back to the Trails</a>
+				<a href="/booking.html" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book a Hike</a>
+			</div>
+		</main>
+
+		<!-- GoatCounter analytics (cookieless). Dashboard: https://hixzofficial.goatcounter.com -->
+		<script data-goatcounter="https://hixzofficial.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+	</body>
+</html>
