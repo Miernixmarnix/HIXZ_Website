@@ -467,6 +467,33 @@
 				display: inline-block; padding-bottom: 0.5rem;
 			}
 			.spotlight .image img { width: 100%; height: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+			/* --- FOOTER PHONE (large, high-contrast, tappable) --- */
+			#footer .footer-phone {
+				display: inline-flex; align-items: center; gap: 12px;
+				margin: 0 auto 1.4em auto; padding: 14px 28px;
+				border: 2px solid #5ea66e; border-radius: 50px;
+				background: rgba(94, 166, 110, 0.12);
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 1.5rem; line-height: 1.2; letter-spacing: 1px;
+				color: #ffffff !important; text-decoration: none; border-bottom: none !important;
+				transition: all 0.25s ease;
+			}
+			#footer .footer-phone:hover, #footer .footer-phone:focus {
+				background-color: #5ea66e; color: #ffffff !important;
+				box-shadow: 0 10px 30px rgba(94, 166, 110, 0.45);
+			}
+			#footer .footer-phone i { font-size: 1.2rem; color: #5ea66e; }
+			#footer .footer-phone:hover i, #footer .footer-phone:focus i { color: #ffffff; }
+			#footer .footer-phone-label {
+				display: block; margin-bottom: 0.6em;
+				font-family: 'Inter', sans-serif; font-weight: 600;
+				font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase;
+				color: rgba(255, 255, 255, 0.85);
+			}
+			@media screen and (max-width: 480px) {
+				#footer .footer-phone { font-size: 1.25rem; padding: 14px 20px; }
+			}
 		</style>
 
 		<!-- EmailJS SDK — sends welcome email on signup -->
@@ -688,7 +715,7 @@
 									<a href="https://www.tiktok.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-tiktok"></a>
 								</div>
 							</div>
-							<div class="video-item" data-location="DAIMARI BEACH">
+							<div class="video-item" data-location="QUADIRIKIRI CAVES">
 								<div class="video-loading-overlay">Loading</div>
 								<video data-src="videos/clip4.mp4" loop muted playsinline preload="none" class="lazy-video"></video>
 								<div class="video-overlay">
@@ -720,6 +747,13 @@
 				</section>
 
 				<footer id="footer">
+					<!-- CALL / WHATSAPP NUMBER — kept large and high-contrast on purpose -->
+					<div style="text-align: center;">
+						<span class="footer-phone-label">Call or WhatsApp</span>
+						<a href="tel:+2976616966" class="footer-phone" aria-label="Call HIXZ at +297 661 6966">
+							<i class="fas fa-phone"></i> +297 661 6966
+						</a>
+					</div>
 					<ul class="icons">
 						<li><a href="https://www.youtube.com/@hixzofficial" target="_blank" rel="noopener" class="icon brands fa-youtube"><span class="label">YouTube</span></a></li>
 						<li><a href="https://www.instagram.com/hixzofficial/" target="_blank" rel="noopener" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
